@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/.vs/trumpf.hmi.dotnettool.builder
+/src/trumpf.hmi.dotnettool.builder/obj
+/src/trumpf.hmi.dotnettool.builder/bin/Debug/netcoreapp3.1
+/src/trumpf.hmi.dotnettool.builder/.vs/trumpf.hmi.dotnettool.builder
+/src/trumpf.hmi.dotnettool.builder.Wpf/obj
+/src/trumpf.hmi.dotnettool.builder.Wpf/bin/Debug/netcoreapp3.1

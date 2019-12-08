@@ -1,0 +1,46 @@
+variables:
+    GIT_SSL_NO_VERIFY: "true"
+
+image: mcr.microsoft.com/dotnet/core/sdk:3.0
+
+stages:
+    - gitversion
+    - test
+    - release
+    - push
+
+gitversion:
+    stage: gitversion
+    image: mcr.microsoft.com/dotnet/core/sdk:2.2
+    script:
+        - dotnet tool install -g GitVersion.Tool --version 5.1.2
+        - ~/.dotnet/tools/dotnet-gitversion /output buildserver
+    artifacts:
+        paths: [gitversion.properties]
+    tags: [docker, linux, artifactory]
+
+test:
+    stage: test
+    script:
+        - dotnet test
+    tags: [docker, linux, artifactory]
+
+release:
+    stage: release
+    script:
+        - source gitversion.properties
+        - '[ "$CI_COMMIT_TAG" ] || curl --fail -X POST -k "https://source.corp.trumpf.com/api/v4/projects/$CI_PROJECT_ID/repository/tags?private_token=$GITLAB_API_KEY&id=$CI_PROJECT_ID&tag_name=$GitVersion_SemVer&ref=$CI_COMMIT_SHA"'
+    tags: [docker, artifactory]
+    when: manual
+    except:
+        refs: [tags]
+
+push:
+    stage: push
+    script:
+        - '[ "$GitVersion_PreReleaseTag" ] && =''https://srv01af2.corp.trumpf.com/artifactory/api/nuget/hmi-snapshot-local/Trumpf.Hmi.Uif/'' || source=''https://srv01af2.corp.trumpf.com/artifactory/api/nuget/hmi-release-local/Trumpf.Hmi.Uif/'''
+        - dotnet pack ./src/Trumpf.Hmi.Uif -o nupkg -c Release
+        - dotnet nuget push nupkg/*.nupkg -k $ARTIFACTORY_API_KEY -s $source
+    tags: [docker, linux, artifactory]
+    only:
+        refs: [tags]
