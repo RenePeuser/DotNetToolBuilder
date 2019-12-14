@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "trumpf.hmi.dotnettool.builder": {
+      "commandName": "Project"
+    }
+  }
+}

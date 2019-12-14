@@ -6,11 +6,11 @@
 
     public class UifRootCommandBuilder : IUifRootCommandBuilder
     {
-        private readonly IEnumerable<ICommandBuilder> _commandBuilders;
+        private readonly IEnumerable<IUifCommandBuilder> _uifCommandBuilders;
 
-        public UifRootCommandBuilder(IEnumerable<ICommandBuilder> commandBuilders)
+        public UifRootCommandBuilder(IEnumerable<IUifCommandBuilder> uifCommandBuilders)
         {
-            _commandBuilders = commandBuilders;
+            _uifCommandBuilders = uifCommandBuilders;
         }
 
         public RootCommand Build()
@@ -18,10 +18,10 @@
             var rootCommand = new RootCommand
             {
                 Name = "uif",
-                Description = @"Run 'uif [command] --help' in order to get more information for a command.",
+                Description = @"Run 'uif [command] --help' in order to get specific information.",
             };
 
-            _commandBuilders.ForEach(builder => rootCommand.AddCommand(builder.Build()));
+            _uifCommandBuilders.ForEach(builder => rootCommand.AddCommand(builder.Build()));
 
             return rootCommand;
         }
