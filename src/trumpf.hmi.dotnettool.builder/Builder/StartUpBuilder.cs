@@ -20,6 +20,7 @@ namespace trumpf.hmi.dotnettool.builder.Builder
 {
     using Microsoft.Extensions.DependencyInjection;
     using Trumpf.Hmi.FileSystemAbstraction.Services;
+    using $projectName$.ErrorHandling;
     $usings$
 
     public class Startup
