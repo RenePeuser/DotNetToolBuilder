@@ -10,7 +10,7 @@
     using System.CommandLine;    
     using $project-name$.Rendering;
 
-    public class $command-name$CommandBuilder : I$parent-command-name$CommandBuilder
+    public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
         private readonly IEnumerable<I$command-name$SubCommandBuilder> _$command-argument-name$SubCommandBuilders;
 

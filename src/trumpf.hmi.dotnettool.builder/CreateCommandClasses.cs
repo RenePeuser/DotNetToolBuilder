@@ -76,7 +76,7 @@ namespace trumpf.hmi.dotnettool.builder
                         var result = new CommandBuilderForSubCommands().Build(projectName, subCommand, parameter, currentPath);
                         var filePath0 = new FileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.Name.FirstCharToUpper()}CommandBuilder.cs"));
                         File.WriteAllText(filePath0.FullName, result);
-                        commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.Name.FirstCharToUpper()}CommandBuilder", filePath0.FileNameWithoutExtension()));
+                        commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.Name.FirstCharToUpper()}SubCommandBuilder", filePath0.FileNameWithoutExtension()));
 
                         var subCommandBuilder = new SubCommandInterfaceBuilder().Build(projectName, subCommand, parameter, currentPath);
                         var filePath1 = new FileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"I{subCommand.Name.FirstCharToUpper()}SubCommandBuilder.cs"));
