@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Services
 {
     public class NameSpaceCollector
     {

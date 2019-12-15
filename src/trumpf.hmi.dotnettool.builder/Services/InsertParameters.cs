@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Drawing;
-using Pastel;
 using trumpf.hmi.dotnettool.builder.Extensions;
 using trumpf.hmi.dotnettool.builder.Models;
+using trumpf.hmi.dotnettool.builder.Parser;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Services
 {
     public class InsertParameters
     {

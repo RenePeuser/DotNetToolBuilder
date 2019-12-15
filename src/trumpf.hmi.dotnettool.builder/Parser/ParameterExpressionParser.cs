@@ -6,7 +6,7 @@ using trumpf.hmi.dotnettool.builder.Models;
 using trumpf.hmi.dotnettool.builder.Services;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Parser
 {
     public class ParameterExpressionParser
     {
