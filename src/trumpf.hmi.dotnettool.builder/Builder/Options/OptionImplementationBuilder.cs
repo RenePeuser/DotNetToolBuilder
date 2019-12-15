@@ -31,7 +31,7 @@ namespace trumpf.hmi.dotnettool.builder.Builder.Options
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
             var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();").Flatten(Environment.NewLine);
 
-            var newTemplate = template.Replace("$projectName$", projectName)
+            var newTemplate = template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
                 .Replace("$yield-option$", yieldStatements)
                 .Replace("$namespace$", nameSpace)
@@ -52,9 +52,9 @@ namespace trumpf.hmi.dotnettool.builder.Builder.Options
             {
                 var neewOptionStatement = BuildNewOptionString(option);
                 var newMethod = optionMethodTemplate.Replace("$option$", neewOptionStatement)
-                    .Replace("$option-name$", option.Name.FirstCharToUpper());
+                    .Replace("$option-name$", option.NormalizedValue);
 
-                var methodName = $"Build{option.Name.FirstCharToUpper()}Option";
+                var methodName = $"Build{option.NormalizedValue}Option";
                 yield return new MethodInfo(methodName, newMethod);
             }
         }

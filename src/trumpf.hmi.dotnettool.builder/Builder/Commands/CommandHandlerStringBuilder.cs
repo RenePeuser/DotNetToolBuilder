@@ -31,7 +31,7 @@ namespace trumpf.hmi.dotnettool.builder.Builder.Commands
 
             foreach (var optionInfo in cliParameterInfo.Options)
             {
-                yield return new CtorArgument("bool", optionInfo.Name);
+                yield return new CtorArgument("bool", optionInfo.ArgumentName);
             }
         }
     }

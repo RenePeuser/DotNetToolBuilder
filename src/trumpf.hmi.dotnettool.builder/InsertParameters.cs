@@ -13,7 +13,7 @@ namespace trumpf.hmi.dotnettool.builder
 
             while (true)
             {
-                Console.WriteLine("Please enter your parameter expression: (Sample: dotnet tool list packages --global)".InputColor() + $"{Environment.NewLine}Sample: 'dotnet tool install --global <package> --version <version>')".InputColor());
+                Console.WriteLine("Please enter your parameter expression: (Sample: dotnet tool list packages --global)".AsInput() + $"{Environment.NewLine}Sample: 'dotnet tool install --global <package> --version <version>')".AsInput());
                 var parameterExpression = Console.ReadLine();
 
                 var parseResult = new ParameterExpressionParser().Parse(parameterExpression, parameter);
@@ -24,7 +24,7 @@ namespace trumpf.hmi.dotnettool.builder
 
                 Console.WriteLine();
 
-                Console.WriteLine($"Do you want to add another parameter expression ? yes(y) or no (n)".InputColor());
+                Console.WriteLine($"Do you want to add another parameter expression ? yes(y) or no (n)".AsInput());
 
                 var result = Console.ReadLine();
                 if (result.Contains("no") || result.Contains("n"))

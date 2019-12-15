@@ -23,30 +23,33 @@ namespace trumpf.hmi.dotnettool.builder
                 if (current.StartsWith("<") && current.EndsWith(">"))
                 {
                     Console.WriteLine();
-                    Console.WriteLine($"Please enter a description for your argument: '{current}'".InputColor());
+                    Console.WriteLine($"Please enter a description for your argument: '{current}'".AsInput());
                     var description = Console.ReadLine();
 
                     var name = current.Substring(1, current.Length - 2);
-                    argument = new Argument(name, description);
+                    var normalizedArgumentName = name.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
+                    argument = new Argument(name, description, current, normalizedArgumentName);
                 }
                 else if (current.Contains("-"))
                 {
                     Console.WriteLine();
-                    Console.WriteLine($"Please enter an alias for your option: '{current}'".InputColor());
+                    Console.WriteLine($"Please enter an alias for your option: '{current}'".AsInput());
                     var alias = Console.ReadLine();
                     Console.WriteLine();
 
                     Console.WriteLine();
-                    Console.WriteLine($"Is your option required (r) or optional (o): '{current}'".InputColor());
+                    Console.WriteLine($"Is your option required (r) or optional (o): '{current}'".AsInput());
                     var required = Console.ReadLine();
                     var boolRequired = required.ToLower().Equals("r");
 
                     Console.WriteLine();
-                    Console.WriteLine($"Please enter a description for your option: '{current}'".InputColor());
+                    Console.WriteLine($"Please enter a description for your option: '{current}'".AsInput());
                     var description = Console.ReadLine();
 
                     var optioName = current.TrimStart('-');
-                    listArguments.Add(new OptionInfo(current, optioName, alias, description, boolRequired, argument));
+                    var normalizedOptiontName = optioName.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
+                    var optionArgumentName = normalizedOptiontName.FirstCharToLower();
+                    listArguments.Add(new OptionInfo(current, optioName, alias, description, boolRequired, argument, normalizedOptiontName, optionArgumentName));
                     if (argument.IsNotNull())
                     {
                         argument = null;
@@ -58,7 +61,7 @@ namespace trumpf.hmi.dotnettool.builder
                     parameter.Name = current;
 
                     Console.WriteLine();
-                    Console.WriteLine($"Please enter a description for your command: '{parameter.Name}'".InputColor());
+                    Console.WriteLine($"Please enter a description for your command: '{parameter.Name}'".AsInput());
                     var description = Console.ReadLine();
                     parameter.Decsription = description;
                     parameter.Options = listArguments.ToList();

@@ -5,9 +5,9 @@ namespace trumpf.hmi.dotnettool.builder
 {
     public static class ColorExtension
     {
-        public static string InputColor(this string source)
+        public static string AsInput(this string source)
         {
-            return source.Pastel(Color.Gray);
+            return source.Pastel(Color.Aqua);
         }
 
         public static string AsError(this string source)
