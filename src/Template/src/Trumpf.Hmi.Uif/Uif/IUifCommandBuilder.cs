@@ -4,6 +4,6 @@
 
     public interface IUifCommandBuilder
     {
-        Command Build();
+        RootCommand Build();
     }
 }

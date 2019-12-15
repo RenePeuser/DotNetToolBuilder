@@ -27,7 +27,7 @@ namespace trumpf.hmi.dotnettool.builder.Builder
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<TiFileService, TcFileService>();
-            services.AddSingleton<I$root-command$RootCommandBuilder, $root-command$RootCommandBuilder>();
+            services.AddSingleton<I$root-command$CommandBuilder, $root-command$CommandBuilder>();
             
             $command-registrations$
         }

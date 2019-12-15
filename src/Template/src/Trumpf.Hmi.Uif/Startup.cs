@@ -8,7 +8,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<TiFileService, TcFileService>();
-            services.AddSingleton<IUifRootCommandBuilder, UifRootCommandBuilder>();
+            services.AddSingleton<IUifCommandBuilder, UifCommandBuilder>();
         }
     }
 }

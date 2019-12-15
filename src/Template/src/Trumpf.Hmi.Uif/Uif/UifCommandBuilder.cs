@@ -4,11 +4,11 @@
     using System.CommandLine;
     using Trumpf.Hmi.Extensions;
 
-    public class UifRootCommandBuilder : IUifRootCommandBuilder
+    public class UifCommandBuilder : IUifCommandBuilder
     {
         private readonly IEnumerable<IUifCommandBuilder> _uifCommandBuilders;
 
-        public UifRootCommandBuilder(IEnumerable<IUifCommandBuilder> uifCommandBuilders)
+        public UifCommandBuilder(IEnumerable<IUifCommandBuilder> uifCommandBuilders)
         {
             _uifCommandBuilders = uifCommandBuilders;
         }
@@ -22,7 +22,6 @@
             };
 
             _uifCommandBuilders.ForEach(builder => rootCommand.AddCommand(builder.Build()));
-
             return rootCommand;
         }
     }

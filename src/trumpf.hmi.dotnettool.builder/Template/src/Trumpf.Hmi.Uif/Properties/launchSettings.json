@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Trumpf.Hmi.Uif": {
-      "commandName": "Project",
-      "commandLineArgs": "push C:\\TRUMPF\\Hmi\\Main\\Touchpoint\\Setup\\UIF\\Touchpoint.tcix "
-    }
-  }
-}
