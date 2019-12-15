@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using trumpf.hmi.dotnettool.builder.Builder.Commands;
+using trumpf.hmi.dotnettool.builder.Models;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Services
 {
     public class CliParameterService
     {

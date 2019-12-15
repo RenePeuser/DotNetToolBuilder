@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Models
 {
     public class CliParameterInfo
     {

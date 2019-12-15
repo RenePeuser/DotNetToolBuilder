@@ -1,8 +1,8 @@
-﻿namespace trumpf.hmi.dotnettool.builder
+﻿namespace trumpf.hmi.dotnettool.builder.Models
 {
-    internal class Property
+    internal class CtorArgument
     {
-        public Property(string type, string name)
+        public CtorArgument(string type, string name)
         {
             Type = type;
             Name = name;

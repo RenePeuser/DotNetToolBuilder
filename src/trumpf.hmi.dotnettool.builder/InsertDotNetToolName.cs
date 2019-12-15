@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Pastel;
+using trumpf.hmi.dotnettool.builder.Extensions;
 
 namespace trumpf.hmi.dotnettool.builder
 {

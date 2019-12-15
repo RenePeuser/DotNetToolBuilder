@@ -1,10 +1,12 @@
-﻿using trumpf.hmi.dotnettool.builder;
-using trumpf.hmi.dotnettool.builder.Builder.Commands;
+﻿using trumpf.hmi.dotnettool.builder.Extensions;
+using trumpf.hmi.dotnettool.builder.Models;
 
-internal class RootCommandBuilder
+namespace trumpf.hmi.dotnettool.builder.Builder.Commands
 {
-    private const string template =
-@"namespace $namespace$
+    internal class RootCommandBuilder
+    {
+        private const string template =
+            @"namespace $namespace$
 {
     using System.Collections.Generic;
     using Trumpf.Hmi.Extensions;
@@ -29,17 +31,18 @@ internal class RootCommandBuilder
     }
 }";
 
-    internal string Build(string project, CliParameterInfo cliParameterInfo, string nameSpace)
-    {
-        var commandHandler = new CommandHandlerStringBuilder().Build(cliParameterInfo);
+        internal string Build(string project, CliParameterInfo cliParameterInfo, string nameSpace)
+        {
+            var commandHandler = new CommandHandlerStringBuilder().Build(cliParameterInfo);
 
-        var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
-            .Replace("$command-argument-name$", cliParameterInfo.Name)
-            .Replace("$namespace$", nameSpace)
-            .Replace("$command-description$", cliParameterInfo.Decsription)
-            .Replace("$command-handler$", commandHandler)
-            .Replace("$project-name$", project);
+            var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
+                .Replace("$command-argument-name$", cliParameterInfo.Name)
+                .Replace("$namespace$", nameSpace)
+                .Replace("$command-description$", cliParameterInfo.Decsription)
+                .Replace("$command-handler$", commandHandler)
+                .Replace("$project-name$", project);
 
-        return newTemplate;
+            return newTemplate;
+        }
     }
 }

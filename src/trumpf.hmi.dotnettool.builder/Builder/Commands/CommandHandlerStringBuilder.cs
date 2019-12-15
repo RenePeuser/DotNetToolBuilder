@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using trumpf.hmi.dotnettool.builder.Extensions;
+using trumpf.hmi.dotnettool.builder.Models;
 using Trumpf.Hmi.Extensions;
 
 namespace trumpf.hmi.dotnettool.builder.Builder.Commands

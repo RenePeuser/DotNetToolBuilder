@@ -1,4 +1,7 @@
-﻿namespace trumpf.hmi.dotnettool.builder.Builder.Argument
+﻿using trumpf.hmi.dotnettool.builder.Extensions;
+using trumpf.hmi.dotnettool.builder.Models;
+
+namespace trumpf.hmi.dotnettool.builder.Builder.Argument
 {
     public class ArgumentBuilder
     {

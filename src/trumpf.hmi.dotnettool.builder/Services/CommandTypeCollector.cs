@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using trumpf.hmi.dotnettool.builder.Models;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Services
 {
     public class CommandTypeCollector
     {

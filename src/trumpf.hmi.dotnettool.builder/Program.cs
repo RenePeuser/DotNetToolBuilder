@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using trumpf.hmi.dotnettool.builder.Builder;
+using trumpf.hmi.dotnettool.builder.Extensions;
 using trumpf.hmi.dotnettool.builder.Services;
 using Trumpf.Hmi.Extensions;
 

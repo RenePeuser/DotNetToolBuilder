@@ -1,10 +1,12 @@
-﻿using trumpf.hmi.dotnettool.builder;
-using trumpf.hmi.dotnettool.builder.Builder.Commands;
+﻿using trumpf.hmi.dotnettool.builder.Extensions;
+using trumpf.hmi.dotnettool.builder.Models;
 
-internal class RootCommandInterfaceBuilder
+namespace trumpf.hmi.dotnettool.builder.Builder.Commands
 {
-    private const string template =
-@"namespace $namespace$
+    internal class RootCommandInterfaceBuilder
+    {
+        private const string template =
+            @"namespace $namespace$
 {
     using System.CommandLine;
 
@@ -14,12 +16,13 @@ internal class RootCommandInterfaceBuilder
     }
 }";
 
-    internal string Build(string project, CliParameterInfo cliParameterInfo, string nameSpace)
-    {
-        var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
-            .Replace("$namespace$", nameSpace)
-            .Replace("$project-name$", project);        
+        internal string Build(string project, CliParameterInfo cliParameterInfo, string nameSpace)
+        {
+            var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
+                .Replace("$namespace$", nameSpace)
+                .Replace("$project-name$", project);        
 
-        return newTemplate;
+            return newTemplate;
+        }
     }
 }

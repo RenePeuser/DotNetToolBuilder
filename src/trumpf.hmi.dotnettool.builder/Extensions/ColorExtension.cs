@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using Pastel;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Extensions
 {
     public static class ColorExtension
     {

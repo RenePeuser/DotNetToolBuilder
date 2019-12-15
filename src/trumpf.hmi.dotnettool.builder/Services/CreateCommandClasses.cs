@@ -1,13 +1,14 @@
-﻿using System.Collections.Specialized;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using trumpf.hmi.dotnettool.builder.Builder.Argument;
 using trumpf.hmi.dotnettool.builder.Builder.Commands;
 using trumpf.hmi.dotnettool.builder.Builder.Options;
 using trumpf.hmi.dotnettool.builder.Builder.Parameter;
+using trumpf.hmi.dotnettool.builder.Extensions;
+using trumpf.hmi.dotnettool.builder.Models;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Services
 {
     internal class CreateCommandClasses
     {

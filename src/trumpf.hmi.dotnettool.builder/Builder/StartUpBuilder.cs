@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using trumpf.hmi.dotnettool.builder.Extensions;
+using trumpf.hmi.dotnettool.builder.Models;
+using trumpf.hmi.dotnettool.builder.Services;
 using Trumpf.Hmi.Extensions;
 
 namespace trumpf.hmi.dotnettool.builder.Builder

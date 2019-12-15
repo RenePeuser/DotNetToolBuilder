@@ -1,4 +1,4 @@
-﻿namespace trumpf.hmi.dotnettool.builder
+﻿namespace trumpf.hmi.dotnettool.builder.Models
 {
     public class OptionInfo
     {
