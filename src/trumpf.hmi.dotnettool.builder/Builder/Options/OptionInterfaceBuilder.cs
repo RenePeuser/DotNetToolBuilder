@@ -1,9 +1,9 @@
-﻿namespace trumpf.hmi.dotnettool.builder
+﻿namespace trumpf.hmi.dotnettool.builder.Builder.Options
 {
-    public class IOptionInterfaceBuilder
+    public class OptionInterfaceBuilder
     {
-        private const string template = 
-@"namespace $projectName$
+        private const string template =
+@"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.CommandLine;
@@ -14,9 +14,10 @@
     }
 }";
 
-        public string Build(string projectName, CliParameterInfo parameterInfo)
+        public string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace)
         {
             var newTemplate = template.Replace("$projectName$", projectName)
+                .Replace("$namespace$", nameSpace)
                 .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper());
 
             return newTemplate;

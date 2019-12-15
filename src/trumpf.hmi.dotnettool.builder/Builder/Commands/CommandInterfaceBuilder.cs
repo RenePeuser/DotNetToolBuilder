@@ -1,9 +1,9 @@
-﻿namespace trumpf.hmi.dotnettool.builder
+﻿namespace trumpf.hmi.dotnettool.builder.Builder.Commands
 {
-    internal class ICommandService
+    internal class CommandInterfaceBuilder
     {
         private const string template =
-            @"namespace $project-name$
+@"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -14,9 +14,10 @@
         Task HandleAsync($command-name$Parameters parameters);
     }
 }";
-        internal string Build(string project, CliParameterInfo cliParameterInfo)
+        internal string Build(string project, CliParameterInfo cliParameterInfo, string nameSpace)
         {
             var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
+                .Replace("$namespace$", nameSpace)
                 .Replace("$project-name$", project);
 
             return newTemplate;

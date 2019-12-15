@@ -2,7 +2,7 @@
 using System.Linq;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Builder.Commands
 {
     internal class CommandHandlerStringBuilder
     {

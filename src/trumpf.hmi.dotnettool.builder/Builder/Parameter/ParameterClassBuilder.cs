@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Builder.Parameter
 {
     internal class ParameterClassBuilder
     {
-        private const string template = 
-@"namespace $projectName$
+        private const string template =
+@"namespace $namespace$
   {
       public class $command-name$Parameters
       {
@@ -23,9 +23,7 @@ namespace trumpf.hmi.dotnettool.builder
 
         private const string ctorArgument = @"$type$ $argName$";
 
-        private const string propertyInitializer = @"$property$ = $argName$";
-
-        internal string Build(string projectName, CliParameterInfo cliParameterInfo)
+        internal string Build(string projectName, CliParameterInfo cliParameterInfo, string nameSpace)
         {
             var ctorArguments = BuildCtorArguments(cliParameterInfo);
             var properties = BuildProperties(ctorArguments);
@@ -38,6 +36,7 @@ namespace trumpf.hmi.dotnettool.builder
                                       .Replace("$agrument-to-properties$", propertyInitializer)
                                       .Replace("$properties$", propertyString)
                                       .Replace("$projectName$", projectName)
+                                      .Replace("$namespace$", nameSpace)
                                       .Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper());
 
             return newTemplate;

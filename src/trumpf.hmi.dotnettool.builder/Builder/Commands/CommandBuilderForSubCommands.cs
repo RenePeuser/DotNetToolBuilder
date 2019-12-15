@@ -1,9 +1,9 @@
-﻿namespace trumpf.hmi.dotnettool.builder
+﻿namespace trumpf.hmi.dotnettool.builder.Builder.Commands
 {
     internal class CommandBuilderForSubCommands
     {
         private const string template =
-@"namespace $project-name$.$command-name$
+@"namespace $namespace$
 {
     using System.Collections.Generic;
     using Trumpf.Hmi.Extensions;
@@ -28,12 +28,13 @@
     }
 }";
 
-        internal string Build(string project, CliParameterInfo cliParameterInfo, CliParameterInfo parent)
+        internal string Build(string project, CliParameterInfo cliParameterInfo, CliParameterInfo parent, string nameSpace)
         {
             var commandHandler = new CommandHandlerStringBuilder().Build(cliParameterInfo);
 
             var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
                 .Replace("$command-argument-name$", cliParameterInfo.Name)
+                .Replace("$namespace$", nameSpace)
                 .Replace("$command-description$", cliParameterInfo.Decsription)
                 .Replace("$command-handler$", commandHandler)
                 .Replace("$parent-command-name$", parent.Name.FirstCharToUpper())

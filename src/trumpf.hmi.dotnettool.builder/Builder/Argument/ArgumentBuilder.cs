@@ -1,9 +1,9 @@
-﻿namespace trumpf.hmi.dotnettool.builder
+﻿namespace trumpf.hmi.dotnettool.builder.Builder.Argument
 {
     public class ArgumentBuilder
     {
         private const string template = 
-@"namespace $project-name$
+@"namespace $namespace$
 {
     using System.CommandLine;
 
@@ -22,11 +22,12 @@
     }
 }";
 
-        public string Build(string projectName, CliParameterInfo parameterInfo)
+        public string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace)
         {
             var newTemplate = template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
                 .Replace("$argument-name$", parameterInfo.ArgumentInfo.Name)
+                .Replace("$namespace$", nameSpace)
                 .Replace("$argument-description$", parameterInfo.ArgumentInfo.Description);
 
             return newTemplate;

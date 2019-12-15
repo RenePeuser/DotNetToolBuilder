@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Builder.Options
 {
     public class OptionImplementationBuilder
     {
-        private const string template = 
-@"namespace $projectName$
+        private const string template =
+@"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.CommandLine;
@@ -25,7 +25,7 @@ namespace trumpf.hmi.dotnettool.builder
     }
 }";
 
-        public string Build(string projectName, CliParameterInfo parameterInfo)
+        public string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace)
         {
             var optionsMethods = BuildOptionsMethodFrom(parameterInfo.Options).ToList();
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
@@ -34,6 +34,7 @@ namespace trumpf.hmi.dotnettool.builder
             var newTemplate = template.Replace("$projectName$", projectName)
                 .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
                 .Replace("$yield-option$", yieldStatements)
+                .Replace("$namespace$", nameSpace)
                 .Replace("$build-option-method$", optionsMethodAsString);
 
             return newTemplate;

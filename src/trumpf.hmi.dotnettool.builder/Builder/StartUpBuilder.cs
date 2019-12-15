@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Trumpf.Hmi.Extensions;
 
-namespace trumpf.hmi.dotnettool.builder
+namespace trumpf.hmi.dotnettool.builder.Builder
 {
     public class StartUpBuilder
     {
@@ -20,6 +20,7 @@ namespace trumpf.hmi.dotnettool.builder
 {
     using Microsoft.Extensions.DependencyInjection;
     using Trumpf.Hmi.FileSystemAbstraction.Services;
+    $usings$
 
     public class Startup
     {
@@ -35,21 +36,21 @@ namespace trumpf.hmi.dotnettool.builder
     }
 }";
 
-        public void AddRegistrationsFrom(string projectName, FileInfo solutionFile, CommandTypeCollector commandTypeCollector, CliParameterInfo rootCommand)
+        public void AddRegistrationsFrom(string projectName, FileInfo solutionFile, CommandTypeCollector commandTypeCollector, CliParameterInfo rootCommand, NameSpaceCollector nameSpaceCollector)
         {
-            var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs",SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
+            var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
 
             var methods = GenerateMethods(commandTypeCollector).ToList();
             var commandRegistrations = methods.Select(m => $"{m.MethodName}(services);").Flatten(Environment.NewLine);
             var registrationMethods = methods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
 
-            var folder = solutionFile.Directory.EnumerateDirectories(rootCommand.Name, SearchOption.AllDirectories).FirstOrDefault();
-            var allDirectories = folder.EnumerateDirectories("*", SearchOption.AllDirectories).ToList();
+            var usings = nameSpaceCollector.GetAll().Select(n => $"using {n};").Flatten(Environment.NewLine);
 
             var newStartUp = template.Replace("$projectName$", projectName)
-                .Replace("$command-registrations$", commandRegistrations)
-                .Replace("$root-command$", rootCommand.Name.FirstCharToUpper())
-                .Replace("$methods$", registrationMethods);
+            .Replace("$command-registrations$", commandRegistrations)
+            .Replace("$root-command$", rootCommand.Name.FirstCharToUpper())
+            .Replace("$methods$", registrationMethods)
+            .Replace("$usings$", usings);
 
             File.WriteAllText(startUpFile.FullName, newStartUp);
         }
