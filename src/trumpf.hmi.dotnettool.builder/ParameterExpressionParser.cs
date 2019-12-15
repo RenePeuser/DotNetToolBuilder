@@ -80,11 +80,13 @@ namespace trumpf.hmi.dotnettool.builder
 
                     if (lastParamater.IsNotNull())
                     {
-                        var parentForThis =
-                            CliParameterService.FindAlreadyExistingCommand(lastParamater.SubCommands, parameter);
+                        var parentForThis = CliParameterService.FindAlreadyExistingCommand(lastParamater.SubCommands, parameter);
                         if (parentForThis.IsNotNull())
                         {
-                            parentForThis.SubCommands = parentForThis.SubCommands.Concat(parameter.SubCommands);
+                            if (parentForThis.SubCommands.IsNotNull())
+                            {
+                                parentForThis.SubCommands = parentForThis.SubCommands.Concat(parameter.SubCommands);
+                            }
                         }
                     }
                 }
