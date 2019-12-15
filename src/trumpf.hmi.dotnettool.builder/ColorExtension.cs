@@ -7,7 +7,12 @@ namespace trumpf.hmi.dotnettool.builder
     {
         public static string AsInput(this string source)
         {
-            return source.Pastel(Color.Aqua);
+            return source.Pastel(Color.DarkCyan);
+        }
+
+        public static string AsSample(this string source)
+        {
+            return source.Pastel(Color.Gray);
         }
 
         public static string AsError(this string source)

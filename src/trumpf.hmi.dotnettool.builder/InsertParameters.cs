@@ -13,7 +13,9 @@ namespace trumpf.hmi.dotnettool.builder
 
             while (true)
             {
-                Console.WriteLine("Please enter your parameter expression: (Sample: dotnet tool list packages --global)".AsInput() + $"{Environment.NewLine}Sample: 'dotnet tool install --global <package> --version <version>')".AsInput());
+                Console.WriteLine("Please enter your parameter expression".AsInput());
+                Console.WriteLine($"Sample: 'dotnet tool install --global <package>  [--version not needed is a default command]')".AsSample());
+
                 var parameterExpression = Console.ReadLine();
 
                 var parseResult = new ParameterExpressionParser().Parse(parameterExpression, parameter);

@@ -90,6 +90,9 @@ namespace trumpf.hmi.dotnettool.builder
 
             Console.WriteLine($"Enjoy your new generated: '{projectName}' dotnet tool :-)".AsSuccessfull());
 
+
+
+
             // Open generated solution
             new VisualStudioService().Open(solutionFile);
         }

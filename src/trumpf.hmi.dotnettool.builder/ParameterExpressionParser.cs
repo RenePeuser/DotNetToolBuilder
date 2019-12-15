@@ -37,7 +37,6 @@ namespace trumpf.hmi.dotnettool.builder
                     var alias = Console.ReadLine();
                     Console.WriteLine();
 
-                    Console.WriteLine();
                     Console.WriteLine($"Is your option required (r) or optional (o): '{current}'".AsInput());
                     var required = Console.ReadLine();
                     var boolRequired = required.ToLower().Equals("r");
