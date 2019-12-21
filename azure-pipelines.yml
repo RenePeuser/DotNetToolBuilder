@@ -13,8 +13,8 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration) .\src\DotNetTool.Builder.sln
+- script: dotnet build --configuration $(buildConfiguration) ./src/DotNetTool.Builder.sln
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test --configuration $(buildConfiguration) .\src\DotNetTool.Builder.sln
+- script: dotnet test --configuration $(buildConfiguration) ./src/DotNetTool.Builder.sln
   displayName: 'dotnet test $(buildConfiguration)'
