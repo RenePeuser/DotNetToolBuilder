@@ -7,10 +7,6 @@ using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Parser.Argument
 {
-    public interface IArgumentOnly : IArgumentParser
-    {
-    }
-
     public class ArgumentOnly : IArgumentOnly
     {
         private readonly IConsoleService _consoleService;
@@ -33,7 +29,7 @@ namespace DotNetTool.Builder.Parser.Argument
 
             _consoleService.WriteLine();
             _consoleService.WriteLine($"Please enter a description for your argument: '{value}'".AsInput());
-            var description = Console.ReadLine();
+            var description = _consoleService.ReadLine();
 
             var argument = new ArgumentInfo(name, description, value, normalizedArgumentName, typeInfo);
 

@@ -25,7 +25,7 @@ namespace DotNetTool.Builder.Parser.Argument
 
             var argument = _argumentOnly.Parse(current);
 
-            return new ArgumentInfo(argument.Name, argument.Description, argument.Value, argument.NormalizedName, typeInfo);
+            return new ArgumentInfo(argument.Name, argument.Description, value, argument.NormalizedName, typeInfo);
         }
     }
 }

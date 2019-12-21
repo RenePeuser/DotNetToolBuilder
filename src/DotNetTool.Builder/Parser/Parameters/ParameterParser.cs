@@ -28,7 +28,7 @@ namespace DotNetTool.Builder.Parser.Parameters
             _consoleService.WriteLine();
             _consoleService.WriteLine($"Please enter a description for your command: '{parameter.Name}'".AsInput());
             var description = _consoleService.ReadLine();
-            parameter.Decsription = description;
+            parameter.Description = description;
             parameter.Options = options.ToList();
 
             return parameter;
@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Parser.Parameters
         {
             var parameter = new CliParameterInfo();
             parameter.Name = value;
-            parameter.Decsription = parameterInfo.Decsription;
+            parameter.Description = parameterInfo.Description;
             parameter.Options = parameterInfo.Options.ToList();
             return parameter;
         }

@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Models
 {
     public class CliParameterInfo
     {
-        public IEnumerable<CliParameterInfo> SubCommands { get; set; }
+        public IEnumerable<CliParameterInfo> SubCommands { get; set; } = Enumerable.Empty<CliParameterInfo>();
 
         public IEnumerable<OptionInfo> Options { get; set; } = Enumerable.Empty<OptionInfo>();
 
@@ -13,6 +13,6 @@ namespace DotNetTool.Builder.Models
 
         public string Name { get; set; }
 
-        public string Decsription { get; set; }
+        public string Description { get; set; }
     }
 }

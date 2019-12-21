@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Builder.Commands
             var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
                 .Replace("$command-argument-name$", cliParameterInfo.Name)
                 .Replace("$namespace$", nameSpace)
-                .Replace("$command-description$", cliParameterInfo.Decsription)
+                .Replace("$command-description$", cliParameterInfo.Description)
                 .Replace("$command-handler$", commandHandler)
                 .Replace("$parent-command-name$", parent.Name.FirstCharToUpper())
                 .Replace("$project-name$", project);
