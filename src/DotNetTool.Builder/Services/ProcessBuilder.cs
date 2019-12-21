@@ -1,0 +1,23 @@
+﻿using System.Diagnostics;
+using Trumpf.Hmi.ArgumentChecking;
+
+namespace DotNetTool.Builder.Services
+{
+    internal class ProcessBuilder : IProcessBuilder
+    {
+        public IProcess BuildFrom(string command, string arguments)
+        {
+            Throw.IfNullOrWhiteSpace(() => command);
+            Throw.IfNullOrWhiteSpace(() => arguments);
+
+            var process = new ProcessProxy(new Process());
+
+            process.StartInfo.FileName = command;
+            process.StartInfo.Arguments = arguments;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+
+            return process;
+        }
+    }
+}

@@ -4,11 +4,11 @@
     using System.CommandLine;
     using Trumpf.Hmi.Extensions;
 
-    public class UltraCommandBuilder : IUltraCommandBuilder
+    public class UifCommandBuilder : IUifCommandBuilder
     {
-        private readonly IEnumerable<IUltraSubCommandBuilder> _ultraSubCommandBuilders;
+        private readonly IEnumerable<IUifSubCommandBuilder> _ultraSubCommandBuilders;
 
-        public UltraCommandBuilder(IEnumerable<IUltraSubCommandBuilder> ultraSubCommandBuilders)
+        public UifCommandBuilder(IEnumerable<IUifSubCommandBuilder> ultraSubCommandBuilders)
         {
             _ultraSubCommandBuilders = ultraSubCommandBuilders;
         }

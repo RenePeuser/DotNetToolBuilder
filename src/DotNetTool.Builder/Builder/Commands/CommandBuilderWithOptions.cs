@@ -1,0 +1,55 @@
+﻿using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
+
+namespace DotNetTool.Builder.Builder.Commands
+{
+    internal class CommandBuilderWithOptions : ICommandBuilderWithOptions
+    {
+        private const string template =
+@"namespace $namespace$
+{                
+    using System.Collections.Generic;
+    using Trumpf.Hmi.Extensions;
+    using System.CommandLine;
+    using System.CommandLine.Invocation;        
+    using $project-name$.Rendering;
+
+    public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
+    {
+        private readonly I$command-name$Service _$command-service-argument-name$Service;
+        private readonly I$command-name$OptionsBuilder _optionsBuilder;        
+
+        public $command-name$CommandBuilder(I$command-name$Service $command-service-argument-name$Service, I$command-name$OptionsBuilder optionsBuilder)
+        {                    
+            _$command-service-argument-name$Service = $command-service-argument-name$Service;
+            _optionsBuilder = optionsBuilder;
+            _argumentBuilder = argumentBuilder;
+        }
+
+        public Command Build()
+        {
+            var command = new Command(""$command-argument-name$"", ""$command-description$"".AsDescription());
+            _optionsBuilder.Build().ForEach(option => command.AddOption(option));            
+            command.Handler = $command-handler$;
+            return command;
+        }
+    }
+}";
+
+        public string Build(string project, CliParameterInfo cliParameterInfo, CliParameterInfo parent, string nameSpace)
+        {
+            var commandHandler = new CommandHandlerStringBuilder().Build(cliParameterInfo);
+
+            var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
+                .Replace("$parent-command-name$", parent.Name.FirstCharToUpper())
+                .Replace("$command-description$", cliParameterInfo.Decsription)
+                .Replace("$command-argument-name$", cliParameterInfo.Name)
+                .Replace("$command-service-argument-name$", cliParameterInfo.Name)
+                .Replace("$command-handler$", commandHandler)
+                .Replace("$namespace$", nameSpace)
+                .Replace("$project-name$", project);
+
+            return newTemplate;
+        }
+    }
+}

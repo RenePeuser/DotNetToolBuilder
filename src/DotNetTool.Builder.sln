@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetTool.Builder", "DotNetTool.Builder\DotNetTool.Builder.csproj", "{FED8E22B-68BA-4CB9-B2F4-E0BF18CC3F1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetTool.Builder.Test", "DotNetTool.Builder.Test\DotNetTool.Builder.Test.csproj", "{BB9D664D-F473-4E8E-841F-7C8D5788EF97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FED8E22B-68BA-4CB9-B2F4-E0BF18CC3F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FED8E22B-68BA-4CB9-B2F4-E0BF18CC3F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FED8E22B-68BA-4CB9-B2F4-E0BF18CC3F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FED8E22B-68BA-4CB9-B2F4-E0BF18CC3F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9D664D-F473-4E8E-841F-7C8D5788EF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9D664D-F473-4E8E-841F-7C8D5788EF97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9D664D-F473-4E8E-841F-7C8D5788EF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9D664D-F473-4E8E-841F-7C8D5788EF97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A292190-30DD-4325-883B-603B9EAE175B}
+	EndGlobalSection
+EndGlobal

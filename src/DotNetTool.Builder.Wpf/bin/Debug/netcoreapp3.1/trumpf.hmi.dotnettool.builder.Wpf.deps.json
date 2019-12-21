@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "trumpf.hmi.dotnettool.builder.Wpf/1.0.0": {
+        "runtime": {
+          "trumpf.hmi.dotnettool.builder.Wpf.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "trumpf.hmi.dotnettool.builder.Wpf/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
