@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using trumpf.hmi.dotnettool.builder.Models;
 using Trumpf.Hmi.Extensions;
 
@@ -7,31 +6,6 @@ namespace trumpf.hmi.dotnettool.builder.Services
 {
     public class CliParameterService
     {
-        public static CliParameterInfo FindAlreadyExistingCommand(IEnumerable<CliParameterInfo> others,
-            CliParameterInfo current)
-        {
-            if (others.IsNull())
-            {
-                return null;
-            }
-
-            foreach (var cliParameterInfo in others)
-            {
-                if (cliParameterInfo.Name == current.Name)
-                {
-                    return cliParameterInfo;
-                }
-
-                var match = FindAlreadyExistingCommand(cliParameterInfo.SubCommands, current);
-                if (match.IsNotNull())
-                {
-                    return match;
-                }
-            }
-
-            return null;
-        }
-
         public static CliParameterInfo FindAlreadyExistingCommand(string command,
             CliParameterInfo current)
         {

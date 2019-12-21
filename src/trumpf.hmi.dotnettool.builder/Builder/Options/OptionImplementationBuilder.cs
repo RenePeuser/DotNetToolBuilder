@@ -42,7 +42,7 @@ namespace trumpf.hmi.dotnettool.builder.Builder.Options
             return newTemplate;
         }
 
-        private const string optionMethodTemplate = 
+        private const string optionMethodTemplate =
 @"private Option Build$option-name$Option()
 {
     return new $option$;
@@ -61,16 +61,41 @@ namespace trumpf.hmi.dotnettool.builder.Builder.Options
             }
         }
 
-        private const string optionTemplate = 
+        private const string optionTemplate =
 @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"".AsDescription())
 {
     Required = $required-value$
 }";
 
+        private const string optionArgumentTemplate =
+@"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"".AsDescription())
+{
+    Required = $required-value$,
+    Argument = new Argument(""$option-argument-name$"")
+}";
+
         private string BuildNewOptionString(OptionInfo optionInfo)
+        {
+            return optionInfo.Argument.IsNotNull()
+                ? BuildNewOptionWithArgumentString(optionInfo)
+                : BuildNewOptionWithoutArgumentString(optionInfo);
+        }
+
+        private string BuildNewOptionWithoutArgumentString(OptionInfo optionInfo)
         {
             var newTemplate = optionTemplate.Replace("$option-name$", optionInfo.Name)
                 .Replace("$option-alias$", optionInfo.Alias)
+                .Replace("$option-description$", optionInfo.Description)
+                .Replace("$required-value$", optionInfo.Required.ToString().ToLower());
+
+            return newTemplate;
+        }
+
+        private string BuildNewOptionWithArgumentString(OptionInfo optionInfo)
+        {
+            var newTemplate = optionArgumentTemplate.Replace("$option-name$", optionInfo.Name)
+                .Replace("$option-alias$", optionInfo.Alias)
+                .Replace("$option-argument-name$", optionInfo.Argument.Name)
                 .Replace("$option-description$", optionInfo.Description)
                 .Replace("$required-value$", optionInfo.Required.ToString().ToLower());
 

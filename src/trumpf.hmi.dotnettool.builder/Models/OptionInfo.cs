@@ -27,6 +27,7 @@
         public Argument Argument { get; }
 
         public string NormalizedValue { get; }
+
         public string ArgumentName { get; }
     }
 }

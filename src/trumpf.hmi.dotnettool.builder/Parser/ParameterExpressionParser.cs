@@ -10,7 +10,7 @@ namespace trumpf.hmi.dotnettool.builder.Parser
 {
     public class ParameterExpressionParser
     {
-        public CliParameterInfo Parse(string paramterExpression, CliParameterInfo lastParamater)
+        public CliParameterInfo Parse(string paramterExpression, CliParameterInfo lastParameter)
         {
             var splittedExpression = paramterExpression.Split(" ");
 
@@ -24,7 +24,7 @@ namespace trumpf.hmi.dotnettool.builder.Parser
                 if (current.StartsWith("<") && current.EndsWith(">"))
                 {
 
-                    var alreadyExistingArgument = CliParameterService.FindAlreadyExistingArgument(current, lastParamater);
+                    var alreadyExistingArgument = CliParameterService.FindAlreadyExistingArgument(current, lastParameter);
                     if (alreadyExistingArgument.IsNull())
                     {
                         Console.WriteLine();
@@ -44,7 +44,7 @@ namespace trumpf.hmi.dotnettool.builder.Parser
                 else if (current.Contains("-"))
                 {
 
-                    var alreadyExistingOption = CliParameterService.FindAlreadyExistingOption(current, lastParamater);
+                    var alreadyExistingOption = CliParameterService.FindAlreadyExistingOption(current, lastParameter);
                     if (alreadyExistingOption.IsNull())
                     {
                         Console.WriteLine();
@@ -79,7 +79,7 @@ namespace trumpf.hmi.dotnettool.builder.Parser
                 else
                 {
 
-                    var commandAlreadyExists = CliParameterService.FindAlreadyExistingCommand(current, lastParamater);
+                    var commandAlreadyExists = CliParameterService.FindAlreadyExistingCommand(current, lastParameter);
                     var parameter = new CliParameterInfo();
 
                     if (commandAlreadyExists.IsNull())
@@ -113,9 +113,9 @@ namespace trumpf.hmi.dotnettool.builder.Parser
 
                     lastCliParameterInfo = parameter;
 
-                    if (lastParamater.IsNotNull())
+                    if (lastParameter.IsNotNull())
                     {
-                        var parentForThis = CliParameterService.FindAlreadyExistingCommand(current, lastParamater);
+                        var parentForThis = CliParameterService.FindAlreadyExistingCommand(current, lastParameter);
                         if (parentForThis.IsNotNull())
                         {
                             if (parentForThis.SubCommands.IsNotNull())
@@ -127,9 +127,9 @@ namespace trumpf.hmi.dotnettool.builder.Parser
                 }
             }
 
-            if (lastParamater.IsNotNull())
+            if (lastParameter.IsNotNull())
             {
-                return lastParamater;
+                return lastParameter;
             }
 
             return lastCliParameterInfo;
