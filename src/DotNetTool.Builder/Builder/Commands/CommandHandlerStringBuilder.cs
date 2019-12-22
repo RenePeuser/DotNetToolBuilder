@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandHandlerStringBuilder : ICommandHandlerStringBuilder
     {
-        private const string template =
+        private const string Template =
             "CommandHandler.Create<$types$>(($argument-names$) => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
 
         public string Build(ParameterInfo parameterInfo)
@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.Builder.Commands
             var types = arguments.Select(arg => arg.Type).Flatten(", ");
             var argNames = arguments.Select(arg => arg.Name).Flatten(", ");
 
-            var newTemplate = template.Replace("$types$", types)
+            var newTemplate = Template.Replace("$types$", types)
                 .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$command-argument-name$", parameterInfo.Name)
                 .Replace("$argument-names$", argNames);
@@ -26,10 +26,15 @@ namespace DotNetTool.Builder.Builder.Commands
         internal IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
         {
             var argumentInfo = parameterInfo.ArgumentInfo;
-            if (argumentInfo.IsNotNull()) yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
+            if (argumentInfo.IsNotNull())
+            {
+                yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
+            }
 
             foreach (var optionInfo in parameterInfo.Options)
+            {
                 yield return new CtorArgument("bool", optionInfo.ArgumentName);
+            }
         }
     }
 }

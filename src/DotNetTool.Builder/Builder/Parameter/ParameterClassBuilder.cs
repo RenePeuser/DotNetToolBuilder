@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Builder.Parameter
 {
     internal class ParameterClassBuilder : IParameterClassBuilder
     {
-        private const string template =
+        private const string Template =
             @"namespace $namespace$
   {
       public class $command-name$Parameters
@@ -22,18 +22,18 @@ namespace DotNetTool.Builder.Builder.Parameter
       }
   }";
 
-        private const string ctorArgument = @"$type$ $argName$";
+        private const string CtorArgument = @"$type$ $argName$";
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
-            var ctorArguments = BuildCtorArguments(parameterInfo);
-            var properties = BuildProperties(ctorArguments);
+            var ctorArguments = BuildCtorArguments(parameterInfo).ToList();
+            var properties = BuildProperties(ctorArguments).ToList();
             var propertyString = BuildPropertyString(properties);
 
             var argumentString = BuildArguments(ctorArguments);
             var propertyInitializer = BuildPropertyInitializerString(ctorArguments, properties);
 
-            var newTemplate = template.Replace("$ctor-arguments$", argumentString)
+            var newTemplate = Template.Replace("$ctor-arguments$", argumentString)
                 .Replace("$agrument-to-properties$", propertyInitializer)
                 .Replace("$properties$", propertyString)
                 .Replace("$projectName$", projectName)
@@ -45,7 +45,7 @@ namespace DotNetTool.Builder.Builder.Parameter
 
         private string BuildPropertyString(IEnumerable<Property> properties)
         {
-            var result = properties.Select(p => $"public {p.Type} {p.Name} {"{"} get; {"}"}")
+            var result = properties.Select(p => $"public {p.Type} {p.Name} {{ get; }}")
                 .Flatten(Environment.NewLine);
             return result;
         }
@@ -57,8 +57,7 @@ namespace DotNetTool.Builder.Builder.Parameter
             return result.Flatten(Environment.NewLine);
         }
 
-        private IEnumerable<string> BuildPropertyInitializer(IEnumerable<CtorArgument> arguments,
-            IEnumerable<Property> properties)
+        private IEnumerable<string> BuildPropertyInitializer(IEnumerable<CtorArgument> arguments, IEnumerable<Property> properties)
         {
             foreach (var property in properties)
             {
@@ -69,13 +68,12 @@ namespace DotNetTool.Builder.Builder.Parameter
 
         private string BuildArguments(IEnumerable<CtorArgument> ctorArguments)
         {
-            var result = ctorArguments
-                .Select(arg => ctorArgument.Replace("$type$", arg.Type).Replace("$argName$", arg.Name)).Flatten(", ");
+            var result = ctorArguments.Select(arg => CtorArgument.Replace("$type$", arg.Type).Replace("$argName$", arg.Name)).Flatten(", ");
             return result;
         }
 
 
-        internal IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
+        private IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
         {
             var argumentInfo = parameterInfo.ArgumentInfo;
             if (argumentInfo.IsNotNull()) yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
@@ -84,7 +82,7 @@ namespace DotNetTool.Builder.Builder.Parameter
                 yield return new CtorArgument("bool", optionInfo.ArgumentName);
         }
 
-        internal IEnumerable<Property> BuildProperties(IEnumerable<CtorArgument> ctorArguments)
+        private IEnumerable<Property> BuildProperties(IEnumerable<CtorArgument> ctorArguments)
         {
             foreach (var argument in ctorArguments) yield return new Property(argument.Type, argument.NormalizedName);
         }

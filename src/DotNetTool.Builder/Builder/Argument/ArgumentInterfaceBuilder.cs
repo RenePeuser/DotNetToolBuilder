@@ -9,7 +9,7 @@ namespace DotNetTool.Builder.Builder.Argument
 
     public class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
-        private const string template =
+        private const string Template =
             @"namespace $namespace$
 {
     using System.CommandLine;
@@ -22,7 +22,7 @@ namespace DotNetTool.Builder.Builder.Argument
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
-            var newTemplate = template.Replace("$projectName$", projectName)
+            var newTemplate = Template.Replace("$projectName$", projectName)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$command-name$", parameterInfo.NormalizedName);
 

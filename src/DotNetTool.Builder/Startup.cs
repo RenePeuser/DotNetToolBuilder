@@ -108,6 +108,12 @@ namespace DotNetTool.Builder
         {
             services.AddSingleton<IOptionInterfaceBuilder, OptionInterfaceBuilder>();
             services.AddSingleton<IOptionImplementationBuilder, OptionImplementationBuilder>();
+            services.AddSingleton<IOptionMethodsBuilder, OptionMethodsBuilder>();
+
+            services.AddSingleton<INewOptionExpressionBuilder, NewOptionExpressionBuilderWithArgument>();
+            services.AddSingleton<INewOptionExpressionBuilder, NewOptionExpressionBuilderWithoutArgument>();
+
+            services.AddSingleton<INewOptionExpressionService, NewOptionExpressionService>();
         }
 
         public void RegisterParameterClassBuilder(IServiceCollection services)

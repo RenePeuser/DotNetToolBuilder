@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandInterfaceBuilder : ICommandInterfaceBuilder
     {
-        private const string template =
+        private const string Template =
             @"namespace $namespace$
 {
     using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public string Build(string project, ParameterInfo parameterInfo, string nameSpace)
         {
-            var newTemplate = template.Replace("$command-name$", parameterInfo.NormalizedName)
+            var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$project-name$", project);
 

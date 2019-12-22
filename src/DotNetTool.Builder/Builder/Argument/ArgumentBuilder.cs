@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Builder.Argument
 {
     public class ArgumentBuilder : IArgumentBuilder
     {
-        private const string template =
+        private const string Template =
             @"namespace $namespace$
 {
     using System.CommandLine;
@@ -26,7 +26,7 @@ namespace DotNetTool.Builder.Builder.Argument
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
-            var newTemplate = template.Replace("$project-name$", projectName)
+            var newTemplate = Template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$argument-name$", parameterInfo.ArgumentInfo.Name)
                 .Replace("$namespace$", nameSpace)
