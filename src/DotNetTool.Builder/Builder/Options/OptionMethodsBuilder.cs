@@ -10,13 +10,13 @@ namespace DotNetTool.Builder.Builder.Options
 
     public class OptionMethodsBuilder : IOptionMethodsBuilder
     {
-        private readonly INewOptionExpressionService _newOptionExpressionService;
-
         private const string OptionMethodTemplate =
             @"private Option Build$option-name$Option()
 {
     return new $option$;
 }";
+
+        private readonly INewOptionExpressionService _newOptionExpressionService;
 
         public OptionMethodsBuilder(INewOptionExpressionService newOptionExpressionService)
         {

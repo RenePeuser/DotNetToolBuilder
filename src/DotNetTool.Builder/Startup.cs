@@ -1,8 +1,8 @@
-﻿using DotNetTool.Builder.Builder;
-using DotNetTool.Builder.Builder.Argument;
+﻿using DotNetTool.Builder.Builder.Argument;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
+using DotNetTool.Builder.Builder.Startup;
 using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Parser;
@@ -37,6 +37,8 @@ namespace DotNetTool.Builder
         private void RegisterStartUpBuilder(IServiceCollection services)
         {
             services.AddSingleton<IStartUpBuilder, StartUpBuilder>();
+            services.AddSingleton<IRegisterServiceMethodBuilder, RegisterServiceMethodBuilder>();
+            services.AddSingleton<ITypeRegistrationBuilder, TypeRegistrationBuilder>();
         }
 
         private void RegisterServices(IServiceCollection services)

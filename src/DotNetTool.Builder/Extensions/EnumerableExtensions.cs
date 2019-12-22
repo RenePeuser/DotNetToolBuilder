@@ -32,10 +32,10 @@ namespace DotNetTool.Builder.Extensions
             if (result == null)
             {
                 throw new InvalidOperationException(
-                                                    string.Format(
-                                                                  CultureInfo.InvariantCulture,
-                                                                  "Enumeration does not contains any item of the specific type: {0}",
-                                                                  typeof(TSource).Name));
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Enumeration does not contains any item of the specific type: {0}",
+                        typeof(TSource).Name));
             }
 
             return result;
@@ -68,10 +68,10 @@ namespace DotNetTool.Builder.Extensions
             if (result == null)
             {
                 throw new InvalidOperationException(
-                                                    string.Format(
-                                                                  CultureInfo.InvariantCulture,
-                                                                  "Enumeration does not contains any item of the specific type: {0}",
-                                                                  typeof(TSource).Name));
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Enumeration does not contains any item of the specific type: {0}",
+                        typeof(TSource).Name));
             }
 
             return result;
@@ -102,7 +102,7 @@ namespace DotNetTool.Builder.Extensions
             Throw.IfNull(() => action);
 
             var index = 0;
-            foreach(var item in source)
+            foreach (var item in source)
             {
                 action(item, index++);
             }
@@ -126,14 +126,12 @@ namespace DotNetTool.Builder.Extensions
 
         public static bool SequenceEqualsTo<T>(this IEnumerable<T> first, IEnumerable<T> second)
         {
-            if (first == null
-                && second == null)
+            if (first == null && second == null)
             {
                 return true;
             }
 
-            if (first == null
-                || second == null)
+            if (first == null || second == null)
             {
                 return false;
             }
@@ -190,7 +188,7 @@ namespace DotNetTool.Builder.Extensions
 
             return new ObservableCollection<T>(enumeration);
         }
-        
+
         public static ReadOnlyObservableCollection<T> ToReadOnlyObservableCollection<T>(this IEnumerable<T> enumeration)
         {
             Throw.IfNull(() => enumeration);
@@ -343,7 +341,7 @@ namespace DotNetTool.Builder.Extensions
 
             return !source.Any();
         }
-        
+
         public static IEnumerable<T> Except<T, TProperty>(this IEnumerable<T> first, IEnumerable<T> second, Func<T, TProperty> selector)
             where T : class
         {
@@ -597,7 +595,7 @@ namespace DotNetTool.Builder.Extensions
 
             return false;
         }
-        
+
         public static bool IsNullOrEmpty(this IEnumerable source)
         {
             if (source.IsNull())
@@ -642,7 +640,7 @@ namespace DotNetTool.Builder.Extensions
 
             return stringCollection;
         }
-        
+
         private static IEnumerable<T1> InternalExcept<T1, T2, TProperty>(
             this IEnumerable<T1> first,
             IEnumerable<T2> second,

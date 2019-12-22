@@ -7,9 +7,7 @@ namespace DotNetTool.Builder.Builder.Options
 {
     public class OptionImplementationBuilder : IOptionImplementationBuilder
     {
-        private readonly IOptionMethodsBuilder _optionMethodsBuilder;
-
-        private const string template =
+        private const string Template =
             @"namespace $namespace$
 {
     using System.Collections.Generic;
@@ -27,6 +25,8 @@ namespace DotNetTool.Builder.Builder.Options
     }
 }";
 
+        private readonly IOptionMethodsBuilder _optionMethodsBuilder;
+
         public OptionImplementationBuilder(IOptionMethodsBuilder optionMethodsBuilder)
         {
             _optionMethodsBuilder = optionMethodsBuilder;
@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Builder.Options
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
             var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();").Flatten(Environment.NewLine);
 
-            var newTemplate = template.Replace("$project-name$", projectName)
+            var newTemplate = Template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$yield-option$", yieldStatements)
                 .Replace("$namespace$", nameSpace)

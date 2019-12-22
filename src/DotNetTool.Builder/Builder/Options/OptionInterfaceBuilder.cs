@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Builder.Options
 {
     public class OptionInterfaceBuilder : IOptionInterfaceBuilder
     {
-        private const string template =
+        private const string Template =
             @"namespace $namespace$
 {
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Builder.Options
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
-            var newTemplate = template.Replace("$projectName$", projectName)
+            var newTemplate = Template.Replace("$projectName$", projectName)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$command-name$", parameterInfo.NormalizedName);
 

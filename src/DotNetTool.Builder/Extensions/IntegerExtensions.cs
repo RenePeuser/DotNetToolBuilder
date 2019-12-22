@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Extensions
     {
         public static int ToInt(this int? value)
         {
-            return value ?? default(int);
+            return value ?? default;
         }
 
         public static bool ToBool(this int value)

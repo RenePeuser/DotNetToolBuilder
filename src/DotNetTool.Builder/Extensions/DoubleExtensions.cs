@@ -16,17 +16,17 @@ namespace DotNetTool.Builder.Extensions
 
         public static double ToDouble(this double? value)
         {
-            return value ?? default(double);
+            return value ?? default;
         }
 
         public static double ToValueOrDefault(this double value)
         {
-            return value.IsNan() ? default(double) : value;
+            return value.IsNan() ? default : value;
         }
 
         public static bool IsZero(this double source)
         {
-            var result = source.EqualsTo(default(double));
+            var result = source.EqualsTo(default);
 
             return result;
         }
@@ -38,15 +38,14 @@ namespace DotNetTool.Builder.Extensions
 
         public static int Ceiling(this double value)
         {
-            return (int)Math.Ceiling(value);
+            return (int) Math.Ceiling(value);
         }
 
         public static bool DoubleNotEqualsToExcludingNan(this double source, double target)
         {
             bool result;
 
-            if (source.IsNotNan()
-                && target.IsNotNan())
+            if (source.IsNotNan() && target.IsNotNan())
             {
                 result = source.NotEqualsTo(target);
             }

@@ -26,8 +26,10 @@ namespace DotNetTool.Builder.Services
             var vs2019 = visualStudio2019Folder.EnumerateFiles("devenv.exe", SearchOption.AllDirectories)
                 .FirstOrDefault();
             if (vs2019.NotExists())
+            {
                 throw new InvalidOperationException(
                     $"Can not start visual studio 2019, because did not find any version of visual studio in path: '{visualStudio2019Folder.FullName}'");
+            }
 
             _processService.RunCliCommandAsync(vs2019.FullName, solution.FullName);
         }

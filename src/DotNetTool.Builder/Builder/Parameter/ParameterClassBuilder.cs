@@ -10,17 +10,17 @@ namespace DotNetTool.Builder.Builder.Parameter
     {
         private const string Template =
             @"namespace $namespace$
-  {
-      public class $command-name$Parameters
-      {
-          public $command-name$Parameters($ctor-arguments$)
-          {
-              $agrument-to-properties$
-          }
+{
+    public class $command-name$Parameters
+    {
+        public $command-name$Parameters($ctor-arguments$)
+        {
+            $agrument-to-properties$
+        }
 
-          $properties$                                                    
-      }
-  }";
+        $properties$                                                    
+    }
+}";
 
         private const string CtorArgument = @"$type$ $argName$";
 
@@ -76,15 +76,23 @@ namespace DotNetTool.Builder.Builder.Parameter
         private IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
         {
             var argumentInfo = parameterInfo.ArgumentInfo;
-            if (argumentInfo.IsNotNull()) yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
+            if (argumentInfo.IsNotNull())
+            {
+                yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
+            }
 
             foreach (var optionInfo in parameterInfo.Options)
+            {
                 yield return new CtorArgument("bool", optionInfo.ArgumentName);
+            }
         }
 
         private IEnumerable<Property> BuildProperties(IEnumerable<CtorArgument> ctorArguments)
         {
-            foreach (var argument in ctorArguments) yield return new Property(argument.Type, argument.NormalizedName);
+            foreach (var argument in ctorArguments)
+            {
+                yield return new Property(argument.Type, argument.NormalizedName);
+            }
         }
     }
 }

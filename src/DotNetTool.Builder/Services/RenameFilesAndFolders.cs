@@ -9,8 +9,12 @@ namespace DotNetTool.Builder.Services
         {
             var folders = directoryInfo.EnumerateDirectories("*.*", SearchOption.AllDirectories);
             foreach (var folder in folders)
+            {
                 if (folder.Name.Contains(originalName))
+                {
                     Directory.Move(folder.FullName, folder.FullName.Replace(originalName, newName));
+                }
+            }
 
             var allFiles = directoryInfo.EnumerateFiles("*.*", SearchOption.AllDirectories);
             foreach (var fileInfo in allFiles)
@@ -23,7 +27,9 @@ namespace DotNetTool.Builder.Services
                 }
 
                 if (fileInfo.Name.Contains(originalName))
+                {
                     File.Move(fileInfo.FullName, fileInfo.FullName.Replace(originalName, newName));
+                }
             }
         }
     }

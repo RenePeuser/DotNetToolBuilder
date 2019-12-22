@@ -22,15 +22,13 @@ namespace DotNetTool.Builder.Services
             var process = _processBuilder.BuildFrom(command, arguments);
             var tcs = new TaskCompletionSource<CliRunResult>();
             process.EnableRaisingEvents = true;
-            process.Exited += (_, __) =>
-            {
-                tcs.TrySetResult(new CliRunResult(process.ExitCode, process.StandardOutput.ReadToEnd()));
-            };
+            process.Exited += (_, __) => { tcs.TrySetResult(new CliRunResult(process.ExitCode, process.StandardOutput.ReadToEnd())); };
 
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
-            process.Start().IfFalseThen(() =>
-                tcs.SetException(new Exception($"Failed to start cli command: {command} {arguments}")));
+            process.Start()
+                .IfFalseThen(() =>
+                    tcs.SetException(new Exception($"Failed to start cli command: {command} {arguments}")));
             return tcs.Task;
         }
     }

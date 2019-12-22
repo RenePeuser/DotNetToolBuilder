@@ -7,25 +7,11 @@ using DotNetTool.Builder.FileSystemAbstraction;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
 
-namespace DotNetTool.Builder.Builder
+namespace DotNetTool.Builder.Builder.Startup
 {
-    public interface IStartUpBuilder
-    {
-        void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
-            ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
-            INameSpaceCollector nameSpaceCollector);
-    }
-
     public class StartUpBuilder : IStartUpBuilder
     {
-        private const string registerServiceMethod =
-            @"private static void Configure$command-name$(IServiceCollection services)
-    {
-        $registrations$
-    }
-";
-
-        private const string template =
+        private const string Template =
             @"namespace $projectName$
 {
     using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +34,15 @@ namespace DotNetTool.Builder.Builder
     }
 }";
 
+        private readonly IRegisterServiceMethodBuilder _registerServiceMethodBuilder;
+        private readonly ITypeRegistrationBuilder _typeRegistrationBuilder;
+
+        public StartUpBuilder(IRegisterServiceMethodBuilder registerServiceMethodBuilder, ITypeRegistrationBuilder typeRegistrationBuilder)
+        {
+            _registerServiceMethodBuilder = registerServiceMethodBuilder;
+            _typeRegistrationBuilder = typeRegistrationBuilder;
+        }
+
         public void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
             ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
             INameSpaceCollector nameSpaceCollector)
@@ -61,7 +56,7 @@ namespace DotNetTool.Builder.Builder
 
             var usings = nameSpaceCollector.GetAll().Select(n => $"using {n};").Flatten(Environment.NewLine);
 
-            var newStartUp = template.Replace("$projectName$", projectName)
+            var newStartUp = Template.Replace("$projectName$", projectName)
                 .Replace("$command-registrations$", commandRegistrations)
                 .Replace("$root-command$", rootCommand.NormalizedName)
                 .Replace("$methods$", registrationMethods)
@@ -76,20 +71,10 @@ namespace DotNetTool.Builder.Builder
             foreach (var registration in allRegistrations)
             {
                 var command = registration.Key;
-                var typeRegistrations = GetTypeRegistrations(registration.Value).Flatten(Environment.NewLine);
-
-                var newMethodSyntax = registerServiceMethod.Replace("$command-name$", command.FirstCharToUpper())
-                    .Replace("$registrations$", typeRegistrations);
-
+                var typeRegistrations = _typeRegistrationBuilder.Build(registration.Value).Flatten(Environment.NewLine);
+                var newMethodSyntax = _registerServiceMethodBuilder.Build(command.FirstCharToUpper(), typeRegistrations);
                 yield return new MethodInfo($"Configure{command.FirstCharToUpper()}", newMethodSyntax);
             }
-        }
-
-        private IEnumerable<string> GetTypeRegistrations(IEnumerable<TypeToRegister> registrations)
-        {
-            foreach (var typeToRegister in registrations)
-                yield return
-                    $"services.AddSingleton<{typeToRegister.InterfaceType}, {typeToRegister.ImplementationType}>();";
         }
     }
 }

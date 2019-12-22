@@ -11,7 +11,7 @@ namespace DotNetTool.Builder.Extensions
 
             if (source is T)
             {
-                result = (T)source;
+                result = (T) source;
             }
 
             return result;
@@ -21,7 +21,7 @@ namespace DotNetTool.Builder.Extensions
         {
             Throw.IfNull(() => source);
 
-            return (T)source;
+            return (T) source;
         }
 
         public static bool Is<T>(this object source)

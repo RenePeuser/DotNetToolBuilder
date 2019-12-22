@@ -8,8 +8,7 @@ namespace DotNetTool.Builder.InfoCollectors
         private readonly ICollectProjectName _collectProjectName;
         private readonly IParameterExpressionCollector _parameterExpressionCollector;
 
-        public DotNetToolInfoCollector(ICollectProjectName collectProjectName,
-            ICollectDotNetToolName collectDotNetToolName, IParameterExpressionCollector parameterExpressionCollector)
+        public DotNetToolInfoCollector(ICollectProjectName collectProjectName, ICollectDotNetToolName collectDotNetToolName, IParameterExpressionCollector parameterExpressionCollector)
         {
             _collectProjectName = collectProjectName;
             _collectDotNetToolName = collectDotNetToolName;

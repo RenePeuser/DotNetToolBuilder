@@ -15,59 +15,59 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfGreaterThan<T>(Func<T> argumentFunc, T limit) where T : IComparable
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             if (!argumentFunc().IsGreaterThan(limit))
             {
                 return;
             }
 
-            ThrowGreaterThanException(argumentFunc, limit, arg => arg is T && ((T)arg).IsGreaterThan(limit));
+            ThrowGreaterThanException(argumentFunc, limit, arg => arg is T && ((T) arg).IsGreaterThan(limit));
         }
 
         [DebuggerHidden]
         public static void IfGreaterOrEqual<T>(Func<T> argumentFunc, T limit) where T : IComparable
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             if (!argumentFunc().IsGreaterOrEqual(limit))
             {
                 return;
             }
 
-            ThrowGreaterOrEqualException(argumentFunc, limit, arg => arg is T && ((T)arg).IsGreaterOrEqual(limit));
+            ThrowGreaterOrEqualException(argumentFunc, limit, arg => arg is T && ((T) arg).IsGreaterOrEqual(limit));
         }
 
         [DebuggerHidden]
         public static void IfLessThan<T>(Func<T> argumentFunc, T limit) where T : IComparable
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             if (!argumentFunc().IsLessThan(limit))
             {
                 return;
             }
 
-            ThrowLessThanException(argumentFunc, limit, arg => arg is T && ((T)arg).IsLessThan(limit));
+            ThrowLessThanException(argumentFunc, limit, arg => arg is T && ((T) arg).IsLessThan(limit));
         }
 
         [DebuggerHidden]
         public static void IfLessOrEqual<T>(Func<T> argumentFunc, T limit) where T : IComparable
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             if (!argumentFunc().IsLessOrEqual(limit))
             {
                 return;
             }
 
-            ThrowLessOrEqualException(argumentFunc, limit, arg => arg is T && ((T)arg).IsLessOrEqual(limit));
+            ThrowLessOrEqualException(argumentFunc, limit, arg => arg is T && ((T) arg).IsLessOrEqual(limit));
         }
 
         [DebuggerHidden]
         public static void IfNotValidBinary(Func<string> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             IfNullOrWhiteSpace(argumentFunc);
             IfNotValidBinaryInternal(argumentFunc);
@@ -76,7 +76,7 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfNotValidHex(Func<string> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             IfNullOrWhiteSpace(argumentFunc);
             IfNotValidHexInternal(argumentFunc);
@@ -90,24 +90,24 @@ namespace DotNetTool.Builder.ArgumentChecking
                 throw new ArgumentNullException(nameof(argumentFunc));
             }
 
-            Throw.IfNullInternal(argumentFunc);
+            IfNullInternal(argumentFunc);
         }
 
         [DebuggerHidden]
         public static void IfNullOrEmpty<T>(Func<IEnumerable<T>> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNullInternal(argumentFunc);
-            Throw.IfEmpty(argumentFunc);
+            IfNull(() => argumentFunc);
+            IfNullInternal(argumentFunc);
+            IfEmpty(argumentFunc);
         }
 
         [DebuggerHidden]
         public static void IfNullOrAny<T>(Func<IEnumerable<T>> argumentFunc, Func<T, bool> predicate)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(() => predicate);
+            IfNull(() => argumentFunc);
+            IfNull(() => predicate);
 
-            Throw.IfNullInternal(argumentFunc);
+            IfNullInternal(argumentFunc);
 
             if (!argumentFunc().Any(predicate))
             {
@@ -120,8 +120,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfNullOrAnyItemIsNull<T>(Func<IEnumerable<T>> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(argumentFunc);
+            IfNull(() => argumentFunc);
+            IfNull(argumentFunc);
 
             if (!argumentFunc().IsAnyItemNull())
             {
@@ -136,8 +136,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfAnyItemIsNullOrWhitespace(Func<IEnumerable<string>> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(argumentFunc);
+            IfNull(() => argumentFunc);
+            IfNull(argumentFunc);
 
             if (!argumentFunc().IsAnyItemNullOrWhitespace())
             {
@@ -152,8 +152,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(() => validationPredicate);
+            IfNull(() => argumentFunc);
+            IfNull(() => validationPredicate);
 
             IfInternal(argumentFunc, validationPredicate, b => b, string.Empty);
         }
@@ -161,8 +161,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate, string message)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(() => validationPredicate);
+            IfNull(() => argumentFunc);
+            IfNull(() => validationPredicate);
 
             IfInternal(argumentFunc, validationPredicate, b => b, message);
         }
@@ -170,8 +170,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfNot<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(() => validationPredicate);
+            IfNull(() => argumentFunc);
+            IfNull(() => validationPredicate);
 
             IfInternal(argumentFunc, validationPredicate, b => b.IsFalse(), string.Empty);
         }
@@ -179,8 +179,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfNot<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate, string message)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(() => validationPredicate);
+            IfNull(() => argumentFunc);
+            IfNull(() => validationPredicate);
 
             IfInternal(argumentFunc, validationPredicate, b => b.IsFalse(), message);
         }
@@ -188,18 +188,18 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfNullOrEmpty(Func<string> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNullInternal(argumentFunc);
-            Throw.IfEmpty(argumentFunc);
+            IfNull(() => argumentFunc);
+            IfNullInternal(argumentFunc);
+            IfEmpty(argumentFunc);
         }
 
         [DebuggerHidden]
         public static void IfNullOrWhiteSpace(Func<string> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNullInternal(argumentFunc);
-            Throw.IfEmpty(argumentFunc);
-            Throw.IfWhitespace(argumentFunc);
+            IfNull(() => argumentFunc);
+            IfNullInternal(argumentFunc);
+            IfEmpty(argumentFunc);
+            IfWhitespace(argumentFunc);
         }
 
         [DebuggerHidden]
@@ -220,8 +220,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfEqualsTo<T>(Func<T> argumentFunc, T expectedValue)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfEqualsToInternal(argumentFunc, expectedValue);
+            IfNull(() => argumentFunc);
+            IfEqualsToInternal(argumentFunc, expectedValue);
         }
 
         [DebuggerHidden]
@@ -229,13 +229,13 @@ namespace DotNetTool.Builder.ArgumentChecking
         {
             IfNull(() => argumentFunc);
 
-            Throw.IfNotEqualsToInternal(argumentFunc, expectedValue);
+            IfNotEqualsToInternal(argumentFunc, expectedValue);
         }
 
         [DebuggerHidden]
         public static void IfLengthIsNot(Func<string> argumentFunc, int length)
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             if (!argumentFunc().Length.NotEqualsTo(length))
             {
@@ -251,14 +251,14 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfOutOfRange<T>(Func<T> argumentFunc, T min, T max) where T : IComparable
         {
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => argumentFunc);
 
             if (!argumentFunc().IsOutOfRange(min, max))
             {
                 return;
             }
 
-            ThrowValueOutOfRangeException(argumentFunc, min, max, arg => arg is T && ((T)arg).IsOutOfRange(min, max));
+            ThrowValueOutOfRangeException(argumentFunc, min, max, arg => arg is T && ((T) arg).IsOutOfRange(min, max));
         }
 
         [DebuggerHidden]
@@ -284,8 +284,8 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         public static void IfNotContains<T>(Func<T> argumentFunc, IEnumerable<T> source)
         {
-            Throw.IfNull(() => source);
-            Throw.IfNull(() => argumentFunc);
+            IfNull(() => source);
+            IfNull(() => argumentFunc);
 
             var argument = argumentFunc();
             if (source.Contains(argument))
@@ -307,7 +307,7 @@ namespace DotNetTool.Builder.ArgumentChecking
             }
 
             throw new ArgumentException(
-                $"The enumerable must not be empty.",
+                "The enumerable must not be empty.",
                 argument.GetParameterName(arg => arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsEmpty()));
         }
 
@@ -329,7 +329,7 @@ namespace DotNetTool.Builder.ArgumentChecking
         [DebuggerHidden]
         private static void IfNotValidHexInternal(Func<string> argumentFunc)
         {
-            string hexCode = argumentFunc();
+            var hexCode = argumentFunc();
             if (!hexCode.IsNotValidHexString())
             {
                 return;
@@ -361,7 +361,7 @@ namespace DotNetTool.Builder.ArgumentChecking
             }
 
             throw new ArgumentException(
-                $"The string must not be empty.",
+                "The string must not be empty.",
                 argument.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsEmpty()));
         }
 
@@ -374,7 +374,7 @@ namespace DotNetTool.Builder.ArgumentChecking
             }
 
             throw new ArgumentException(
-                $"The string must not be only whitespace.",
+                "The string must not be only whitespace.",
                 argument.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsWhitespace()));
         }
 

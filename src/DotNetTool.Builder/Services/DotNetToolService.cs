@@ -31,13 +31,18 @@ namespace DotNetTool.Builder.Services
             // Package Id                              Version      Commands
             // ------------------------------------------------------------------------
             // gitversion.tool                         5.0.1        dotnet-gitversion
-            // trumpf.uifpack                          3.0.0        uif-pack
             var listResult = await _processService.RunCliCommandAsync("dotnet", "tool list -g");
-            if (listResult.ExitCode != 0) throw new Exception($"Error occured: '{listResult.Output}'");
+            if (listResult.ExitCode != 0)
+            {
+                throw new Exception($"Error occured: '{listResult.Output}'");
+            }
 
             var toolRows = listResult.Output.Split("\r\n");
             var tool = toolRows.FirstOrDefault(line => line.Contains(toolName.ToLower()));
-            if (tool.IsNull()) return null;
+            if (tool.IsNull())
+            {
+                return null;
+            }
 
             var toolInfos = tool.Split(" ").Where(s => s.IsNotNullOrWhiteSpace()).ToList();
             return new DotNetToolInfo(toolInfos[0], toolInfos[1], toolInfos[2]);

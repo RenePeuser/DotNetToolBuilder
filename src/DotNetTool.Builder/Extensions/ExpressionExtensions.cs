@@ -83,7 +83,7 @@ namespace DotNetTool.Builder.Extensions
         {
             Throw.IfNull(() => constantExpression);
 
-            return (TResult)constantExpression.Value;
+            return (TResult) constantExpression.Value;
         }
 
         public static TResult GetValueOfExpression<TResult>(this UnaryExpression unaryExpression)
@@ -120,7 +120,7 @@ namespace DotNetTool.Builder.Extensions
 
             var result = fieldInfo.GetValue(constantExpression.Value);
 
-            return (TResult)result;
+            return (TResult) result;
         }
 
         public static string ExtractPropertyName<T>(this Expression<Func<T>> propertyExpression)
@@ -160,7 +160,7 @@ namespace DotNetTool.Builder.Extensions
                 throw new ArgumentException("Expression is not a member expression", nameof(argumentExpression));
             }
 
-            return default(T);
+            return default;
         }
 
         public static T GetMemberValue<T>(this Expression<Func<T>> argumentExpression)
@@ -190,7 +190,7 @@ namespace DotNetTool.Builder.Extensions
 
             var result = fieldInfo.GetValue(constantExpression.Value);
 
-            return (T)result;
+            return (T) result;
         }
 
         public static T GetMemberValue<T>(this Expression<T> argumentExpression)
@@ -220,7 +220,7 @@ namespace DotNetTool.Builder.Extensions
 
             var result = fieldInfo.GetValue(constantExpression.Value);
 
-            return (T)result;
+            return (T) result;
         }
 
         public static string NameOf(this Expression expression)

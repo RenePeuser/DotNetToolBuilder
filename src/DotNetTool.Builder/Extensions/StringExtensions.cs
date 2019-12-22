@@ -189,13 +189,13 @@ namespace DotNetTool.Builder.Extensions
             if (value.Length.NotEqualsTo(expectedBlocks.MultiplyBy(blockLength)))
             {
                 throw new ArgumentException(
-                                            string.Format(
-                                                          CultureInfo.InvariantCulture,
-                                                          "Can not split string in expected blocks, because of string length: '{0}' which is not equals as the product of expected blocks: '{1}' and bloock length: '{2}'",
-                                                          value.Length,
-                                                          expectedBlocks,
-                                                          blockLength),
-                                            nameof(value));
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Can not split string in expected blocks, because of string length: '{0}' which is not equals as the product of expected blocks: '{1}' and bloock length: '{2}'",
+                        value.Length,
+                        expectedBlocks,
+                        blockLength),
+                    nameof(value));
             }
 
             for (var i = 0; i < expectedBlocks; i++)
@@ -211,7 +211,7 @@ namespace DotNetTool.Builder.Extensions
                 yield break;
             }
 
-            if (blockLength.IsLessOrEqual(default(int)))
+            if (blockLength.IsLessOrEqual(default))
             {
                 throw new ArgumentException("The length of a block must not be 0 or smaller");
             }
@@ -245,7 +245,7 @@ namespace DotNetTool.Builder.Extensions
         {
             Throw.IfNullOrWhiteSpace(() => hexCode);
 
-            if (normalizedLength.IsLessOrEqual(default(int)))
+            if (normalizedLength.IsLessOrEqual(default))
             {
                 throw new ArgumentException("The length of a block must not be 0 or smaller");
             }

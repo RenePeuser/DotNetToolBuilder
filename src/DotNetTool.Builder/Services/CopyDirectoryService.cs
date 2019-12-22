@@ -24,8 +24,10 @@ namespace DotNetTool.Builder.Services
         public void CopyDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool copySubDirs)
         {
             if (sourceDirectory.NotExists())
+            {
                 throw new DirectoryNotFoundException(
                     $"Source directory does not exist or could not be found: '{sourceDirectory.FullName}'");
+            }
 
             targetDirectory.NotExists().IfTrueThen(targetDirectory.Create);
 

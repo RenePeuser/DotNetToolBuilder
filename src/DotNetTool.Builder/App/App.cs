@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using DotNetTool.Builder.Builder;
+using DotNetTool.Builder.Builder.Startup;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
@@ -93,7 +93,8 @@ namespace DotNetTool.Builder.App
             consoleService.WriteLine();
 
             var findExe = solutionFile.Directory
-                .EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
+                .EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories)
+                .FirstOrDefault();
 
 
             consoleService.WriteLine($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");

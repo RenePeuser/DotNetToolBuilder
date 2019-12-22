@@ -1,5 +1,4 @@
-﻿
-using DotNetTool.Builder.FileSystemAbstraction;
+﻿using DotNetTool.Builder.FileSystemAbstraction;
 
 namespace DotNetTool.Builder.Services
 {

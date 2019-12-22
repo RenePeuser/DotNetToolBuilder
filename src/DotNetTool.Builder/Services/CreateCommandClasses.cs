@@ -63,7 +63,10 @@ namespace DotNetTool.Builder.Services
             ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector)
         {
             var subCommands = parameter.SubCommands;
-            if (subCommands.IsNull()) return;
+            if (subCommands.IsNull())
+            {
+                return;
+            }
 
             foreach (var subCommand in subCommands)
             {
@@ -151,12 +154,18 @@ namespace DotNetTool.Builder.Services
                 {
                     string command = null;
                     if (subCommand.ArgumentInfo.IsNull() && subCommand.Options.IsEmpty())
+                    {
                         command = _commandBuilderSimple.Build(projectName, subCommand, parameter, currentPath);
+                    }
                     else if (subCommand.ArgumentInfo.IsNotNull() && subCommand.Options.IsEmpty())
+                    {
                         command = _commandBuilderWithArgument.Build(projectName, subCommand, parameter, currentPath);
+                    }
                     else if (subCommand.ArgumentInfo.IsNotNull() && subCommand.Options.Any())
+                    {
                         command = _commandBuilderWithArgumentAndOption.Build(projectName, subCommand, parameter,
                             currentPath);
+                    }
 
                     var fileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName,
                         $"{subCommand.NormalizedName}CommandBuilder.cs"));

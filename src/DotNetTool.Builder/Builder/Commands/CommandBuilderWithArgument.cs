@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Builder.Commands
     internal class CommandBuilderWithArgument : ICommandBuilderWithArgument
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {                
     using System.Collections.Generic;
     using Trumpf.Hmi.Extensions;

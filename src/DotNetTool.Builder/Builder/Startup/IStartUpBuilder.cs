@@ -1,0 +1,13 @@
+﻿using DotNetTool.Builder.FileSystemAbstraction;
+using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Services;
+
+namespace DotNetTool.Builder.Builder.Startup
+{
+    public interface IStartUpBuilder
+    {
+        void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
+            ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
+            INameSpaceCollector nameSpaceCollector);
+    }
+}

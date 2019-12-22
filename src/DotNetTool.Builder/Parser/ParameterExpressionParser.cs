@@ -61,12 +61,18 @@ namespace DotNetTool.Builder.Parser
                         throw new InvalidOperationException();
                 }
 
-                if (lastParameterInfo.IsNotNull()) parameter.SubCommands = lastParameterInfo.ToIList();
+                if (lastParameterInfo.IsNotNull())
+                {
+                    parameter.SubCommands = lastParameterInfo.ToIList();
+                }
 
                 if (parameter.IsNotNull())
                 {
                     parameter.ArgumentInfo = argument;
-                    if (argument.IsNotNull()) argument = null;
+                    if (argument.IsNotNull())
+                    {
+                        argument = null;
+                    }
                 }
 
                 lastParameterInfo = parameter;
@@ -74,12 +80,19 @@ namespace DotNetTool.Builder.Parser
                 {
                     var parentForThis = _parameterService.FindAlreadyExistingCommand(current, lastParameter);
                     if (parentForThis.IsNotNull())
+                    {
                         if (parentForThis.SubCommands.IsNotNull())
+                        {
                             parentForThis.SubCommands = parentForThis.SubCommands.Concat(parameter.SubCommands);
+                        }
+                    }
                 }
             }
 
-            if (lastParameter.IsNotNull()) return lastParameter;
+            if (lastParameter.IsNotNull())
+            {
+                return lastParameter;
+            }
 
             return lastParameterInfo;
         }

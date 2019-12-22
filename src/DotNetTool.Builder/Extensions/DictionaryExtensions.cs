@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using DotNetTool.Builder.ArgumentChecking;
 
@@ -10,7 +9,7 @@ namespace DotNetTool.Builder.Extensions
     {
         public static TValue GetValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
-            var result = dictionary.GetValueOrDefaults(key, default(TValue));
+            var result = dictionary.GetValueOrDefaults(key, default);
 
             if (result.Exists.IsFalse())
             {
@@ -25,7 +24,7 @@ namespace DotNetTool.Builder.Extensions
             Throw.IfNull(() => dictionary);
             Throw.IfNull<object>(() => key);
 
-            return dictionary.GetValueOrDefaults(key, default(TValue)).Value;
+            return dictionary.GetValueOrDefaults(key, default).Value;
         }
 
         public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
@@ -41,7 +40,7 @@ namespace DotNetTool.Builder.Extensions
             Throw.IfNull(() => dictionary);
             Throw.IfNull<object>(() => value);
 
-            var result = dictionary.GetKeyOrDefaultInternal(value, default(TKey));
+            var result = dictionary.GetKeyOrDefaultInternal(value, default);
 
             if (result.Exists.IsFalse())
             {

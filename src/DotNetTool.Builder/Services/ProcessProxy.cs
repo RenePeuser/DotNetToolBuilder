@@ -33,9 +33,13 @@ namespace DotNetTool.Builder.Services
             {
                 _process.EnableRaisingEvents = value;
                 if (value)
+                {
                     AttachEvents();
+                }
                 else
+                {
                     DetachEvents();
+                }
             }
         }
 

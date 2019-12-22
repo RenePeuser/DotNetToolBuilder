@@ -1,5 +1,4 @@
-﻿using System.IO;
-using DotNetTool.Builder.ArgumentChecking;
+﻿using DotNetTool.Builder.ArgumentChecking;
 
 namespace DotNetTool.Builder.FileSystemAbstraction.Services
 {

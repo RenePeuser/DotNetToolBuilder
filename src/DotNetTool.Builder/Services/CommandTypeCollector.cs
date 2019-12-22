@@ -18,9 +18,13 @@ namespace DotNetTool.Builder.Services
             var name = parameterInfo.Name;
             var alreadyExists = _typesToRegister.ContainsKey(name);
             if (alreadyExists)
+            {
                 _typesToRegister[name] = _typesToRegister[name].Concat(typeToRegister);
+            }
             else
+            {
                 _typesToRegister[name] = typeToRegister.ToIList();
+            }
         }
 
         public Dictionary<string, IEnumerable<TypeToRegister>> GetAll()
