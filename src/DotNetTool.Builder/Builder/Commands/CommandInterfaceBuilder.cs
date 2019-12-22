@@ -1,12 +1,11 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandInterfaceBuilder : ICommandInterfaceBuilder
     {
         private const string template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.Linq;

@@ -29,7 +29,8 @@ namespace DotNetTool.Builder.Services
 
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.UseShellExecute = false;
-            process.Start().IfFalseThen(() => tcs.SetException(new Exception($"Failed to start cli command: {command} {arguments}")));
+            process.Start().IfFalseThen(() =>
+                tcs.SetException(new Exception($"Failed to start cli command: {command} {arguments}")));
             return tcs.Task;
         }
     }

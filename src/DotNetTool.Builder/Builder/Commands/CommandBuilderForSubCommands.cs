@@ -1,12 +1,11 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandBuilderForSubCommands : ICommandBuilderForSubCommands
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.Collections.Generic;
     using Trumpf.Hmi.Extensions;
@@ -43,12 +42,12 @@ namespace DotNetTool.Builder.Builder.Commands
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
-                                      .Replace("$command-argument-name$", parameterInfo.Name)
-                                      .Replace("$namespace$", nameSpace)
-                                      .Replace("$command-description$", parameterInfo.Description)
-                                      .Replace("$command-handler$", commandHandler)
-                                      .Replace("$parent-command-name$", parent.NormalizedName)
-                                      .Replace("$project-name$", project);
+                .Replace("$command-argument-name$", parameterInfo.Name)
+                .Replace("$namespace$", nameSpace)
+                .Replace("$command-description$", parameterInfo.Description)
+                .Replace("$command-handler$", commandHandler)
+                .Replace("$parent-command-name$", parent.NormalizedName)
+                .Replace("$project-name$", project);
 
             return newTemplate;
         }

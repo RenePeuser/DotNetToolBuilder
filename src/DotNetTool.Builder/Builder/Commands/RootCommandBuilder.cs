@@ -1,17 +1,9 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
     internal class RootCommandBuilder : IRootCommandBuilder
     {
-        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
-
-        public RootCommandBuilder(ICommandHandlerStringBuilder commandHandlerStringBuilder)
-        {
-            _commandHandlerStringBuilder = commandHandlerStringBuilder;
-        }
-
         private const string template =
             @"namespace $namespace$
 {
@@ -37,6 +29,13 @@ namespace DotNetTool.Builder.Builder.Commands
         }
     }
 }";
+
+        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
+
+        public RootCommandBuilder(ICommandHandlerStringBuilder commandHandlerStringBuilder)
+        {
+            _commandHandlerStringBuilder = commandHandlerStringBuilder;
+        }
 
         public string Build(string project, ParameterInfo parameterInfo, string nameSpace)
         {

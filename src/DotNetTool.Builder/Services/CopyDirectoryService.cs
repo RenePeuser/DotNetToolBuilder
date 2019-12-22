@@ -25,9 +25,8 @@ namespace DotNetTool.Builder.Services
         public void CopyDirectory(TiDirectoryInfo sourceDirectory, TiDirectoryInfo targetDirectory, bool copySubDirs)
         {
             if (sourceDirectory.NotExists())
-            {
-                throw new DirectoryNotFoundException($"Source directory does not exist or could not be found: '{sourceDirectory.FullName}'");
-            }
+                throw new DirectoryNotFoundException(
+                    $"Source directory does not exist or could not be found: '{sourceDirectory.FullName}'");
 
             targetDirectory.NotExists().IfTrueThen(targetDirectory.Create);
 
@@ -43,7 +42,8 @@ namespace DotNetTool.Builder.Services
                 var sourceDirectories = sourceDirectory.EnumerateDirectories();
                 foreach (var subDirectory in sourceDirectories)
                 {
-                    var targetDirectoryPath = _directoryService.GetDirectoryInfo(Path.Combine(targetDirectory.FullName, subDirectory.Name));
+                    var targetDirectoryPath =
+                        _directoryService.GetDirectoryInfo(Path.Combine(targetDirectory.FullName, subDirectory.Name));
                     CopyDirectory(subDirectory, targetDirectoryPath, copySubDirs);
                 }
             }

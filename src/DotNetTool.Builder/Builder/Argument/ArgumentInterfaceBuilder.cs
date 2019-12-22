@@ -1,5 +1,4 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Argument
 {
@@ -11,7 +10,7 @@ namespace DotNetTool.Builder.Builder.Argument
     public class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.CommandLine;
 

@@ -10,14 +10,14 @@ namespace DotNetTool.Builder.Services
     {
         private readonly Process _process;
 
-        public event EventHandler? Exited;
-
         public ProcessProxy(Process process)
         {
             Throw.IfNull(() => process);
 
             _process = process;
         }
+
+        public event EventHandler? Exited;
 
         public bool Start()
         {
@@ -33,16 +33,12 @@ namespace DotNetTool.Builder.Services
             {
                 _process.EnableRaisingEvents = value;
                 if (value)
-                {
                     AttachEvents();
-                }
                 else
-                {
                     DetachEvents();
-                }
             }
         }
-        
+
         public ProcessStartInfo StartInfo => _process.StartInfo;
 
         public int ExitCode => _process.ExitCode;

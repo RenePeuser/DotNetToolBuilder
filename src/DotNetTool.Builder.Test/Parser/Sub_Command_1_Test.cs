@@ -42,14 +42,12 @@ namespace DotNetTool.Builder.Test.Parser
         public void Assert_Argument_Is_Not_Null()
         {
             Assert.IsNotNull(_subCommand1.ArgumentInfo);
-
         }
 
         [TestMethod]
         public void Assert_SubcCommands_Count()
         {
             Assert.IsTrue(_subCommand1.SubCommands.IsEmpty());
-
         }
     }
 }

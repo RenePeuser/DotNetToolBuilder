@@ -7,8 +7,8 @@ namespace DotNetTool.Builder.Services
 {
     public class DotNetToolSynchronizer : IDotNetToolSynchronizer
     {
-        private readonly IDotNetToolService _dotNetToolService;
         private readonly IConsoleService _consoleService;
+        private readonly IDotNetToolService _dotNetToolService;
 
         public DotNetToolSynchronizer(IDotNetToolService dotNetToolService, IConsoleService consoleService)
         {
@@ -37,20 +37,14 @@ namespace DotNetTool.Builder.Services
         private async Task UninstallTool(DotNetToolInfo dotNetToolInfo)
         {
             var unistallResult = await _dotNetToolService.UninstallAsync(dotNetToolInfo.Name);
-            if (unistallResult.ExitCode != 0)
-            {
-                throw new Exception(unistallResult.Output);
-            }
+            if (unistallResult.ExitCode != 0) throw new Exception(unistallResult.Output);
         }
 
         private async Task InstallTool(DotNetToolInfo dotNetToolInfo)
         {
             _consoleService.WriteLine($"Install '{dotNetToolInfo.Name}'");
             var result = await _dotNetToolService.InstallAsync(dotNetToolInfo.Name, dotNetToolInfo.Version);
-            if (result.ExitCode != 0)
-            {
-                throw new Exception(result.Output);
-            }
+            if (result.ExitCode != 0) throw new Exception(result.Output);
         }
     }
 }

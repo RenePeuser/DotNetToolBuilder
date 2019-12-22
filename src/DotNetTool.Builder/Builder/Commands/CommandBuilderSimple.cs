@@ -1,19 +1,11 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandBuilderSimple : ICommandBuilderSimple
     {
-        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
-
-        public CommandBuilderSimple(ICommandHandlerStringBuilder commandHandlerStringBuilder)
-        {
-            _commandHandlerStringBuilder = commandHandlerStringBuilder;
-        }
-
-        private const string template =
-@"namespace $namespace$
+        private const string Template =
+            @"namespace $namespace$
 {                
     using System.Collections.Generic;
     using Trumpf.Hmi.Extensions;
@@ -38,11 +30,18 @@ namespace DotNetTool.Builder.Builder.Commands
     }
 }";
 
+        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
+
+        public CommandBuilderSimple(ICommandHandlerStringBuilder commandHandlerStringBuilder)
+        {
+            _commandHandlerStringBuilder = commandHandlerStringBuilder;
+        }
+
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
-            var newTemplate = template.Replace("$command-name$", parameterInfo.NormalizedName)
+            var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$parent-command-name$", parent.NormalizedName)
                 .Replace("$command-description$", parameterInfo.Description)
                 .Replace("$command-argument-name$", parameterInfo.Name)

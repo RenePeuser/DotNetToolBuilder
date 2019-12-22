@@ -1,6 +1,4 @@
-﻿using DotNetTool.Builder.Extensions;
-
-namespace DotNetTool.Builder.Models
+﻿namespace DotNetTool.Builder.Models
 {
     public class DotNetTool
     {

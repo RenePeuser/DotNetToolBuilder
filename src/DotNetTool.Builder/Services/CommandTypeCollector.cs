@@ -6,30 +6,26 @@ namespace DotNetTool.Builder.Services
 {
     public class CommandTypeCollector : ICommandTypeCollector
     {
-        private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToregister;
+        private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToRegister;
 
         public CommandTypeCollector()
         {
-            _typesToregister = new Dictionary<string, IEnumerable<TypeToRegister>>();
+            _typesToRegister = new Dictionary<string, IEnumerable<TypeToRegister>>();
         }
 
         public void Add(ParameterInfo parameterInfo, TypeToRegister typeToRegister)
         {
             var name = parameterInfo.Name;
-            var alreadyExists = _typesToregister.ContainsKey(name);
+            var alreadyExists = _typesToRegister.ContainsKey(name);
             if (alreadyExists)
-            {
-                _typesToregister[name] = _typesToregister[name].Concat(typeToRegister);
-            }
+                _typesToRegister[name] = _typesToRegister[name].Concat(typeToRegister);
             else
-            {
-                _typesToregister[name] = typeToRegister.ToIList();
-            }
+                _typesToRegister[name] = typeToRegister.ToIList();
         }
 
         public Dictionary<string, IEnumerable<TypeToRegister>> GetAll()
         {
-            return _typesToregister;
+            return _typesToRegister;
         }
     }
 }

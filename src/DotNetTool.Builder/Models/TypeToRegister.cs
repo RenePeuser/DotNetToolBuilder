@@ -10,6 +10,5 @@
 
         public string InterfaceType { get; }
         public string ImplementationType { get; }
-
     }
 }

@@ -128,7 +128,6 @@ namespace DotNetTool.Builder
             services.AddSingleton<IRootCommandInterfaceBuilder, RootCommandInterfaceBuilder>();
             services.AddSingleton<ISubCommandInterfaceBuilder, SubCommandInterfaceBuilder>();
             services.AddSingleton<ICommandServiceBuilder, CommandServiceBuilder>();
-            
         }
     }
 }

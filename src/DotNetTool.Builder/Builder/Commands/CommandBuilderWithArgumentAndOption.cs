@@ -1,19 +1,11 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandBuilderWithArgumentAndOption : ICommandBuilderWithArgumentAndOption
     {
-        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
-
-        public CommandBuilderWithArgumentAndOption(ICommandHandlerStringBuilder commandHandlerStringBuilder)
-        {
-            _commandHandlerStringBuilder = commandHandlerStringBuilder;
-        }
-
         private const string template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {                
     using System.Collections.Generic;
     using Trumpf.Hmi.Extensions;
@@ -44,6 +36,13 @@ namespace DotNetTool.Builder.Builder.Commands
         }
     }
 }";
+
+        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
+
+        public CommandBuilderWithArgumentAndOption(ICommandHandlerStringBuilder commandHandlerStringBuilder)
+        {
+            _commandHandlerStringBuilder = commandHandlerStringBuilder;
+        }
 
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {

@@ -27,7 +27,8 @@ namespace DotNetTool.Builder.Test.Parser
             var parameterParser = new ParameterParser(consoleService);
             var parameterService = new ParameterService();
 
-            var allparsers = new IParameterValueParser[] { argumentOnlyParser, argumentWithPreTypeCast, argumentWithPostTypeCast, optionParser, parameterParser };
+            var allparsers = new IParameterValueParser[]
+                {argumentOnlyParser, argumentWithPreTypeCast, argumentWithPostTypeCast, optionParser, parameterParser};
             var paser = new ParameterExpressionParser(allparsers, parameterService);
 
             var expression = GetExpressionToParse();

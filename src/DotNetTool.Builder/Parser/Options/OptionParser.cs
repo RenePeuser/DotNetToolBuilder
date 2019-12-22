@@ -39,7 +39,8 @@ namespace DotNetTool.Builder.Parser.Options
             var normalizedOptiontName = optioName.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
             var optionArgumentName = normalizedOptiontName.FirstCharToLower();
 
-            var option = new OptionInfo(value, optioName, alias, description, boolRequired, argument, normalizedOptiontName, optionArgumentName);
+            var option = new OptionInfo(value, optioName, alias, description, boolRequired, argument,
+                normalizedOptiontName, optionArgumentName);
             return option;
         }
     }

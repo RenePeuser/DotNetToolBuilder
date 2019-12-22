@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using Trumpf.Hmi.Extensions;
 
@@ -10,7 +9,7 @@ namespace DotNetTool.Builder.Builder.Options
     public class OptionImplementationBuilder : IOptionImplementationBuilder
     {
         private const string template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.CommandLine;
@@ -27,11 +26,31 @@ namespace DotNetTool.Builder.Builder.Options
     }
 }";
 
+        private const string optionMethodTemplate =
+            @"private Option Build$option-name$Option()
+{
+    return new $option$;
+}";
+
+        private const string optionTemplate =
+            @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"".AsDescription())
+{
+    Required = $required-value$
+}";
+
+        private const string optionArgumentTemplate =
+            @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"".AsDescription())
+{
+    Required = $required-value$,
+    Argument = new Argument(""$option-argument-name$"")
+}";
+
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
             var optionsMethods = BuildOptionsMethodFrom(parameterInfo.Options).ToList();
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
-            var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();").Flatten(Environment.NewLine);
+            var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();")
+                .Flatten(Environment.NewLine);
 
             var newTemplate = template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)
@@ -41,12 +60,6 @@ namespace DotNetTool.Builder.Builder.Options
 
             return newTemplate;
         }
-
-        private const string optionMethodTemplate =
-@"private Option Build$option-name$Option()
-{
-    return new $option$;
-}";
 
         private IEnumerable<MethodInfo> BuildOptionsMethodFrom(IEnumerable<OptionInfo> options)
         {
@@ -60,19 +73,6 @@ namespace DotNetTool.Builder.Builder.Options
                 yield return new MethodInfo(methodName, newMethod);
             }
         }
-
-        private const string optionTemplate =
-@"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"".AsDescription())
-{
-    Required = $required-value$
-}";
-
-        private const string optionArgumentTemplate =
-@"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"".AsDescription())
-{
-    Required = $required-value$,
-    Argument = new Argument(""$option-argument-name$"")
-}";
 
         private string BuildNewOptionString(OptionInfo optionInfo)
         {

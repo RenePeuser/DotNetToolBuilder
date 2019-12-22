@@ -12,20 +12,22 @@ namespace DotNetTool.Builder.Builder
 {
     public interface IStartUpBuilder
     {
-        void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile, ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand, INameSpaceCollector nameSpaceCollector);
+        void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile,
+            ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
+            INameSpaceCollector nameSpaceCollector);
     }
 
     public class StartUpBuilder : IStartUpBuilder
     {
         private const string registerServiceMethod =
-@"private static void Configure$command-name$(IServiceCollection services)
+            @"private static void Configure$command-name$(IServiceCollection services)
     {
         $registrations$
     }
 ";
 
         private const string template =
-@"namespace $projectName$
+            @"namespace $projectName$
 {
     using Microsoft.Extensions.DependencyInjection;
     using Trumpf.Hmi.FileSystemAbstraction.Services;
@@ -47,9 +49,12 @@ namespace DotNetTool.Builder.Builder
     }
 }";
 
-        public void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile, ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand, INameSpaceCollector nameSpaceCollector)
+        public void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile,
+            ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
+            INameSpaceCollector nameSpaceCollector)
         {
-            var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
+            var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories)
+                .FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
 
             var methods = GenerateMethods(commandTypeCollector).ToList();
             var commandRegistrations = methods.Select(m => $"{m.MethodName}(services);").Flatten(Environment.NewLine);
@@ -58,10 +63,10 @@ namespace DotNetTool.Builder.Builder
             var usings = nameSpaceCollector.GetAll().Select(n => $"using {n};").Flatten(Environment.NewLine);
 
             var newStartUp = template.Replace("$projectName$", projectName)
-            .Replace("$command-registrations$", commandRegistrations)
-            .Replace("$root-command$", rootCommand.NormalizedName)
-            .Replace("$methods$", registrationMethods)
-            .Replace("$usings$", usings);
+                .Replace("$command-registrations$", commandRegistrations)
+                .Replace("$root-command$", rootCommand.NormalizedName)
+                .Replace("$methods$", registrationMethods)
+                .Replace("$usings$", usings);
 
             File.WriteAllText(startUpFile.FullName, newStartUp);
         }
@@ -84,9 +89,8 @@ namespace DotNetTool.Builder.Builder
         private IEnumerable<string> GetTypeRegistrations(IEnumerable<TypeToRegister> registrations)
         {
             foreach (var typeToRegister in registrations)
-            {
-                yield return $"services.AddSingleton<{typeToRegister.InterfaceType}, {typeToRegister.ImplementationType}>();";
-            }
+                yield return
+                    $"services.AddSingleton<{typeToRegister.InterfaceType}, {typeToRegister.ImplementationType}>();";
         }
     }
 }

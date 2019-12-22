@@ -4,11 +4,12 @@ namespace DotNetTool.Builder.InfoCollectors
 {
     public class DotNetToolInfoCollector : IDotNetToolInfoCollector
     {
-        private readonly ICollectProjectName _collectProjectName;
         private readonly ICollectDotNetToolName _collectDotNetToolName;
+        private readonly ICollectProjectName _collectProjectName;
         private readonly IParameterExpressionCollector _parameterExpressionCollector;
 
-        public DotNetToolInfoCollector(ICollectProjectName collectProjectName, ICollectDotNetToolName collectDotNetToolName, IParameterExpressionCollector parameterExpressionCollector)
+        public DotNetToolInfoCollector(ICollectProjectName collectProjectName,
+            ICollectDotNetToolName collectDotNetToolName, IParameterExpressionCollector parameterExpressionCollector)
         {
             _collectProjectName = collectProjectName;
             _collectDotNetToolName = collectDotNetToolName;

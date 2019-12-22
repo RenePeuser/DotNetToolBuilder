@@ -2,7 +2,8 @@
 {
     public class OptionInfo
     {
-        public OptionInfo(string value, string name, string alias, string description, bool required, ArgumentInfo argument, string normalizedValue, string argumentName)
+        public OptionInfo(string value, string name, string alias, string description, bool required,
+            ArgumentInfo argument, string normalizedValue, string argumentName)
         {
             Value = value;
             Name = name;

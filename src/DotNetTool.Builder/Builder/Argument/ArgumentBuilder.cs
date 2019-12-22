@@ -1,12 +1,11 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Argument
 {
     public class ArgumentBuilder : IArgumentBuilder
     {
-        private const string template = 
-@"namespace $namespace$
+        private const string template =
+            @"namespace $namespace$
 {
     using System.CommandLine;
 

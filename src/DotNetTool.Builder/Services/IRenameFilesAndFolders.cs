@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
+﻿using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
 
 namespace DotNetTool.Builder.Services
 {

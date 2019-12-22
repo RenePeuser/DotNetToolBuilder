@@ -14,12 +14,12 @@ namespace DotNetTool.Builder.App
 {
     public class App
     {
-        public IServiceProvider ServiceProvider { get; }
-
         public App(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }
+
+        public IServiceProvider ServiceProvider { get; }
 
         public Task<int> RunAsync(string[] args)
         {
@@ -59,18 +59,21 @@ namespace DotNetTool.Builder.App
             renameFilesAndFolders.Rename(targetDirectory, "uif", dotNetTool.ToolName);
 
             // detect folder of root command
-            var rootDirectory = targetDirectory.EnumerateDirectories(dotNetTool.ToolName, SearchOption.AllDirectories).Single();
+            var rootDirectory = targetDirectory.EnumerateDirectories(dotNetTool.ToolName, SearchOption.AllDirectories)
+                .Single();
 
             var currentPath = dotNetTool.ProjectName;
 
             // Create command structure
-            createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, typeCollector, currentPath, namespaceCollector);
+            createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, typeCollector,
+                currentPath, namespaceCollector);
 
             // Find solution file
             var solutionFile = targetDirectory.EnumerateFiles("*.sln", SearchOption.AllDirectories).Single();
 
             // Add type registrations
-            startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, typeCollector, dotNetTool.ParameterInfo, namespaceCollector);
+            startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, typeCollector,
+                dotNetTool.ParameterInfo, namespaceCollector);
 
             consoleService.WriteLine();
             consoleService.WriteLine($"Build your new '{dotNetTool.ProjectName}' dotnet tool...");
@@ -90,7 +93,8 @@ namespace DotNetTool.Builder.App
             consoleService.WriteLine(dotnetBuildResult.Output.AsSuccessfull());
             consoleService.WriteLine();
 
-            var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
+            var findExe = solutionFile.Directory
+                .EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
 
 
             consoleService.WriteLine($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
@@ -101,7 +105,8 @@ namespace DotNetTool.Builder.App
             consoleService.WriteLine(runYourCliResult.Output.AsSuccessfull());
             consoleService.WriteLine();
 
-            consoleService.WriteLine($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)".AsSuccessfull());
+            consoleService.WriteLine($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)"
+                .AsSuccessfull());
 
             // Open generated solution
             visualStudioService.Open(solutionFile);

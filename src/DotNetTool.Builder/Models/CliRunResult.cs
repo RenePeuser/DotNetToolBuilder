@@ -8,7 +8,7 @@
             Output = output;
         }
 
-        public int  ExitCode { get; }
+        public int ExitCode { get; }
         public string Output { get; }
     }
 }

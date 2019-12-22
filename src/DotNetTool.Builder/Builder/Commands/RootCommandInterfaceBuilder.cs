@@ -1,5 +1,4 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
@@ -20,7 +19,7 @@ namespace DotNetTool.Builder.Builder.Commands
         {
             var newTemplate = template.Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$namespace$", nameSpace)
-                .Replace("$project-name$", project);        
+                .Replace("$project-name$", project);
 
             return newTemplate;
         }

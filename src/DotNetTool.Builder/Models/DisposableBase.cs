@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Models
 {
     internal abstract class DisposableBase : IDisposable
     {
-        bool _disposed;
+        private bool _disposed;
 
         public void Dispose()
         {
@@ -14,15 +14,9 @@ namespace DotNetTool.Builder.Models
 
         private void Dispose(bool disposing)
         {
-            if (_disposed)
-            {
-                return;
-            }
+            if (_disposed) return;
 
-            if (disposing)
-            {
-                DisposeManagedResources();
-            }
+            if (disposing) DisposeManagedResources();
 
             _disposed = true;
         }

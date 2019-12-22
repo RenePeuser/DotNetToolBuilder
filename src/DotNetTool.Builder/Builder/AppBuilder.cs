@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder
@@ -8,7 +7,7 @@ namespace DotNetTool.Builder.Builder
     public class AppBuilder
     {
         private const string template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System;
     using System.CommandLine.Invocation;
