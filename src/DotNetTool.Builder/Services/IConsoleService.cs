@@ -2,8 +2,12 @@
 {
     public interface IConsoleService
     {
-        void WriteLine();
-        void WriteLine(string value);
+        void WriteInput(string value);
+        void WriteSample(string value);
+        void WriteError(string value);
+        void WriteSuccess(string value);
+
         string ReadLine();
+        void WriteInfo(string value);
     }
 }

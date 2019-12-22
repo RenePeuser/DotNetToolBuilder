@@ -22,10 +22,8 @@ namespace DotNetTool.Builder.Services
 
             while (true)
             {
-                _consoleService.WriteLine("Please enter your parameter expression".AsInput());
-                _consoleService.WriteLine(
-                    "Sample: 'dotnet tool install --global <package>  [--version not needed is a default command]')"
-                        .AsSample());
+                _consoleService.WriteInput("Please enter your parameter expression");
+                _consoleService.WriteSample("Sample: 'dotnet tool install --global <package>  [--version not needed is a default command]')");
 
                 var parameterExpression = _consoleService.ReadLine();
                 var parseResult = _parameterExpressionParser.Parse(parameterExpression, parameter);
@@ -35,10 +33,7 @@ namespace DotNetTool.Builder.Services
                     parameter = parseResult;
                 }
 
-                _consoleService.WriteLine();
-
-                _consoleService.WriteLine(
-                    "Do you want to add another parameter expression ? yes(y) or no (n)".AsInput());
+                _consoleService.WriteInput("Do you want to add another parameter expression ? yes(y) or no (n)");
 
                 var result = _consoleService.ReadLine();
                 if (result.Contains("no") || result.Contains("n"))

@@ -25,8 +25,7 @@ namespace DotNetTool.Builder.Parser.Argument
             var normalizedArgumentName = name.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
             var typeInfo = "object";
 
-            _consoleService.WriteLine();
-            _consoleService.WriteLine($"Please enter a description for your argument: '{value}'".AsInput());
+            _consoleService.WriteInput($"Please enter a description for your argument: '{value}'");
             var description = _consoleService.ReadLine();
 
             var argument = new ArgumentInfo(name, description, value, normalizedArgumentName, typeInfo);

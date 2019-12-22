@@ -45,7 +45,7 @@ namespace DotNetTool.Builder.Services
 
         private async Task InstallTool(DotNetToolInfo dotNetToolInfo)
         {
-            _consoleService.WriteLine($"Install '{dotNetToolInfo.Name}'");
+            _consoleService.WriteInfo($"Install '{dotNetToolInfo.Name}'");
             var result = await _dotNetToolService.InstallAsync(dotNetToolInfo.Name, dotNetToolInfo.Version);
             if (result.ExitCode != 0)
             {

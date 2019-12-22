@@ -24,8 +24,7 @@ namespace DotNetTool.Builder.Parser.Parameters
         {
             var parameter = new ParameterInfo();
             parameter.Name = value;
-            _consoleService.WriteLine();
-            _consoleService.WriteLine($"Please enter a description for your command: '{parameter.Name}'".AsInput());
+            _consoleService.WriteInput($"Please enter a description for your command: '{parameter.Name}'");
             var description = _consoleService.ReadLine();
             parameter.Description = description;
             parameter.Options = options.ToList();

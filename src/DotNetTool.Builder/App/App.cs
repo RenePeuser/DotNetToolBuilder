@@ -74,14 +74,12 @@ namespace DotNetTool.Builder.App
             startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, typeCollector,
                 dotNetTool.ParameterInfo, namespaceCollector);
 
-            consoleService.WriteLine();
-            consoleService.WriteLine($"Build your new '{dotNetTool.ProjectName}' dotnet tool...");
-            consoleService.WriteLine();
+            consoleService.WriteInfo($"Build your new '{dotNetTool.ProjectName}' dotnet tool...");
 
             var dotnetBuildResult = await processService.RunCliCommandAsync("dotnet", $"build {solutionFile.FullName}");
             if (dotnetBuildResult.ExitCode != 0)
             {
-                consoleService.WriteLine("Could not build sour new solution".AsError());
+                consoleService.WriteError("Could not build sour new solution");
 
                 // Open generated solution
                 visualStudioService.Open(solutionFile);
@@ -89,24 +87,19 @@ namespace DotNetTool.Builder.App
                 return -1;
             }
 
-            consoleService.WriteLine(dotnetBuildResult.Output.AsSuccessfull());
-            consoleService.WriteLine();
+            consoleService.WriteSuccess(dotnetBuildResult.Output.AsSuccessfull());
 
             var findExe = solutionFile.Directory
                 .EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories)
                 .FirstOrDefault();
 
 
-            consoleService.WriteLine($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
-            consoleService.WriteLine();
+            consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
+
             var runYourCliResult = await processService.RunCliCommandAsync($"{findExe.FullName}", "--help");
 
-            consoleService.WriteLine();
-            consoleService.WriteLine(runYourCliResult.Output.AsSuccessfull());
-            consoleService.WriteLine();
-
-            consoleService.WriteLine($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)"
-                .AsSuccessfull());
+            consoleService.WriteSuccess(runYourCliResult.Output);
+            consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
 
             // Open generated solution
             visualStudioService.Open(solutionFile);

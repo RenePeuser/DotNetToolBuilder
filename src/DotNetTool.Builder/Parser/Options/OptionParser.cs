@@ -21,17 +21,14 @@ namespace DotNetTool.Builder.Parser.Options
 
         public OptionInfo Parse(string value, ArgumentInfo argument)
         {
-            _consoleService.WriteLine();
-            _consoleService.WriteLine($"Please enter an alias for your option: '{value}'".AsInput());
+            _consoleService.WriteInput($"Please enter an alias for your option: '{value}'");
             var alias = _consoleService.ReadLine();
-            _consoleService.WriteLine();
 
-            _consoleService.WriteLine($"Is your option required (r) or optional (o): '{value}'".AsInput());
+            _consoleService.WriteInput($"Is your option required (r) or optional (o): '{value}'");
             var required = _consoleService.ReadLine();
             var boolRequired = required.ToLower().Equals("r");
 
-            _consoleService.WriteLine();
-            _consoleService.WriteLine($"Please enter a description for your option: '{value}'".AsInput());
+            _consoleService.WriteInput($"Please enter a description for your option: '{value}'");
             var description = _consoleService.ReadLine();
 
             var optioName = value.TrimStart('-');

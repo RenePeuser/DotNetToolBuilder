@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.InfoCollectors
 
         public virtual string Invoke()
         {
-            _consoleService.WriteLine(Title);
+            _consoleService.WriteInput(Title);
             return _consoleService.ReadLine();
         }
     }
