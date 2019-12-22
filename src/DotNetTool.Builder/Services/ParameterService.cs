@@ -4,10 +4,10 @@ using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Services
 {
-    public class CliParameterService
+    public class ParameterService : IParameterService
     {
-        public static CliParameterInfo FindAlreadyExistingCommand(string command,
-            CliParameterInfo current)
+        public ParameterInfo FindAlreadyExistingCommand(string command,
+            ParameterInfo current)
         {
             if (current.IsNull())
             {
@@ -39,8 +39,8 @@ namespace DotNetTool.Builder.Services
             return null;
         }
 
-        public static ArgumentInfo FindAlreadyExistingArgument(string argument,
-            CliParameterInfo current)
+        public ArgumentInfo FindAlreadyExistingArgument(string argument,
+            ParameterInfo current)
         {
             if (current.IsNull())
             {
@@ -71,8 +71,8 @@ namespace DotNetTool.Builder.Services
             return null;
         }
 
-        public static OptionInfo FindAlreadyExistingOption(string option,
-            CliParameterInfo current)
+        public OptionInfo FindAlreadyExistingOption(string option,
+            ParameterInfo current)
         {
             if (current.IsNull())
             {

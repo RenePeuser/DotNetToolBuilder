@@ -1,4 +1,5 @@
-﻿using DotNetTool.Builder.Builder.Argument;
+﻿using DotNetTool.Builder.Builder;
+using DotNetTool.Builder.Builder.Argument;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
@@ -17,8 +18,7 @@ namespace DotNetTool.Builder
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IConsoleService, ConsoleService>();
-            services.AddSingleton<TiFileService, TcFileService>();
+            RegisterServices(services);
 
             RegisterArgumentParser(services);
             RegisterOptionsParser(services);
@@ -31,6 +31,33 @@ namespace DotNetTool.Builder
             RegisterOptionsBuilder(services);
             RegisterParameterClassBuilder(services);
             RegisterCommandBuilders(services);
+            RegisterStartUpBuilder(services);
+        }
+
+        private void RegisterStartUpBuilder(IServiceCollection services)
+        {
+            services.AddSingleton<IStartUpBuilder, StartUpBuilder>();
+        }
+
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddSingleton<IConsoleService, ConsoleService>();
+            services.AddSingleton<TiFileService, TcFileService>();
+
+            services.AddSingleton<IParameterService, ParameterService>();
+            services.AddSingleton<ICommandTypeCollector, CommandTypeCollector>();
+            services.AddSingleton<ICopyDirectoryService, CopyDirectoryService>();
+
+            services.AddSingleton<ICreateCommandClasses, CreateCommandClasses>();
+
+            services.AddSingleton<IDotNetToolService, DotNetToolService>();
+            services.AddSingleton<IDotNetToolSynchronizer, DotNetToolSynchronizer>();
+
+            services.AddSingleton<IProcessBuilder, ProcessBuilder>();
+            services.AddSingleton<IProcessService, ProcessService>();
+            services.AddSingleton<INameSpaceCollector, NameSpaceCollector>();
+            services.AddSingleton<IRenameFilesAndFolders, RenameFilesAndFolders>();
+            services.AddSingleton<IVisualStudioService, VisualStudioService>();
         }
 
         public void RegisterDotNetToolInfoCollector(IServiceCollection services)
@@ -73,6 +100,7 @@ namespace DotNetTool.Builder
         public void RegisterArgumentBuilder(IServiceCollection services)
         {
             services.AddSingleton<IArgumentBuilder, ArgumentBuilder>();
+            services.AddSingleton<IArgumentInterfaceBuilder, ArgumentInterfaceBuilder>();
         }
 
         public void RegisterOptionsBuilder(IServiceCollection services)

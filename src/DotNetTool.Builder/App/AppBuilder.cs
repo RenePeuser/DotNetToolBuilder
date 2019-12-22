@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder.App
 {
@@ -7,8 +6,6 @@ namespace DotNetTool.Builder.App
     {
         public App Build()
         {
-            var builder = new ConfigurationBuilder();
-            var configuration = builder.Build();
             var services = new ServiceCollection();
             var startup = new Startup();
 

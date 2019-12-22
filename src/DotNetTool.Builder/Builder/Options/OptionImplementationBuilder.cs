@@ -27,7 +27,7 @@ namespace DotNetTool.Builder.Builder.Options
     }
 }";
 
-        public string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace)
+        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
             var optionsMethods = BuildOptionsMethodFrom(parameterInfo.Options).ToList();
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);

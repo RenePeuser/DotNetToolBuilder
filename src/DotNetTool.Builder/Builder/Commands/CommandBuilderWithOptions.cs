@@ -5,6 +5,13 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandBuilderWithOptions : ICommandBuilderWithOptions
     {
+        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
+
+        public CommandBuilderWithOptions(ICommandHandlerStringBuilder commandHandlerStringBuilder)
+        {
+            _commandHandlerStringBuilder = commandHandlerStringBuilder;
+        }
+
         private const string template =
 @"namespace $namespace$
 {                
@@ -36,15 +43,15 @@ namespace DotNetTool.Builder.Builder.Commands
     }
 }";
 
-        public string Build(string project, CliParameterInfo cliParameterInfo, CliParameterInfo parent, string nameSpace)
+        public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
-            var commandHandler = new CommandHandlerStringBuilder().Build(cliParameterInfo);
+            var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
-            var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
+            var newTemplate = template.Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
                 .Replace("$parent-command-name$", parent.Name.FirstCharToUpper())
-                .Replace("$command-description$", cliParameterInfo.Description)
-                .Replace("$command-argument-name$", cliParameterInfo.Name)
-                .Replace("$command-service-argument-name$", cliParameterInfo.Name)
+                .Replace("$command-description$", parameterInfo.Description)
+                .Replace("$command-argument-name$", parameterInfo.Name)
+                .Replace("$command-service-argument-name$", parameterInfo.Name)
                 .Replace("$command-handler$", commandHandler)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$project-name$", project);

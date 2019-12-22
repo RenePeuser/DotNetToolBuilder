@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Parser
 {
     public interface IParameterExpressionParser
     {
-        CliParameterInfo Parse(string paramterExpression, CliParameterInfo lastParameter);
+        ParameterInfo Parse(string paramterExpression, ParameterInfo lastParameter);
     }
 }

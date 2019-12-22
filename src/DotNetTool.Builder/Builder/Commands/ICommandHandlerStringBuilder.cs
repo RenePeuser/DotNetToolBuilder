@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal interface ICommandHandlerStringBuilder
     {
-        string Build(CliParameterInfo cliParameterInfo);
+        string Build(ParameterInfo parameterInfo);
     }
 }

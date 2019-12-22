@@ -25,7 +25,7 @@ namespace DotNetTool.Builder.Builder.Argument
     }
 }";
 
-        public string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace)
+        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
             var newTemplate = template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())

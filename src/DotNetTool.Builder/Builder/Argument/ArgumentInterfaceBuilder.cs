@@ -3,7 +3,12 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Argument
 {
-    public class ArgumentInterfaceBuilder
+    public interface IArgumentInterfaceBuilder
+    {
+        string Build(string projectName, ParameterInfo parameterInfo, string nameSpace);
+    }
+
+    public class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string template =
 @"namespace $namespace$
@@ -16,7 +21,7 @@ namespace DotNetTool.Builder.Builder.Argument
     }
 }";
 
-        public string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace)
+        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
             var newTemplate = template.Replace("$projectName$", projectName)
                 .Replace("$namespace$", nameSpace)

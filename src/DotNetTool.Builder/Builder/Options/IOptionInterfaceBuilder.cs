@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Builder.Options
 {
     public interface IOptionInterfaceBuilder
     {
-        string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace);
+        string Build(string projectName, ParameterInfo parameterInfo, string nameSpace);
     }
 }

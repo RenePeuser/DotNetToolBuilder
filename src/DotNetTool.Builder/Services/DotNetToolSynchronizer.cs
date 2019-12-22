@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DotNetTool.Builder.Models;
 using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Services

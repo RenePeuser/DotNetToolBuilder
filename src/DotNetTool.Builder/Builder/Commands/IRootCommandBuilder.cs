@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal interface IRootCommandBuilder
     {
-        string Build(string project, CliParameterInfo cliParameterInfo, string nameSpace);
+        string Build(string project, ParameterInfo parameterInfo, string nameSpace);
     }
 }

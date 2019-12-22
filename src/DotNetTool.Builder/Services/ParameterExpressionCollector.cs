@@ -5,7 +5,7 @@ using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Services
 {
-    public class ParameterExpressionCollector: IParameterExpressionCollector
+    public class ParameterExpressionCollector : IParameterExpressionCollector
     {
         private readonly IConsoleService _consoleService;
         private readonly IParameterExpressionParser _parameterExpressionParser;
@@ -16,9 +16,9 @@ namespace DotNetTool.Builder.Services
             _parameterExpressionParser = parameterExpressionParser;
         }
 
-        public CliParameterInfo Collect()
+        public ParameterInfo Collect()
         {
-            CliParameterInfo parameter = null;
+            ParameterInfo parameter = null;
 
             while (true)
             {

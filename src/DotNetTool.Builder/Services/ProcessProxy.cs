@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using DotNetTool.Builder.Models;
 using Trumpf.Hmi.ArgumentChecking;
 
 namespace DotNetTool.Builder.Services

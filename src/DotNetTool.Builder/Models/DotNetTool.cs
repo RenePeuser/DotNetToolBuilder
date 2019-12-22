@@ -2,17 +2,17 @@
 {
     public class DotNetTool
     {
-        public DotNetTool(string projectName, string toolName, CliParameterInfo cliParameterInfo)
+        public DotNetTool(string projectName, string toolName, ParameterInfo parameterInfo)
         {
             ProjectName = projectName;
             ToolName = toolName;
-            CliParameterInfo = cliParameterInfo;
+            ParameterInfo = parameterInfo;
         }
 
         public string ProjectName { get; }
 
         public string ToolName { get; }
 
-        public CliParameterInfo CliParameterInfo { get; }
+        public ParameterInfo ParameterInfo { get; }
     }
 }

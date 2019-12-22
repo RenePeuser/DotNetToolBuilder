@@ -13,17 +13,19 @@ namespace DotNetTool.Builder.Parser
     public class ParameterExpressionParser : IParameterExpressionParser
     {
         private readonly IEnumerable<IParameterValueParser> _parsers;
+        private readonly IParameterService _parameterService;
 
-        public ParameterExpressionParser(IEnumerable<IParameterValueParser> parsers)
+        public ParameterExpressionParser(IEnumerable<IParameterValueParser> parsers, IParameterService parameterService)
         {
             _parsers = parsers;
+            _parameterService = parameterService;
         }
 
-        public CliParameterInfo Parse(string paramterExpression, CliParameterInfo lastParameter)
+        public ParameterInfo Parse(string paramterExpression, ParameterInfo lastParameter)
         {
             var splittedExpression = paramterExpression.Split(" ");
             var options = new List<OptionInfo>();
-            CliParameterInfo lastCliParameterInfo = null;
+            ParameterInfo lastParameterInfo = null;
             ArgumentInfo argument = null;
 
             for (int i = splittedExpression.Length - 1; i >= 0; i--)
@@ -31,20 +33,20 @@ namespace DotNetTool.Builder.Parser
                 var currentWithTypeInfo = splittedExpression[i];
                 string current = currentWithTypeInfo;
                 var foundParser = _parsers.SingleOrDefault(p => p.IsThisParserFor(currentWithTypeInfo));
-                CliParameterInfo parameter = null;
+                ParameterInfo parameter = null;
 
                 switch (foundParser)
                 {
                     case IArgumentParser argumentParser:
-                        var alreadyExistingArgument = CliParameterService.FindAlreadyExistingArgument(current, lastParameter);
+                        var alreadyExistingArgument = _parameterService.FindAlreadyExistingArgument(current, lastParameter);
                         argument = alreadyExistingArgument.IsNull() ? argumentParser.Parse(currentWithTypeInfo) : alreadyExistingArgument;
                         break;
                     case IOptionParser optionParser:
-                        var alreadyExistingOption = CliParameterService.FindAlreadyExistingOption(current, lastParameter);
+                        var alreadyExistingOption = _parameterService.FindAlreadyExistingOption(current, lastParameter);
                         options.Add(alreadyExistingOption.IsNull() ? optionParser.Parse(currentWithTypeInfo, argument) : alreadyExistingOption);
                         break;
                     case IParameterParser parameterParser:
-                        var commandAlreadyExists = CliParameterService.FindAlreadyExistingCommand(current, lastParameter);
+                        var commandAlreadyExists = _parameterService.FindAlreadyExistingCommand(current, lastParameter);
                         parameter = commandAlreadyExists.IsNull() ? parameterParser.Parse(currentWithTypeInfo, options) : parameterParser.Parse(current, options, commandAlreadyExists);
                         options = new List<OptionInfo>();
                         break;
@@ -52,9 +54,9 @@ namespace DotNetTool.Builder.Parser
                         throw new InvalidOperationException();
                 }
 
-                if (lastCliParameterInfo.IsNotNull())
+                if (lastParameterInfo.IsNotNull())
                 {
-                    parameter.SubCommands = lastCliParameterInfo.ToIList();
+                    parameter.SubCommands = lastParameterInfo.ToIList();
                 }
 
                 if (parameter.IsNotNull())
@@ -66,10 +68,10 @@ namespace DotNetTool.Builder.Parser
                     }
                 }
                 
-                lastCliParameterInfo = parameter;
+                lastParameterInfo = parameter;
                 if (lastParameter.IsNotNull())
                 {
-                    var parentForThis = CliParameterService.FindAlreadyExistingCommand(current, lastParameter);
+                    var parentForThis = _parameterService.FindAlreadyExistingCommand(current, lastParameter);
                     if (parentForThis.IsNotNull())
                     {
                         if (parentForThis.SubCommands.IsNotNull())
@@ -85,7 +87,7 @@ namespace DotNetTool.Builder.Parser
                 return lastParameter;
             }
 
-            return lastCliParameterInfo;
+            return lastParameterInfo;
         }
     }
 }

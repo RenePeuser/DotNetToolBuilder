@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Builder.Options
     }
 }";
 
-        public string Build(string projectName, CliParameterInfo parameterInfo, string nameSpace)
+        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
             var newTemplate = template.Replace("$projectName$", projectName)
                 .Replace("$namespace$", nameSpace)

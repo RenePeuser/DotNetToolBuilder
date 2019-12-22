@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace DotNetTool.Builder.Models
 {
-    public class CliParameterInfo
+    public class ParameterInfo
     {
-        public IEnumerable<CliParameterInfo> SubCommands { get; set; } = Enumerable.Empty<CliParameterInfo>();
+        public IEnumerable<ParameterInfo> SubCommands { get; set; } = Enumerable.Empty<ParameterInfo>();
 
         public IEnumerable<OptionInfo> Options { get; set; } = Enumerable.Empty<OptionInfo>();
 

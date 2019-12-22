@@ -20,10 +20,9 @@ namespace DotNetTool.Builder.Parser.Parameters
             return !value.StartsWith("-") && !value.StartsWith("[") && !value.StartsWith("<");
         }
 
-        public CliParameterInfo Parse(string value, IEnumerable<OptionInfo> options)
+        public ParameterInfo Parse(string value, IEnumerable<OptionInfo> options)
         {
-            var parameter = new CliParameterInfo();
-
+            var parameter = new ParameterInfo();
             parameter.Name = value;
             _consoleService.WriteLine();
             _consoleService.WriteLine($"Please enter a description for your command: '{parameter.Name}'".AsInput());
@@ -34,9 +33,9 @@ namespace DotNetTool.Builder.Parser.Parameters
             return parameter;
         }
 
-        public CliParameterInfo Parse(string value, IEnumerable<OptionInfo> options, CliParameterInfo parameterInfo)
+        public ParameterInfo Parse(string value, IEnumerable<OptionInfo> options, ParameterInfo parameterInfo)
         {
-            var parameter = new CliParameterInfo();
+            var parameter = new ParameterInfo();
             parameter.Name = value;
             parameter.Description = parameterInfo.Description;
             parameter.Options = parameterInfo.Options.ToList();

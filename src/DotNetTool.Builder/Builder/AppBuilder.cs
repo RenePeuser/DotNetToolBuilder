@@ -33,7 +33,7 @@ namespace DotNetTool.Builder.Builder
     }
 }";
 
-        public void AddStartup(string projectName, FileInfo solutionFile, CliParameterInfo rootCommand)
+        public void AddStartup(string projectName, FileInfo solutionFile, ParameterInfo rootCommand)
         {
             var app = solutionFile.Directory.EnumerateFiles("App.cs", SearchOption.AllDirectories).FirstOrDefault();
 

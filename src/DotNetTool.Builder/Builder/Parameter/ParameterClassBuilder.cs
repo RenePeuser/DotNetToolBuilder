@@ -25,9 +25,9 @@ namespace DotNetTool.Builder.Builder.Parameter
 
         private const string ctorArgument = @"$type$ $argName$";
 
-        public string Build(string projectName, CliParameterInfo cliParameterInfo, string nameSpace)
+        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
-            var ctorArguments = BuildCtorArguments(cliParameterInfo);
+            var ctorArguments = BuildCtorArguments(parameterInfo);
             var properties = BuildProperties(ctorArguments);
             var propertyString = BuildPropertyString(properties);
 
@@ -39,7 +39,7 @@ namespace DotNetTool.Builder.Builder.Parameter
                                       .Replace("$properties$", propertyString)
                                       .Replace("$projectName$", projectName)
                                       .Replace("$namespace$", nameSpace)
-                                      .Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper());
+                                      .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper());
 
             return newTemplate;
         }
@@ -72,15 +72,15 @@ namespace DotNetTool.Builder.Builder.Parameter
         }
 
 
-        internal IEnumerable<CtorArgument> BuildCtorArguments(CliParameterInfo cliParameterInfo)
+        internal IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
         {
-            var argumentInfo = cliParameterInfo.ArgumentInfo;
+            var argumentInfo = parameterInfo.ArgumentInfo;
             if (argumentInfo.IsNotNull())
             {
                 yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
             }
 
-            foreach (var optionInfo in cliParameterInfo.Options)
+            foreach (var optionInfo in parameterInfo.Options)
             {
                 yield return new CtorArgument("bool", optionInfo.ArgumentName);
             }

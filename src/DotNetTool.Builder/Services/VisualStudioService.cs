@@ -1,18 +1,34 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using DotNetTool.Builder.Extensions;
+using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
+using Trumpf.Hmi.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder.Services
 {
-    public class VisualStudioService
+    public class VisualStudioService : IVisualStudioService
     {
-        public void Open(FileInfo solution)
+        private readonly IProcessService _processService;
+        private readonly TiDirectoryService _directoryService;
+
+        public VisualStudioService(IProcessService processService, TiDirectoryService directoryService)
+        {
+            _processService = processService;
+            _directoryService = directoryService;
+        }
+
+        public void Open(TiFileInfo solution)
         {
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            var vs2019 = Path.Combine(programx86Path,
-                @"Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe");
-            var fileInfo = new FileInfo(vs2019);
-            Process.Start(fileInfo.FullName, solution.FullName);
+            var visualStudio2019Folder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, @"Microsoft Visual Studio\2019\"));
+            var vs2019 = visualStudio2019Folder.EnumerateFiles("devenv.exe", SearchOption.AllDirectories).FirstOrDefault();
+            if (vs2019.NotExists())
+            {
+                throw new InvalidOperationException($"Can not start visual studio 2019, because did not find any version of visual studio in path: '{visualStudio2019Folder.FullName}'");
+            }
+
+            _processService.RunCliCommandAsync(vs2019.FullName, solution.FullName);
         }
     }
 }

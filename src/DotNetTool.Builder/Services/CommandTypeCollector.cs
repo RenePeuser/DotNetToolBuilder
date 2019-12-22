@@ -4,7 +4,7 @@ using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Services
 {
-    public class CommandTypeCollector
+    public class CommandTypeCollector : ICommandTypeCollector
     {
         private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToregister;
 
@@ -13,9 +13,9 @@ namespace DotNetTool.Builder.Services
             _typesToregister = new Dictionary<string, IEnumerable<TypeToRegister>>();
         }
 
-        public void Add(CliParameterInfo cliParameterInfo, TypeToRegister typeToRegister)
+        public void Add(ParameterInfo parameterInfo, TypeToRegister typeToRegister)
         {
-            var name = cliParameterInfo.Name;
+            var name = parameterInfo.Name;
             var alreadyExists = _typesToregister.ContainsKey(name);
             if (alreadyExists)
             {

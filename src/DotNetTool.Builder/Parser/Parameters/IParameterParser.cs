@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Parser.Parameters
 {
     public interface IParameterParser : IParameterValueParser
     {
-        CliParameterInfo Parse(string value, IEnumerable<OptionInfo> options);
-        CliParameterInfo Parse(string value, IEnumerable<OptionInfo> options, CliParameterInfo parameterInfo);
+        ParameterInfo Parse(string value, IEnumerable<OptionInfo> options);
+        ParameterInfo Parse(string value, IEnumerable<OptionInfo> options, ParameterInfo parameterInfo);
     }
 }

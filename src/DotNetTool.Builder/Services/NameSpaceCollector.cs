@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Services
 {
-    public class NameSpaceCollector
+    public class NameSpaceCollector : INameSpaceCollector
     {
         private readonly List<string> items = new List<string>();
 

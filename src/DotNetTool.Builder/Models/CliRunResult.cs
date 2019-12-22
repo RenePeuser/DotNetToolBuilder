@@ -1,4 +1,4 @@
-﻿namespace DotNetTool.Builder.Services
+﻿namespace DotNetTool.Builder.Models
 {
     public class CliRunResult
     {

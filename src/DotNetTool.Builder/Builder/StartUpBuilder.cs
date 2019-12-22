@@ -6,10 +6,16 @@ using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
 using Trumpf.Hmi.Extensions;
+using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
 
 namespace DotNetTool.Builder.Builder
 {
-    public class StartUpBuilder
+    public interface IStartUpBuilder
+    {
+        void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile, ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand, INameSpaceCollector nameSpaceCollector);
+    }
+
+    public class StartUpBuilder : IStartUpBuilder
     {
         private const string registerServiceMethod =
 @"private static void Configure$command-name$(IServiceCollection services)
@@ -41,7 +47,7 @@ namespace DotNetTool.Builder.Builder
     }
 }";
 
-        public void AddRegistrationsFrom(string projectName, FileInfo solutionFile, CommandTypeCollector commandTypeCollector, CliParameterInfo rootCommand, NameSpaceCollector nameSpaceCollector)
+        public void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile, ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand, INameSpaceCollector nameSpaceCollector)
         {
             var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
 
@@ -60,7 +66,7 @@ namespace DotNetTool.Builder.Builder
             File.WriteAllText(startUpFile.FullName, newStartUp);
         }
 
-        private IEnumerable<MethodInfo> GenerateMethods(CommandTypeCollector commandTypeCollector)
+        private IEnumerable<MethodInfo> GenerateMethods(ICommandTypeCollector commandTypeCollector)
         {
             var allRegistrations = commandTypeCollector.GetAll();
             foreach (var registration in allRegistrations)

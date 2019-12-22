@@ -20,9 +20,9 @@ namespace DotNetTool.Builder.Builder.Commands
     }
 }";
 
-        public string Build(string project, CliParameterInfo cliParameterInfo, string nameSpace)
+        public string Build(string project, ParameterInfo parameterInfo, string nameSpace)
         {
-            var newTemplate = template.Replace("$command-name$", cliParameterInfo.Name.FirstCharToUpper())
+            var newTemplate = template.Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
                 .Replace("$namespace$", nameSpace)
                 .Replace("$project-name$", project);
 
