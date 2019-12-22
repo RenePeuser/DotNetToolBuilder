@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
@@ -12,6 +13,8 @@ namespace DotNetTool.Builder.Models
         public ArgumentInfo ArgumentInfo { get; set; }
 
         public string Name { get; set; }
+
+        public string NormalizedName => NormalizedName;
 
         public string Description { get; set; }
     }

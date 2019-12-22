@@ -28,7 +28,7 @@ namespace DotNetTool.Builder.Builder.Argument
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
             var newTemplate = template.Replace("$project-name$", projectName)
-                .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
+                .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$argument-name$", parameterInfo.ArgumentInfo.Name)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$type$", parameterInfo.ArgumentInfo.Type)

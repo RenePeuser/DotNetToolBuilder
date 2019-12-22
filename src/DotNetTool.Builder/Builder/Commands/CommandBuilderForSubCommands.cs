@@ -5,14 +5,7 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandBuilderForSubCommands : ICommandBuilderForSubCommands
     {
-        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
-
-        public CommandBuilderForSubCommands(ICommandHandlerStringBuilder commandHandlerStringBuilder)
-        {
-            _commandHandlerStringBuilder = commandHandlerStringBuilder;
-        }
-
-        private const string template =
+        private const string Template =
 @"namespace $namespace$
 {
     using System.Collections.Generic;
@@ -38,17 +31,24 @@ namespace DotNetTool.Builder.Builder.Commands
     }
 }";
 
+        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
+
+        public CommandBuilderForSubCommands(ICommandHandlerStringBuilder commandHandlerStringBuilder)
+        {
+            _commandHandlerStringBuilder = commandHandlerStringBuilder;
+        }
+
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
-            var newTemplate = template.Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
-                .Replace("$command-argument-name$", parameterInfo.Name)
-                .Replace("$namespace$", nameSpace)
-                .Replace("$command-description$", parameterInfo.Description)
-                .Replace("$command-handler$", commandHandler)
-                .Replace("$parent-command-name$", parent.Name.FirstCharToUpper())
-                .Replace("$project-name$", project);
+            var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
+                                      .Replace("$command-argument-name$", parameterInfo.Name)
+                                      .Replace("$namespace$", nameSpace)
+                                      .Replace("$command-description$", parameterInfo.Description)
+                                      .Replace("$command-handler$", commandHandler)
+                                      .Replace("$parent-command-name$", parent.NormalizedName)
+                                      .Replace("$project-name$", project);
 
             return newTemplate;
         }

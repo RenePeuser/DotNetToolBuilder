@@ -39,7 +39,7 @@ namespace DotNetTool.Builder.Builder.Parameter
                                       .Replace("$properties$", propertyString)
                                       .Replace("$projectName$", projectName)
                                       .Replace("$namespace$", nameSpace)
-                                      .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper());
+                                      .Replace("$command-name$", parameterInfo.NormalizedName);
 
             return newTemplate;
         }
@@ -90,7 +90,7 @@ namespace DotNetTool.Builder.Builder.Parameter
         {
             foreach (var argument in ctorArguments)
             {
-                yield return new Property(argument.Type, argument.Name.FirstCharToUpper());
+                yield return new Property(argument.Type, argument.NormalizedName);
             }
         }
     }

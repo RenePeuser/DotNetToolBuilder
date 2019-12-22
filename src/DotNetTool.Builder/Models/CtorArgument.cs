@@ -1,4 +1,6 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using DotNetTool.Builder.Extensions;
+
+namespace DotNetTool.Builder.Models
 {
     internal class CtorArgument
     {
@@ -6,9 +8,13 @@
         {
             Type = type;
             Name = name;
+            NormalizedName = name.FirstCharToUpper();
         }
 
         public string Type { get; }
+
         public string Name { get; }
+
+        public string NormalizedName { get; }
     }
 }

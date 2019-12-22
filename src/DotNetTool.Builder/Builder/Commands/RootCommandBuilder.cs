@@ -42,7 +42,7 @@ namespace DotNetTool.Builder.Builder.Commands
         {
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
-            var newTemplate = template.Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
+            var newTemplate = template.Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$command-argument-name$", parameterInfo.Name)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$command-description$", parameterInfo.Description)

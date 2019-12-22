@@ -34,7 +34,7 @@ namespace DotNetTool.Builder.Builder.Options
             var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();").Flatten(Environment.NewLine);
 
             var newTemplate = template.Replace("$project-name$", projectName)
-                .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
+                .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$yield-option$", yieldStatements)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$build-option-method$", optionsMethodAsString);

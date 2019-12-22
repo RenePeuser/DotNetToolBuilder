@@ -42,8 +42,8 @@ namespace DotNetTool.Builder.Builder.Commands
         {
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
-            var newTemplate = template.Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
-                .Replace("$parent-command-name$", parent.Name.FirstCharToUpper())
+            var newTemplate = template.Replace("$command-name$", parameterInfo.NormalizedName)
+                .Replace("$parent-command-name$", parent.NormalizedName)
                 .Replace("$command-description$", parameterInfo.Description)
                 .Replace("$command-argument-name$", parameterInfo.Name)
                 .Replace("$command-service-argument-name$", parameterInfo.Name)

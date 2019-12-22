@@ -55,7 +55,7 @@ namespace DotNetTool.Builder.App
             renameFilesAndFolders.Rename(targetDirectory, "Trumpf.Hmi.Uif", dotNetTool.ProjectName);
 
             // DotNetTool name
-            renameFilesAndFolders.Rename(targetDirectory, "Uif", dotNetTool.ToolName.FirstCharToUpper());
+            renameFilesAndFolders.Rename(targetDirectory, "Uif", dotNetTool.NormalizedToolName);
             renameFilesAndFolders.Rename(targetDirectory, "uif", dotNetTool.ToolName);
 
             // detect folder of root command

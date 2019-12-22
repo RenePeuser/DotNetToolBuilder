@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
-            var newTemplate = template.Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
+            var newTemplate = template.Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$project-name$", project);
 

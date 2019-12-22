@@ -43,6 +43,7 @@ namespace DotNetTool.Builder
         {
             services.AddSingleton<IConsoleService, ConsoleService>();
             services.AddSingleton<TiFileService, TcFileService>();
+            services.AddSingleton<TiDirectoryService, TcDirectoryService>();
 
             services.AddSingleton<IParameterService, ParameterService>();
             services.AddSingleton<ICommandTypeCollector, CommandTypeCollector>();
@@ -126,6 +127,8 @@ namespace DotNetTool.Builder
             services.AddSingleton<IRootCommandBuilder, RootCommandBuilder>();
             services.AddSingleton<IRootCommandInterfaceBuilder, RootCommandInterfaceBuilder>();
             services.AddSingleton<ISubCommandInterfaceBuilder, SubCommandInterfaceBuilder>();
+            services.AddSingleton<ICommandServiceBuilder, CommandServiceBuilder>();
+            
         }
     }
 }

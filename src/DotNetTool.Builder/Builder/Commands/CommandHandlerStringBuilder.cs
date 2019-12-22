@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Builder.Commands
             var argNames = arguments.Select(arg => arg.Name).Flatten(", ");
 
             var newTemplate = template.Replace("$types$", types)
-                .Replace("$command-name$", parameterInfo.Name.FirstCharToUpper())
+                .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$command-argument-name$", parameterInfo.Name)
                 .Replace("$argument-names$", argNames);
             return newTemplate;

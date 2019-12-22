@@ -59,7 +59,7 @@ namespace DotNetTool.Builder.Builder
 
             var newStartUp = template.Replace("$projectName$", projectName)
             .Replace("$command-registrations$", commandRegistrations)
-            .Replace("$root-command$", rootCommand.Name.FirstCharToUpper())
+            .Replace("$root-command$", rootCommand.NormalizedName)
             .Replace("$methods$", registrationMethods)
             .Replace("$usings$", usings);
 
