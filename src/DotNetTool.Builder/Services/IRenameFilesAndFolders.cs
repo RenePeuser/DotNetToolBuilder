@@ -1,9 +1,9 @@
-﻿using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
+﻿using DotNetTool.Builder.FileSystemAbstraction;
 
 namespace DotNetTool.Builder.Services
 {
     public interface IRenameFilesAndFolders
     {
-        void Rename(TiDirectoryInfo directoryInfo, string originalName, string newName);
+        void Rename(IDirectoryInfo directoryInfo, string originalName, string newName);
     }
 }

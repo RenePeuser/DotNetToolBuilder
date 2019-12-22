@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
-using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Builder.Commands
 {

@@ -3,6 +3,7 @@ using DotNetTool.Builder.Builder.Argument;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
+using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
@@ -10,7 +11,6 @@ using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Trumpf.Hmi.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder
 {
@@ -42,8 +42,8 @@ namespace DotNetTool.Builder
         private void RegisterServices(IServiceCollection services)
         {
             services.AddSingleton<IConsoleService, ConsoleService>();
-            services.AddSingleton<TiFileService, TcFileService>();
-            services.AddSingleton<TiDirectoryService, TcDirectoryService>();
+            services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<IDirectoryService, DirectoryService>();
 
             services.AddSingleton<IParameterService, ParameterService>();
             services.AddSingleton<ICommandTypeCollector, CommandTypeCollector>();

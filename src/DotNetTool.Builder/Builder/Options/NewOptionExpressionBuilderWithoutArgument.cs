@@ -1,5 +1,5 @@
-﻿using DotNetTool.Builder.Models;
-using Trumpf.Hmi.Extensions;
+﻿using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {

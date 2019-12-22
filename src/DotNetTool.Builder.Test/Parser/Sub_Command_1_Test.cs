@@ -1,7 +1,7 @@
 ﻿using System.Linq;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Test.Parser
 {

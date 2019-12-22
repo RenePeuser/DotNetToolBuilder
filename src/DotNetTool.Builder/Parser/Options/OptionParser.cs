@@ -2,7 +2,6 @@
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
-using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Parser.Options
 {

@@ -1,9 +1,9 @@
-﻿using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
+﻿using DotNetTool.Builder.FileSystemAbstraction;
 
 namespace DotNetTool.Builder.Services
 {
     public interface IVisualStudioService
     {
-        void Open(TiFileInfo solution);
+        void Open(IFileInfo solution);
     }
 }

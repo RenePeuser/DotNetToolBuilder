@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.FileSystemAbstraction;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
-using Trumpf.Hmi.Extensions;
-using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
 
 namespace DotNetTool.Builder.Builder
 {
     public interface IStartUpBuilder
     {
-        void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile,
+        void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
             ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
             INameSpaceCollector nameSpaceCollector);
     }
@@ -38,7 +37,7 @@ namespace DotNetTool.Builder.Builder
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<TiFileService, TcFileService>();
+            services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<IErrorHandler, ErrorHandler>();
             services.AddSingleton<I$root-command$CommandBuilder, $root-command$CommandBuilder>();
             
@@ -49,7 +48,7 @@ namespace DotNetTool.Builder.Builder
     }
 }";
 
-        public void AddRegistrationsFrom(string projectName, TiFileInfo solutionFile,
+        public void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
             ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
             INameSpaceCollector nameSpaceCollector)
         {

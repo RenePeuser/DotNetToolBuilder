@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
-using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Builder.Options
 {
@@ -36,8 +36,7 @@ namespace DotNetTool.Builder.Builder.Options
         {
             var optionsMethods = _optionMethodsBuilder.Build(parameterInfo.Options).ToList();
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
-            var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();")
-                .Flatten(Environment.NewLine);
+            var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();").Flatten(Environment.NewLine);
 
             var newTemplate = template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)

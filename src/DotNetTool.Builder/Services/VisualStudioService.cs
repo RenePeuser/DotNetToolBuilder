@@ -2,23 +2,23 @@
 using System.IO;
 using System.Linq;
 using DotNetTool.Builder.Extensions;
-using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
-using Trumpf.Hmi.FileSystemAbstraction.Services;
+using DotNetTool.Builder.FileSystemAbstraction;
+using DotNetTool.Builder.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder.Services
 {
     public class VisualStudioService : IVisualStudioService
     {
-        private readonly TiDirectoryService _directoryService;
+        private readonly IDirectoryService _directoryService;
         private readonly IProcessService _processService;
 
-        public VisualStudioService(IProcessService processService, TiDirectoryService directoryService)
+        public VisualStudioService(IProcessService processService, IDirectoryService directoryService)
         {
             _processService = processService;
             _directoryService = directoryService;
         }
 
-        public void Open(TiFileInfo solution)
+        public void Open(IFileInfo solution)
         {
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
             var visualStudio2019Folder =

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetTool.Builder.ArgumentChecking;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
-using Trumpf.Hmi.ArgumentChecking;
-using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Services
 {

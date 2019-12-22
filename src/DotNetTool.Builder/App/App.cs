@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetTool.Builder.Builder;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Trumpf.Hmi.Extensions;
-using Trumpf.Hmi.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder.App
 {
@@ -30,7 +29,7 @@ namespace DotNetTool.Builder.App
         {
             var consoleService = ServiceProvider.GetService<IConsoleService>();
             var dotNetToolCollector = ServiceProvider.GetService<IDotNetToolInfoCollector>();
-            var directoryService = ServiceProvider.GetService<TiDirectoryService>();
+            var directoryService = ServiceProvider.GetService<IDirectoryService>();
             var typeCollector = ServiceProvider.GetService<ICommandTypeCollector>();
             var namespaceCollector = ServiceProvider.GetService<INameSpaceCollector>();
             var visualStudioService = ServiceProvider.GetService<IVisualStudioService>();

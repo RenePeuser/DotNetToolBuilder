@@ -5,7 +5,7 @@ using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Trumpf.Hmi.ObjectCreator;
+using NSubstitute;
 
 namespace DotNetTool.Builder.Test.Parser
 {
@@ -19,7 +19,7 @@ namespace DotNetTool.Builder.Test.Parser
         [TestInitialize]
         public void Init()
         {
-            var consoleService = TcObjectCreator.Create<IConsoleService>();
+            var consoleService = Substitute.For<IConsoleService>();
             var argumentOnlyParser = new ArgumentOnly(consoleService);
             var argumentWithPreTypeCast = new ArgumentWithPreTypeCast(argumentOnlyParser);
             var argumentWithPostTypeCast = new ArgumentWithPostTypeCast(argumentOnlyParser);

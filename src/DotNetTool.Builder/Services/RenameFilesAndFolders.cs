@@ -1,11 +1,11 @@
 ﻿using System.IO;
-using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
+using DotNetTool.Builder.FileSystemAbstraction;
 
 namespace DotNetTool.Builder.Services
 {
     public class RenameFilesAndFolders : IRenameFilesAndFolders
     {
-        public void Rename(TiDirectoryInfo directoryInfo, string originalName, string newName)
+        public void Rename(IDirectoryInfo directoryInfo, string originalName, string newName)
         {
             var folders = directoryInfo.EnumerateDirectories("*.*", SearchOption.AllDirectories);
             foreach (var folder in folders)

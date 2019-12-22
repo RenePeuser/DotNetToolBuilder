@@ -1,28 +1,27 @@
 ﻿using System.IO;
 using DotNetTool.Builder.Extensions;
-using Trumpf.Hmi.Extensions;
-using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
-using Trumpf.Hmi.FileSystemAbstraction.Services;
+using DotNetTool.Builder.FileSystemAbstraction;
+using DotNetTool.Builder.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder.Services
 {
     public class CopyDirectoryService : ICopyDirectoryService
     {
-        private readonly TiDirectoryService _directoryService;
-        private readonly TiFileService _fileService;
+        private readonly IDirectoryService _directoryService;
+        private readonly IFileService _fileService;
 
-        public CopyDirectoryService(TiDirectoryService directoryService, TiFileService fileService)
+        public CopyDirectoryService(IDirectoryService directoryService, IFileService fileService)
         {
             _directoryService = directoryService;
             _fileService = fileService;
         }
 
-        public void CopyDirectory(TiDirectoryInfo sourceDirectory, TiDirectoryInfo targetDirectory)
+        public void CopyDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory)
         {
             CopyDirectory(sourceDirectory, targetDirectory, true);
         }
 
-        public void CopyDirectory(TiDirectoryInfo sourceDirectory, TiDirectoryInfo targetDirectory, bool copySubDirs)
+        public void CopyDirectory(IDirectoryInfo sourceDirectory, IDirectoryInfo targetDirectory, bool copySubDirs)
         {
             if (sourceDirectory.NotExists())
                 throw new DirectoryNotFoundException(

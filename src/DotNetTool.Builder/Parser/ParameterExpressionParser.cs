@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
-using Trumpf.Hmi.Extensions;
 
 namespace DotNetTool.Builder.Parser
 {

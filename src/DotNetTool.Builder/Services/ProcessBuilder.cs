@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Trumpf.Hmi.ArgumentChecking;
+using DotNetTool.Builder.ArgumentChecking;
 
 namespace DotNetTool.Builder.Services
 {

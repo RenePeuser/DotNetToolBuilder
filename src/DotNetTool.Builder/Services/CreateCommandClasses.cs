@@ -5,10 +5,9 @@ using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.FileSystemAbstraction;
+using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.Models;
-using Trumpf.Hmi.Extensions;
-using Trumpf.Hmi.FileSystemAbstraction.FileSystem;
-using Trumpf.Hmi.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder.Services
 {
@@ -22,8 +21,8 @@ namespace DotNetTool.Builder.Services
         private readonly ICommandBuilderWithArgumentAndOption _commandBuilderWithArgumentAndOption;
         private readonly ICommandInterfaceBuilder _commandInterfaceBuilder;
         private readonly ICommandServiceBuilder _commandServiceBuilder;
-        private readonly TiDirectoryService _directoryService;
-        private readonly TiFileService _fileService;
+        private readonly IDirectoryService _directoryService;
+        private readonly IFileService _fileService;
         private readonly IOptionImplementationBuilder _optionImplementationBuilder;
         private readonly IOptionInterfaceBuilder _optionInterfaceBuilder;
         private readonly IParameterClassBuilder _parameterClassBuilder;
@@ -36,8 +35,8 @@ namespace DotNetTool.Builder.Services
             ICommandBuilderSimple commandBuilderSimple,
             ICommandBuilderWithArgument commandBuilderWithArgument,
             ICommandBuilderWithArgumentAndOption commandBuilderWithArgumentAndOption,
-            TiDirectoryService directoryService,
-            TiFileService fileService,
+            IDirectoryService directoryService,
+            IFileService fileService,
             IArgumentBuilder argumentBuilder,
             IOptionImplementationBuilder optionImplementationBuilder,
             IParameterClassBuilder parameterClassBuilder,
@@ -60,7 +59,7 @@ namespace DotNetTool.Builder.Services
             _commandInterfaceBuilder = commandInterfaceBuilder;
         }
 
-        public void Invoke(string projectName, ParameterInfo parameter, TiDirectoryInfo rootDirectory,
+        public void Invoke(string projectName, ParameterInfo parameter, IDirectoryInfo rootDirectory,
             ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector)
         {
             var subCommands = parameter.SubCommands;
