@@ -1,4 +1,6 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using DotNetTool.Builder.Extensions;
+
+namespace DotNetTool.Builder.Models
 {
     public class DotNetTool
     {
@@ -6,7 +8,7 @@
         {
             ProjectName = projectName;
             ToolName = toolName;
-            NormalizedToolName = NormalizedToolName;
+            NormalizedToolName = toolName.FirstCharToUpper();
             ParameterInfo = parameterInfo;
         }
 

@@ -23,7 +23,7 @@ namespace DotNetTool.Builder.Builder.Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<TiFileService, TcFileService>();
             services.AddSingleton<IErrorHandler, ErrorHandler>();
             services.AddSingleton<I$root-command$CommandBuilder, $root-command$CommandBuilder>();
             
