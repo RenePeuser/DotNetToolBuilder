@@ -1,8 +1,8 @@
-﻿namespace Trumpf.Hmi.Uif
+namespace rps.template
 {
     using System.CommandLine;
 
-    public interface IUifCommandBuilder
+    public interface IRpsCommandBuilder
     {
         RootCommand Build();
     }

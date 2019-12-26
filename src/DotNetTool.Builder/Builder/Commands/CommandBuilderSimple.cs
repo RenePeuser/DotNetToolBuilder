@@ -7,8 +7,7 @@ namespace DotNetTool.Builder.Builder.Commands
         private const string Template =
             @"namespace $namespace$
 {                
-    using System.Collections.Generic;
-    using Trumpf.Hmi.Extensions;
+    using System.Collections.Generic;    
     using System.CommandLine;
     using System.CommandLine.Invocation;    
 
@@ -23,7 +22,7 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public Command Build()
         {
-            var command = new Command(""$command-argument-name$"" ""$command-description$"".AsDescription());            
+            var command = new Command(""$command-argument-name$"" ""$command-description$"");            
             command.Handler = $command-handler$;
             return command;
         }

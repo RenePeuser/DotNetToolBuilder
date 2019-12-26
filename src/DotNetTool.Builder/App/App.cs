@@ -51,11 +51,11 @@ namespace DotNetTool.Builder.App
             copyDirectoryService.CopyDirectory(sourceDirectory, targetDirectory);
 
             // Solution and projects
-            renameFilesAndFolders.Rename(targetDirectory, "Trumpf.Hmi.Uif", dotNetTool.ProjectName);
+            renameFilesAndFolders.Rename(targetDirectory, "rps.template", dotNetTool.ProjectName);
 
             // DotNetTool name
-            renameFilesAndFolders.Rename(targetDirectory, "Uif", dotNetTool.NormalizedToolName);
-            renameFilesAndFolders.Rename(targetDirectory, "uif", dotNetTool.ToolName);
+            renameFilesAndFolders.Rename(targetDirectory, "Rps", dotNetTool.NormalizedToolName);
+            renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.ToolName);
 
             // detect folder of root command
             var rootDirectory = targetDirectory.EnumerateDirectories(dotNetTool.ToolName, SearchOption.AllDirectories)
@@ -87,7 +87,7 @@ namespace DotNetTool.Builder.App
                 return -1;
             }
 
-            consoleService.WriteSuccess(dotnetBuildResult.Output.AsSuccessfull());
+            consoleService.WriteSuccess(dotnetBuildResult.Output);
 
             var findExe = solutionFile.Directory
                 .EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories)

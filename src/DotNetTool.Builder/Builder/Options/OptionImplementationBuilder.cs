@@ -11,8 +11,7 @@ namespace DotNetTool.Builder.Builder.Options
             @"namespace $namespace$
 {
     using System.Collections.Generic;
-    using System.CommandLine;
-    using $project-name$.Rendering;
+    using System.CommandLine; 
 
     public class $command-name$OptionsBuilder : I$command-name$OptionsBuilder
     {

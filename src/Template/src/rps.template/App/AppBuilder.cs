@@ -1,4 +1,4 @@
-﻿namespace Trumpf.Hmi.Uif
+namespace rps.template
 {
     using System.IO;
     using Microsoft.Extensions.Configuration;

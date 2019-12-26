@@ -1,7 +1,6 @@
-﻿using System;
-using DotNetTool.Builder.Extensions;
+using System;
 
-namespace DotNetTool.Builder.Services
+namespace rps.template.Services
 {
     public class ConsoleService : IConsoleService
     {
@@ -37,8 +36,7 @@ namespace DotNetTool.Builder.Services
         public void WriteSample(string value)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine(value);
-            Console.WriteLine();
+            WriteLine(value);
             Console.ForegroundColor = ConsoleColor.White;
         }
 

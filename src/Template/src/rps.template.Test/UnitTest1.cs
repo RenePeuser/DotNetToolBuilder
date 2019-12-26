@@ -1,4 +1,4 @@
-namespace Trumpf.Hmi.Uif.Test
+namespace rps.template.Test
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/Trumpf.Hmi.Uif/bin/Debug/netcoreapp3.0/uif.dll",
+            "program": "${workspaceFolder}/src/rps.template/bin/Debug/netcoreapp3.0/rps.dll",
             "args": [
                 "--help"
             ],

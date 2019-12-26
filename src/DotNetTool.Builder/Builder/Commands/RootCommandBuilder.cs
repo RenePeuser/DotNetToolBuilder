@@ -5,12 +5,11 @@ namespace DotNetTool.Builder.Builder.Commands
     internal class RootCommandBuilder : IRootCommandBuilder
     {
         private const string Template =
-            @"namespace $namespace$
+@"namespace $namespace$
 {
-    using System.Collections.Generic;
-    using Trumpf.Hmi.Extensions;
+    using System.Linq;
+    using System.Collections.Generic;    
     using System.CommandLine;    
-    using $project-name$.Rendering;
 
     public class $command-name$CommandBuilder : I$command-name$CommandBuilder
     {
@@ -23,8 +22,8 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public Command Build()
         {
-            var $command-argument-name$Command = new Command(""$command-argument-name$"", ""$command-description$"".AsDescription());
-            _$command-argument-name$SubCommandBuilders.ForEach(builder => $command-argument-name$Command.AddCommand(builder.Build()));            
+            var $command-argument-name$Command = new Command(""$command-argument-name$"", ""$command-description$"");
+            _$command-argument-name$SubCommandBuilders.ToList().ForEach(builder => $command-argument-name$Command.AddCommand(builder.Build()));            
             return $command-argument-name$Command;
         }
     }

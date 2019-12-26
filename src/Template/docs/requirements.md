@@ -12,7 +12,7 @@
 
 * Anzeigen von installierten Paketen
 
-        > uif list dependencies ./my.tcix
+        > rps list dependencies ./my.tcix
 
         Listing dependencies for 'my.tcix':
 
@@ -23,7 +23,7 @@
 
 * Anzeigen von veralteten Paketen
 
-        > uif list dependencies --outdated ./my.tcix
+        > rps list dependencies --outdated ./my.tcix
 
         Listing outdated dependencies for 'my.tcix':
 
@@ -33,7 +33,7 @@
 
 * Updaten von Paketen (Möglichkeit für FBHs auch Patch-Versionen hochzuziehen)
 
-        > uif update dependencies [--minor] [--patch] ./my.tcix
+        > rps update dependencies [--minor] [--patch] ./my.tcix
         
         Updated the following dependencies for 'my.tcix':
 
@@ -43,13 +43,13 @@
 
 * Im Idealfall ist hier auch der Packer enthalten
 
-        > uif pack ./my.tcix
+        > rps pack ./my.tcix
 
         ...
 
 * Upload von tciz files zu SCAPS?
 
-        > uif push --component my_component ./my.tciz 
+        > rps push --component my_component ./my.tciz 
 
         ...
 

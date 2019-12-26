@@ -1,4 +1,4 @@
-﻿namespace DotNetTool.Builder.Services
+namespace rps.template.Services
 {
     public interface IConsoleService
     {

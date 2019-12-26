@@ -1,4 +1,4 @@
-﻿namespace Trumpf.Hmi.Uif
+namespace rps.template
 {
     using System;
     using System.CommandLine;
@@ -7,8 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
-    using Trumpf.Hmi.Extensions;
-    using Trumpf.Hmi.Uif.ErrorHandling;
+    using rps.template.ErrorHandling;
 
     public class App
     {
@@ -21,7 +20,7 @@
 
         public Task<int> RunAsync(string[] args)
         {
-            var rootCommand = ServiceProvider.GetService<IUifCommandBuilder>().Build();
+            var rootCommand = ServiceProvider.GetService<IRpsCommandBuilder>().Build();
             var errorHandler = ServiceProvider.GetService<IErrorHandler>();
 
             var commandLineBuilder = new CommandLineBuilder(rootCommand);
@@ -31,7 +30,8 @@
 
             var parser = commandLineBuilder.Build();
 
-            parser.Configuration.RootCommand.Options.Single(o => o.Name == "version").As<Option>().AddAlias("-v");
+            var option = parser.Configuration.RootCommand.Options.Single(o => o.Name == "version") as Option;
+            option.AddAlias("-v");
 
             return parser.InvokeAsync(args);
         }

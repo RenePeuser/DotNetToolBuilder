@@ -5,13 +5,12 @@ namespace DotNetTool.Builder.Builder.Commands
     internal class CommandBuilderWithArgumentAndOption : ICommandBuilderWithArgumentAndOption
     {
         private const string Template =
-            @"namespace $namespace$
+@"namespace $namespace$
 {                
-    using System.Collections.Generic;
-    using Trumpf.Hmi.Extensions;
+    using System.Linq;
+    using System.Collections.Generic;    
     using System.CommandLine;
-    using System.CommandLine.Invocation;  
-    using $project-name$.Rendering;
+    using System.CommandLine.Invocation;    
 
     public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
@@ -28,8 +27,8 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public Command Build()
         {
-            var command = new Command(""$command-argument-name$"", ""$command-description$"".AsDescription());
-            _optionsBuilder.Build().ForEach(option => command.AddOption(option));
+            var command = new Command(""$command-argument-name$"", ""$command-description$"");
+            _optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
             command.AddArgument(_argumentBuilder.Build());
             command.Handler = $command-handler$;
             return command;

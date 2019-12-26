@@ -1,13 +1,20 @@
-﻿namespace Trumpf.Hmi.Uif.ErrorHandling
+using rps.template.Services;
+
+namespace rps.template.ErrorHandling
 {
     using System;
     using System.CommandLine.Invocation;
     using System.Threading.Tasks;
-    using Trumpf.Hmi.Extensions;
-    using Trumpf.Hmi.Uif.Rendering;
 
     public class ErrorHandler : IErrorHandler
     {
+        private readonly IConsoleService _consoleService;
+
+        public ErrorHandler(IConsoleService consoleService)
+        {
+            _consoleService = consoleService;
+        }
+
         public async Task HandleErrors(InvocationContext context, Func<InvocationContext, Task> next)
         {
             try
@@ -18,15 +25,15 @@
             {
                 var ex = FindMostSuitableException(e);
 
-                if (ex.Is<UifException>())
+                if (ex is RpsException)
                 {
-                    Console.Error.WriteLine(ex.Message.AsError());
+                    _consoleService.WriteError(ex.Message);
                 }
                 else
                 {
-                    Console.Error.WriteLine("An unhandled Error occurred:".AsError());
-                    Console.Error.WriteLine();
-                    Console.Error.WriteLine(ex.ToString().AsError());
+                    _consoleService.WriteError("An unhandled Error occurred:");
+                    _consoleService.WriteLine();
+                    _consoleService.WriteError(ex.ToString());
                 }
 
                 context.ResultCode = 1;
@@ -35,7 +42,7 @@
 
         private static Exception FindMostSuitableException(Exception exception)
         {
-            if (exception.Is<UifException>())
+            if (exception is RpsException)
             {
                 return exception;
             }

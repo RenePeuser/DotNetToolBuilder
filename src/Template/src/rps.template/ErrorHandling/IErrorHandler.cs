@@ -1,4 +1,4 @@
-﻿namespace Trumpf.Hmi.Uif.ErrorHandling
+namespace rps.template.ErrorHandling
 {
     using System;
     using System.CommandLine.Invocation;

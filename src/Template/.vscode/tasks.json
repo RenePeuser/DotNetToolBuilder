@@ -25,7 +25,7 @@
             "type": "process",
             "args": [
                 "pack",
-                "${workspaceFolder}/src/Trumpf.Hmi.Uif/",
+                "${workspaceFolder}/src/rps.template/",
                 "-o",
                 "nupkg"
             ],
@@ -60,7 +60,7 @@
                 "tool",
                 "uninstall",
                 "-g",
-                "Trumpf.Hmi.Uif"
+                "rps.template"
             ],
             "problemMatcher": []
         },

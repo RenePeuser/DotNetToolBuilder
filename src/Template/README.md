@@ -5,19 +5,13 @@
 Make sure you have .NET Core SDK 3.0 or higher installed on your machine. Then run
 
 ```bash
-dotnet tool install -g Trumpf.Hmi.Uif
-```
-
-*Note: You need a `NuGet.Config` pointing to the Artifactory. If you don't have one, try the following:*
-
-```bash
-dotnet tool install -g Trumpf.Hmi.Uif --add-source https://srv01af2.corp.trumpf.com/artifactory/api/nuget/nuget-libs-release
+dotnet tool install -g rps.template
 ```
 
 ## Run
 
 ```bash
-uif --help
+rps --help
 ```
 
 and enjoy.

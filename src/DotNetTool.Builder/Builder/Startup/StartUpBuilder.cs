@@ -14,17 +14,17 @@ namespace DotNetTool.Builder.Builder.Startup
         private const string Template =
             @"namespace $projectName$
 {
-    using Microsoft.Extensions.DependencyInjection;
-    using Trumpf.Hmi.FileSystemAbstraction.Services;
+    using Microsoft.Extensions.DependencyInjection;    
+    using $projectName$.Services;
     using $projectName$.ErrorHandling;
     $usings$
 
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSingleton<TiFileService, TcFileService>();
+        {            
             services.AddSingleton<IErrorHandler, ErrorHandler>();
+            services.AddSingleton<IConsoleService, ConsoleService>();
             services.AddSingleton<I$root-command$CommandBuilder, $root-command$CommandBuilder>();
             
             $command-registrations$
