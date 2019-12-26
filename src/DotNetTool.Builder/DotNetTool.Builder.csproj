@@ -5,7 +5,22 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>DotNetTool.Builder</AssemblyName>
     <RootNamespace>DotNetTool.Builder</RootNamespace>
+    <Authors>Rene Peuser</Authors>
+    <Company>Rene Peuser Softwaresolutions</Company>
+    <Description>This dotnet tool helps you create good stuctured cli's which are packed as tool. A wizard takes your cli expressions and generates a complete solution with all base functionality. You have only to implement the concrete logic behind each command.</Description>
+    <Copyright>Copyright 2019 (c) Rene Peuser. All rights reserved.</Copyright>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
+    <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
+    <PackageReleaseNotes>This is a beta version of this DotNetToolBuilder</PackageReleaseNotes>
+    <PackageTags>C#;DotNet;.Net;.NetTool;.NetToolBuilder;DotNetToolBuilder;CLI;Build CLI;Build .NetTool;</PackageTags>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>buildtool</ToolCommandName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\license.txt" Pack="true" PackagePath="license.txt" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Template\**" />
@@ -14,6 +29,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="template.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="template.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Argument.Check" Version="0.9.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
   </ItemGroup>

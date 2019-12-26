@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DotNetTool.Builder.ArgumentChecking;
+using Argument.Check;
+
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 

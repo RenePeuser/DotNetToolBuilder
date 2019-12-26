@@ -1,4 +1,5 @@
-﻿using DotNetTool.Builder.Builder.Argument;
+﻿using DotNetTool.Builder.App;
+using DotNetTool.Builder.Builder.Argument;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
@@ -43,6 +44,8 @@ namespace DotNetTool.Builder
 
         private void RegisterServices(IServiceCollection services)
         {
+            services.AddSingleton<IExtractTemplate, ExtractTemplate>();
+
             services.AddSingleton<IConsoleService, ConsoleService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<IDirectoryService, DirectoryService>();

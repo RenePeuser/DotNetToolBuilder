@@ -2,10 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Argument.Check;
 using DotNetTool.Builder.Builder.Startup;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
+using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +29,7 @@ namespace DotNetTool.Builder.App
 
         private async Task<int> RunInternalAsync()
         {
+
             var consoleService = ServiceProvider.GetService<IConsoleService>();
             var dotNetToolCollector = ServiceProvider.GetService<IDotNetToolInfoCollector>();
             var directoryService = ServiceProvider.GetService<IDirectoryService>();
@@ -42,13 +45,12 @@ namespace DotNetTool.Builder.App
 
             var dotNetTool = dotNetToolCollector.Collect();
 
-            var sourceDirectory = directoryService.GetDirectoryInfo(@"D:\AzureDevOps\DotNetToolBuilder\src\Template");
-            var targetDirectory = directoryService.GetDirectoryInfo(@"D:\AzureDevOps\DotNetToolBuilder\src\New");
+            var targetDirectory = directoryService.GetDirectoryInfo(Path.Combine(directoryService.GetCurrentDirectory().FullName, dotNetTool.ProjectName));
+            Throw.If(() => targetDirectory, dir => dir.Exists, $"The directory: {targetDirectory.FullName} already exists.");
 
-            targetDirectory.Exists.IfTrueThen(() => targetDirectory.Delete(true));
+            targetDirectory.Create();
+            new ExtractTemplate().ExtractTo(targetDirectory);
 
-            // Copy template structure
-            copyDirectoryService.CopyDirectory(sourceDirectory, targetDirectory);
 
             // Solution and projects
             renameFilesAndFolders.Rename(targetDirectory, "rps.template", dotNetTool.ProjectName);

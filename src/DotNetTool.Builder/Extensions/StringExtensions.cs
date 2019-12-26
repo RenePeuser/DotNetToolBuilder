@@ -5,7 +5,8 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
-using DotNetTool.Builder.ArgumentChecking;
+using Argument.Check;
+
 
 namespace DotNetTool.Builder.Extensions
 {

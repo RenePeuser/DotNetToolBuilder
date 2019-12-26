@@ -4,7 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using DotNetTool.Builder.ArgumentChecking;
+using Argument.Check;
+
 
 namespace DotNetTool.Builder.Extensions
 {

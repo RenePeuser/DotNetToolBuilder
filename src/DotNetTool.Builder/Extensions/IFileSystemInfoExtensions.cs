@@ -1,4 +1,5 @@
-using DotNetTool.Builder.ArgumentChecking;
+using Argument.Check;
+
 using DotNetTool.Builder.FileSystemAbstraction;
 
 namespace DotNetTool.Builder.Extensions

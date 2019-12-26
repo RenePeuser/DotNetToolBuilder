@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
-using DotNetTool.Builder.ArgumentChecking;
+using Argument.Check;
+
 
 namespace DotNetTool.Builder.Extensions
 {

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using DotNetTool.Builder.ArgumentChecking;
+using Argument.Check;
+
 
 namespace DotNetTool.Builder.FileSystemAbstraction
 {

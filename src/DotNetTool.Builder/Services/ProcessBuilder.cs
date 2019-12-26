@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
-using DotNetTool.Builder.ArgumentChecking;
+using Argument.Check;
+
 
 namespace DotNetTool.Builder.Services
 {
