@@ -17,6 +17,9 @@ dotnet tool install DotNetTool.Builder
 
 ## How to use it
 
-The command for the builder is not defined right now.
+Install the tool local
+```bash
+buildtool
+```
 
 ![](./assets/dotnet-tool-builder.gif)
