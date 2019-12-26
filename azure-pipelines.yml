@@ -13,8 +13,27 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration) ./src/DotNetTool.Builder.sln
+
+- task: GitVersion@5
+  displayName: git version
+  inputs:
+    runtime: 'core'
+    updateAssemblyInfo: true
+
+- script: dotnet build --configuration $(buildConfiguration) ./src/DotNetTool.Builder.sln  /p:Version='$(GitVersion.NuGetVersion)'
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test --configuration $(buildConfiguration) ./src/DotNetTool.Builder.sln
-  displayName: 'dotnet test $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: 'test'
+    projects: './src/DotNetTool.Builder.sln'
+    arguments: '--configuration $(buildConfiguration)'
+
+- script: dotnet pack ./src/DotNetTool.Builder/DotNetTool.Builder.csproj --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration) /p:Version='$(GitVersion.NuGetVersion)'
+  displayName: 'dotnet pack $(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifacts'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
