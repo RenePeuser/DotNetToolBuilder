@@ -38,6 +38,7 @@ namespace DotNetTool.Builder.App
             var createCommandClasses = ServiceProvider.GetService<ICreateCommandClasses>();
             var processService = ServiceProvider.GetService<IProcessService>();
             var startUpBuilder = ServiceProvider.GetService<IStartUpBuilder>();
+            var extractTemplate = ServiceProvider.GetService<IExtractTemplate>();
 
 
             var dotNetTool = dotNetToolCollector.Collect();
@@ -46,7 +47,7 @@ namespace DotNetTool.Builder.App
             Throw.If(() => targetDirectory, dir => dir.Exists, $"The directory: {targetDirectory.FullName} already exists.");
 
             targetDirectory.Create();
-            new ExtractTemplate().ExtractTo(targetDirectory);
+            extractTemplate.ExtractTo(targetDirectory);
 
 
             // Solution and projects

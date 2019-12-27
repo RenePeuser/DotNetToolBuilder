@@ -1,18 +1,27 @@
-﻿using System.IO.Compression;
-using System.Linq;
+﻿using System.IO;
+using System.IO.Compression;
 using DotNetTool.Builder.FileSystemAbstraction;
+using DotNetTool.Builder.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder.Services
 {
     public class ExtractTemplate : IExtractTemplate
     {
+        private readonly IDirectoryService _directoryService;
+        private readonly IFileService _fileService;
+
+        public ExtractTemplate(IDirectoryService directoryService, IFileService fileService)
+        {
+            _directoryService = directoryService;
+            _fileService = fileService;
+        }
+
         public void ExtractTo(IDirectoryInfo directoryInfo)
         {
-            var names = this.GetType().Assembly.GetManifestResourceNames();
-            var template = names.First(n => n.Contains("template.zip"));
-            using var stream = this.GetType().Assembly.GetManifestResourceStream(template);
-            using var archive = new ZipArchive(stream, ZipArchiveMode.Read);
-            archive.ExtractToDirectory(directoryInfo.FullName, true);
+            var currentAssemblyLocation = _fileService.GetFileInfo(this.GetType().Assembly.Location);
+            var templateAsZip = _fileService.GetFileInfo(Path.Combine(currentAssemblyLocation.Directory.FullName, "template.zip"));
+            using var zipFile = ZipFile.OpenRead(templateAsZip.FullName);
+            zipFile.ExtractToDirectory(directoryInfo.FullName, true);
         }
     }
 }
