@@ -45,19 +45,14 @@ namespace DotNetTool.Builder
         private void RegisterServices(IServiceCollection services)
         {
             services.AddSingleton<IExtractTemplate, ExtractTemplate>();
-
             services.AddSingleton<IConsoleService, ConsoleService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<IDirectoryService, DirectoryService>();
-
             services.AddSingleton<IParameterService, ParameterService>();
             services.AddSingleton<ICommandTypeCollector, CommandTypeCollector>();
-
             services.AddSingleton<ICreateCommandClasses, CreateCommandClasses>();
-
             services.AddSingleton<IDotNetToolService, DotNetToolService>();
             services.AddSingleton<IDotNetToolSynchronizer, DotNetToolSynchronizer>();
-
             services.AddSingleton<IProcessBuilder, ProcessBuilder>();
             services.AddSingleton<IProcessService, ProcessService>();
             services.AddSingleton<INameSpaceCollector, NameSpaceCollector>();
@@ -113,10 +108,8 @@ namespace DotNetTool.Builder
             services.AddSingleton<IOptionInterfaceBuilder, OptionInterfaceBuilder>();
             services.AddSingleton<IOptionImplementationBuilder, OptionImplementationBuilder>();
             services.AddSingleton<IOptionMethodsBuilder, OptionMethodsBuilder>();
-
             services.AddSingleton<INewOptionExpressionBuilder, NewOptionExpressionBuilderWithArgument>();
             services.AddSingleton<INewOptionExpressionBuilder, NewOptionExpressionBuilderWithoutArgument>();
-
             services.AddSingleton<INewOptionExpressionService, NewOptionExpressionService>();
         }
 

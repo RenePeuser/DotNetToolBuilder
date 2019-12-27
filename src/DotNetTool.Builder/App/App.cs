@@ -88,7 +88,6 @@ namespace DotNetTool.Builder.App
             consoleService.WriteSuccess(runYourCliResult.Output);
             consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
 
-            // Open generated solution
             visualStudioService.Open(solutionFile);
 
             return 0;
