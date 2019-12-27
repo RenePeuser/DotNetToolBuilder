@@ -11,6 +11,7 @@ using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Validation;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder
@@ -20,6 +21,7 @@ namespace DotNetTool.Builder
         public void ConfigureServices(IServiceCollection services)
         {
             RegisterServices(services);
+            RegisterValidation(services);
 
             RegisterArgumentParser(services);
             RegisterOptionsParser(services);
@@ -33,6 +35,12 @@ namespace DotNetTool.Builder
             RegisterParameterClassBuilder(services);
             RegisterCommandBuilders(services);
             RegisterStartUpBuilder(services);
+        }
+
+        private void RegisterValidation(IServiceCollection services)
+        {
+            services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
+            services.AddSingleton<IToolNameValidator, ToolNameValidator>();
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)

@@ -29,7 +29,7 @@ namespace DotNetTool.Builder.App
         {
 
             var consoleService = ServiceProvider.GetService<IConsoleService>();
-            var dotNetToolCollector = ServiceProvider.GetService<IDotNetToolInfoCollector>();
+            var dotNetToolInfoCollector = ServiceProvider.GetService<IDotNetToolInfoCollector>();
             var directoryService = ServiceProvider.GetService<IDirectoryService>();
             var typeCollector = ServiceProvider.GetService<ICommandTypeCollector>();
             var namespaceCollector = ServiceProvider.GetService<INameSpaceCollector>();
@@ -41,7 +41,7 @@ namespace DotNetTool.Builder.App
             var extractTemplate = ServiceProvider.GetService<IExtractTemplate>();
 
 
-            var dotNetTool = dotNetToolCollector.Collect();
+            var dotNetTool = dotNetToolInfoCollector.Collect();
 
             var targetDirectory = directoryService.GetDirectoryInfo(Path.Combine(directoryService.GetCurrentDirectory().FullName, dotNetTool.ProjectName));
             Throw.If(() => targetDirectory, dir => dir.Exists, $"The directory: {targetDirectory.FullName} already exists.");
