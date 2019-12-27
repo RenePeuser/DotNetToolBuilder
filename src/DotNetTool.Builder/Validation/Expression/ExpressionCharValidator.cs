@@ -18,6 +18,7 @@ namespace DotNetTool.Builder.Validation.Expression
             c => c == '<',
             c => c == '>',
             c => c == '-',
+            c => c == '.',
         };
 
         public ValidationResult IsValid(string value)
