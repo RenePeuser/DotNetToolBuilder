@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Services
     {
         Task<CliRunResult> InstallAsync(string toolName, string version);
 
-        Task<DotNetToolInfo?> ExistsAsync(string toolName);
+        Task<DotNetToolInfo> ExistsAsync(string toolName);
 
         Task<CliRunResult> UninstallAsync(string toolName);
     }

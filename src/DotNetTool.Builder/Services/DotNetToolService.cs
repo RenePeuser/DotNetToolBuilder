@@ -25,7 +25,7 @@ namespace DotNetTool.Builder.Services
             return _processService.RunCliCommandAsync("dotnet", $"tool install -g {toolName} --version {version}");
         }
 
-        public async Task<DotNetToolInfo?> ExistsAsync(string toolName)
+        public async Task<DotNetToolInfo> ExistsAsync(string toolName)
         {
             Throw.IfNullOrWhiteSpace(() => toolName);
 

@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Services
             _process = process;
         }
 
-        public event EventHandler? Exited;
+        public event EventHandler Exited;
 
         public bool Start()
         {
@@ -58,7 +58,7 @@ namespace DotNetTool.Builder.Services
             _process.Exited += ProcessExitedEventHandler;
         }
 
-        private void ProcessExitedEventHandler(object? sender, EventArgs e)
+        private void ProcessExitedEventHandler(object sender, EventArgs e)
         {
             Exited?.Invoke(sender, e);
         }
