@@ -2,7 +2,18 @@
 {
     public interface IInputValidator
     {
-        bool IsValid(string value);
-        string GetValidationInfo();
+        ValidationResult IsValid(string value);
+    }
+
+    public class ValidationResult
+    {
+        public ValidationResult(bool isValid, string errors)
+        {
+            IsValid = isValid;
+            Errors = errors;
+        }
+
+        public bool IsValid { get; }
+        public string Errors { get; }
     }
 }

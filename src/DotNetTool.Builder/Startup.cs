@@ -12,6 +12,7 @@ using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Validation;
+using DotNetTool.Builder.Validation.Expression;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder
@@ -41,6 +42,13 @@ namespace DotNetTool.Builder
         {
             services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
             services.AddSingleton<IToolNameValidator, ToolNameValidator>();
+
+            services.AddSingleton<IExpressionValidator, ExpressionValidator>();
+            services.AddSingleton<IExpressionContentValidator, ExpressionCastValidator>();
+            services.AddSingleton<IExpressionContentValidator, ExpressionArgumentValidator>();
+            services.AddSingleton<IExpressionContentValidator, ExpressionOptionValidator>();
+            services.AddSingleton<IExpressionContentValidator, ExpressionCharValidator>();
+
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)

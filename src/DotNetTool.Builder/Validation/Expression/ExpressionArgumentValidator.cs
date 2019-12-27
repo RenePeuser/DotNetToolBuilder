@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using DotNetTool.Builder.Extensions;
 
-namespace DotNetTool.Builder.Validation
+namespace DotNetTool.Builder.Validation.Expression
 {
-    public class ToolNameValidator : IToolNameValidator
+    public class ExpressionArgumentValidator : IExpressionContentValidator
     {
-        private const string ValidationInfo = "Only letters or digits are allowed";
+        private const string ValidationInfo = "Arguments must be open with '<' and closed with '>'";
 
         public ValidationResult IsValid(string value)
         {
@@ -19,7 +19,8 @@ namespace DotNetTool.Builder.Validation
                 return false;
             }
 
-            return value.All(char.IsLetterOrDigit);
+            var count = value.Count(c => c == '<') + value.Count(c => c == '>');
+            return count % 2 == 0;
         }
     }
 }

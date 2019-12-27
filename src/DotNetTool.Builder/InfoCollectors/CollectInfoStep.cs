@@ -21,15 +21,15 @@ namespace DotNetTool.Builder.InfoCollectors
         public virtual string Invoke()
         {
             string input = null;
-            bool isValid = false;
-            while (isValid.IsFalse())
+            ValidationResult validationResult = null;
+            while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
             {
                 _consoleService.WriteInput(Title);
                 input = _consoleService.ReadLine();
-                isValid = _inputValidator.IsValid(input);
-                if (isValid.IsFalse())
+                validationResult = _inputValidator.IsValid(input);
+                if (validationResult.IsValid.IsFalse())
                 {
-                    _consoleService.WriteError(_inputValidator.GetValidationInfo());
+                    _consoleService.WriteError(validationResult.Errors);
                 }
             }
 

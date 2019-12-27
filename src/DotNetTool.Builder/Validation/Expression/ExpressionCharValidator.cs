@@ -1,19 +1,24 @@
-﻿using DotNetTool.Builder.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DotNetTool.Builder.Extensions;
 
-namespace DotNetTool.Builder.Validation
+namespace DotNetTool.Builder.Validation.Expression
 {
-    public class ProjectNameValidator : IProjectNameValidator
+    public class ExpressionCharValidator : IExpressionContentValidator
     {
+        private const string ValidationInfo = "Only letters, digits, '[', ']', '<', '>' and '-'";
+
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[]
         {
             char.IsLetterOrDigit,
-            c => c == '.'
+            char.IsWhiteSpace,
+            c => c == '[',
+            c => c == ']',
+            c => c == '<',
+            c => c == '>',
+            c => c == '-',
         };
-
-        private const string ValidationInfo = "Only letters, digits or '.' are allowed";
 
         public ValidationResult IsValid(string value)
         {

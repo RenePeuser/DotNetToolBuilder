@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using DotNetTool.Builder.Extensions;
 
-namespace DotNetTool.Builder.Validation
+namespace DotNetTool.Builder.Validation.Expression
 {
-    public class ToolNameValidator : IToolNameValidator
+    public class ExpressionOptionValidator : IExpressionContentValidator
     {
-        private const string ValidationInfo = "Only letters or digits are allowed";
+        private const string ValidationInfo = "Options must be declared with '--'";
 
         public ValidationResult IsValid(string value)
         {
@@ -19,7 +19,8 @@ namespace DotNetTool.Builder.Validation
                 return false;
             }
 
-            return value.All(char.IsLetterOrDigit);
+            var split = value.Split(" ");
+            return split.Where(s => s.StartsWith("-")).All(s => s.StartsWith("--"));
         }
     }
 }
