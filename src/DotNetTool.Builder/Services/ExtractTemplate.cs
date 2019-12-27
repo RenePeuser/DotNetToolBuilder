@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Services
         public void ExtractTo(IDirectoryInfo directoryInfo)
         {
             var currentAssemblyLocation = _fileService.GetFileInfo(this.GetType().Assembly.Location);
-            var templateAsZip = _fileService.GetFileInfo(Path.Combine(currentAssemblyLocation.Directory.FullName, "template.zip"));
+            var templateAsZip = _fileService.GetFileInfo(Path.Combine(currentAssemblyLocation.Directory.FullName, "dotnet.tool.builder.template"));
             using var zipFile = ZipFile.OpenRead(templateAsZip.FullName);
             zipFile.ExtractToDirectory(directoryInfo.FullName, true);
         }
