@@ -15,7 +15,7 @@
     <PackageReleaseNotes>First beta version</PackageReleaseNotes>
     <PackageTags>C#;DotNet;.Net;.NetTool;.NetToolBuilder;DotNetToolBuilder;CLI;Build CLI;Build .NetTool;</PackageTags>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>buildtool</ToolCommandName>
+    <ToolCommandName>dotnet-newtool</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>
