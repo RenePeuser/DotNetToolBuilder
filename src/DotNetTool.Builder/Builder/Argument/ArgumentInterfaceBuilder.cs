@@ -10,7 +10,7 @@ namespace DotNetTool.Builder.Builder.Argument
     public class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string Template =
-            @"namespace $namespace$
+@"namespace $namespace$
 {
     using System.CommandLine;
 

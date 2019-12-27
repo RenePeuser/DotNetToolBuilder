@@ -7,8 +7,7 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal class CommandHandlerStringBuilder : ICommandHandlerStringBuilder
     {
-        private const string Template =
-            "CommandHandler.Create<$types$>(($argument-names$) => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
+        private const string Template = "CommandHandler.Create<$types$>(($argument-names$) => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
 
         public string Build(ParameterInfo parameterInfo)
         {

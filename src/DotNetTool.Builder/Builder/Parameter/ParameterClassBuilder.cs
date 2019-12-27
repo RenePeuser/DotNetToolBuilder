@@ -9,7 +9,7 @@ namespace DotNetTool.Builder.Builder.Parameter
     internal class ParameterClassBuilder : IParameterClassBuilder
     {
         private const string Template =
-            @"namespace $namespace$
+@"namespace $namespace$
 {
     public class $command-name$Parameters
     {
@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Builder.Parameter
             $agrument-to-properties$
         }
 
-        $properties$                                                    
+        $properties$
     }
 }";
 
@@ -45,8 +45,7 @@ namespace DotNetTool.Builder.Builder.Parameter
 
         private string BuildPropertyString(IEnumerable<Property> properties)
         {
-            var result = properties.Select(p => $"public {p.Type} {p.Name} {{ get; }}")
-                .Flatten(Environment.NewLine);
+            var result = properties.Select(p => $"public {p.Type} {p.Name} {{ get; }}").Flatten(Environment.NewLine);
             return result;
         }
 

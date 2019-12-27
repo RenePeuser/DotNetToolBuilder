@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Builder.Commands
     internal class CommandBuilderForSubCommands : ICommandBuilderForSubCommands
     {
         private const string Template =
-            @"namespace $namespace$
+@"namespace $namespace$
 {
     using System.Linq;
     using System.Collections.Generic;    

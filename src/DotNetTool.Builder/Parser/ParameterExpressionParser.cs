@@ -37,24 +37,15 @@ namespace DotNetTool.Builder.Parser
 
                 switch (foundParser)
                 {
-                    case IArgumentParser argumentParser:
-                        var alreadyExistingArgument =
-                            _parameterService.FindAlreadyExistingArgument(current, lastParameter);
-                        argument = alreadyExistingArgument.IsNull()
-                            ? argumentParser.Parse(currentWithTypeInfo)
-                            : alreadyExistingArgument;
+                    case IArgumentParser argumentParser: var alreadyExistingArgument = _parameterService.FindAlreadyExistingArgument(current, lastParameter);
+                        argument = alreadyExistingArgument.IsNull() ? argumentParser.Parse(currentWithTypeInfo) : alreadyExistingArgument;
                         break;
-                    case IOptionParser optionParser:
-                        var alreadyExistingOption = _parameterService.FindAlreadyExistingOption(current, lastParameter);
-                        options.Add(alreadyExistingOption.IsNull()
-                            ? optionParser.Parse(currentWithTypeInfo, argument)
-                            : alreadyExistingOption);
+                    case IOptionParser optionParser: var alreadyExistingOption = _parameterService.FindAlreadyExistingOption(current, lastParameter);
+                        options.Add(alreadyExistingOption.IsNull() ? optionParser.Parse(currentWithTypeInfo, argument) : alreadyExistingOption);
                         break;
                     case IParameterParser parameterParser:
                         var commandAlreadyExists = _parameterService.FindAlreadyExistingCommand(current, lastParameter);
-                        parameter = commandAlreadyExists.IsNull()
-                            ? parameterParser.Parse(currentWithTypeInfo, options)
-                            : parameterParser.Parse(current, options, commandAlreadyExists);
+                        parameter = commandAlreadyExists.IsNull() ? parameterParser.Parse(currentWithTypeInfo, options) : parameterParser.Parse(current, options, commandAlreadyExists);
                         options = new List<OptionInfo>();
                         break;
                     default:
