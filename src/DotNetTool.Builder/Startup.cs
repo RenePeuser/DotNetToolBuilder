@@ -52,7 +52,6 @@ namespace DotNetTool.Builder
 
             services.AddSingleton<IParameterService, ParameterService>();
             services.AddSingleton<ICommandTypeCollector, CommandTypeCollector>();
-            services.AddSingleton<ICopyDirectoryService, CopyDirectoryService>();
 
             services.AddSingleton<ICreateCommandClasses, CreateCommandClasses>();
 
