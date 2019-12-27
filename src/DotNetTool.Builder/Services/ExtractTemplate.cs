@@ -7,12 +7,10 @@ namespace DotNetTool.Builder.Services
 {
     public class ExtractTemplate : IExtractTemplate
     {
-        private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
 
-        public ExtractTemplate(IDirectoryService directoryService, IFileService fileService)
+        public ExtractTemplate(IFileService fileService)
         {
-            _directoryService = directoryService;
             _fileService = fileService;
         }
 
