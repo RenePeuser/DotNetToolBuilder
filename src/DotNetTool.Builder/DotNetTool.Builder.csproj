@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="template.zip">
+    <None Update="dotnet.tool.builder.template">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
