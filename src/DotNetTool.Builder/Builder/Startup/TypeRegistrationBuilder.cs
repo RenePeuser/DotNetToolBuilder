@@ -9,7 +9,7 @@ namespace DotNetTool.Builder.Builder.Startup
         {
             foreach (var typeToRegister in registrations)
             {
-                yield return $"services.AddSingleton<{typeToRegister.InterfaceType}, {typeToRegister.ImplementationType}>();";
+                yield return $"            services.AddSingleton<{typeToRegister.InterfaceType}, {typeToRegister.ImplementationType}>();";
             }
         }
     }

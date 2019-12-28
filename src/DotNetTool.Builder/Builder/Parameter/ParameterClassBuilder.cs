@@ -15,10 +15,10 @@ namespace DotNetTool.Builder.Builder.Parameter
     {
         public $command-name$Parameters($ctor-arguments$)
         {
-            $agrument-to-properties$
+$agrument-to-properties$
         }
 
-        $properties$
+$properties$
     }
 }";
 
@@ -45,7 +45,7 @@ namespace DotNetTool.Builder.Builder.Parameter
 
         private string BuildPropertyString(IEnumerable<Property> properties)
         {
-            var result = properties.Select(p => $"public {p.Type} {p.Name} {{ get; }}").Flatten(Environment.NewLine);
+            var result = properties.Select(p => $"        public {p.Type} {p.Name} {{ get; }}").Flatten(Environment.NewLine);
             return result;
         }
 
@@ -61,7 +61,7 @@ namespace DotNetTool.Builder.Builder.Parameter
             foreach (var property in properties)
             {
                 var argument = arguments.Single(a => a.Name.ToLower().EqualsTo(property.Name.ToLower()));
-                yield return $"{property.Name} = {argument.Name};";
+                yield return $"            {property.Name} = {argument.Name};";
             }
         }
 

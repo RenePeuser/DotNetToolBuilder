@@ -11,10 +11,10 @@ namespace DotNetTool.Builder.Builder.Options
     public class OptionMethodsBuilder : IOptionMethodsBuilder
     {
         private const string OptionMethodTemplate =
-            @"private Option Build$option-name$Option()
-{
-    return new $option$;
-}";
+@"        private Option Build$option-name$Option()
+        {
+            return new $option$;
+        }";
 
         private readonly INewOptionExpressionService _newOptionExpressionService;
 
@@ -28,9 +28,7 @@ namespace DotNetTool.Builder.Builder.Options
             foreach (var option in options)
             {
                 var neewOptionStatement = _newOptionExpressionService.Build(option);
-                var newMethod = OptionMethodTemplate.Replace("$option$", neewOptionStatement)
-                    .Replace("$option-name$", option.NormalizedValue);
-
+                var newMethod = OptionMethodTemplate.Replace("$option$", neewOptionStatement).Replace("$option-name$", option.NormalizedValue);
                 var methodName = $"Build{option.NormalizedValue}Option";
                 yield return new MethodInfo(methodName, newMethod);
             }

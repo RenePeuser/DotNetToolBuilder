@@ -17,10 +17,10 @@ namespace DotNetTool.Builder.Builder.Options
     {
         public IEnumerable<Option> Build()
         {   
-            $yield-option$
+$yield-option$
         }
 
-        $build-option-method$                                       
+$build-option-method$                                       
     }
 }";
 
@@ -35,7 +35,7 @@ namespace DotNetTool.Builder.Builder.Options
         {
             var optionsMethods = _optionMethodsBuilder.Build(parameterInfo.Options).ToList();
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
-            var yieldStatements = optionsMethods.Select(m => $"yield return {m.MethodName}();").Flatten(Environment.NewLine);
+            var yieldStatements = optionsMethods.Select(m => $"            yield return {m.MethodName}();").Flatten(Environment.NewLine);
 
             var newTemplate = Template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)

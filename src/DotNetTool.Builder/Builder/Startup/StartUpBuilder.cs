@@ -27,10 +27,10 @@ namespace DotNetTool.Builder.Builder.Startup
             services.AddSingleton<IConsoleService, ConsoleService>();
             services.AddSingleton<I$root-command$CommandBuilder, $root-command$CommandBuilder>();
             
-            $command-registrations$
+$command-registrations$
         }
 
-        $methods$
+$methods$
     }
 }";
 
@@ -47,12 +47,10 @@ namespace DotNetTool.Builder.Builder.Startup
             ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
             INameSpaceCollector nameSpaceCollector)
         {
-            var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories)
-                .FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
-
+            var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
             var methods = GenerateMethods(commandTypeCollector).ToList();
-            var commandRegistrations = methods.Select(m => $"{m.MethodName}(services);").Flatten(Environment.NewLine);
-            var registrationMethods = methods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
+            var commandRegistrations = methods.Select(m => $"            {m.MethodName}(services);").Flatten(Environment.NewLine);
+            var registrationMethods = methods.Select(m => $"        {m.MethodSyntax}").Flatten(Environment.NewLine);
 
             var usings = nameSpaceCollector.GetAll().Select(n => $"using {n};").Flatten(Environment.NewLine);
 

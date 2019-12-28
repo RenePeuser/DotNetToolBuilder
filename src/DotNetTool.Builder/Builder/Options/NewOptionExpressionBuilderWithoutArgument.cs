@@ -7,9 +7,9 @@ namespace DotNetTool.Builder.Builder.Options
     {
         private const string OptionTemplate =
             @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")
-{
-    Required = $required-value$
-}";
+            {
+                Required = $required-value$
+            }";
 
         public string Build(OptionInfo optionInfo)
         {
