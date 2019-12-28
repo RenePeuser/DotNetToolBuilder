@@ -21,7 +21,7 @@ namespace DotNetTool.Builder.Parser.Options
 
         public OptionInfo Parse(string value, ArgumentInfo argument)
         {
-            _consoleService.WriteInput($"Please enter an alias for your option: '{value}'");
+            _consoleService.WriteInput($"Please enter an alias for your option: '{value}' suggestion: '-{value.Split("--")[1].First()}'");
             var alias = _consoleService.ReadLine();
 
             _consoleService.WriteInput($"Is your option required (r) or optional (o): '{value}'");

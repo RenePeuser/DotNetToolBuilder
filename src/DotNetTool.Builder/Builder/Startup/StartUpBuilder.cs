@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Builder.Startup
     using Microsoft.Extensions.DependencyInjection;    
     using $projectName$.Services;
     using $projectName$.ErrorHandling;
-    $usings$
+$usings$
 
     public class Startup
     {
@@ -52,7 +52,7 @@ $methods$
             var commandRegistrations = methods.Select(m => $"            {m.MethodName}(services);").Flatten(Environment.NewLine);
             var registrationMethods = methods.Select(m => $"        {m.MethodSyntax}").Flatten(Environment.NewLine);
 
-            var usings = nameSpaceCollector.GetAll().Select(n => $"using {n};").Flatten(Environment.NewLine);
+            var usings = nameSpaceCollector.GetAll().Select(n => $"    using {n};").Flatten(Environment.NewLine);
 
             var newStartUp = Template.Replace("$projectName$", projectName)
                 .Replace("$command-registrations$", commandRegistrations)

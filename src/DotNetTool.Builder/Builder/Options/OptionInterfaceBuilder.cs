@@ -18,9 +18,10 @@ namespace DotNetTool.Builder.Builder.Options
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            var currentNamespace = $"{nameSpace}.Options";
             var newTemplate = Template.Replace("$projectName$", projectName)
-                .Replace("$namespace$", nameSpace)
-                .Replace("$command-name$", parameterInfo.NormalizedName);
+                                      .Replace("$namespace$", currentNamespace)
+                                      .Replace("$command-name$", parameterInfo.NormalizedName);
 
             return newTemplate;
         }

@@ -33,6 +33,7 @@ $build-option-method$
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            var currentNamespace = $"{nameSpace}.Options";
             var optionsMethods = _optionMethodsBuilder.Build(parameterInfo.Options).ToList();
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);
             var yieldStatements = optionsMethods.Select(m => $"            yield return {m.MethodName}();").Flatten(Environment.NewLine);
@@ -40,7 +41,7 @@ $build-option-method$
             var newTemplate = Template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$yield-option$", yieldStatements)
-                .Replace("$namespace$", nameSpace)
+                .Replace("$namespace$", currentNamespace)
                 .Replace("$build-option-method$", optionsMethodAsString);
 
             return newTemplate;

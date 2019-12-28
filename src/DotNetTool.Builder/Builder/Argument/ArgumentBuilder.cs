@@ -26,10 +26,11 @@ namespace DotNetTool.Builder.Builder.Argument
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            var currentNamespace = $"{nameSpace}.Arguments";
             var newTemplate = Template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$argument-name$", parameterInfo.ArgumentInfo.Name)
-                .Replace("$namespace$", nameSpace)
+                .Replace("$namespace$", currentNamespace)
                 .Replace("$type$", parameterInfo.ArgumentInfo.Type)
                 .Replace("$argument-description$", parameterInfo.ArgumentInfo.Description);
 

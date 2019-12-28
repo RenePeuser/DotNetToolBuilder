@@ -143,7 +143,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<ICommandBuilderWithArgumentAndOption, CommandBuilderWithArgumentAndOption>();
             services.AddSingleton<ICommandBuilderWithOptions, CommandBuilderWithOptions>();
             services.AddSingleton<ICommandHandlerStringBuilder, CommandHandlerStringBuilder>();
-            services.AddSingleton<ICommandInterfaceBuilder, CommandInterfaceBuilder>();
+            services.AddSingleton<ICommandServiceInterfaceBuilder, CommandServiceInterfaceBuilder>();
             services.AddSingleton<IRootCommandBuilder, RootCommandBuilder>();
             services.AddSingleton<IRootCommandInterfaceBuilder, RootCommandInterfaceBuilder>();
             services.AddSingleton<ISubCommandInterfaceBuilder, SubCommandInterfaceBuilder>();

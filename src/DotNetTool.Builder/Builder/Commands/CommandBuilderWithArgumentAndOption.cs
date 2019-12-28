@@ -10,7 +10,10 @@ namespace DotNetTool.Builder.Builder.Commands
     using System.Linq;
     using System.Collections.Generic;    
     using System.CommandLine;
-    using System.CommandLine.Invocation;    
+    using System.CommandLine.Invocation;
+    using $namespace$.Arguments;
+    using $namespace$.Options;
+    using $namespace$.Service;
 
     public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {

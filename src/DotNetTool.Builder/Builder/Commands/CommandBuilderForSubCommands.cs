@@ -9,7 +9,8 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     using System.Linq;
     using System.Collections.Generic;    
-    using System.CommandLine;    
+    using System.CommandLine;
+    $usings$
 
     public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
@@ -39,7 +40,6 @@ namespace DotNetTool.Builder.Builder.Commands
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
-
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
                                       .Replace("$command-argument-name$", parameterInfo.Name)
                                       .Replace("$namespace$", nameSpace)

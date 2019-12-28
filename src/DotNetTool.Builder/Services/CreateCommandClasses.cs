@@ -19,7 +19,7 @@ namespace DotNetTool.Builder.Services
         private readonly ICommandBuilderSimple _commandBuilderSimple;
         private readonly ICommandBuilderWithArgument _commandBuilderWithArgument;
         private readonly ICommandBuilderWithArgumentAndOption _commandBuilderWithArgumentAndOption;
-        private readonly ICommandInterfaceBuilder _commandInterfaceBuilder;
+        private readonly ICommandServiceInterfaceBuilder _commandServiceInterfaceBuilder;
         private readonly ICommandServiceBuilder _commandServiceBuilder;
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
@@ -41,7 +41,7 @@ namespace DotNetTool.Builder.Services
             IOptionImplementationBuilder optionImplementationBuilder,
             IParameterClassBuilder parameterClassBuilder,
             ICommandServiceBuilder commandServiceBuilder,
-            ICommandInterfaceBuilder commandInterfaceBuilder)
+            ICommandServiceInterfaceBuilder commandServiceInterfaceBuilder)
         {
             _argumentInterfaceBuilder = argumentInterfaceBuilder;
             _optionInterfaceBuilder = optionInterfaceBuilder;
@@ -56,7 +56,7 @@ namespace DotNetTool.Builder.Services
             _optionImplementationBuilder = optionImplementationBuilder;
             _parameterClassBuilder = parameterClassBuilder;
             _commandServiceBuilder = commandServiceBuilder;
-            _commandInterfaceBuilder = commandInterfaceBuilder;
+            _commandServiceInterfaceBuilder = commandServiceInterfaceBuilder;
         }
 
         public void Invoke(string projectName, ParameterInfo parameter, IDirectoryInfo rootDirectory,
@@ -91,6 +91,8 @@ namespace DotNetTool.Builder.Services
                     File.WriteAllText(argumentImplementationFilePath.FullName, argumentImplementationSyntaxTree);
 
                     commandTypeCollector.Add(parameter, new TypeToRegister(argumentInterfaceFilePath.FileNameWithoutExtension(), argumentImplementationFilePath.FileNameWithoutExtension()));
+
+                    namespaceCollector.Add($"{currentPath}.Arguments");
                 }
 
                 if (subCommand.Options.Any())
@@ -107,6 +109,8 @@ namespace DotNetTool.Builder.Services
                     File.WriteAllText(optionsImplementationFilePath.FullName, optionsImplementationSyntaxTree);
 
                     commandTypeCollector.Add(parameter, new TypeToRegister(optionsInterfaceFilePath.FileNameWithoutExtension(), optionsImplementationFilePath.FileNameWithoutExtension()));
+
+                    namespaceCollector.Add($"{currentPath}.Options");
                 }
 
                 if (subCommand.Options.Any() || subCommand.ArgumentInfo.IsNotNull())
@@ -114,6 +118,8 @@ namespace DotNetTool.Builder.Services
                     var parameterModelClass = _parameterClassBuilder.Build(projectName, subCommand, currentPath);
                     var fileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
                     fileInfo.WriteAllText(parameterModelClass);
+
+                    namespaceCollector.Add($"{currentPath}.Service");
                 }
 
                 if (subCommand.SubCommands.IsNotNull() && subCommand.SubCommands.Any())
@@ -154,7 +160,7 @@ namespace DotNetTool.Builder.Services
                     var commandService = _fileService.GetFileInfo(Path.Combine(serviceFolder.FullName,$"{subCommand.NormalizedName}Service.cs"));
                     commandService.WriteAllText(commandServiceResult);
 
-                    var serviceInterface = _commandInterfaceBuilder.Build(projectName, subCommand, currentPath);
+                    var serviceInterface = _commandServiceInterfaceBuilder.Build(projectName, subCommand, currentPath);
                     var commandServiceInterface = _fileService.GetFileInfo(Path.Combine(serviceFolder.FullName, $"I{subCommand.NormalizedName}Service.cs"));
                     commandServiceInterface.WriteAllText(serviceInterface);
 

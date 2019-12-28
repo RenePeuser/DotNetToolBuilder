@@ -83,7 +83,7 @@ namespace DotNetTool.Builder.App
 
             var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
             consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
-
+            consoleService.WriteInfo($"{findExe.Name} --help");
             var runYourCliResult = await processService.RunCliCommandAsync($"{findExe.FullName}", "--help");
             consoleService.WriteSuccess(runYourCliResult.Output);
             consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
