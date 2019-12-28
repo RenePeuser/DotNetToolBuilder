@@ -19,7 +19,7 @@ namespace DotNetTool.Builder.Services
             _expressionValidator = expressionValidator;
         }
 
-        public ParameterInfo Collect()
+        public ParameterInfo CollectFor(string dotNetToolName)
         {
             ParameterInfo parameter = null;
 
@@ -34,7 +34,7 @@ namespace DotNetTool.Builder.Services
                     _consoleService.WriteSample("Sample: 'dotnet tool install --global <package>  [--version not needed is a default command]')");
 
                     parameterExpression = _consoleService.ReadLine();
-                    validationResult = _expressionValidator.IsValid(parameterExpression);
+                    validationResult = _expressionValidator.IsValid(dotNetToolName, parameterExpression);
                     if (validationResult.IsValid.IsFalse())
                     {
                         _consoleService.WriteError(validationResult.Errors);

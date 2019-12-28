@@ -7,9 +7,9 @@ namespace DotNetTool.Builder.Validation.Expression
     {
         private const string ValidationInfo = "Options must be declared with '--'";
 
-        public ValidationResult IsValid(string value)
+        public ValidationResult IsValid(string dotNetToolName, string expression)
         {
-            return new ValidationResult(IsValidInternal(value), ValidationInfo);
+            return new ValidationResult(IsValidInternal(expression), ValidationInfo);
         }
 
         private static bool IsValidInternal(string value)

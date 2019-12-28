@@ -14,14 +14,14 @@ namespace DotNetTool.Builder.Validation.Expression
             _expressionContentValidators = expressionContentValidators;
         }
 
-        public ValidationResult IsValid(string value)
+        public ValidationResult IsValid(string dotNetToolName, string expression)
         {
-            if (value.IsNullOrWhiteSpace())
+            if (expression.IsNullOrWhiteSpace())
             {
                 return new ValidationResult(false, "Input must not be 'null', 'empty' or 'whitespace");
             }
 
-            var results = _expressionContentValidators.Select(validator => validator.IsValid(value));
+            var results = _expressionContentValidators.Select(validator => validator.IsValid(dotNetToolName, expression));
             if (results.All(r => r.IsValid))
             {
                 return new ValidationResult(true, null);

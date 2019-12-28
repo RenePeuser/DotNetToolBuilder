@@ -48,6 +48,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, ExpressionArgumentValidator>();
             services.AddSingleton<IExpressionContentValidator, ExpressionOptionValidator>();
             services.AddSingleton<IExpressionContentValidator, ExpressionCharValidator>();
+            services.AddSingleton<IExpressionContentValidator, ExpressionToolNameValidator>();
 
         }
 

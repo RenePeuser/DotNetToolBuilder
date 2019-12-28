@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Services
 {
     public interface IParameterExpressionCollector
     {
-        ParameterInfo Collect();
+        ParameterInfo CollectFor(string dotnetToolName);
     }
 }

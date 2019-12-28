@@ -1,6 +1,7 @@
 ﻿namespace DotNetTool.Builder.Validation.Expression
 {
-    public interface IExpressionValidator : IInputValidator
+    public interface IExpressionValidator
     {
+        ValidationResult IsValid(string dotNetToolName, string expression);
     }
 }

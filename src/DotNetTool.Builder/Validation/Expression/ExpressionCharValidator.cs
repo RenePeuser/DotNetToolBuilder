@@ -21,9 +21,9 @@ namespace DotNetTool.Builder.Validation.Expression
             c => c == '.',
         };
 
-        public ValidationResult IsValid(string value)
+        public ValidationResult IsValid(string dotNetToolName, string expression)
         {
-            return new ValidationResult(IsValidInternal(value), ValidationInfo);
+            return new ValidationResult(IsValidInternal(expression), ValidationInfo);
         }
 
         private bool IsValidInternal(string value)
