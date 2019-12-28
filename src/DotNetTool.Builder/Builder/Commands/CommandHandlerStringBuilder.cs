@@ -16,9 +16,9 @@ namespace DotNetTool.Builder.Builder.Commands
             var argNames = arguments.Select(arg => arg.Name).Flatten(", ");
 
             var newTemplate = Template.Replace("$types$", types)
-                .Replace("$command-name$", parameterInfo.NormalizedName)
-                .Replace("$command-argument-name$", parameterInfo.Name)
-                .Replace("$argument-names$", argNames);
+                                      .Replace("$command-name$", parameterInfo.NormalizedName)
+                                      .Replace("$command-argument-name$", parameterInfo.Name)
+                                      .Replace("$argument-names$", argNames);
             return newTemplate;
         }
 
@@ -32,7 +32,14 @@ namespace DotNetTool.Builder.Builder.Commands
 
             foreach (var optionInfo in parameterInfo.Options)
             {
-                yield return new CtorArgument("bool", optionInfo.ArgumentName);
+                if (optionInfo.Argument.IsNotNull())
+                {
+                    yield return new CtorArgument(optionInfo.Argument.Type, optionInfo.ArgumentName);
+                }
+                else
+                {
+                    yield return new CtorArgument("bool", optionInfo.ArgumentName);
+                }
             }
         }
     }

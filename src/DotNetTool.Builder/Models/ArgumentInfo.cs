@@ -1,4 +1,6 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using DotNetTool.Builder.Extensions;
+
+namespace DotNetTool.Builder.Models
 {
     public class ArgumentInfo
     {
@@ -8,6 +10,7 @@
             Description = description;
             Value = value;
             NormalizedName = normalizedName;
+            NormalizedParameterName = normalizedName.FirstCharToLower();
             Type = type;
         }
 
@@ -18,6 +21,8 @@
         public string Value { get; }
 
         public string NormalizedName { get; }
+
+        public string NormalizedParameterName { get; }
 
         public string Type { get; }
     }

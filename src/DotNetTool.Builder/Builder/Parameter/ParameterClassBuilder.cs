@@ -34,11 +34,11 @@ namespace DotNetTool.Builder.Builder.Parameter
             var propertyInitializer = BuildPropertyInitializerString(ctorArguments, properties);
 
             var newTemplate = Template.Replace("$ctor-arguments$", argumentString)
-                .Replace("$agrument-to-properties$", propertyInitializer)
-                .Replace("$properties$", propertyString)
-                .Replace("$projectName$", projectName)
-                .Replace("$namespace$", nameSpace)
-                .Replace("$command-name$", parameterInfo.NormalizedName);
+                                      .Replace("$agrument-to-properties$", propertyInitializer)
+                                      .Replace("$properties$", propertyString)
+                                      .Replace("$projectName$", projectName)
+                                      .Replace("$namespace$", nameSpace)
+                                      .Replace("$command-name$", parameterInfo.NormalizedName);
 
             return newTemplate;
         }
@@ -82,7 +82,14 @@ namespace DotNetTool.Builder.Builder.Parameter
 
             foreach (var optionInfo in parameterInfo.Options)
             {
-                yield return new CtorArgument("bool", optionInfo.ArgumentName);
+                if (optionInfo.Argument.IsNotNull())
+                {
+                    yield return new CtorArgument(optionInfo.Argument.Type, optionInfo.ArgumentName);
+                }
+                else
+                {
+                    yield return new CtorArgument("bool", optionInfo.ArgumentName);
+                }
             }
         }
 

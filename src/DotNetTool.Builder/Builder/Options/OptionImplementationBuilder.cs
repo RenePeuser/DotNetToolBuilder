@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Builder.Options
     public class OptionImplementationBuilder : IOptionImplementationBuilder
     {
         private const string Template =
-            @"namespace $namespace$
+@"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.CommandLine; 

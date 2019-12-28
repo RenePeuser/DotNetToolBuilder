@@ -13,10 +13,10 @@ namespace DotNetTool.Builder.Builder.Options
 
         public string Build(OptionInfo optionInfo)
         {
-            var newTemplate = OptionTemplate.Replace("$option-name$", optionInfo.Name)
-                .Replace("$option-alias$", optionInfo.Alias)
-                .Replace("$option-description$", optionInfo.Description)
-                .Replace("$required-value$", optionInfo.Required.ToString().ToLower());
+            var newTemplate = OptionTemplate.Replace("$option-name$", optionInfo.Value)
+                                            .Replace("$option-alias$", optionInfo.Alias)
+                                            .Replace("$option-description$", optionInfo.Description)
+                                            .Replace("$required-value$", optionInfo.Required.ToString().ToLower());
 
             return newTemplate;
         }

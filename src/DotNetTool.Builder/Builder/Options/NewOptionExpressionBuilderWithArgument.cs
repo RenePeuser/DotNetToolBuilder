@@ -6,19 +6,24 @@ namespace DotNetTool.Builder.Builder.Options
     public class NewOptionExpressionBuilderWithArgument : INewOptionExpressionBuilder
     {
         private const string OptionArgumentTemplate =
-            @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")
+@"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")
 {
     Required = $required-value$,
-    Argument = new Argument(""$option-argument-name$"")
+    Argument = new Argument<$type$>(""$option-argument-name$"")
+    {
+        Description = ""$argument-description$""
+    }
 }";
 
         public string Build(OptionInfo optionInfo)
         {
-            var newTemplate = OptionArgumentTemplate.Replace("$option-name$", optionInfo.Name)
-                .Replace("$option-alias$", optionInfo.Alias)
-                .Replace("$option-argument-name$", optionInfo.Argument.Name)
-                .Replace("$option-description$", optionInfo.Description)
-                .Replace("$required-value$", optionInfo.Required.ToString().ToLower());
+            var newTemplate = OptionArgumentTemplate.Replace("$option-name$", optionInfo.Value)
+                                                    .Replace("$option-alias$", optionInfo.Alias)
+                                                    .Replace("$option-argument-name$", optionInfo.ArgumentName)
+                                                    .Replace("$option-description$", optionInfo.Description)
+                                                    .Replace("$required-value$", optionInfo.Required.ToString().ToLower())
+                                                    .Replace("$type$", optionInfo.Argument.Type)
+                                                    .Replace("$argument-description$", optionInfo.Argument.Description);
 
             return newTemplate;
         }
