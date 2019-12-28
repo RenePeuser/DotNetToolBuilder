@@ -49,7 +49,6 @@ namespace DotNetTool.Builder.App
             targetDirectory.Create();
             extractTemplate.ExtractTo(targetDirectory);
 
-
             // Solution and projects
             renameFilesAndFolders.Rename(targetDirectory, "rps.template", dotNetTool.ProjectName);
 
