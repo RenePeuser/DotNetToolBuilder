@@ -13,21 +13,34 @@ namespace DotNetTool.Builder.Validation
             c => c == '.'
         };
 
-        private const string ValidationInfo = "Only letters, digits or '.' are allowed";
-
         public ValidationResult IsValid(string value)
         {
-            return new ValidationResult(IsValidInternal(value), ValidationInfo);
+            var errors = CollectErrors(value).Flatten(Environment.NewLine);
+            return new ValidationResult(errors.IsEmpty(), errors);
         }
 
-        private bool IsValidInternal(string value)
+        private IEnumerable<string> CollectErrors(string value)
         {
             if (value.IsNullOrWhiteSpace())
             {
-                return false;
+                yield return "The project name must not be null, empty or whitespace";
+                yield break;
             }
 
-            return value.All(c => _validationRules.Any(validation => validation(c)));
+            if (value.All(c => _validationRules.Any(validation => validation(c))).IsFalse())
+            {
+                yield return "The project name must only contains letters, digits or '.' are allowed.";
+            }
+
+            if (char.IsLetter(value.First()).IsFalse())
+            {
+                yield return "The project name must start with a letter";
+            }
+
+            if (char.IsLetter(value.Last()).IsFalse())
+            {
+                yield return "The project name must end with a letter";
+            }
         }
     }
 }

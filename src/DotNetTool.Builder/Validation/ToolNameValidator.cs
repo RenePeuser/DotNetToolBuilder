@@ -1,25 +1,30 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation
 {
     public class ToolNameValidator : IToolNameValidator
     {
-        private const string ValidationInfo = "Only letters or digits are allowed";
-
         public ValidationResult IsValid(string value)
         {
-            return new ValidationResult(IsValidInternal(value), ValidationInfo);
+            var errors = CollectErrors(value).Flatten(Environment.NewLine);
+            return new ValidationResult(errors.IsEmpty(), errors);
         }
 
-        private static bool IsValidInternal(string value)
+        private IEnumerable<string> CollectErrors(string value)
         {
             if (value.IsNullOrWhiteSpace())
             {
-                return false;
+                yield return "The dotnet tool name must not be null, empty or whitespace";
+                yield break;
             }
 
-            return value.All(char.IsLetterOrDigit);
+            if (value.All(char.IsLetterOrDigit).IsFalse())
+            {
+                yield return "The dotnet tool name must only contains letters, digits or '.' are allowed.";
+            }
         }
     }
 }
