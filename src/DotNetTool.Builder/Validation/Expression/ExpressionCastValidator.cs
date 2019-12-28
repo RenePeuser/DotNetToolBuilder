@@ -19,8 +19,18 @@ namespace DotNetTool.Builder.Validation.Expression
                 return false;
             }
 
-            var count = value.Count(c => c == '[') + value.Count(c => c == ']');
-            return count % 2 == 0;
+            var splittedExpression = value.Split(" ");
+            var result = splittedExpression.Where(s =>
+            {
+                if (s.Contains("[") || s.Contains("]"))
+                {
+                    return s.Count(c => c == '[' || c == ']') != 2 || s.IndexOf('[') > s.IndexOf(']');
+                }
+
+                return false;
+            });
+            return result.IsEmpty();
+
         }
     }
 }

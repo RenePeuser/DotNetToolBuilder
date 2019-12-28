@@ -20,7 +20,15 @@ namespace DotNetTool.Builder.Validation.Expression
             }
 
             var splittedExpression = value.Split(" ");
-            var result = splittedExpression.Where(s => s.StartsWith("<") && s.EndsWith(">").IsFalse());
+            var result = splittedExpression.Where(s =>
+            {
+                if (s.Contains("<") || s.Contains(">"))
+                {
+                    return s.Count(c => c == '<' || c == '>') != 2 || s.IndexOf('<') > s.IndexOf('>');
+                }
+
+                return false;
+            });
             return result.IsEmpty();
         }
     }
