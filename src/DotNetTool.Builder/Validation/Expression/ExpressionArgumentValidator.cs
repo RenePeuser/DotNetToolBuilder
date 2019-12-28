@@ -19,8 +19,9 @@ namespace DotNetTool.Builder.Validation.Expression
                 return false;
             }
 
-            var count = value.Count(c => c == '<') + value.Count(c => c == '>');
-            return count % 2 == 0;
+            var splittedExpression = value.Split(" ");
+            var result = splittedExpression.Where(s => s.StartsWith("<") && s.EndsWith(">").IsFalse());
+            return result.IsEmpty();
         }
     }
 }

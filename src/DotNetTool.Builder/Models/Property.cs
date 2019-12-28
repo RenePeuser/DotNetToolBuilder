@@ -1,5 +1,8 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using System.Diagnostics;
+
+namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(Name) + "}")]
     internal class Property
     {
         public Property(string type, string name)

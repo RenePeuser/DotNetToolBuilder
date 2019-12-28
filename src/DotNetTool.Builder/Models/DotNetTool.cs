@@ -1,7 +1,9 @@
-﻿using DotNetTool.Builder.Extensions;
+﻿using System.Diagnostics;
+using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(ToolName) + "}")]
     public class DotNetTool
     {
         public DotNetTool(string projectName, string toolName, ParameterInfo parameterInfo)

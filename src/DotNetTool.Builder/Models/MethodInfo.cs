@@ -1,5 +1,8 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using System.Diagnostics;
+
+namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(MethodName) + "}")]
     public class MethodInfo
     {
         public MethodInfo(string methodName, string methodSyntax)

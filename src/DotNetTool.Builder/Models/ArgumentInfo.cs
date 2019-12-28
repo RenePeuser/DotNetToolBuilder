@@ -1,7 +1,9 @@
-﻿using DotNetTool.Builder.Extensions;
+﻿using System.Diagnostics;
+using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(Value) + "}")]
     public class ArgumentInfo
     {
         public ArgumentInfo(string name, string description, string value, string normalizedName, string type)

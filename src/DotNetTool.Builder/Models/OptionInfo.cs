@@ -1,5 +1,8 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using System.Diagnostics;
+
+namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(Value) + "}")]
     public class OptionInfo
     {
         public OptionInfo(string value, string name, string alias, string description, bool required,

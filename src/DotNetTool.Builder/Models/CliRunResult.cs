@@ -1,5 +1,8 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using System.Diagnostics;
+
+namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("ExitCode: '{" + nameof(ExitCode) + "}'")]
     public class CliRunResult
     {
         public CliRunResult(int exitCode, string output)

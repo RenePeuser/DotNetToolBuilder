@@ -1,7 +1,9 @@
-﻿using DotNetTool.Builder.Extensions;
+﻿using System.Diagnostics;
+using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(Name) + "}")]
     internal class CtorArgument
     {
         public CtorArgument(string type, string name)

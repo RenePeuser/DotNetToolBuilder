@@ -8,6 +8,7 @@ using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.App
 {
@@ -22,15 +23,15 @@ namespace DotNetTool.Builder.App
 
         public Task<int> RunAsync(string[] args)
         {
-            return RunInternalAsync();
+            return RunInternalAsync(args);
         }
 
-        private async Task<int> RunInternalAsync()
+        private async Task<int> RunInternalAsync(string[] args)
         {
-
             var consoleService = ServiceProvider.GetService<IConsoleService>();
             var dotNetToolInfoCollector = ServiceProvider.GetService<IDotNetToolInfoCollector>();
             var directoryService = ServiceProvider.GetService<IDirectoryService>();
+            var fileService = ServiceProvider.GetService<IFileService>();
             var typeCollector = ServiceProvider.GetService<ICommandTypeCollector>();
             var namespaceCollector = ServiceProvider.GetService<INameSpaceCollector>();
             var visualStudioService = ServiceProvider.GetService<IVisualStudioService>();
@@ -41,7 +42,18 @@ namespace DotNetTool.Builder.App
             var extractTemplate = ServiceProvider.GetService<IExtractTemplate>();
 
 
-            var dotNetTool = dotNetToolInfoCollector.Collect();
+            var dotNetToolSerialized = fileService.GetFileInfo(args.First());
+
+            Models.DotNetTool dotNetTool;
+            if (dotNetToolSerialized.Exists && dotNetToolSerialized.Extension.EndsWith("json"))
+            {
+                dotNetTool = JsonConvert.DeserializeObject<Models.DotNetTool>(dotNetToolSerialized.ReadAllText());
+            }
+            else
+            {
+                dotNetTool = dotNetToolInfoCollector.Collect();
+            }
+
 
             var targetDirectory = directoryService.GetDirectoryInfo(Path.Combine(directoryService.GetCurrentDirectory().FullName, dotNetTool.ProjectName));
             Throw.If(() => targetDirectory, dir => dir.Exists, $"The directory: {targetDirectory.FullName} already exists.");

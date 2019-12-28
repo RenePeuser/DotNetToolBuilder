@@ -1,5 +1,8 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using System.Diagnostics;
+
+namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(Name) + "}")]
     public class DotNetToolInfo
     {
         public DotNetToolInfo(string name, string version, string command)

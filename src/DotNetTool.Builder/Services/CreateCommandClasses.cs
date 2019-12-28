@@ -68,9 +68,11 @@ namespace DotNetTool.Builder.Services
                 return;
             }
 
+            var currentRootPath = $"{currentPath}.{parameter.NormalizedName}";
+
             foreach (var subCommand in subCommands)
             {
-                currentPath = $"{currentPath}.{subCommand.NormalizedName}";
+                currentPath = $"{currentRootPath}.{subCommand.NormalizedName}";
 
                 namespaceCollector.Add(currentPath);
 
@@ -167,7 +169,7 @@ namespace DotNetTool.Builder.Services
                     commandTypeCollector.Add(subCommand, new TypeToRegister($"{commandServiceInterface.FileNameWithoutExtension()}", $"{commandService.FileNameWithoutExtension()}"));
                 }
 
-                Invoke(projectName, subCommand, subCommnandDirectoryInfo, commandTypeCollector, currentPath, namespaceCollector);
+                Invoke(projectName, subCommand, subCommnandDirectoryInfo, commandTypeCollector, currentRootPath, namespaceCollector);
             }
         }
     }

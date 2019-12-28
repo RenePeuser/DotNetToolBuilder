@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
+    [DebuggerDisplay("{" + nameof(Name) + "}")]
     public class ParameterInfo
     {
         public IEnumerable<ParameterInfo> SubCommands { get; set; } = Enumerable.Empty<ParameterInfo>();
