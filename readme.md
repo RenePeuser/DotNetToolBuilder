@@ -63,7 +63,7 @@ public class ParseParameters
     }
 
     public System.IO.FileInfo File { get; }
-    public bool Option { get; }
+    public string Option { get; }
 }
 ```
 
