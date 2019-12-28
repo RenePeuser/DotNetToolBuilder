@@ -14,9 +14,10 @@ namespace DotNetTool.Builder.Builder.Startup
         private const string Template =
             @"namespace $projectName$
 {
-    using Microsoft.Extensions.DependencyInjection;    
+    using Microsoft.Extensions.DependencyInjection;
+    using $projectName$.$root-command$;
     using $projectName$.Services;
-    using $projectName$.ErrorHandling;
+    using $projectName$.ErrorHandling;    
 $usings$
 
     public class Startup
