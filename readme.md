@@ -7,7 +7,7 @@ A small wizard will guide you through the creation of your expected tool.
 
 ![](./assets/dotnet-tool-builder-install.gif)
 
-Hint if you do not use ther "--version" option you get the latest version, but if it's a prerelease
+Hint if you do not use the "--version" option you get the latest version, but if it's a prerelease
 state you have to use the specific version otherwise, the tool will not be found.
 
 Install the tool global
