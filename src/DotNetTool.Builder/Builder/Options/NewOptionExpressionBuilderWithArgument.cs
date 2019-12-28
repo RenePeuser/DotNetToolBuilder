@@ -6,14 +6,14 @@ namespace DotNetTool.Builder.Builder.Options
     public class NewOptionExpressionBuilderWithArgument : INewOptionExpressionBuilder
     {
         private const string OptionArgumentTemplate =
-@"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")
-{
-    Required = $required-value$,
-    Argument = new Argument<$type$>(""$option-argument-name$"")
-    {
-        Description = ""$argument-description$""
-    }
-}";
+            @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")
+            {
+                Required = $required-value$,
+                Argument = new Argument<$type$>(""$option-argument-name$"")
+                {
+                    Description = ""$argument-description$""
+                }
+            }";
 
         public string Build(OptionInfo optionInfo)
         {
