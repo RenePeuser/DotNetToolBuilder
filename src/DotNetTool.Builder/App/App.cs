@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.App
 {
+    using Extensions;
+
     public class App
     {
         public App(IServiceProvider serviceProvider)
@@ -42,14 +44,18 @@ namespace DotNetTool.Builder.App
             var extractTemplate = ServiceProvider.GetService<IExtractTemplate>();
 
 
-            var dotNetToolSerialized = fileService.GetFileInfo(args.First());
 
-            Models.DotNetTool dotNetTool;
-            if (dotNetToolSerialized.Exists && dotNetToolSerialized.Extension.EndsWith("json"))
+            Models.DotNetTool dotNetTool = null;
+            if (args.FirstOrDefault().IsNotNull() && args.First().EndsWith("json"))
             {
-                dotNetTool = JsonConvert.DeserializeObject<Models.DotNetTool>(dotNetToolSerialized.ReadAllText());
+                var dotNetToolSerialized = fileService.GetFileInfo(args.FirstOrDefault());
+                if (dotNetToolSerialized.Exists && dotNetToolSerialized.Extension.EndsWith("json"))
+                {
+                    dotNetTool = JsonConvert.DeserializeObject<Models.DotNetTool>(dotNetToolSerialized.ReadAllText());
+                }
             }
-            else
+            
+            if(dotNetTool.IsNull())
             {
                 dotNetTool = dotNetToolInfoCollector.Collect();
             }
