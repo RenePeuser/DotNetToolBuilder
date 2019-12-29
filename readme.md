@@ -51,6 +51,13 @@ Install the tool local
 ```bash
 dotnet tool install DotNetTool.Builder --version x.y.z
 ```
+
+## Simple sample:
+
+![](./assets/simple-tool-sample.gif)
+
+How easy it is 
+
 ## How to use it
 
 ```bash
