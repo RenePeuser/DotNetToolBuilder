@@ -7,13 +7,13 @@
     <RootNamespace>DotNetTool.Builder</RootNamespace>
     <Authors>Rene Peuser</Authors>
     <Company>Rene Peuser Softwaresolutions</Company>
-    <Description>This dotnet tool helps you create good stuctured cli's which are packed as tool. A wizard takes your cli expressions and generates a complete solution with all base functionality. You have only to implement the concrete logic behind each command.</Description>
+    <Description>This dotnet tool allows you creating your own dotnet tool based on Microsofts System.CommandLine.Experimental package.</Description>
     <Copyright>Copyright 2019 (c) Rene Peuser. All rights reserved.</Copyright>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
-    <PackageReleaseNotes>First beta version</PackageReleaseNotes>
-    <PackageTags>C#;DotNet;.Net;.NetTool;.NetToolBuilder;DotNetToolBuilder;CLI;Build CLI;Build .NetTool;</PackageTags>
+    <PackageReleaseNotes>This is a prerelease version of DotNetTool.Builder</PackageReleaseNotes>
+    <PackageTags>C#;DotNet;.Net;.NetTool;.NetToolBuilder;DotNetToolBuilder;CLI;Build CLI;Build.NetTool;System.CommandLine.Experimental;</PackageTags>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>dotnet-newtool</ToolCommandName>
   </PropertyGroup>
