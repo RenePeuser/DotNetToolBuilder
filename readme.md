@@ -1,16 +1,6 @@
 # DotNetTool.Builder
 
-This DotNetTool.Builder will create a dotnet tool based on the System.CommandLine.Experimental package.
-Dependding on one or more cli expressions it creates:
-
-- One solution and projects
-- all classes which are needed, 
-- options
-- arguments
-- middlewares
-- dependency-injection 
-- services
-- etc.
+This dotnet tool will create a dotnet tool based on the System.CommandLine.Experimental package.
 
 ## Target
 
