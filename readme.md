@@ -3,6 +3,14 @@
 This dotnet tool helps to generate a cli which will be packed as tool.
 A small wizard will guide you through the creation of your expected tool.
 
+## Target
+
+With this DotNetTool.Builder you should focus your work only to your Logic
+of your defined cli commands. 
+
+The hole framework around will be generated. With this builder your are able
+to build quick, fast and good maintainable CLI's.
+
 ## Install
 
 ![](./assets/dotnet-tool-builder-install.gif)
@@ -20,6 +28,17 @@ Install the tool local
 dotnet tool install DotNetTool.Builder --version x.y.z
 ```
 ## How to use it
+
+```
+Hint: If you need multiple expressions like: (see gif below !)
+
+      tool list <file> --xyz
+      tool update <file> --abc
+      tool addd <file> --now
+      
+      You have to do it one after one. After all infos for the first expression are collected
+      you will be asked add another expression, say yes and you can add a secon, third one..    
+```
 
 ```bash
 dotnet newtool
