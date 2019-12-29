@@ -2,8 +2,6 @@
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    using Extensions;
-
     internal class CommandBuilderSimple : ICommandBuilderSimple
     {
         private const string Template =

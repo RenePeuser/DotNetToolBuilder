@@ -72,7 +72,7 @@ namespace DotNetTool.Builder.App
 
             // DotNetTool name
             renameFilesAndFolders.Rename(targetDirectory, "Rps", dotNetTool.NormalizedToolName);
-            renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.ToolName);
+            renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.ToolName.ToLower());
 
             // detect folder of root command
             var rootDirectory = targetDirectory.EnumerateDirectories(dotNetTool.ToolName, SearchOption.AllDirectories).Single();
