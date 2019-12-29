@@ -56,8 +56,6 @@ dotnet tool install DotNetTool.Builder --version x.y.z
 
 ![](./assets/simple-tool-sample.gif)
 
-How easy it is 
-
 ## Sample multiple expressions
 
 ```bash
