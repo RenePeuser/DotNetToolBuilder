@@ -18,6 +18,8 @@ namespace DotNetTool.Builder.Models
 
         public string NormalizedName => Name.FirstCharToUpper();
 
+        public string AsArgumentName => Name.FirstCharToLower();
+
         public string Description { get; set; }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
-
-namespace DotNetTool.Builder.Builder.Commands
+﻿namespace DotNetTool.Builder.Builder.Commands
 {
-    internal class CommandHandlerStringBuilder : ICommandHandlerStringBuilder
+    using System.Collections.Generic;
+    using System.Linq;
+    using Extensions;
+    using Models;
+
+    internal class CommandHandlerNoArgsAndNoOptionBuilder : ICommandHandlerStringBuilder
     {
-        private const string Template = "CommandHandler.Create<$types$>(($argument-names$) => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
+        private const string Template = "CommandHandler.Create(() => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
 
         public string Build(ParameterInfo parameterInfo)
         {
@@ -16,10 +16,15 @@ namespace DotNetTool.Builder.Builder.Commands
             var argNames = arguments.Select(arg => arg.Name).Flatten(", ");
 
             var newTemplate = Template.Replace("$types$", types)
-                                      .Replace("$command-name$", parameterInfo.NormalizedName)
-                                      .Replace("$command-argument-name$", parameterInfo.Name)
-                                      .Replace("$argument-names$", argNames);
+                .Replace("$command-name$", parameterInfo.NormalizedName)
+                .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
+                .Replace("$argument-names$", argNames);
             return newTemplate;
+        }
+
+        public bool IsThisBuilderFor(ParameterInfo parameterInfo)
+        {
+            return parameterInfo.ArgumentInfo.IsNull() && parameterInfo.Options.IsNullOrEmpty();
         }
 
         internal IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)

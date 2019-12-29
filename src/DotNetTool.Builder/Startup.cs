@@ -135,6 +135,8 @@ namespace DotNetTool.Builder
         public void RegisterParameterClassBuilder(IServiceCollection services)
         {
             services.AddSingleton<IParameterClassBuilder, ParameterClassBuilder>();
+            services.AddSingleton<IParameterSpecificClassBuilder, ParameterWithoutArgsOrOptionsClassBuilder>();
+            services.AddSingleton<IParameterSpecificClassBuilder, ParameterWithArgsOrOptionsClassBuilder>();
         }
 
         public void RegisterCommandBuilders(IServiceCollection services)
@@ -144,12 +146,17 @@ namespace DotNetTool.Builder
             services.AddSingleton<ICommandBuilderWithArgument, CommandBuilderWithArgument>();
             services.AddSingleton<ICommandBuilderWithArgumentAndOption, CommandBuilderWithArgumentAndOption>();
             services.AddSingleton<ICommandBuilderWithOptions, CommandBuilderWithOptions>();
-            services.AddSingleton<ICommandHandlerStringBuilder, CommandHandlerStringBuilder>();
+
             services.AddSingleton<ICommandServiceInterfaceBuilder, CommandServiceInterfaceBuilder>();
             services.AddSingleton<IRootCommandBuilder, RootCommandBuilder>();
             services.AddSingleton<IRootCommandInterfaceBuilder, RootCommandInterfaceBuilder>();
             services.AddSingleton<ISubCommandInterfaceBuilder, SubCommandInterfaceBuilder>();
             services.AddSingleton<ICommandServiceBuilder, CommandServiceBuilder>();
+
+
+            services.AddSingleton<ICommandHandlerBuilder, CommandHandlerBuilder>();
+            services.AddSingleton<ICommandHandlerStringBuilder, CommandHandlerWithArgsOrOptionBuilder>();
+            services.AddSingleton<ICommandHandlerStringBuilder, CommandHandlerNoArgsAndNoOptionBuilder>();
         }
     }
 }

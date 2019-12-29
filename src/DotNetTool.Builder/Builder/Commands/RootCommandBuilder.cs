@@ -2,6 +2,8 @@
 
 namespace DotNetTool.Builder.Builder.Commands
 {
+    using Extensions;
+
     internal class RootCommandBuilder : IRootCommandBuilder
     {
         private const string Template =
@@ -41,7 +43,7 @@ namespace DotNetTool.Builder.Builder.Commands
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
-                .Replace("$command-argument-name$", parameterInfo.Name)
+                .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$command-description$", parameterInfo.Description)
                 .Replace("$command-handler$", commandHandler)

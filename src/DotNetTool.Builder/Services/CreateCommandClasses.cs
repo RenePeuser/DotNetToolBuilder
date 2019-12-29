@@ -76,7 +76,7 @@ namespace DotNetTool.Builder.Services
 
                 namespaceCollector.Add(currentPath);
 
-                var subCommnandDirectoryInfo =_directoryService.GetDirectoryInfo(Path.Combine(rootDirectory.FullName, subCommand.NormalizedName));
+                var subCommnandDirectoryInfo = _directoryService.GetDirectoryInfo(Path.Combine(rootDirectory.FullName, subCommand.NormalizedName));
                 subCommnandDirectoryInfo.Create();
 
                 if (subCommand.ArgumentInfo.IsNotNull())
@@ -115,25 +115,21 @@ namespace DotNetTool.Builder.Services
                     namespaceCollector.Add($"{currentPath}.Options");
                 }
 
-                if (subCommand.Options.Any() || subCommand.ArgumentInfo.IsNotNull())
-                {
-                    var parameterModelClass = _parameterClassBuilder.Build(projectName, subCommand, currentPath);
-                    var fileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
-                    fileInfo.WriteAllText(parameterModelClass);
-
-                    namespaceCollector.Add($"{currentPath}.Service");
-                }
+                var parameterModelClass = _parameterClassBuilder.Build(projectName, subCommand, currentPath);
+                var parameterClassFileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
+                parameterClassFileInfo.WriteAllText(parameterModelClass);
+                namespaceCollector.Add($"{currentPath}.Service");
 
                 if (subCommand.SubCommands.IsNotNull() && subCommand.SubCommands.Any())
                 {
-                        var result = _commandBuilderForSubCommands.Build(projectName, subCommand, parameter, currentPath);
-                        var filePath0 = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
-                        filePath0.WriteAllText(result);
-                        commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.NormalizedName}SubCommandBuilder", filePath0.FileNameWithoutExtension()));
+                    var result = _commandBuilderForSubCommands.Build(projectName, subCommand, parameter, currentPath);
+                    var filePath0 = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
+                    filePath0.WriteAllText(result);
+                    commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.NormalizedName}SubCommandBuilder", filePath0.FileNameWithoutExtension()));
 
-                        var subCommandBuilder = _subCommandInterfaceBuilder.Build(projectName, subCommand, parameter, currentPath);
-                        var filePath1 = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"I{subCommand.NormalizedName}SubCommandBuilder.cs"));
-                        filePath1.WriteAllText(subCommandBuilder);
+                    var subCommandBuilder = _subCommandInterfaceBuilder.Build(projectName, subCommand, parameter, currentPath);
+                    var filePath1 = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"I{subCommand.NormalizedName}SubCommandBuilder.cs"));
+                    filePath1.WriteAllText(subCommandBuilder);
                 }
                 else
                 {
@@ -159,7 +155,7 @@ namespace DotNetTool.Builder.Services
                     var commandServiceResult = _commandServiceBuilder.Build(projectName, subCommand, currentPath);
                     var serviceFolder = _directoryService.GetDirectoryInfo(Path.Combine(subCommnandDirectoryInfo.FullName, "Service"));
                     serviceFolder.Exists.IfFalseThen(() => serviceFolder.Create());
-                    var commandService = _fileService.GetFileInfo(Path.Combine(serviceFolder.FullName,$"{subCommand.NormalizedName}Service.cs"));
+                    var commandService = _fileService.GetFileInfo(Path.Combine(serviceFolder.FullName, $"{subCommand.NormalizedName}Service.cs"));
                     commandService.WriteAllText(commandServiceResult);
 
                     var serviceInterface = _commandServiceInterfaceBuilder.Build(projectName, subCommand, currentPath);

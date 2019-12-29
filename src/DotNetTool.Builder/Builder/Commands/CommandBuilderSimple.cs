@@ -2,6 +2,8 @@
 
 namespace DotNetTool.Builder.Builder.Commands
 {
+    using Extensions;
+
     internal class CommandBuilderSimple : ICommandBuilderSimple
     {
         private const string Template =
@@ -9,7 +11,8 @@ namespace DotNetTool.Builder.Builder.Commands
 {                
     using System.Collections.Generic;    
     using System.CommandLine;
-    using System.CommandLine.Invocation;    
+    using System.CommandLine.Invocation;
+    using $namespace$.Service;
 
     public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
@@ -22,7 +25,7 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public Command Build()
         {
-            var command = new Command(""$command-argument-name$"" ""$command-description$"");            
+            var command = new Command(""$command-argument-name$"", ""$command-description$"");            
             command.Handler = $command-handler$;
             return command;
         }
@@ -44,7 +47,7 @@ namespace DotNetTool.Builder.Builder.Commands
                 .Replace("$parent-command-name$", parent.NormalizedName)
                 .Replace("$command-description$", parameterInfo.Description)
                 .Replace("$command-argument-name$", parameterInfo.Name)
-                .Replace("$command-service-argument-name$", parameterInfo.Name)
+                .Replace("$command-service-argument-name$", parameterInfo.AsArgumentName)
                 .Replace("$command-handler$", commandHandler)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$project-name$", project);
