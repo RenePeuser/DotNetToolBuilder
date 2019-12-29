@@ -41,6 +41,12 @@ dotnet tool install DotNetTool.Builder --version x.y.z
 ```
 ## How to use it
 
+```bash
+dotnet newtool
+```
+
+![](./assets/dotnet-tool-builder.gif)
+
 ```
 Hint: If you need multiple expressions like: (see gif below !)
 
@@ -51,12 +57,6 @@ Hint: If you need multiple expressions like: (see gif below !)
       You have to do it one after one. After all infos for the first expression are collected
       you will be asked add another expression, say yes and you can add a secon, third one..    
 ```
-
-```bash
-dotnet newtool
-```
-
-![](./assets/dotnet-tool-builder.gif)
 
 ## Creation-Target
 The command 'dotnet newtool' will create in the current execution directory a new folder
