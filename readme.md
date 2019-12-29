@@ -2,7 +2,7 @@
 
 This DotNetTool.Builder will creates you a .NetTool based on the [System.CommandLine.Experimental](https://www.nuget.org/packages/System.CommandLine.Experimental/) package.
 
-It will create, based on one or more cli expressions, all classes, options, arguments, middlewares and services,
+It will create, based on one or more cli expressions, all classes, options, arguments, middlewares, dependency-injection and services,
 so that you only have to implement the logic for your specific command.
 
 ## Target
