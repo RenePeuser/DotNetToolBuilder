@@ -39,6 +39,8 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 
 ## Install
 
+Hint: Because of prerelease state you has to use the '--version' option to install the prerelease.
+
 ![](./assets/dotnet-tool-builder-install.gif)
 
 Hint if you do not use the "--version" option you get the latest version, but if it's a prerelease
