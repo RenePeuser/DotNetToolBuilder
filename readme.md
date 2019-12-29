@@ -2,6 +2,11 @@
 
 This dotnet tool will create a dotnet tool based on the System.CommandLine.Experimental package.
 
+## Prerequisites
+* VS2019
+* .NET Core 3.0 SDK or higher
+
+
 ## Target
 
 With this DotNetTool.Builder you should focus your work only to your Logic
@@ -13,7 +18,7 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version x.y.z'
 2. Run 'dotnet newTool'
 3. Insert all your expressions, and informations
-4. Implement your logic to the created command hanlder which calls a created service for each command
+4. Implement your logic to the created service for each command, which is called from the aktiv command handler.
 
    📦FindAndReplaceTool
     ┣ 📂..
