@@ -92,7 +92,7 @@ namespace DotNetTool.Builder.App
             var dotnetBuildResult = await processService.RunCliCommandAsync("dotnet", $"build {solutionFile.FullName}");
             if (dotnetBuildResult.ExitCode != 0)
             {
-                consoleService.WriteError("Could not build sour new solution");
+                consoleService.WriteError(dotnetBuildResult.Output);
                 visualStudioService.Open(solutionFile);
                 return -1;
             }

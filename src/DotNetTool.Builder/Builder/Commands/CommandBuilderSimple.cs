@@ -30,16 +30,16 @@ namespace DotNetTool.Builder.Builder.Commands
     }
 }";
 
-        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
+        private readonly ICommandHandlerBuilder _commandHandlerBuilder;
 
-        public CommandBuilderSimple(ICommandHandlerStringBuilder commandHandlerStringBuilder)
+        public CommandBuilderSimple(ICommandHandlerBuilder commandHandlerBuilder)
         {
-            _commandHandlerStringBuilder = commandHandlerStringBuilder;
+            _commandHandlerBuilder = commandHandlerBuilder;
         }
 
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
-            var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
+            var commandHandler = _commandHandlerBuilder.Build(parameterInfo);
 
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$parent-command-name$", parent.NormalizedName)

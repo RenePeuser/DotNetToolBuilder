@@ -115,10 +115,14 @@ namespace DotNetTool.Builder.Services
                     namespaceCollector.Add($"{currentPath}.Options");
                 }
 
-                var parameterModelClass = _parameterClassBuilder.Build(projectName, subCommand, currentPath);
-                var parameterClassFileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
-                parameterClassFileInfo.WriteAllText(parameterModelClass);
-                namespaceCollector.Add($"{currentPath}.Service");
+
+                if (subCommand.ArgumentInfo.IsNotNull() || subCommand.Options.Any() || subCommand.SubCommands.IsNullOrEmpty())
+                {
+                    var parameterModelClass = _parameterClassBuilder.Build(projectName, subCommand, currentPath);
+                    var parameterClassFileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
+                    parameterClassFileInfo.WriteAllText(parameterModelClass);
+                    namespaceCollector.Add($"{currentPath}.Service");
+                }
 
                 if (subCommand.SubCommands.IsNotNull() && subCommand.SubCommands.Any())
                 {

@@ -2,8 +2,6 @@
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    using Extensions;
-
     internal class CommandBuilderForSubCommands : ICommandBuilderForSubCommands
     {
         private const string Template =
@@ -11,8 +9,7 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     using System.Linq;
     using System.Collections.Generic;    
-    using System.CommandLine;
-    $usings$
+    using System.CommandLine;    
 
     public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
@@ -32,16 +29,16 @@ namespace DotNetTool.Builder.Builder.Commands
     }
 }";
 
-        private readonly ICommandHandlerStringBuilder _commandHandlerStringBuilder;
+        private readonly ICommandHandlerBuilder _commandHandlerBuilder;
 
-        public CommandBuilderForSubCommands(ICommandHandlerStringBuilder commandHandlerStringBuilder)
+        public CommandBuilderForSubCommands(ICommandHandlerBuilder commandHandlerBuilder)
         {
-            _commandHandlerStringBuilder = commandHandlerStringBuilder;
+            _commandHandlerBuilder = commandHandlerBuilder;
         }
 
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
-            var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
+            var commandHandler = _commandHandlerBuilder.Build(parameterInfo);
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
                                       .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
                                       .Replace("$namespace$", nameSpace)
