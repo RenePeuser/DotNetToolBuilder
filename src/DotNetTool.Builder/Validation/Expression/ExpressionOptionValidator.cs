@@ -1,26 +1,53 @@
-﻿using System.Linq;
-using DotNetTool.Builder.Extensions;
+﻿using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using System;
+    using System.Collections.Generic;
+
     public class ExpressionOptionValidator : IExpressionContentValidator
     {
-        private const string ValidationInfo = "Options must be declared with '--'";
+        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
+
+        public ExpressionOptionValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
+        {
+            _primitiveTypeNameValidator = primitiveTypeNameValidator;
+        }
 
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
-            return new ValidationResult(IsValidInternal(expression), ValidationInfo);
+            var errors = CheckForErrors(expression).Flatten(Environment.NewLine);
+            return new ValidationResult(errors.IsEmpty(), errors);
         }
 
-        private static bool IsValidInternal(string value)
+        private IEnumerable<string> CheckForErrors(string expression)
         {
-            if (value.IsNullOrWhiteSpace())
+            if (expression.IsNullOrWhiteSpace())
             {
-                return false;
+                yield return "Argument must not be null or empty.";
+                yield break;
             }
 
-            var split = value.Split(" ");
-            return split.Where(s => s.StartsWith("-")).All(s => s.StartsWith("--"));
+            var splittedExpression = expression.Split(" ");
+            foreach (var value in splittedExpression)
+            {
+                if (value.StartsWith("-"))
+                {
+                    if (value.StartsWith("--").IsFalse())
+                    {
+                        yield return $"Option: '{value}' must start with '--'";
+                    }
+                    else
+                    {
+                        var optionName = value.Replace("--", string.Empty);
+                        var validationResult = _primitiveTypeNameValidator.IsValid(optionName);
+                        if (validationResult.IsValid.IsFalse())
+                        {
+                            yield return $"The name of an argument does not match a name of a type: {optionName}";
+                        }
+                    }
+                }
+            }
         }
     }
 }

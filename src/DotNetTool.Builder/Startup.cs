@@ -43,6 +43,8 @@ namespace DotNetTool.Builder
             services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
             services.AddSingleton<IToolNameValidator, ToolNameValidator>();
 
+            services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
+
             services.AddSingleton<IExpressionValidator, ExpressionValidator>();
             services.AddSingleton<IExpressionContentValidator, ExpressionCastValidator>();
             services.AddSingleton<IExpressionContentValidator, ExpressionArgumentValidator>();

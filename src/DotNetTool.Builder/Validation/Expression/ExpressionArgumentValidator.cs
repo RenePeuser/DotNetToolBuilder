@@ -3,33 +3,56 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using System;
+    using System.Collections.Generic;
+
     public class ExpressionArgumentValidator : IExpressionContentValidator
     {
-        private const string ValidationInfo = "Arguments must be open with '<' and closed with '>'";
+        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
+
+        public ExpressionArgumentValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
+        {
+            _primitiveTypeNameValidator = primitiveTypeNameValidator;
+        }
 
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
-            return new ValidationResult(IsValidInternal(expression), ValidationInfo);
+            var errors = CheckForErrors(expression).Flatten(Environment.NewLine);
+            return new ValidationResult(errors.IsEmpty(), errors);
         }
 
-        private static bool IsValidInternal(string value)
+        private IEnumerable<string> CheckForErrors(string expression)
         {
-            if (value.IsNullOrWhiteSpace())
+            if (expression.IsNullOrWhiteSpace())
             {
-                return false;
+                yield return "Argument must not be null or empty.";
+                yield break;
+
             }
 
-            var splittedExpression = value.Split(" ");
-            var result = splittedExpression.Where(s =>
+            var splittedExpression = expression.Split(" ");
+            foreach (var value in splittedExpression)
             {
-                if (s.Contains("<") || s.Contains(">"))
+                if (value.Contains("<") || value.Contains(">"))
                 {
-                    return s.Count(c => c == '<' || c == '>') != 2 || s.IndexOf('<') > s.IndexOf('>');
+                    var result = value.Count(c => c == '<' || c == '>') != 2 || value.IndexOf('<') > value.IndexOf('>');
+                    if (result)
+                    {
+                        yield return $"Argument: '{value}' must starts with '< and ends with '>'";
+                    }
+                    else
+                    {
+                        var start = value.IndexOf("<") + 1;
+                        var end = value.IndexOf(">");
+                        var argumentName = value.Substring(start, end - start);
+                        var validationResult = _primitiveTypeNameValidator.IsValid(argumentName);
+                        if (validationResult.IsValid.IsFalse())
+                        {
+                            yield return $"The name of an argument does not match a name of a type: {argumentName}";
+                        }
+                    }
                 }
-
-                return false;
-            });
-            return result.IsEmpty();
+            }
         }
     }
 }
