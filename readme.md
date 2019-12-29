@@ -16,7 +16,19 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version x.y.z'
 2. Run 'dotnet newTool'
 3. Insert all your expressions, and informations
-4. Implement your logic to the created 'CommandName' + Service.cs of each of your command.
+4. Implement your logic to the created command hanlder which calls a created service for each command
+
+   📦FindAndReplaceTool
+    ┣ 📂..
+    ┣ 📂RootCommand
+    ┃ ┣ 📂SubCommand
+    ┃ ┃ ┣ 📂Arguments
+    ┃ ┃ ┃ ┣ .. 
+    ┃ ┃ ┣ 📂Options
+    ┃ ┃ ┃ ┣ .. 
+    ┃ ┃ ┣ 📂Service
+    ┃ ┃ ┃ ┣ 📜SubCommandService.cs  <= Implement your logic here !
+
 5. Set up your package informations for your project
 5. Test it.
 6. Pack it.
@@ -45,8 +57,6 @@ dotnet tool install DotNetTool.Builder --version x.y.z
 dotnet newtool
 ```
 
-![](./assets/dotnet-tool-builder.gif)
-
 ```
 Hint: If you need multiple expressions like: (see gif below !)
 
@@ -58,18 +68,58 @@ Hint: If you need multiple expressions like: (see gif below !)
       you will be asked add another expression, say yes and you can add a secon, third one..    
 ```
 
+![](./assets/dotnet-tool-builder.gif)
+
+
 ## Creation-Target
 The command 'dotnet newtool' will create in the current execution directory a new folder
-with your given project name
+with your given project, all classes, options, arguments, middlewares, dependency-injection and services,
 
-![](./assets/new-tool.png)
+Based on the sample "FindAndReplaceTool"
 
 ```bash
 📦D:\
- ┣ 📂Test
- ┃ ┣ 📂New.Tool
- ┃ ┃ ┣ 📂src
- ┃ ┃ ┣ 📂...
+┣ 📂Test
+┃ ┣ 📂FindAndReplaceTool
+┃ ┃ ┣ 📂src
+┃ ┃ ┃ ┣ 📂FindAndReplaceTool
+┃ ┃ ┃ ┃ ┣ 📂App
+┃ ┃ ┃ ┃ ┃ ┣ ..
+┃ ┃ ┃ ┃ ┣ 📂ErrorHandling
+┃ ┃ ┃ ┃ ┃ ┣ ..
+┃ ┃ ┃ ┃ ┣ 📂Fart
+┃ ┃ ┃ ┃ ┃ ┣ 📂Findin
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Arguments
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FindinArgumentBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜IFindinArgumentBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Options
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FindinOptionsBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜IFindinOptionsBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Service
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FindinService.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜IFindinService.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜FindinCommandBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜FindinParameters.cs
+┃ ┃ ┃ ┃ ┃ ┣ 📂Replacein
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Arguments
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜IReplaceinArgumentBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReplaceinArgumentBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Options
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜IReplaceinOptionsBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReplaceinOptionsBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Service
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜IReplaceinService.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReplaceinService.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ReplaceinCommandBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ReplaceinParameters.cs
+┃ ┃ ┃ ┃ ┃ ┣ 📜FartCommandBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┣ 📜IFartCommandBuilder.cs
+┃ ┃ ┃ ┃ ┃ ┗ 📜IFartSubCommandBuilder.cs
+┃ ┃ ┃ ┃ ┣ 📂Properties
+┃ ┃ ┃ ┃ ┃ ┗ 📜launchSettings.json
+┃ ┃ ┃ ┃ ┣ 📂Services
+┃ ┃ ┃ ┃ ┃ ┣ 📜..
+┃ ┃ ┃ ┃ ┣ 📜..
  ```
 
 ## Parameter expression structure
