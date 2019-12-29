@@ -1,15 +1,27 @@
 # DotNetTool.Builder
 
-This dotnet tool helps to generate a cli which will be packed as tool.
-A small wizard will guide you through the creation of your expected tool.
+This DotNetTool.Builder will creates you a .NetTool based on the [System.CommandLine.Experimental](https://www.nuget.org/packages/System.CommandLine.Experimental/) package.
+
+It will create, based on one or more cli expressions, all classes, options, arguments, middlewares and services,
+so that you only have to implement the logic for your specific command.
 
 ## Target
 
 With this DotNetTool.Builder you should focus your work only to your Logic
-of your defined cli commands. 
+of your defined cli commands. The hole framework around will be generated. 
+With this builder your are able to build quick, fast and good maintainable CLI's.
 
-The hole framework around will be generated. With this builder your are able
-to build quick, fast and good maintainable CLI's.
+## Quickguide to your new CLI
+```
+1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version x.y.z'
+2. Run 'dotnet newTool'
+3. Insert all your expressions, and informations
+4. Implement your logic to the created 'CommandName' + Service.cs of each of your command.
+5. Set up your package informations for your project
+5. Test it.
+6. Pack it.
+7. Publish it.
+```
 
 ## Install
 
