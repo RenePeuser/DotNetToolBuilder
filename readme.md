@@ -34,7 +34,7 @@ Hint: If you need multiple expressions like: (see gif below !)
 
       tool list <file> --xyz
       tool update <file> --abc
-      tool addd <file> --now
+      tool add <file> --now
       
       You have to do it one after one. After all infos for the first expression are collected
       you will be asked add another expression, say yes and you can add a secon, third one..    
