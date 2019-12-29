@@ -121,6 +121,7 @@ Based on the sample "FindAndReplaceTool"
 ┃ ┃ ┃ ┃ ┃ ┣ 📜..
 ┃ ┃ ┃ ┃ ┣ 📜..
  ```
+![](./assets/solution-command-structure.png)
 
 ## Parameter expression structure
 ```
@@ -134,9 +135,6 @@ parse      = Root-SubCommand
 <opt-arg>  = Argument for the option '--option'
 [string]   = Type casting for argument '<opt-arg>'.
 ```
-
-![](./assets/solution-command-structure.png)
-
 ## Type-Casting
 
 For each 'Argument' you can cast this argument to your needed type.
