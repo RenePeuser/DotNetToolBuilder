@@ -41,39 +41,170 @@ with your given project name
  ┃ ┃ ┣ 📂...
  ```
 
-## With Type-Casting
+## Parameter expression structure
+```
+tool parse <file>[FileInfo] --option <opt-arg>[string]
 
-![](./assets/parameter-expression-with-cast.png)
+tool       = Root-Command
+parse      = Root-SubCommand
+<file>     = Argument for 'parse' command
+[FileInfo] = Type casting for argument '<file>'.
+--option   = Option for 'parse' command
+<opt-arg>  = Argument for the option '--option'
+[string]   = Type casting for argument '<opt-arg>'.
+```
 
-You are able to define the type for any argument with a type cast '[bool]' or '[System.IO.FileInfo]'.
+## Type-Casting
+
+For each 'Argument' you can cast this argument to your needed type.
 The cast could be written before or after your argument.
 
-Hint: If you do not define argument types the default will be 'object'
+Post-Cast
+```
+<file>[FileInfo]
+```
 
-Then all the generated classes and services work direct with the expected type.
+Pre-Cast
+```
+[string]<opt-arg>
+```
+### Sample for primitive type casting
 
-Sample: (Result from the 'newTool' result)
+```
+tool fetch <file> --pattern <pattern>[string]
+tool fetch <file> --count-numbers <count-numbers-value>[int]
+```
+
+### Sample for specific type casting
+
+```
+tool fetch <file>[System.IO.FileInfo] --all-numbers
+tool fetch <directory>[System.IO.DirectoryInfo] --all-files
+```
+
+```
+Hint: If you do not cast argument with specific types, the default will be
+      'object'. 
+      For types like 'FileInfo' or 'DirectoryInfo' you have to use full
+      quilified type name like 'System.IO.FileInfo'. It will work also with
+      FileInfo but your app will not compile because of the missing namespace
+      thats all.
+```
+
+Then all the generated classes and services work directly with the expected type.
+
+```
+tool parse <file>[System.IO.FileInfo] --option <opt-arg>[string]
+```
 ```csharp
 public class ParseParameters
 {
-    public ParseParameters(System.IO.FileInfo file, bool option)
+    public ParseParameters(System.IO.FileInfo file, string option)
     {
         File = file;
         Option = option;
     }
 
     public System.IO.FileInfo File { get; }
-    public bool Option { get; }
+    public string Option { get; }
 }
 ```
 
 ```csharp
 public Command Build()
 {
-    var command = new Command("parse", "Parse the given file or file path");
-    _optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
-    command.AddArgument(_argumentBuilder.Build());
-    command.Handler = CommandHandler.Create<System.IO.FileInfo, bool>((file, option) => _parseService.HandleAsync(new ParseParameters(file, option)));
+    ...
+    command.Handler = CommandHandler.Create<System.IO.FileInfo, string>((file, option) => _parseService.HandleAsync(new ParseParameters(file, option)));
+    return command;
+}
+```
+
+## Interpreting Options
+
+### Option without argument
+
+Any option without argument is a 'bool' option
+
+```
+tool parse <file>[System.IO.FileInfo] --is-json
+```
+
+```csharp
+public class ParseParameters
+{
+    public ParseParameters(System.IO.FileInfo file, bool isJson)
+    {
+        File = file;
+        IsJson = isJson;
+    }
+
+    public System.IO.FileInfo File { get; }
+    public bool IsJson { get; }
+}
+```
+
+```csharp
+public Command Build()
+{
+    ...
+    command.Handler = CommandHandler.Create<System.IO.FileInfo, bool>((file, option) => _parseService.HandleAsync(new ParseParameters(file, isJson)));
+    return command;
+}
+```
+
+### Option with argument
+```
+tool parse <file>[System.IO.FileInfo] --search-expression <search-expression-value>[string]
+```
+
+```csharp
+public class ParseParameters
+{
+    public ParseParameters(System.IO.FileInfo file, string searchExpression)
+    {
+        File = file;
+        SearchExpression = searchExpression;
+    }
+
+    public System.IO.FileInfo File { get; }
+    public string SearchExpression { get; }
+}
+```
+
+```csharp
+public Command Build()
+{
+    ...
+    command.Handler = CommandHandler.Create<System.IO.FileInfo, string>((file, option) => _parseService.HandleAsync(new ParseParameters(file, searchExpression)));
+    return command;
+}
+```
+
+### Option with argument but NO cast
+
+```
+tool parse <file>[System.IO.FileInfo] --search-expression <search-expression-value>
+```
+
+```csharp
+public class ParseParameters
+{
+    public ParseParameters(System.IO.FileInfo file, object searchExpression)
+    {
+        File = file;
+        SearchExpression = searchExpression;
+    }
+
+    public System.IO.FileInfo File { get; }
+    public object SearchExpression { get; }
+}
+```
+
+```csharp
+public Command Build()
+{
+    ...
+    command.Handler = CommandHandler.Create<System.IO.FileInfo, object>((file, option) => _parseService.HandleAsync(new ParseParameters(file, searchExpression)));
     return command;
 }
 ```
