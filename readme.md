@@ -2,6 +2,11 @@
 
 This dotnet tool will create a dotnet tool based on the System.CommandLine.Experimental package.
 
+## Prerequisites
+* VS2019
+* .NET Core 3.0 SDK or higher
+
+
 ## Target
 
 With this DotNetTool.Builder you should focus your work only to your Logic
