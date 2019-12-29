@@ -58,7 +58,7 @@ dotnet tool install DotNetTool.Builder --version x.y.z
 
 How easy it is 
 
-## How to use it
+## Sample multiple expressions
 
 ```bash
 dotnet newtool
