@@ -5,6 +5,8 @@ using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.Parser.Options
 {
+    using System;
+
     public class OptionParser : IOptionParser
     {
         private readonly IConsoleService _consoleService;
@@ -21,7 +23,10 @@ namespace DotNetTool.Builder.Parser.Options
 
         public OptionInfo Parse(string value, ArgumentInfo argument)
         {
-            _consoleService.WriteInput($"Please enter an alias for your option: '{value}' suggestion: '-{value.Split("--")[1].First()}'");
+            var splitted = value.TrimStart('-').Split('-');
+            var suggestion = new string(splitted.Select(s => s.First()).ToArray());
+
+            _consoleService.WriteInput($"Please enter an alias for your option: '{value}' suggestion: '-{suggestion}'");
             var alias = _consoleService.ReadLine();
 
             _consoleService.WriteInput($"Is your option required (r) or optional (o): '{value}'");

@@ -22,12 +22,12 @@
             yield return new ExpressionArgumentValidator(primitiveTypeNameValidator);
             yield return new ExpressionCastValidator();
             yield return new ExpressionCharValidator();
+            yield return new ExpressionCommandMustBeforeOptionOrArgumentValidator();
             yield return new ExpressionMinimumCommandValidator();
             yield return new ExpressionOnlyOneArgumentValidator();
             yield return new ExpressionOptionValidator(primitiveTypeNameValidator);
             yield return new ExpressionToolNameValidator();
             yield return new ExpressionMultipleWhitespacesValidator();
-            yield return new ExpressionCommandMustBeforeOptionOrArgumentValidator();
         }
     }
 }
