@@ -41,7 +41,7 @@ namespace DotNetTool.Builder.Test.Validation
 
             yield return new ExpressionWithExpectedResult(" ", "  tool");
             yield return new ExpressionWithExpectedResult("-", "- tool");
-            yield return new ExpressionWithExpectedResult("a.b", "a.b  tool");
+            yield return new ExpressionWithExpectedResult("a.b", "a.b tool");
             yield return new ExpressionWithExpectedResult("a.b", "a.b  tool");
 
             yield return new ExpressionWithExpectedResult("dotnet", "");

@@ -31,7 +31,7 @@ namespace DotNetTool.Builder.Services
                 while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
                 {
                     _consoleService.WriteInput("Please enter your parameter expression");
-                    _consoleService.WriteSample("Sample: 'dotnet tool install --global <package>  [--version not needed is a default command]')");
+                    _consoleService.WriteSample("Sample: 'myTool install <package> --global");
 
                     parameterExpression = _consoleService.ReadLine();
                     validationResult = _expressionValidator.IsValid(dotNetToolName, parameterExpression);
