@@ -45,6 +45,13 @@ namespace DotNetTool.Builder.Validation.Expression
                         var start = value.IndexOf("<") + 1;
                         var end = value.IndexOf(">");
                         var argumentName = value.Substring(start, end - start);
+
+                        if (argumentName.IsNullOrWhiteSpace())
+                        {
+                            yield return $"Missing argument name: {value}";
+                            yield break;
+                        }
+
                         var validationResult = _primitiveTypeNameValidator.IsValid(argumentName);
                         if (validationResult.IsValid.IsFalse())
                         {

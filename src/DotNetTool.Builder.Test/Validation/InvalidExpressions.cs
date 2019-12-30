@@ -4,122 +4,15 @@ namespace DotNetTool.Builder.Test.Validation
 {
     using System;
     using System.Linq;
-    using DotNetTool.Builder.Validation;
-    using DotNetTool.Builder.Validation.Expression;
     using Extensions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
-    public abstract class ValidationTestBase
-    {
-        internal ExpressionValidator ExpressionValidator { get; private set; }
-
-        [TestInitialize]
-        public void Init()
-        {
-            ExpressionValidator = new ExpressionValidator(GetValidators().ToList());
-        }
-
-        private IEnumerable<IExpressionContentValidator> GetValidators()
-        {
-            var primitiveTypeNameValidator = new PrimitiveTypeNameValidator();
-            yield return new ExpressionArgumentValidator(primitiveTypeNameValidator);
-            yield return new ExpressionCastValidator();
-            yield return new ExpressionCharValidator();
-            yield return new ExpressionMinimumCommandValidator();
-            yield return new ExpressionOnlyOneArgumentValidator();
-            yield return new ExpressionOptionValidator(primitiveTypeNameValidator);
-            yield return new ExpressionToolNameValidator();
-            yield return new ExpressionMultipleWhitespacesValidator();
-        }
-    }
-
     [TestClass]
     public class InvalidExpressions : ValidationTestBase
     {
-        // Hint implement all thees tests because later we want evaluate the output of each error
-        // but of time issue we want stabilize the beta version.
         [TestMethod]
-        public void Missing_Tool_Name_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "").IsValid);
-        }
-
-        [TestMethod]
-        public void Whitespace_Only_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", " ").IsValid);
-        }
-
-        [TestMethod]
-        public void Type_Cast_Only_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "[string]").IsValid);
-        }
-
-        [TestMethod]
-        public void Empty_Type_Cast_Only_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "[]").IsValid);
-        }
-
-        [TestMethod]
-        public void Option_Only_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "--version").IsValid);
-        }
-
-        [TestMethod]
-        public void Only_Tool_Name_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "dotnet").IsValid);
-        }
-
-        [TestMethod]
-        public void Only_Tool_Name_And_Post_Whitespace_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "dotnet").IsValid);
-        }
-
-        [TestMethod]
-        public void Only_Tool_Name_And_Pre_Whitespace_Is_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", " dotnet").IsValid);
-        }
-
-        [TestMethod]
-        public void Only_Tool_Name_And_One_Cast_Is_Not_Valid()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "dotnet [string]").IsValid);
-        }
-
-        [TestMethod]
-        public void Only_Tool_Name_And_Option_Is_Not_Valid()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "dotnet --version").IsValid);
-        }
-
-        [TestMethod]
-        public void Only_Tool_Name_And_Argument_Is_Not_Valid()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "dotnet <version>").IsValid);
-        }
-
-        [TestMethod]
-        public void Only_Tool_Name_And_Casted_Argument_Is_Not_Valid()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "dotnet [string]<version>").IsValid);
-        }
-
-        [TestMethod]
-        public void One_Command_And_Multiple_Arguments_Are_Not_Allowed()
-        {
-            Assert.IsFalse(ExpressionValidator.IsValid("dotnet", "dotnet tool <arg1> <arg2>").IsValid);
-        }
-
-
-        [TestMethod]
-        public void All_Invalid_Expressions_Must_Be_Not_Valid()
+        public void All_Expressions_Must_Be_Not_Valid()
         {
             var invalidExpressions = GetAll().ToList();
 
@@ -173,11 +66,40 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool ");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool  ");
 
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool §");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool %");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool &");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool /");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool (");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool )");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool [");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool ]");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool ?");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool $");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool ´");
+
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool []");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <>");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --");
+
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool < >");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool - -");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool [ ]");
+
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <%>");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -&-");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool [$]");
+
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool arg>");
 
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[string");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[ ]");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[--]");
+
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> invalidCommand");
+
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[string]--option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg><arg>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[string]<arg>");
@@ -194,27 +116,51 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option<arg>[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option--option");
 
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option invalidCommand");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <value> invalidCommand");
+
             yield return new ExpressionWithExpectedResult("!§$%&/()=?`´", "!§$%&/()=?`´");
             yield return new ExpressionWithExpectedResult("dotnet", "!§$%&/()=?`´");
         }
     }
 
-
-    public class ExpressionWithExpectedResult
+    [TestClass]
+    public class ValidExpressions : ValidationTestBase
     {
-        public ExpressionWithExpectedResult(string toolName, string expression) : this(toolName, expression, string.Empty)
+        [TestMethod]
+        public void All_Expressions_Must_Be_Valid()
         {
+            var validExpressions = GetAll().ToList();
+
+            var invalidExpressions = from expression in validExpressions
+                                     let isInvalid = ExpressionValidator.IsValid(expression.ToolName, expression.Expression).IsValid.IsFalse()
+                                     where isInvalid
+                                     select new { IsValid = isInvalid, Expression = expression.Expression };
+
+
+            Assert.IsTrue(invalidExpressions.IsEmpty(), invalidExpressions.ToString($"Following expressions was invalid, which should be valid:{Environment.NewLine}", result => result.Expression));
         }
 
-        public ExpressionWithExpectedResult(string toolName, string expression, string expectedMessage)
+        public IEnumerable<ExpressionWithExpectedResult> GetAll()
         {
-            ToolName = toolName;
-            Expression = expression;
-            ExpectedMessage = expectedMessage;
-        }
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution>");
 
-        public string ToolName { get; set; }
-        public string Expression { get; }
-        public string ExpectedMessage { get; }
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --no-restore");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration <build-config>");
+
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution>[System.IO.FileInfo]");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build [System.IO.FileInfo]<solution>");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution>[System.IO.FileInfo] --no-restore");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build [System.IO.FileInfo]<solution> --no-restore");
+
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration <build-config>");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration <build-config>[string]");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration [string]<build-config>");
+
+            yield return new ExpressionWithExpectedResult("songoku", "songoku collect dragonballs --all");
+            yield return new ExpressionWithExpectedResult("songoku", "songoku do transform to <saiyajin-level>");
+            yield return new ExpressionWithExpectedResult("songoku", "songoku do transform to <saiyajin-level> --use-sensobean");
+        }
     }
 }
