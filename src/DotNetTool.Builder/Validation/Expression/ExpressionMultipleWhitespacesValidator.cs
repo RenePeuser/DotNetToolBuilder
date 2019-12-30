@@ -1,12 +1,11 @@
-﻿using DotNetTool.Builder.Extensions;
-
-namespace DotNetTool.Builder.Validation.Expression
+﻿namespace DotNetTool.Builder.Validation.Expression
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Extensions;
 
-    public class ExpressionToolNameValidator : IExpressionContentValidator
+    public class ExpressionMultipleWhitespacesValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
@@ -22,11 +21,21 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield break;
             }
 
-            var split = expression.Split();
-            if (split[0].NotEqualsTo(dotNetToolName))
+            var splittedValue = expression.Split().Distinct().ToArray();
+            if (splittedValue.Length <= 1)
             {
-                yield return $"Expression must start with your defined dotnet tool name: '{dotNetToolName}'";
+                yield break;
+            }
+
+            for (int i = 1; i < splittedValue.Length; i++)
+            {
+                var current = splittedValue[i];
+                if (current.IsNullOrWhiteSpace())
+                {
+                    yield return $"Multiple whitespace after: '{splittedValue[i - 1]}' please use only one whitespace as separator";
+                }
+
             }
         }
     }
-};
+}

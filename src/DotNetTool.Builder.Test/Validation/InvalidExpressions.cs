@@ -7,7 +7,6 @@ namespace DotNetTool.Builder.Test.Validation
     using Extensions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
     [TestClass]
     public class InvalidExpressions : ValidationTestBase
     {
@@ -41,7 +40,6 @@ namespace DotNetTool.Builder.Test.Validation
 
             yield return new ExpressionWithExpectedResult(" ", "  tool");
             yield return new ExpressionWithExpectedResult("-", "- tool");
-            yield return new ExpressionWithExpectedResult("a.b", "a.b tool");
             yield return new ExpressionWithExpectedResult("a.b", "a.b  tool");
 
             yield return new ExpressionWithExpectedResult("dotnet", "");
