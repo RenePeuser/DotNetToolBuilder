@@ -28,7 +28,7 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield break;
             }
 
-            var splittedExpression = expression.Split(" ");
+            var splittedExpression = expression.Split();
             foreach (var value in splittedExpression)
             {
                 if (value.StartsWith("-"))
@@ -39,7 +39,27 @@ namespace DotNetTool.Builder.Validation.Expression
                     }
                     else
                     {
-                        var optionName = value.Replace("--", string.Empty);
+                        var optionName = value.TrimStart('-');
+                        if (optionName.Contains("<") || optionName.Contains(">"))
+                        {
+                            yield return $"Option '{value}' contains argument syntax, please separate the argument with a whitespace";
+                        }
+
+                        if (optionName.Contains("[") || optionName.Contains("]"))
+                        {
+                            yield return $"Option '{value}' contains type cast syntax, type cast is only valid at argument";
+                        }
+
+                        if (optionName.Contains("--"))
+                        {
+                            yield return $"Option '{value}' contains '--' is only allowed at the beginning, to separate verbs use '-'";
+                        }
+
+                        if (optionName.IsNullOrWhiteSpace())
+                        {
+                            yield return $"Declaration: '{value}' needs an option name, check your expression: {expression}";
+                        }
+
                         var validationResult = _primitiveTypeNameValidator.IsValid(optionName);
                         if (validationResult.IsValid.IsFalse())
                         {

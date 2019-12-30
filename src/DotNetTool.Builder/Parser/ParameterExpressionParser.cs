@@ -23,7 +23,7 @@ namespace DotNetTool.Builder.Parser
 
         public ParameterInfo Parse(string paramterExpression, ParameterInfo lastParameter)
         {
-            var splittedExpression = paramterExpression.Split(" ");
+            var splittedExpression = paramterExpression.Split();
             var options = new List<OptionInfo>();
             ParameterInfo lastParameterInfo = null;
             ArgumentInfo argument = null;

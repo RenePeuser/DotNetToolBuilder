@@ -53,6 +53,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, ExpressionToolNameValidator>();
             services.AddSingleton<IExpressionContentValidator, ExpressionMinimumCommandValidator>();
             services.AddSingleton<IExpressionContentValidator, ExpressionOnlyOneArgumentValidator>();
+            services.AddSingleton<IExpressionContentValidator, ExpressionMultipleWhitespacesValidator>();
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)

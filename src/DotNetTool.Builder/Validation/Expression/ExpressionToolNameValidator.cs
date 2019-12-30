@@ -2,21 +2,64 @@
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class ExpressionToolNameValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
-            return new ValidationResult(IsValidInternal(dotNetToolName, expression), $"Expression must start with your defined dotnet tool name: '{dotNetToolName}'");
+            var errros = Validate(dotNetToolName, expression).ToList();
+            return new ValidationResult(errros.IsNullOrEmpty(), errros.Flatten(Environment.NewLine));
         }
 
-        private bool IsValidInternal(string dotNetToolName, string expression)
+        private IEnumerable<string> Validate(string dotNetToolName, string expression)
         {
             if (expression.IsNullOrWhiteSpace())
             {
-                return false;
+                yield return "Expression must not be null or empty.";
+                yield break;
             }
 
-            return expression.StartsWith(dotNetToolName);
+            if (expression.StartsWith(dotNetToolName).IsFalse())
+            {
+                yield return $"Expression must start with your defined dotnet tool name: '{dotNetToolName}'";
+            }
         }
     }
-}
+
+    public class ExpressionMultipleWhitespacesValidator : IExpressionContentValidator
+    {
+        public ValidationResult IsValid(string dotNetToolName, string expression)
+        {
+            var errros = Validate(dotNetToolName, expression).ToList();
+            return new ValidationResult(errros.IsNullOrEmpty(), errros.Flatten(Environment.NewLine));
+        }
+
+        private IEnumerable<string> Validate(string dotNetToolName, string expression)
+        {
+            if (expression.IsNullOrWhiteSpace())
+            {
+                yield return "Expression must not be null or empty.";
+                yield break;
+            }
+
+            var splittedValue = expression.Split().Distinct().ToArray();
+            if (splittedValue.Length <= 1)
+            {
+                yield break;
+            }
+
+            for (int i = 1; i < splittedValue.Length; i++)
+            {
+                var current = splittedValue[i];
+                if (current.IsNullOrWhiteSpace())
+                {
+                    yield return $"Multiple whitespace after: '{splittedValue[i - 1]}' please use only one whitespace as separator";
+                }
+
+            }
+        }
+    }
+};

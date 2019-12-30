@@ -19,7 +19,7 @@
                 yield return "The expression must not be null, empty or whitespace";
             }
 
-            var splittedValue = expression.Split(" ");
+            var splittedValue = expression.Split();
 
 
             for (int i = 0; i < splittedValue.Length; i++)

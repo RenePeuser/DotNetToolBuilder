@@ -8,8 +8,6 @@ namespace DotNetTool.Builder.Validation.Expression
 
     public class ExpressionCastValidator : IExpressionContentValidator
     {
-        private const string ValidationInfo = "Cast expressions must be open with '[' and closed with ']'";
-
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
             var errors = CollectErrors(expression).Flatten(Environment.NewLine);
@@ -23,7 +21,7 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield return "The expression must not be null, empty or whitespace";
             }
 
-            var splittedExpression = expression.Split(" ");
+            var splittedExpression = expression.Split();
             foreach (var value in splittedExpression)
             {
                 if (value.Contains("[") || value.Contains("]"))

@@ -30,7 +30,7 @@ namespace DotNetTool.Builder.Validation.Expression
 
             }
 
-            var splittedExpression = expression.Split(" ");
+            var splittedExpression = expression.Split();
             foreach (var value in splittedExpression)
             {
                 if (value.Contains("<") || value.Contains(">"))
@@ -49,6 +49,11 @@ namespace DotNetTool.Builder.Validation.Expression
                         if (validationResult.IsValid.IsFalse())
                         {
                             yield return $"The name of an argument does not match a name of a type: {argumentName}";
+                        }
+
+                        if (value.Contains("--"))
+                        {
+                            yield return $"Argument '{value}' contains '--' is only allowed for options, to separate verbs use '-'";
                         }
                     }
                 }
