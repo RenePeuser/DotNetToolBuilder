@@ -5,6 +5,7 @@
     using DotNetTool.Builder.Validation;
     using DotNetTool.Builder.Validation.Expression;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using ToolNameValidator = DotNetTool.Builder.Validation.Expression.ToolNameValidator;
 
     public abstract class ValidationTestBase
     {
@@ -19,15 +20,16 @@
         private IEnumerable<IExpressionContentValidator> GetValidators()
         {
             var primitiveTypeNameValidator = new PrimitiveTypeNameValidator();
-            yield return new ExpressionArgumentValidator(primitiveTypeNameValidator);
-            yield return new ExpressionCastValidator();
-            yield return new ExpressionCharValidator();
-            yield return new ExpressionCommandMustBeforeOptionOrArgumentValidator();
-            yield return new ExpressionMinimumCommandValidator();
-            yield return new ExpressionMultipleWhitespacesValidator();
-            yield return new ExpressionOnlyOneArgumentValidator();
-            yield return new ExpressionOptionValidator(primitiveTypeNameValidator);
-            yield return new ExpressionToolNameValidator();
+            yield return new ArgumentValidator(primitiveTypeNameValidator);
+            yield return new TypeCastValidator();
+            yield return new CharValidator();
+            yield return new CommandMustBeforeOptionOrArgumentValidator();
+            yield return new MinimumCommandValidator();
+            yield return new MultipleWhitespacesValidator();
+            yield return new OnlyOneArgumentValidator();
+            yield return new OptionValidator(primitiveTypeNameValidator);
+            yield return new ToolNameValidator();
+            yield return new CommandNameValidation();
         }
     }
 }

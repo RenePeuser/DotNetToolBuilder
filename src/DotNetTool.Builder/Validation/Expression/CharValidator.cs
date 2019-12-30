@@ -5,7 +5,7 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
-    public class ExpressionCharValidator : IExpressionContentValidator
+    public class CharValidator : IExpressionContentValidator
     {
         private const string ValidationInfo = "Only letters, digits, '[', ']', '<', '>' and '-' allowed";
 

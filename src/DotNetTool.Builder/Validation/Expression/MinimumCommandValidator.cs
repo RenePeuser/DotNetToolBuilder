@@ -3,7 +3,7 @@
     using System.Linq;
     using Extensions;
 
-    public class ExpressionMinimumCommandValidator : IExpressionContentValidator
+    public class MinimumCommandValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {

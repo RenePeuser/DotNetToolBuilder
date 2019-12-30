@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using Extensions;
 
-    public class ExpressionOnlyOneArgumentValidator : IExpressionContentValidator
+    public class OnlyOneArgumentValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {

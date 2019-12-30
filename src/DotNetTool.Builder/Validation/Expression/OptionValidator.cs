@@ -5,11 +5,11 @@ namespace DotNetTool.Builder.Validation.Expression
     using System;
     using System.Collections.Generic;
 
-    public class ExpressionOptionValidator : IExpressionContentValidator
+    public class OptionValidator : IExpressionContentValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 
-        public ExpressionOptionValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
+        public OptionValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
         {
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }

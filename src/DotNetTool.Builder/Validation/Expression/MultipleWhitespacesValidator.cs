@@ -5,7 +5,7 @@
     using System.Linq;
     using Extensions;
 
-    public class ExpressionMultipleWhitespacesValidator : IExpressionContentValidator
+    public class MultipleWhitespacesValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {

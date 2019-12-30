@@ -17,6 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder
 {
+    using ToolNameValidator = Validation.Expression.ToolNameValidator;
+
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
@@ -41,20 +43,21 @@ namespace DotNetTool.Builder
         private void RegisterValidation(IServiceCollection services)
         {
             services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
-            services.AddSingleton<IToolNameValidator, ToolNameValidator>();
+            services.AddSingleton<IToolNameValidator, Validation.ToolNameValidator>();
 
             services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
 
             services.AddSingleton<IExpressionValidator, ExpressionValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionCastValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionArgumentValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionOptionValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionCharValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionToolNameValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionMinimumCommandValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionOnlyOneArgumentValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionMultipleWhitespacesValidator>();
-            services.AddSingleton<IExpressionContentValidator, ExpressionCommandMustBeforeOptionOrArgumentValidator>();
+            services.AddSingleton<IExpressionContentValidator, TypeCastValidator>();
+            services.AddSingleton<IExpressionContentValidator, ArgumentValidator>();
+            services.AddSingleton<IExpressionContentValidator, OptionValidator>();
+            services.AddSingleton<IExpressionContentValidator, CharValidator>();
+            services.AddSingleton<IExpressionContentValidator, ToolNameValidator>();
+            services.AddSingleton<IExpressionContentValidator, MinimumCommandValidator>();
+            services.AddSingleton<IExpressionContentValidator, OnlyOneArgumentValidator>();
+            services.AddSingleton<IExpressionContentValidator, MultipleWhitespacesValidator>();
+            services.AddSingleton<IExpressionContentValidator, CommandMustBeforeOptionOrArgumentValidator>();
+            services.AddSingleton<IExpressionContentValidator, CommandNameValidation>();
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)

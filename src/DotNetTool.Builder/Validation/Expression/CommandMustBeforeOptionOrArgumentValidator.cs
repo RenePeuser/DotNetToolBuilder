@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using DotNetTool.Builder.Extensions;
-
-namespace DotNetTool.Builder.Validation.Expression
+﻿namespace DotNetTool.Builder.Validation.Expression
 {
     using System;
     using System.Collections.Generic;
+    using Extensions;
 
-    public class ExpressionCastValidator : IExpressionContentValidator
+    public class CommandMustBeforeOptionOrArgumentValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
@@ -22,19 +20,16 @@ namespace DotNetTool.Builder.Validation.Expression
             }
 
             var splittedExpression = expression.Split();
+            bool optionOrArgumentExists = false;
             foreach (var value in splittedExpression)
             {
-                if (value.Contains("[") || value.Contains("]"))
+                if (value.Contains("--") || value.Contains("<") || value.Contains("["))
                 {
-                    if (value.Count(c => c == '[' || c == ']') != 2 || value.IndexOf('[') > value.IndexOf(']'))
-                    {
-                        yield return "A type cast must begin with '[' and ends with ']'";
-                    }
-
-                    if (value.StartsWith("[") && value.EndsWith("]"))
-                    {
-                        yield return "A type cast must be close to an argument. Sample: <myArg>[string] or [string]<myArg>";
-                    }
+                    optionOrArgumentExists = true;
+                }
+                else if (optionOrArgumentExists)
+                {
+                    yield return $"Command: '{value}' was defined after an argument or an option, must be declared before of them.";
                 }
             }
         }

@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using System.Collections.Generic;
     using System.Linq;
 
-    public class ExpressionToolNameValidator : IExpressionContentValidator
+    public class ToolNameValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
