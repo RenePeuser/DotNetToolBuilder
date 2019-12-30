@@ -6,6 +6,10 @@ namespace DotNetTool.Builder.Validation.Expression
     using System;
     using System.Collections.Generic;
 
+    class A2
+    {
+    }
+
     public class ArgumentValidator : IExpressionContentValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
@@ -67,6 +71,11 @@ namespace DotNetTool.Builder.Validation.Expression
                 {
                     yield return $"Missing argument name: {value}";
                     yield break;
+                }
+
+                if (char.IsLetter(argumentName.First()).IsFalse())
+                {
+                    yield return $"Argument: {argumentName} must begin with a letter.";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsValid(argumentName);

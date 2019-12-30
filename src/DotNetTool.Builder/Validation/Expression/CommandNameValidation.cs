@@ -34,6 +34,11 @@
                     {
                         yield return $"Command: {value} most not contain argument-, typecast- or option-syntax.";
                     }
+
+                    if (char.IsLetter(value.First()).IsFalse())
+                    {
+                        yield return $"Argument: {value} must begin with a letter.";
+                    }
                 }
             }
         }

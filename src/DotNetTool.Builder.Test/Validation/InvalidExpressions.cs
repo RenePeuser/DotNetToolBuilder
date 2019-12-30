@@ -70,6 +70,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", " dotnet");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet ");
 
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet 2");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet  ");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet []");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet <>");
@@ -107,6 +108,14 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool - -");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool [ ]");
 
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <->");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool ---");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool [-]");
+
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <.>");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -.-");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool [.]");
+
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <%>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -&-");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool [$]");
@@ -122,35 +131,30 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool arg>");
 
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <2arg>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>string]");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[2string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[string");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[ ]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[--]");
-
-
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>--option <arg>--");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>--option <arg>[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>--option <opt>-[string]");
-
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option <arg>--");
-
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option <opt>-[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option [string]-<arg>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option <arg>[string]-");
-
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option<arg>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option<arg>[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option<opt>-[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> --option<opt>-[string]");
-
-
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> invalidCommand");
-
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[string]--option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg><arg>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[string]<arg>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[string]--option");
 
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --2option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool - option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -- option");
@@ -163,6 +167,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option-[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option<arg>[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option--option");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option-");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option invalidCommand");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <value> invalidCommand");
 

@@ -4,6 +4,7 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class OptionValidator : IExpressionContentValidator
     {
@@ -36,35 +37,46 @@ namespace DotNetTool.Builder.Validation.Expression
                     if (value.StartsWith("--").IsFalse())
                     {
                         yield return $"Option: '{value}' must start with '--'";
+                        continue;
                     }
-                    else
+
+                    var optionName = value.TrimStart('-');
+
+                    if (optionName.IsNullOrWhiteSpace())
                     {
-                        var optionName = value.TrimStart('-');
-                        if (optionName.Contains("<") || optionName.Contains(">"))
-                        {
-                            yield return $"Option '{value}' contains argument syntax, please separate the argument with a whitespace";
-                        }
+                        yield return $"Declaration: '{value}' needs an option name, check your expression: {expression}";
+                        continue;
+                    }
 
-                        if (optionName.Contains("[") || optionName.Contains("]"))
-                        {
-                            yield return $"Option '{value}' contains type cast syntax, type cast is only valid at argument";
-                        }
+                    if (optionName.Contains("<") || optionName.Contains(">"))
+                    {
+                        yield return $"Option '{value}' contains argument syntax, please separate the argument with a whitespace";
+                    }
 
-                        if (optionName.Contains("--"))
-                        {
-                            yield return $"Option '{value}' contains '--' is only allowed at the beginning, to separate verbs use '-'";
-                        }
+                    if (optionName.Contains("[") || optionName.Contains("]"))
+                    {
+                        yield return $"Option '{value}' contains type cast syntax, type cast is only valid at argument";
+                    }
 
-                        if (optionName.IsNullOrWhiteSpace())
-                        {
-                            yield return $"Declaration: '{value}' needs an option name, check your expression: {expression}";
-                        }
+                    if (optionName.Contains("--"))
+                    {
+                        yield return $"Option '{value}' contains '--' is only allowed at the beginning, to separate verbs use '-'";
+                    }
 
-                        var validationResult = _primitiveTypeNameValidator.IsValid(optionName);
-                        if (validationResult.IsValid.IsFalse())
-                        {
-                            yield return $"The name of an argument does not match a name of a type: {optionName}";
-                        }
+                    if (char.IsLetterOrDigit(value.Last()).IsFalse())
+                    {
+                        yield return $"Option: '{value}' must ends only with a letter or digit";
+                    }
+
+                    if (char.IsLetter(optionName.First()).IsFalse())
+                    {
+                        yield return $"Option: {optionName} must begin with a letter.";
+                    }
+
+                    var validationResult = _primitiveTypeNameValidator.IsValid(optionName);
+                    if (validationResult.IsValid.IsFalse())
+                    {
+                        yield return $"The name of an argument does not match a name of a type: {optionName}";
                     }
                 }
             }

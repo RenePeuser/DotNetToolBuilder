@@ -33,6 +33,11 @@ namespace DotNetTool.Builder.Validation
                 yield return "The dotnet tool name must only contains letters or digits.";
             }
 
+            if (char.IsLetter(value.First()).IsFalse())
+            {
+                yield return $"The dotnet tool name: '{value}' must start with a letter";
+            }
+
             var validationResult = _primitiveTypeNameValidator.IsValid(value);
             if (validationResult.IsValid.IsFalse())
             {

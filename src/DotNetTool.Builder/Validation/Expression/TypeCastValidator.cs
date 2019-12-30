@@ -29,11 +29,27 @@ namespace DotNetTool.Builder.Validation.Expression
                     if (value.Count(c => c == '[' || c == ']') != 2 || value.IndexOf('[') > value.IndexOf(']'))
                     {
                         yield return "A type cast must begin with '[' and ends with ']'";
+                        continue;
                     }
 
                     if (value.StartsWith("[") && value.EndsWith("]"))
                     {
                         yield return "A type cast must be close to an argument. Sample: <myArg>[string] or [string]<myArg>";
+                        continue;
+                    }
+
+                    var start = value.IndexOf("[") + 1;
+                    var end = value.IndexOf("]");
+                    var typeName = value.Substring(start, end - start);
+
+                    if (typeName.All(c => char.IsLetterOrDigit(c) || c == '.').IsFalse())
+                    {
+                        yield return $"Type: '{typeName}' must only contains letter, digits or '.'";
+                        continue;
+                    }
+                    if (char.IsLetter(typeName.First()).IsFalse())
+                    {
+                        yield return $"Type: '{typeName}' must begin with a letter";
                     }
                 }
             }
