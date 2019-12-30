@@ -4,12 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.Parser
 {
-
-    [TestClass]
-    public class Invalid_Expressions
-    {
-    }
-
     [TestClass]
     public class Root_Command_Test : ParameterExpressionBaseClass
     {

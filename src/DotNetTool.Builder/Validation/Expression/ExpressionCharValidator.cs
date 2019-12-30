@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     public class ExpressionCharValidator : IExpressionContentValidator
     {
-        private const string ValidationInfo = "Only letters, digits, '[', ']', '<', '>' and '-'";
+        private const string ValidationInfo = "Only letters, digits, '[', ']', '<', '>' and '-' allowed";
 
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[]
         {
