@@ -22,8 +22,8 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield break;
             }
 
-            var split = expression.Split();
-            if (split[0].NotEqualsTo(dotNetToolName))
+            var toolName = expression.Split()[0];
+            if (toolName.NotEqualsTo(dotNetToolName))
             {
                 yield return $"Expression must start with your defined dotnet tool name: '{dotNetToolName}'";
             }

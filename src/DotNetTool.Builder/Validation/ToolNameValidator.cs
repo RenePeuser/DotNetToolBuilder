@@ -28,9 +28,9 @@ namespace DotNetTool.Builder.Validation
                 yield break;
             }
 
-            if (value.All(c => char.IsLetterOrDigit(c) || c == '-').IsFalse())
+            if (value.All(char.IsLetterOrDigit).IsFalse())
             {
-                yield return "The dotnet tool name must only contains letters, digits or '-' are allowed.";
+                yield return "The dotnet tool name must only contains letters or digits.";
             }
 
             var validationResult = _primitiveTypeNameValidator.IsValid(value);

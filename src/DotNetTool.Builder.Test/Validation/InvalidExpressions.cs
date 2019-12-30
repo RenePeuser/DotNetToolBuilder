@@ -40,7 +40,13 @@ namespace DotNetTool.Builder.Test.Validation
 
             yield return new ExpressionWithExpectedResult(" ", "  tool");
             yield return new ExpressionWithExpectedResult("-", "- tool");
-            yield return new ExpressionWithExpectedResult("a.b", "a.b  tool");
+
+            // This is already handled when user has to give in tool name, this situation can not happen.
+            // yield return new ExpressionWithExpectedResult("a.b", "a.b tool");
+            // yield return new ExpressionWithExpectedResult("a-b", "a-b tool");
+
+            yield return new ExpressionWithExpectedResult("a/b", "a/b tool");
+            yield return new ExpressionWithExpectedResult("a-b", "a-b  tool");
 
             yield return new ExpressionWithExpectedResult("dotnet", "");
             yield return new ExpressionWithExpectedResult("dotnet", " ");
