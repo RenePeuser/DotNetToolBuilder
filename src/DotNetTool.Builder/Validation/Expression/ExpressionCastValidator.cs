@@ -3,34 +3,42 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using System;
+    using System.Collections.Generic;
+
     public class ExpressionCastValidator : IExpressionContentValidator
     {
         private const string ValidationInfo = "Cast expressions must be open with '[' and closed with ']'";
 
         public ValidationResult IsValid(string dotNetToolName, string expression)
         {
-            return new ValidationResult(IsValidInternal(expression), ValidationInfo);
+            var errors = CollectErrors(expression).Flatten(Environment.NewLine);
+            return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }
 
-        private bool IsValidInternal(string value)
+        private IEnumerable<string> CollectErrors(string expression)
         {
-            if (value.IsNullOrWhiteSpace())
+            if (expression.IsNullOrWhiteSpace())
             {
-                return false;
+                yield return "The expression must not be null, empty or whitespace";
             }
 
-            var splittedExpression = value.Split(" ");
-            var result = splittedExpression.Where(s =>
+            var splittedExpression = expression.Split(" ");
+            foreach (var value in splittedExpression)
             {
-                if (s.Contains("[") || s.Contains("]"))
+                if (value.Contains("[") || value.Contains("]"))
                 {
-                    return s.Count(c => c == '[' || c == ']') != 2 || s.IndexOf('[') > s.IndexOf(']');
+                    if (value.Count(c => c == '[' || c == ']') != 2 || value.IndexOf('[') > value.IndexOf(']'))
+                    {
+                        yield return "A type cast must begin with '[' and ends with ']'";
+                    }
+
+                    if (value.StartsWith("[") || value.EndsWith("]"))
+                    {
+                        yield return "A type cast must be close to an argument. Sample: <myArg>[string] or [string]<myArg>";
+                    }
                 }
-
-                return false;
-            });
-            return result.IsEmpty();
-
+            }
         }
     }
 }

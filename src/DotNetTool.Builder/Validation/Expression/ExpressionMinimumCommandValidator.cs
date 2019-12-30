@@ -1,5 +1,7 @@
 ﻿namespace DotNetTool.Builder.Validation.Expression
 {
+    using System.Linq;
+    using System.Threading;
     using Extensions;
 
     public class ExpressionMinimumCommandValidator : IExpressionContentValidator
