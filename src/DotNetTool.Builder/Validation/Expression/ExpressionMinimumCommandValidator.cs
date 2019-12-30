@@ -1,7 +1,6 @@
 ﻿namespace DotNetTool.Builder.Validation.Expression
 {
     using System.Linq;
-    using System.Threading;
     using Extensions;
 
     public class ExpressionMinimumCommandValidator : IExpressionContentValidator
@@ -19,7 +18,7 @@
             }
 
             var split = expression.Split(' ');
-            return split.Length > 1;
+            return split.Length >= 2 && char.IsLetterOrDigit(split[1].FirstOrDefault());
         }
     }
 }

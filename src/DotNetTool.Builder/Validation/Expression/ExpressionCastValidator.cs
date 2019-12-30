@@ -33,7 +33,7 @@ namespace DotNetTool.Builder.Validation.Expression
                         yield return "A type cast must begin with '[' and ends with ']'";
                     }
 
-                    if (value.StartsWith("[") || value.EndsWith("]"))
+                    if (value.StartsWith("[") && value.EndsWith("]"))
                     {
                         yield return "A type cast must be close to an argument. Sample: <myArg>[string] or [string]<myArg>";
                     }
