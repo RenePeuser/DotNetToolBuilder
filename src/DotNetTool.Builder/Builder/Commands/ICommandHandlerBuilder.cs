@@ -4,6 +4,6 @@
 
     internal interface ICommandHandlerBuilder
     {
-        string Build(ParameterInfo parameterInfo);
+        string Build(CommandInfo parameterInfo);
     }
 }

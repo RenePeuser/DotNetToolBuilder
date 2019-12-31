@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Builder.Parameter
 {
     internal interface IParameterClassBuilder
     {
-        string Build(string projectName, ParameterInfo parameterInfo, string nameSpace);
+        string Build(string projectName, CommandInfo parameterInfo, string nameSpace);
     }
 }

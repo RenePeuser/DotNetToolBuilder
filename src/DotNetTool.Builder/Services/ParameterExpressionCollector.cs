@@ -23,23 +23,20 @@ namespace DotNetTool.Builder.Services
             _expressionTokenizer = expressionTokenizer;
         }
 
-        public ParameterInfo CollectFor(string dotNetToolName)
+        public CommandInfo CollectFor(string dotNetToolName)
         {
-            ParameterInfo parameter = null;
-
+            CommandInfo parameter = null;
             while (true)
             {
-
-                string parameterExpression = null;
+                ExpressionInfo expressionInfo = null;
                 ValidationResult validationResult = null;
                 while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
                 {
                     _consoleService.WriteInput("Please enter your parameter expression");
                     _consoleService.WriteSample("Sample: 'myTool install <package> --global");
 
-                    parameterExpression = _consoleService.ReadLine();
-
-                    var expressionInfo = _expressionTokenizer.Tokenize(parameterExpression);
+                    var parameterExpression = _consoleService.ReadLine();
+                    expressionInfo = _expressionTokenizer.Tokenize(parameterExpression);
                     validationResult = _expressionValidator.IsValid(dotNetToolName, expressionInfo);
                     if (validationResult.IsValid.IsFalse())
                     {
@@ -47,7 +44,7 @@ namespace DotNetTool.Builder.Services
                     }
                 }
 
-                var parseResult = _parameterExpressionParser.Parse(parameterExpression, parameter);
+                var parseResult = _parameterExpressionParser.Parse(expressionInfo, parameter);
 
                 if (parameter.IsNull())
                 {

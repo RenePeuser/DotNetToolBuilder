@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Builder.Commands
     }
 }";
 
-        public string Build(string project, ParameterInfo parameterInfo, string nameSpace)
+        public string Build(string project, CommandInfo parameterInfo, string nameSpace)
         {
             Throw.IfNullOrWhiteSpace(() => project);
             Throw.IfNull(() => parameterInfo);

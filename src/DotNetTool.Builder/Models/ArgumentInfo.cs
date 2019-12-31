@@ -1,28 +1,17 @@
-﻿using System.Diagnostics;
-using DotNetTool.Builder.Extensions;
+﻿using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
-    [DebuggerDisplay("{" + nameof(Value) + "}")]
-    public class ArgumentInfo
+    public class ArgumentInfo : InfoBase
     {
-        public ArgumentInfo(string name, string description, string value, string normalizedName, string type)
+        public ArgumentInfo(string name, string description, string value, string normalizedName, string type) : base(value, name)
         {
-            Name = name;
             Description = description;
-            Value = value;
-            NormalizedName = normalizedName;
             NormalizedParameterName = normalizedName.FirstCharToLower();
             Type = type;
         }
 
-        public string Name { get; }
-
         public string Description { get; }
-
-        public string Value { get; }
-
-        public string NormalizedName { get; }
 
         public string NormalizedParameterName { get; }
 

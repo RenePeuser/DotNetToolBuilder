@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal interface ICommandHandlerStringBuilder
     {
-        string Build(ParameterInfo parameterInfo);
-        bool IsThisBuilderFor(ParameterInfo parameterInfo);
+        string Build(CommandInfo parameterInfo);
+        bool IsThisBuilderFor(CommandInfo parameterInfo);
     }
 }

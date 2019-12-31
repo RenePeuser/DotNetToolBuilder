@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Builder.Argument
 {
     public interface IArgumentBuilder
     {
-        string Build(string projectName, ParameterInfo parameterInfo, string nameSpace);
+        string Build(string projectName, CommandInfo parameterInfo, string nameSpace);
     }
 }

@@ -17,7 +17,7 @@
     }
 }";
 
-        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
+        public string Build(string projectName, CommandInfo parameterInfo, string nameSpace)
         {
             Throw.IfNullOrWhiteSpace(() => projectName);
             Throw.IfNull(() => parameterInfo);
@@ -30,7 +30,7 @@
             return newTemplate;
         }
 
-        public bool IsThisBuilderFor(ParameterInfo parameterInfo)
+        public bool IsThisBuilderFor(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 

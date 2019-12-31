@@ -1,15 +1,10 @@
-﻿using System.Diagnostics;
-
-namespace DotNetTool.Builder.Models
+﻿namespace DotNetTool.Builder.Models
 {
-    [DebuggerDisplay("{" + nameof(Value) + "}")]
-    public class OptionInfo
+    public class OptionInfo : InfoBase
     {
         public OptionInfo(string value, string name, string alias, string description, bool required,
-            ArgumentInfo argument, string normalizedValue, string argumentName)
+            ArgumentInfo argument, string normalizedValue, string argumentName):base(value, name)
         {
-            Value = value;
-            Name = name;
             Alias = alias;
             Description = description;
             Required = required;
@@ -17,10 +12,6 @@ namespace DotNetTool.Builder.Models
             NormalizedValue = normalizedValue;
             ArgumentName = argumentName;
         }
-
-        public string Value { get; }
-
-        public string Name { get; }
 
         public string Alias { get; }
 

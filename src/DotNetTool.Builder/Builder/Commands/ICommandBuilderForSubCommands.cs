@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     internal interface ICommandBuilderForSubCommands
     {
-        string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace);
+        string Build(string project, CommandInfo parameterInfo, CommandInfo parent, string nameSpace);
     }
 }

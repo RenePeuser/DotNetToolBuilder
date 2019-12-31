@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Models
     [DebuggerDisplay("{" + nameof(ToolName) + "}")]
     public class DotNetTool
     {
-        public DotNetTool(string projectName, string toolName, ParameterInfo parameterInfo)
+        public DotNetTool(string projectName, string toolName, CommandInfo parameterInfo)
         {
             ProjectName = projectName;
             ToolName = toolName;
@@ -20,6 +20,6 @@ namespace DotNetTool.Builder.Models
 
         public string NormalizedToolName { get; }
 
-        public ParameterInfo ParameterInfo { get; }
+        public CommandInfo ParameterInfo { get; }
     }
 }

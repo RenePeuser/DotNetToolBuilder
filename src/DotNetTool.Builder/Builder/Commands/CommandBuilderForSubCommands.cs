@@ -40,7 +40,7 @@ namespace DotNetTool.Builder.Builder.Commands
             _commandHandlerBuilder = commandHandlerBuilder;
         }
 
-        public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
+        public string Build(string project, CommandInfo parameterInfo, CommandInfo parent, string nameSpace)
         {
             Throw.IfNullOrWhiteSpace(() => project);
             Throw.IfNull(() => parameterInfo);

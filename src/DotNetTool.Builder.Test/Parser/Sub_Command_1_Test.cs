@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Test.Parser
     [TestClass]
     public class Sub_Command_1_Test : ParameterExpressionBaseClass
     {
-        private ParameterInfo _subCommand1;
+        private CommandInfo _subCommand1;
 
         protected override string GetExpressionToParse()
         {

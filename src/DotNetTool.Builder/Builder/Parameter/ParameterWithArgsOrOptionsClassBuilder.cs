@@ -26,7 +26,7 @@ $properties$
 
         private const string CtorArgument = @"$type$ $argName$";
 
-        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
+        public string Build(string projectName, CommandInfo parameterInfo, string nameSpace)
         {
             Throw.IfNullOrWhiteSpace(() => projectName);
             Throw.IfNull(() => parameterInfo);
@@ -49,7 +49,7 @@ $properties$
             return newTemplate;
         }
 
-        public bool IsThisBuilderFor(ParameterInfo parameterInfo)
+        public bool IsThisBuilderFor(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 
@@ -85,7 +85,7 @@ $properties$
         }
 
 
-        private IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
+        private IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
         {
             var argumentInfo = parameterInfo.ArgumentInfo;
             if (argumentInfo.IsNotNull())

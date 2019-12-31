@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Builder.Parameter
             _parameterSpecificClassBuilders = parameterSpecificClassBuilders;
         }
 
-        public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
+        public string Build(string projectName, CommandInfo parameterInfo, string nameSpace)
         {
             Throw.IfNullOrWhiteSpace(() => projectName);
             Throw.IfNull(() => parameterInfo);

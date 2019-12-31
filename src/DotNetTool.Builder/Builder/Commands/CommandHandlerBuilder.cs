@@ -16,7 +16,7 @@
             _commandHandlerStringBuilders = commandHandlerStringBuilders;
         }
 
-        public string Build(ParameterInfo parameterInfo)
+        public string Build(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 

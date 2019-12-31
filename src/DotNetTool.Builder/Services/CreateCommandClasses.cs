@@ -59,7 +59,7 @@ namespace DotNetTool.Builder.Services
             _commandServiceInterfaceBuilder = commandServiceInterfaceBuilder;
         }
 
-        public void Invoke(string projectName, ParameterInfo parameter, IDirectoryInfo rootDirectory,
+        public void Invoke(string projectName, CommandInfo parameter, IDirectoryInfo rootDirectory,
             ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector)
         {
             var subCommands = parameter.SubCommands;

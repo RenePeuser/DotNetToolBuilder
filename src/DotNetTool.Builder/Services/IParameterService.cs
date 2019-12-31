@@ -4,13 +4,10 @@ namespace DotNetTool.Builder.Services
 {
     public interface IParameterService
     {
-        ParameterInfo FindAlreadyExistingCommand(string command,
-            ParameterInfo current);
+        CommandInfo FindAlreadyExistingCommand(CommandInfo command, CommandInfo current);
 
-        ArgumentInfo FindAlreadyExistingArgument(string argument,
-            ParameterInfo current);
+        ArgumentInfo FindAlreadyExistingArgument(ArgumentInfo argument, CommandInfo current);
 
-        OptionInfo FindAlreadyExistingOption(string option,
-            ParameterInfo current);
+        OptionInfo FindAlreadyExistingOption(OptionInfo option, CommandInfo current);
     }
 }

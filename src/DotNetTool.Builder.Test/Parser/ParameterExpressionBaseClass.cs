@@ -2,17 +2,21 @@
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Options;
-using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
 namespace DotNetTool.Builder.Test.Parser
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using DotNetTool.Builder.Parser.Commands;
+    using DotNetTool.Builder.Tokenizer;
+
     [TestClass]
     public abstract class ParameterExpressionBaseClass
     {
-        protected ParameterInfo ParseResult { get; private set; }
+        protected CommandInfo ParseResult { get; private set; }
 
         protected abstract string GetExpressionToParse();
 
@@ -20,19 +24,19 @@ namespace DotNetTool.Builder.Test.Parser
         public void Init()
         {
             var consoleService = Substitute.For<IConsoleService>();
-            var argumentOnlyParser = new ArgumentOnly(consoleService);
-            var argumentWithPreTypeCast = new ArgumentWithPreTypeCast(argumentOnlyParser);
-            var argumentWithPostTypeCast = new ArgumentWithPostTypeCast(argumentOnlyParser);
-            var optionParser = new OptionParser(consoleService);
-            var parameterParser = new ParameterParser(consoleService);
-            var parameterService = new ParameterService();
-
-            var allparsers = new IParameterValueParser[] { argumentOnlyParser, argumentWithPreTypeCast, argumentWithPostTypeCast, optionParser, parameterParser };
-            var paser = new ParameterExpressionParser(allparsers, parameterService);
-
+            var paser = new ParameterExpressionParser(new CommandParser(consoleService), new ArgumentParser(consoleService), new OptionParser(consoleService), new ParameterService());
+            var tokenizer = new ExpressionTokenizer(GetTokenizer().ToList());
             var expression = GetExpressionToParse();
-            ParseResult = paser.Parse(expression, null);
+            var expressionInfo = tokenizer.Tokenize(expression);
+            ParseResult = paser.Parse(expressionInfo, null);
             OnInit();
+        }
+
+        private IEnumerable<ITokenizer> GetTokenizer()
+        {
+            yield return new ArgumentTokenizer();
+            yield return new OptionTokenizer();
+            yield return new CommandTokenizer();
         }
 
         protected abstract void OnInit();

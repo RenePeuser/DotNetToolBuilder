@@ -5,56 +5,68 @@ using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Options;
-using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.Parser
 {
+    using Commands;
+    using global::Argument.Check;
+    using Tokenizer.Tokens;
+
     public class ParameterExpressionParser : IParameterExpressionParser
     {
+        private readonly ICommandParser _commandParser;
+        private readonly IArgumentParser _argumentParser;
+        private readonly IOptionParser _optionParser;
         private readonly IParameterService _parameterService;
-        private readonly IEnumerable<IParameterValueParser> _parsers;
 
-        public ParameterExpressionParser(IEnumerable<IParameterValueParser> parsers, IParameterService parameterService)
+        public ParameterExpressionParser(ICommandParser commandParser, IArgumentParser argumentParser, IOptionParser optionParser, IParameterService parameterService)
         {
-            _parsers = parsers;
+            Throw.IfNull(() => commandParser);
+            Throw.IfNull(() => argumentParser);
+            Throw.IfNull(() => optionParser);
+            Throw.IfNull(() => parameterService);
+
+            _commandParser = commandParser;
+            _argumentParser = argumentParser;
+            _optionParser = optionParser;
             _parameterService = parameterService;
         }
 
-        public ParameterInfo Parse(string paramterExpression, ParameterInfo lastParameter)
+        public CommandInfo Parse(ExpressionInfo parameterExpression, CommandInfo lastParameter)
         {
-            var splittedExpression = paramterExpression.Split();
             var options = new List<OptionInfo>();
-            ParameterInfo lastParameterInfo = null;
+            CommandInfo lastCommand = null;
             ArgumentInfo argument = null;
 
-            for (var i = splittedExpression.Length - 1; i >= 0; i--)
+            foreach (var token in parameterExpression.Tokens.Reverse())
             {
-                var currentWithTypeInfo = splittedExpression[i];
-                var current = currentWithTypeInfo;
-                var foundParser = _parsers.SingleOrDefault(p => p.IsThisParserFor(currentWithTypeInfo));
-                ParameterInfo parameter = null;
-
-                switch (foundParser)
+                CommandInfo parameter = null;
+                switch (token)
                 {
-                    case IArgumentParser argumentParser: var alreadyExistingArgument = _parameterService.FindAlreadyExistingArgument(current, lastParameter);
-                        argument = alreadyExistingArgument.IsNull() ? argumentParser.Parse(currentWithTypeInfo) : alreadyExistingArgument;
+                    case ArgumentToken argumentToken:
+                        var currentArgument = _argumentParser.Parse(argumentToken);
+                        var existingArgument = _parameterService.FindAlreadyExistingArgument(currentArgument, lastParameter);
+                        argument = existingArgument.IsNotNull() ? existingArgument : currentArgument;
                         break;
-                    case IOptionParser optionParser: var alreadyExistingOption = _parameterService.FindAlreadyExistingOption(current, lastParameter);
-                        options.Add(alreadyExistingOption.IsNull() ? optionParser.Parse(currentWithTypeInfo, argument) : alreadyExistingOption);
+                    case OptionToken optionToken:
+                        var currentOption = _optionParser.Parse(optionToken, argument);
+                        var existingOption = _parameterService.FindAlreadyExistingOption(currentOption, lastParameter);
+                        options.Add(existingOption.IsNotNull() ? existingOption : currentOption);
                         break;
-                    case IParameterParser parameterParser:
-                        var commandAlreadyExists = _parameterService.FindAlreadyExistingCommand(current, lastParameter);
-                        parameter = commandAlreadyExists.IsNull() ? parameterParser.Parse(currentWithTypeInfo, options) : parameterParser.Parse(current, options, commandAlreadyExists);
+                    case CommandToken commandToken:
+                        var currentCommand = _commandParser.Parse(commandToken, options);
+                        var existingCommand = _parameterService.FindAlreadyExistingCommand(currentCommand, lastParameter);
+                        parameter = existingCommand.IsNotNull() ? existingCommand : _commandParser.Parse(commandToken, options, currentCommand);
                         options = new List<OptionInfo>();
                         break;
                     default:
-                        throw new InvalidOperationException();
+                        throw new InvalidOperationException($"Parameter expression: {parameterExpression.OptimizedExpressions} has invalid tokens, please check validation logic.");
                 }
 
-                if (lastParameterInfo.IsNotNull())
+                if (lastCommand.IsNotNull())
                 {
-                    parameter.SubCommands = lastParameterInfo.ToIList();
+                    parameter.SubCommands = lastCommand.ToIList();
                 }
 
                 if (parameter.IsNotNull())
@@ -66,10 +78,10 @@ namespace DotNetTool.Builder.Parser
                     }
                 }
 
-                lastParameterInfo = parameter;
+                lastCommand = parameter;
                 if (lastParameter.IsNotNull())
                 {
-                    var parentForThis = _parameterService.FindAlreadyExistingCommand(current, lastParameter);
+                    var parentForThis = _parameterService.FindAlreadyExistingCommand(parameter, lastParameter);
                     if (parentForThis.IsNotNull())
                     {
                         if (parentForThis.SubCommands.IsNotNull())
@@ -85,7 +97,7 @@ namespace DotNetTool.Builder.Parser
                 return lastParameter;
             }
 
-            return lastParameterInfo;
+            return lastCommand;
         }
     }
 }

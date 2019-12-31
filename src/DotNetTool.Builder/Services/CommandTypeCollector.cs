@@ -13,7 +13,7 @@ namespace DotNetTool.Builder.Services
             _typesToRegister = new Dictionary<string, IEnumerable<TypeToRegister>>();
         }
 
-        public void Add(ParameterInfo parameterInfo, TypeToRegister typeToRegister)
+        public void Add(CommandInfo parameterInfo, TypeToRegister typeToRegister)
         {
             var name = parameterInfo.Name;
             var alreadyExists = _typesToRegister.ContainsKey(name);

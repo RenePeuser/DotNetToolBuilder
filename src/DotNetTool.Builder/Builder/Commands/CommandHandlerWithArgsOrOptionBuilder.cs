@@ -11,7 +11,7 @@ namespace DotNetTool.Builder.Builder.Commands
     {
         private const string Template = "CommandHandler.Create<$types$>(($argument-names$) => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
 
-        public string Build(ParameterInfo parameterInfo)
+        public string Build(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 
@@ -26,14 +26,14 @@ namespace DotNetTool.Builder.Builder.Commands
             return newTemplate;
         }
 
-        public bool IsThisBuilderFor(ParameterInfo parameterInfo)
+        public bool IsThisBuilderFor(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 
             return parameterInfo.ArgumentInfo.IsNotNull() || parameterInfo.Options.Any();
         }
 
-        internal IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
+        internal IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 

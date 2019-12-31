@@ -8,10 +8,15 @@
 
             if (source is T)
             {
-                result = (T) source;
+                result = (T)source;
             }
 
             return result;
+        }
+
+        public static T Cast<T>(this object source) where T : class
+        {
+            return (T)source;
         }
 
         public static bool Is<T>(this object source)

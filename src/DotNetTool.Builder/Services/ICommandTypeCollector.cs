@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Services
 {
     public interface ICommandTypeCollector
     {
-        void Add(ParameterInfo parameterInfo, TypeToRegister typeToRegister);
+        void Add(CommandInfo parameterInfo, TypeToRegister typeToRegister);
         Dictionary<string, IEnumerable<TypeToRegister>> GetAll();
     }
 }

@@ -5,7 +5,7 @@ using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.Parser.Options
 {
-    using System;
+    using Tokenizer.Tokens;
 
     public class OptionParser : IOptionParser
     {
@@ -16,13 +16,9 @@ namespace DotNetTool.Builder.Parser.Options
             _consoleService = consoleService;
         }
 
-        public bool IsThisParserFor(string value)
+        public OptionInfo Parse(OptionToken token, ArgumentInfo argument)
         {
-            return value.StartsWith("-");
-        }
-
-        public OptionInfo Parse(string value, ArgumentInfo argument)
-        {
+            var value = token.Value;
             var splitted = value.TrimStart('-').Split('-');
             var suggestion = new string(splitted.Select(s => s.First()).ToArray());
 
@@ -40,8 +36,7 @@ namespace DotNetTool.Builder.Parser.Options
             var normalizedOptiontName = optioName.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
             var optionArgumentName = normalizedOptiontName.FirstCharToLower();
 
-            var option = new OptionInfo(value, optioName, alias, description, boolRequired, argument,
-                normalizedOptiontName, optionArgumentName);
+            var option = new OptionInfo(value, optioName, alias, description, boolRequired, argument, normalizedOptiontName, optionArgumentName);
             return option;
         }
     }

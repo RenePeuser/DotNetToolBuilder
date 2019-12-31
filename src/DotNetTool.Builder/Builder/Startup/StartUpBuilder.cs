@@ -50,7 +50,7 @@ $methods$
         }
 
         public void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
-            ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
+            ICommandTypeCollector commandTypeCollector, CommandInfo rootCommand,
             INameSpaceCollector nameSpaceCollector)
         {
             Throw.IfNullOrWhiteSpace(() => projectName);

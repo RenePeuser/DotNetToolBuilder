@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Builder.Startup
     public interface IStartUpBuilder
     {
         void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
-            ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
+            ICommandTypeCollector commandTypeCollector, CommandInfo rootCommand,
             INameSpaceCollector nameSpaceCollector);
     }
 }

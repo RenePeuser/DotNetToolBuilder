@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Test.Parser
     [TestClass]
     public class Root_Command_Test : ParameterExpressionBaseClass
     {
-        private ParameterInfo _rootCommand;
+        private CommandInfo _rootCommand;
 
         protected override string GetExpressionToParse()
         {

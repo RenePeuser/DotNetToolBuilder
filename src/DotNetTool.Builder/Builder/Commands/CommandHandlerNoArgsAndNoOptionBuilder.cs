@@ -10,7 +10,7 @@
     {
         private const string Template = "CommandHandler.Create(() => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
 
-        public string Build(ParameterInfo parameterInfo)
+        public string Build(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 
@@ -25,14 +25,14 @@
             return newTemplate;
         }
 
-        public bool IsThisBuilderFor(ParameterInfo parameterInfo)
+        public bool IsThisBuilderFor(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 
             return parameterInfo.ArgumentInfo.IsNull() && parameterInfo.Options.IsNullOrEmpty();
         }
 
-        private IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
+        private IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
         {
             var argumentInfo = parameterInfo.ArgumentInfo;
             if (argumentInfo.IsNotNull())

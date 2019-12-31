@@ -34,7 +34,7 @@ namespace DotNetTool.Builder.Builder
     }
 }";
 
-        public void AddStartup(string projectName, FileInfo solutionFile, ParameterInfo rootCommand)
+        public void AddStartup(string projectName, FileInfo solutionFile, CommandInfo rootCommand)
         {
             Throw.IfNullOrWhiteSpace(() => projectName);
             Throw.IfNull(() => solutionFile);

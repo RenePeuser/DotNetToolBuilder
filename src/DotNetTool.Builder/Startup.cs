@@ -1,5 +1,4 @@
-﻿using DotNetTool.Builder.App;
-using DotNetTool.Builder.Builder.Argument;
+﻿using DotNetTool.Builder.Builder.Argument;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
@@ -9,7 +8,6 @@ using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Options;
-using DotNetTool.Builder.Parser.Parameters;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Validation;
 using DotNetTool.Builder.Validation.Expression;
@@ -17,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder
 {
+    using Parser.Commands;
     using Tokenizer;
     using ToolNameValidator = Validation.Expression.ToolNameValidator;
 
@@ -31,7 +30,6 @@ namespace DotNetTool.Builder
             RegisterArgumentParser(services);
             RegisterOptionsParser(services);
             RegisterParameterParser(services);
-            RegisterParameterValueParser(services);
 
             RegisterDotNetToolInfoCollector(services);
 
@@ -107,11 +105,7 @@ namespace DotNetTool.Builder
 
         public void RegisterArgumentParser(IServiceCollection services)
         {
-            services.AddSingleton<IArgumentOnly, ArgumentOnly>();
-
-            services.AddSingleton<IArgumentParser, ArgumentOnly>();
-            services.AddSingleton<IArgumentParser, ArgumentWithPostTypeCast>();
-            services.AddSingleton<IArgumentParser, ArgumentWithPreTypeCast>();
+            services.AddSingleton<IArgumentParser, ArgumentParser>();
         }
 
         public void RegisterOptionsParser(IServiceCollection services)
@@ -121,17 +115,8 @@ namespace DotNetTool.Builder
 
         public void RegisterParameterParser(IServiceCollection services)
         {
-            services.AddSingleton<IParameterParser, ParameterParser>();
+            services.AddSingleton<ICommandParser, CommandParser>();
             services.AddSingleton<IParameterExpressionParser, ParameterExpressionParser>();
-        }
-
-        public void RegisterParameterValueParser(IServiceCollection services)
-        {
-            services.AddSingleton<IParameterValueParser, ArgumentOnly>();
-            services.AddSingleton<IParameterValueParser, ArgumentWithPostTypeCast>();
-            services.AddSingleton<IParameterValueParser, ArgumentWithPreTypeCast>();
-            services.AddSingleton<IParameterValueParser, OptionParser>();
-            services.AddSingleton<IParameterValueParser, ParameterParser>();
         }
 
         public void RegisterArgumentBuilder(IServiceCollection services)

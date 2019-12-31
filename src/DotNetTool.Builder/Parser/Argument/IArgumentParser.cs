@@ -2,8 +2,10 @@
 
 namespace DotNetTool.Builder.Parser.Argument
 {
-    public interface IArgumentParser : IParameterValueParser
+    using Tokenizer.Tokens;
+
+    public interface IArgumentParser
     {
-        ArgumentInfo Parse(string value);
+        ArgumentInfo Parse(ArgumentToken value);
     }
 }

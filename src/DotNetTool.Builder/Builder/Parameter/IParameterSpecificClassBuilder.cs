@@ -4,7 +4,7 @@
 
     internal interface IParameterSpecificClassBuilder
     {
-        string Build(string projectName, ParameterInfo parameterInfo, string nameSpace);
-        bool IsThisBuilderFor(ParameterInfo parameterInfo);
+        string Build(string projectName, CommandInfo parameterInfo, string nameSpace);
+        bool IsThisBuilderFor(CommandInfo parameterInfo);
     }
 }

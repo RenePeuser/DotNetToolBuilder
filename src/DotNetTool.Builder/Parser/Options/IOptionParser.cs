@@ -2,8 +2,10 @@
 
 namespace DotNetTool.Builder.Parser.Options
 {
-    public interface IOptionParser : IParameterValueParser
+    using Tokenizer.Tokens;
+
+    public interface IOptionParser
     {
-        OptionInfo Parse(string value, ArgumentInfo argument);
+        OptionInfo Parse(OptionToken token, ArgumentInfo argument);
     }
 }

@@ -6,15 +6,15 @@ namespace DotNetTool.Builder.Services
 {
     public class ParameterService : IParameterService
     {
-        public ParameterInfo FindAlreadyExistingCommand(string command,
-            ParameterInfo current)
+        public CommandInfo FindAlreadyExistingCommand(CommandInfo command,
+            CommandInfo current)
         {
             if (current.IsNull())
             {
                 return null;
             }
 
-            if (current.Name == command)
+            if (current.Name == command.Name)
             {
                 return current;
             }
@@ -23,7 +23,7 @@ namespace DotNetTool.Builder.Services
             {
                 foreach (var cliParameterInfo in current.SubCommands)
                 {
-                    if (cliParameterInfo.Name == command)
+                    if (cliParameterInfo.Name == command.Name)
                     {
                         return cliParameterInfo;
                     }
@@ -39,8 +39,8 @@ namespace DotNetTool.Builder.Services
             return null;
         }
 
-        public ArgumentInfo FindAlreadyExistingArgument(string argument,
-            ParameterInfo current)
+        public ArgumentInfo FindAlreadyExistingArgument(ArgumentInfo argument,
+            CommandInfo current)
         {
             if (current.IsNull())
             {
@@ -49,7 +49,7 @@ namespace DotNetTool.Builder.Services
 
             if (current.ArgumentInfo.IsNotNull())
             {
-                if (current.ArgumentInfo.Value == argument)
+                if (current.ArgumentInfo.Value == argument.Name)
                 {
                     return current.ArgumentInfo;
                 }
@@ -71,8 +71,8 @@ namespace DotNetTool.Builder.Services
             return null;
         }
 
-        public OptionInfo FindAlreadyExistingOption(string option,
-            ParameterInfo current)
+        public OptionInfo FindAlreadyExistingOption(OptionInfo option,
+            CommandInfo current)
         {
             if (current.IsNull())
             {
@@ -80,7 +80,7 @@ namespace DotNetTool.Builder.Services
             }
 
 
-            var existingOption = current.Options.FirstOrDefault(o => o.Value == option);
+            var existingOption = current.Options.FirstOrDefault(o => o.Value == option.Value);
             if (existingOption.IsNotNull())
             {
                 return existingOption;
