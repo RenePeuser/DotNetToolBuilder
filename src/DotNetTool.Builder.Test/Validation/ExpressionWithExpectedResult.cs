@@ -13,7 +13,7 @@
             ExpectedMessage = expectedMessage;
         }
 
-        public string ToolName { get; set; }
+        public string ToolName { get; }
         public string Expression { get; }
         public string ExpectedMessage { get; }
     }

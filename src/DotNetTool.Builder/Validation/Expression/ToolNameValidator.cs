@@ -9,6 +9,13 @@ namespace DotNetTool.Builder.Validation.Expression
 
     public class ToolNameValidator : IExpressionContentValidator
     {
+        private readonly IToolNameValidator _toolNameValidator;
+
+        public ToolNameValidator(IToolNameValidator toolNameValidator)
+        {
+            _toolNameValidator = toolNameValidator;
+        }
+
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
             var errors = CollectErrors(dotNetToolName, expressionInfo).ToList();
@@ -29,9 +36,10 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield return "Expression must not be null or empty.";
             }
 
-            if (firstCommand.Value.NotEqualsTo(dotNetToolName))
+            var result = _toolNameValidator.IsValid(firstCommand.Value);
+            if (result.IsValid.IsFalse())
             {
-                yield return $"Expression must begin with: '{dotNetToolName}'";
+                yield return result.Errors;
             }
         }
     }

@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Test.Validation
         public void All_Expressions_Must_Be_Not_Valid()
         {
             var invalidExpressions = GetAll().ToList();
-            invalidExpressions = (List<ExpressionWithExpectedResult>) (new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> invalidCommand")).ToIList();
+            // invalidExpressions = (List<ExpressionWithExpectedResult>)(new ExpressionWithExpectedResult("a-b", "a-b  tool")).ToIList();
 
             var validExpressions = from expression in invalidExpressions
                                    let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
@@ -40,13 +40,11 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("$", "$ tool");
             yield return new ExpressionWithExpectedResult("´", "´ tool");
 
-            yield return new ExpressionWithExpectedResult(" ", "  tool");
             yield return new ExpressionWithExpectedResult("-", "- tool");
 
-            // This is already handled when user has to give in tool name, this situation can not happen.
-            // yield return new ExpressionWithExpectedResult("a.b", "a.b tool");
-            // yield return new ExpressionWithExpectedResult("a-b", "a-b tool");
-
+            //This is already handled when user has to give in tool name, this situation can not happen here.
+            yield return new ExpressionWithExpectedResult("a.b", "a.b tool");
+            yield return new ExpressionWithExpectedResult("a-b", "a-b tool");
             yield return new ExpressionWithExpectedResult("a/b", "a/b tool");
             yield return new ExpressionWithExpectedResult("a-b", "a-b  tool");
 
@@ -85,6 +83,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet <version>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet --version");
 
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool []<>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool §");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool %");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool &");

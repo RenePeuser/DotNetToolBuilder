@@ -48,8 +48,6 @@
 
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet  build  <solution>  --configuration  [string]<build-config>");
 
-            yield return new ExpressionWithExpectedResult("son-goku", "son-goku build");
-
             yield return new ExpressionWithExpectedResult("songoku", "songoku collect dragonballs --all");
             yield return new ExpressionWithExpectedResult("songoku", "songoku do transform to <saiyajin-level>");
             yield return new ExpressionWithExpectedResult("songoku", "songoku do transform to <saiyajin-level> --use-sensobean");

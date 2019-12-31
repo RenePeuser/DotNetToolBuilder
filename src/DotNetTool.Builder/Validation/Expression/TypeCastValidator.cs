@@ -40,6 +40,12 @@ namespace DotNetTool.Builder.Validation.Expression
                     var end = value.IndexOf("]", StringComparison.Ordinal);
                     var typeName = value[start..end];
 
+                    if (typeName.IsNullOrWhiteSpace())
+                    {
+                        yield return $"Type: '{typeName}' must only contains letter, digits or '.'. Sample: '[string]' or '[System.IO.FileInfo]'";
+                        yield break;
+                    }
+
                     if (typeName.All(c => char.IsLetterOrDigit(c) || c == '.').IsFalse())
                     {
                         yield return $"Type: '{typeName}' must only contains letter, digits or '.'";

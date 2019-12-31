@@ -37,7 +37,7 @@
             yield return new MinimumCommandValidator();
             yield return new OnlyOneArgumentValidator();
             yield return new OptionValidator(primitiveTypeNameValidator);
-            yield return new ToolNameValidator();
+            yield return new ToolNameValidator(new DotNetTool.Builder.Validation.ToolNameValidator(new PrimitiveTypeNameValidator()));
             yield return new CommandNameValidation();
             yield return new UnknownTokenValidator();
         }

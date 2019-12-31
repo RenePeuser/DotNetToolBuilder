@@ -28,9 +28,15 @@ namespace DotNetTool.Builder.Validation
                 yield break;
             }
 
+            if (value.Contains(" "))
+            {
+                yield return $"The dotnet tool name: '{value}' must not contains whitespace.";
+                yield break;
+            }
+
             if (value.All(char.IsLetterOrDigit).IsFalse())
             {
-                yield return "The dotnet tool name must only contains letters or digits.";
+                yield return $"The dotnet tool: {value} name must only contains letters or digits.";
             }
 
             if (char.IsLetter(value.First()).IsFalse())

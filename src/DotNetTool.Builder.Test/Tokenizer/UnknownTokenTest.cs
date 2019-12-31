@@ -1,11 +1,10 @@
 ﻿namespace DotNetTool.Builder.Test.Tokenizer
 {
     using System.Linq;
-    using DotNetTool.Builder.Tokenizer.Tokens;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
-    public class UnknaowTokenTest : TokenizerTestBase
+    public class UnknownTokenTest : TokenizerTestBase
     {
         [TestMethod]
         public void Should_Creatable()
@@ -28,7 +27,7 @@
         [TestMethod]
         public void Should_Return_Command_Token()
         {
-            var commandToken = ExpressionInfo.Tokens.OfType<UnknownToken>();
+            var commandToken = ExpressionInfo.Tokens.OfType<DotNetTool.Builder.Tokenizer.Tokens.UnknownToken>();
             Assert.IsNotNull(commandToken);
         }
 
