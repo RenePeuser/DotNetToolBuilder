@@ -5,6 +5,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Argument.Check;
     using Models;
 
     public class ToolNameValidator : IExpressionContentValidator
@@ -13,11 +14,16 @@ namespace DotNetTool.Builder.Validation.Expression
 
         public ToolNameValidator(IToolNameValidator toolNameValidator)
         {
+            Throw.IfNull(() => toolNameValidator);
+
             _toolNameValidator = toolNameValidator;
         }
 
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
+            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => expressionInfo);
+
             var errors = CollectErrors(dotNetToolName, expressionInfo).ToList();
             return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Argument.Check;
     using Extensions;
 
     public class PrimitiveTypeNameValidator : IPrimitiveTypeNameValidator
@@ -17,6 +18,8 @@
 
         public ValidationResult IsValid(string value)
         {
+            Throw.IfNullOrWhiteSpace(() => value);
+
             var match = _strings.Where(s => s.ToLower().EqualsTo(value.ToLower()));
             return new ValidationResult(match.IsEmpty(), match.Flatten(Environment.NewLine));
         }

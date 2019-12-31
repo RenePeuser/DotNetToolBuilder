@@ -5,6 +5,7 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     using System;
     using System.Collections.Generic;
+    using Argument.Check;
     using Models;
     using Tokenizer.Tokens;
 
@@ -12,6 +13,9 @@ namespace DotNetTool.Builder.Validation.Expression
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
+            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => expressionInfo);
+
             var errors = CollectErrors(expressionInfo).ToList();
             return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }

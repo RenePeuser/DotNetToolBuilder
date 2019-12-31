@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using Argument.Check;
     using Extensions;
     using Models;
 
@@ -21,9 +22,12 @@ namespace DotNetTool.Builder.Validation.Expression
             c => c == '.',
         };
 
-        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            var errors = CheckForErrors(expression).ToList();
+            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => expressionInfo);
+
+            var errors = CheckForErrors(expressionInfo).ToList();
             return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
 

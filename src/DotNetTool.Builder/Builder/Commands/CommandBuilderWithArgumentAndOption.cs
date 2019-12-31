@@ -2,6 +2,8 @@
 
 namespace DotNetTool.Builder.Builder.Commands
 {
+    using global::Argument.Check;
+
     internal class CommandBuilderWithArgumentAndOption : ICommandBuilderWithArgumentAndOption
     {
         private const string Template =
@@ -43,11 +45,18 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public CommandBuilderWithArgumentAndOption(ICommandHandlerBuilder commandHandlerBuilder)
         {
+            Throw.IfNull(() => commandHandlerBuilder);
+
             _commandHandlerBuilder = commandHandlerBuilder;
         }
 
         public string Build(string project, ParameterInfo parameterInfo, ParameterInfo parent, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => project);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNull(() => parent);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var commandHandler = _commandHandlerBuilder.Build(parameterInfo);
 
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)

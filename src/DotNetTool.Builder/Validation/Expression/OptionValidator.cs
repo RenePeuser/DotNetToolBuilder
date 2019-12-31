@@ -5,6 +5,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Argument.Check;
     using Models;
     using Tokenizer.Tokens;
 
@@ -14,11 +15,16 @@ namespace DotNetTool.Builder.Validation.Expression
 
         public OptionValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
         {
+            Throw.IfNull(() => primitiveTypeNameValidator);
+
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
+            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => expressionInfo);
+
             var errors = CollectErrors(expressionInfo).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Extensions;
+    using global::Argument.Check;
     using Models;
 
     internal class CommandHandlerNoArgsAndNoOptionBuilder : ICommandHandlerStringBuilder
@@ -11,6 +12,8 @@
 
         public string Build(ParameterInfo parameterInfo)
         {
+            Throw.IfNull(() => parameterInfo);
+
             var arguments = BuildCtorArguments(parameterInfo);
             var types = arguments.Select(arg => arg.Type).Flatten(", ");
             var argNames = arguments.Select(arg => arg.Name).Flatten(", ");
@@ -24,10 +27,12 @@
 
         public bool IsThisBuilderFor(ParameterInfo parameterInfo)
         {
+            Throw.IfNull(() => parameterInfo);
+
             return parameterInfo.ArgumentInfo.IsNull() && parameterInfo.Options.IsNullOrEmpty();
         }
 
-        internal IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
+        private IEnumerable<CtorArgument> BuildCtorArguments(ParameterInfo parameterInfo)
         {
             var argumentInfo = parameterInfo.ArgumentInfo;
             if (argumentInfo.IsNotNull())

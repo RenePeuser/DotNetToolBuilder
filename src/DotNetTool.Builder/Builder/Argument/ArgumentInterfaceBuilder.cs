@@ -2,6 +2,8 @@
 
 namespace DotNetTool.Builder.Builder.Argument
 {
+    using global::Argument.Check;
+
     public class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string Template =
@@ -17,6 +19,10 @@ namespace DotNetTool.Builder.Builder.Argument
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var currentNamespace = $"{nameSpace}.Arguments";
             var newTemplate = Template.Replace("$projectName$", projectName)
                 .Replace("$namespace$", currentNamespace)

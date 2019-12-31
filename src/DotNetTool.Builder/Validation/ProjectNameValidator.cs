@@ -5,6 +5,8 @@ using System.Linq;
 
 namespace DotNetTool.Builder.Validation
 {
+    using Argument.Check;
+
     public class ProjectNameValidator : IProjectNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
@@ -17,11 +19,16 @@ namespace DotNetTool.Builder.Validation
 
         public ProjectNameValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
         {
+            Throw.IfNull(() => primitiveTypeNameValidator);
+
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
         public ValidationResult IsValid(string value)
         {
+            // No argument check here !
+            // Throw.IfNullOrWhiteSpace(() => value);
+
             var errors = CollectErrors(value).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsEmpty(), errors);
         }

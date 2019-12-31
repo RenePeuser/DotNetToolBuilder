@@ -1,6 +1,7 @@
 ﻿namespace DotNetTool.Builder.Builder.Parameter
 {
     using Extensions;
+    using global::Argument.Check;
     using Models;
 
     internal class ParameterWithoutArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
@@ -18,6 +19,10 @@
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var newTemplate = Template.Replace("$projectName$", projectName)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$command-name$", parameterInfo.NormalizedName);
@@ -27,6 +32,8 @@
 
         public bool IsThisBuilderFor(ParameterInfo parameterInfo)
         {
+            Throw.IfNull(() => parameterInfo);
+
             return parameterInfo.ArgumentInfo.IsNull() && parameterInfo.Options.IsNullOrEmpty();
         }
     }

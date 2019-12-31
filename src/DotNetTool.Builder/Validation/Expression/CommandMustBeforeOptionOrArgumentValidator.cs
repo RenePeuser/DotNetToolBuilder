@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Argument.Check;
     using Extensions;
     using Models;
     using Tokenizer.Tokens;
@@ -10,6 +11,9 @@
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
+            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => expressionInfo);
+
             var errors = CollectErrors(expressionInfo.Tokens).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }

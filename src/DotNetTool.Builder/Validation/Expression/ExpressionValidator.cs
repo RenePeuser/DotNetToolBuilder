@@ -14,6 +14,8 @@ namespace DotNetTool.Builder.Validation.Expression
 
         public ExpressionValidator(IEnumerable<IExpressionContentValidator> expressionContentValidators)
         {
+            Throw.IfNull(() => expressionContentValidators);
+
             _expressionContentValidators = expressionContentValidators;
         }
 

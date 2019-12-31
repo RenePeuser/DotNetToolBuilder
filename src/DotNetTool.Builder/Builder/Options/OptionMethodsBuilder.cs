@@ -3,6 +3,8 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
+    using global::Argument.Check;
+
     public class OptionMethodsBuilder : IOptionMethodsBuilder
     {
         private const string OptionMethodTemplate =
@@ -15,11 +17,15 @@ namespace DotNetTool.Builder.Builder.Options
 
         public OptionMethodsBuilder(INewOptionExpressionService newOptionExpressionService)
         {
+            Throw.IfNull(() => newOptionExpressionService);
+
             _newOptionExpressionService = newOptionExpressionService;
         }
 
         public IEnumerable<MethodInfo> Build(IEnumerable<OptionInfo> options)
         {
+            Throw.IfNull(() => options);
+
             foreach (var option in options)
             {
                 var neewOptionStatement = _newOptionExpressionService.Build(option);

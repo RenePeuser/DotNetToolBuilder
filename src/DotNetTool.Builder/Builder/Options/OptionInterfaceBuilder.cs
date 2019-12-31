@@ -2,6 +2,8 @@
 
 namespace DotNetTool.Builder.Builder.Options
 {
+    using global::Argument.Check;
+
     public class OptionInterfaceBuilder : IOptionInterfaceBuilder
     {
         private const string Template =
@@ -18,6 +20,10 @@ namespace DotNetTool.Builder.Builder.Options
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var currentNamespace = $"{nameSpace}.Options";
             var newTemplate = Template.Replace("$projectName$", projectName)
                                       .Replace("$namespace$", currentNamespace)

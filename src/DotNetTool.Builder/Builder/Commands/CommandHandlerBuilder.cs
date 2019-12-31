@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using global::Argument.Check;
     using Models;
 
     internal class CommandHandlerBuilder : ICommandHandlerBuilder
@@ -10,11 +11,15 @@
 
         public CommandHandlerBuilder(IEnumerable<ICommandHandlerStringBuilder> commandHandlerStringBuilders)
         {
+            Throw.IfNullOrEmpty(() => commandHandlerStringBuilders);
+
             _commandHandlerStringBuilders = commandHandlerStringBuilders;
         }
 
         public string Build(ParameterInfo parameterInfo)
         {
+            Throw.IfNull(() => parameterInfo);
+
             var builder = _commandHandlerStringBuilders.Single(builder => builder.IsThisBuilderFor(parameterInfo));
             return builder.Build(parameterInfo);
         }

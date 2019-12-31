@@ -9,6 +9,8 @@ using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.Builder.Startup
 {
+    using global::Argument.Check;
+
     public class StartUpBuilder : IStartUpBuilder
     {
         private const string Template =
@@ -40,6 +42,9 @@ $methods$
 
         public StartUpBuilder(IRegisterServiceMethodBuilder registerServiceMethodBuilder, ITypeRegistrationBuilder typeRegistrationBuilder)
         {
+            Throw.IfNull(() => registerServiceMethodBuilder);
+            Throw.IfNull(() => typeRegistrationBuilder);
+
             _registerServiceMethodBuilder = registerServiceMethodBuilder;
             _typeRegistrationBuilder = typeRegistrationBuilder;
         }
@@ -48,6 +53,12 @@ $methods$
             ICommandTypeCollector commandTypeCollector, ParameterInfo rootCommand,
             INameSpaceCollector nameSpaceCollector)
         {
+            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNull(() => solutionFile);
+            Throw.IfNull(() => rootCommand);
+            Throw.IfNull(() => commandTypeCollector);
+            Throw.IfNull(() => nameSpaceCollector);
+
             var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
             var methods = GenerateMethods(commandTypeCollector).ToList();
             var commandRegistrations = methods.Select(m => $"            {m.MethodName}(services);").Flatten(Environment.NewLine);

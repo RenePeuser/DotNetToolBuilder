@@ -5,17 +5,24 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation
 {
+    using Argument.Check;
+
     public class ToolNameValidator : IToolNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 
         public ToolNameValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
         {
+            Throw.IfNull(() => primitiveTypeNameValidator);
+
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
         public ValidationResult IsValid(string value)
         {
+            // No argument check here !
+            // Throw.IfNullOrWhiteSpace(() => value);
+
             var errors = CollectErrors(value).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsEmpty(), errors);
         }

@@ -4,6 +4,8 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder
 {
+    using global::Argument.Check;
+
     public class AppBuilder
     {
         private const string Template =
@@ -34,10 +36,15 @@ namespace DotNetTool.Builder.Builder
 
         public void AddStartup(string projectName, FileInfo solutionFile, ParameterInfo rootCommand)
         {
+            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNull(() => solutionFile);
+            Throw.IfNotExists(() => solutionFile);
+            Throw.IfNull(() => rootCommand);
+
             var app = solutionFile.Directory.EnumerateFiles("App.cs", SearchOption.AllDirectories).FirstOrDefault();
 
             var newStartUp = Template.Replace("$namespace$", projectName)
-                .Replace("$interface-startup-command$", $"I{rootCommand.NormalizedName}CommandBuilder");
+                                     .Replace("$interface-startup-command$", $"I{rootCommand.NormalizedName}CommandBuilder");
 
             File.WriteAllText(app.FullName, newStartUp);
         }

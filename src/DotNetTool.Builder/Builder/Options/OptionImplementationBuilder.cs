@@ -5,6 +5,8 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
+    using global::Argument.Check;
+
     public class OptionImplementationBuilder : IOptionImplementationBuilder
     {
         private const string Template =
@@ -28,11 +30,17 @@ $build-option-method$
 
         public OptionImplementationBuilder(IOptionMethodsBuilder optionMethodsBuilder)
         {
+            Throw.IfNull(() => optionMethodsBuilder);
+
             _optionMethodsBuilder = optionMethodsBuilder;
         }
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var currentNamespace = $"{nameSpace}.Options";
             var optionsMethods = _optionMethodsBuilder.Build(parameterInfo.Options).ToList();
             var optionsMethodAsString = optionsMethods.Select(m => m.MethodSyntax).Flatten(Environment.NewLine);

@@ -5,6 +5,7 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Builder.Parameter
 {
+    using global::Argument.Check;
     using Models;
 
     internal class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
@@ -27,6 +28,10 @@ $properties$
 
         public string Build(string projectName, ParameterInfo parameterInfo, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var ctorArguments = BuildCtorArguments(parameterInfo).ToList();
             var properties = BuildProperties(ctorArguments).ToList();
             var propertyString = BuildPropertyString(properties);
@@ -46,6 +51,8 @@ $properties$
 
         public bool IsThisBuilderFor(ParameterInfo parameterInfo)
         {
+            Throw.IfNull(() => parameterInfo);
+
             return parameterInfo.ArgumentInfo.IsNotNull() || parameterInfo.Options.Any();
         }
 

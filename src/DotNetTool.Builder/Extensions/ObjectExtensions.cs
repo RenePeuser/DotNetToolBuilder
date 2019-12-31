@@ -1,8 +1,4 @@
-﻿using System;
-using Argument.Check;
-
-
-namespace DotNetTool.Builder.Extensions
+﻿namespace DotNetTool.Builder.Extensions
 {
     public static class ObjectExtensions
     {
@@ -16,13 +12,6 @@ namespace DotNetTool.Builder.Extensions
             }
 
             return result;
-        }
-
-        public static T Cast<T>(this object source)
-        {
-            Throw.IfNull(() => source);
-
-            return (T) source;
         }
 
         public static bool Is<T>(this object source)
@@ -43,16 +32,6 @@ namespace DotNetTool.Builder.Extensions
         public static bool IsNull(this object source)
         {
             return source.EqualsTo(null);
-        }
-
-        public static void IfType<TType>(this object source, Action<TType> action)
-            where TType : class
-        {
-            Throw.IfNull(() => action);
-
-            var expectedType = source.As<TType>();
-
-            expectedType.IfNotNullThen(() => action(expectedType));
         }
     }
 }

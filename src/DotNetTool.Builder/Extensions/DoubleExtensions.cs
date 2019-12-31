@@ -9,21 +9,6 @@ namespace DotNetTool.Builder.Extensions
             return double.IsNaN(value);
         }
 
-        public static bool IsNotNan(this double value)
-        {
-            return !value.IsNan();
-        }
-
-        public static double ToDouble(this double? value)
-        {
-            return value ?? default;
-        }
-
-        public static double ToValueOrDefault(this double value)
-        {
-            return value.IsNan() ? default : value;
-        }
-
         public static bool IsZero(this double source)
         {
             var result = source.EqualsTo(default);
@@ -31,30 +16,9 @@ namespace DotNetTool.Builder.Extensions
             return result;
         }
 
-        public static decimal ToDecimal(this double source)
-        {
-            return new decimal(source);
-        }
-
         public static int Ceiling(this double value)
         {
             return (int) Math.Ceiling(value);
-        }
-
-        public static bool DoubleNotEqualsToExcludingNan(this double source, double target)
-        {
-            bool result;
-
-            if (source.IsNotNan() && target.IsNotNan())
-            {
-                result = source.NotEqualsTo(target);
-            }
-            else
-            {
-                result = !source.Equals(target);
-            }
-
-            return result;
         }
     }
 }

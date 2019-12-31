@@ -58,21 +58,5 @@ namespace DotNetTool.Builder.Extensions
 
             return source.IsLessOrEqual(upperLimit) && source.IsGreaterOrEqual(lowerLimit);
         }
-
-        public static bool IsInRangeExcluding<T>(this T source, T lowerLimit, T upperLimit)
-            where T : IComparable
-        {
-            Throw.IfLessOrEqual(() => upperLimit, lowerLimit);
-
-            return source.IsLessThan(upperLimit) && source.IsGreaterThan(lowerLimit);
-        }
-
-        public static bool IsOutOfRange<T>(this T source, T lowerLimit, T upperLimit)
-            where T : IComparable
-        {
-            Throw.IfLessThan(() => upperLimit, lowerLimit);
-
-            return !source.IsInRange(lowerLimit, upperLimit);
-        }
     }
 }

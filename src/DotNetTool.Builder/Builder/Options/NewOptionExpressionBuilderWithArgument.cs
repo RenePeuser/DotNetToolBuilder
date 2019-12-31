@@ -3,6 +3,8 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
+    using global::Argument.Check;
+
     public class NewOptionExpressionBuilderWithArgument : INewOptionExpressionBuilder
     {
         private const string OptionArgumentTemplate =
@@ -17,6 +19,8 @@ namespace DotNetTool.Builder.Builder.Options
 
         public string Build(OptionInfo optionInfo)
         {
+            Throw.IfNull(() => optionInfo);
+
             var newTemplate = OptionArgumentTemplate.Replace("$option-name$", optionInfo.Value)
                                                     .Replace("$option-alias$", optionInfo.Alias)
                                                     .Replace("$option-argument-name$", optionInfo.ArgumentName)
@@ -30,6 +34,8 @@ namespace DotNetTool.Builder.Builder.Options
 
         public bool IsBuilderFor(OptionInfo optionInfo)
         {
+            Throw.IfNull(() => optionInfo);
+
             return optionInfo.Argument.IsNotNull();
         }
     }

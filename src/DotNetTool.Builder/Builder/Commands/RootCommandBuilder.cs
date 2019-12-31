@@ -3,6 +3,7 @@
 namespace DotNetTool.Builder.Builder.Commands
 {
     using Extensions;
+    using global::Argument.Check;
 
     internal class RootCommandBuilder : IRootCommandBuilder
     {
@@ -35,11 +36,17 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public RootCommandBuilder(ICommandHandlerStringBuilder commandHandlerStringBuilder)
         {
+            Throw.IfNull(() => commandHandlerStringBuilder);
+
             _commandHandlerStringBuilder = commandHandlerStringBuilder;
         }
 
         public string Build(string project, ParameterInfo parameterInfo, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => project);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var commandHandler = _commandHandlerStringBuilder.Build(parameterInfo);
 
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)

@@ -2,6 +2,8 @@
 
 namespace DotNetTool.Builder.Builder.Commands
 {
+    using global::Argument.Check;
+
     internal class CommandServiceBuilder : ICommandServiceBuilder
     {
         private const string Template =
@@ -21,6 +23,10 @@ namespace DotNetTool.Builder.Builder.Commands
 
         public string Build(string project, ParameterInfo parameterInfo, string nameSpace)
         {
+            Throw.IfNullOrWhiteSpace(() => project);
+            Throw.IfNull(() => parameterInfo);
+            Throw.IfNullOrWhiteSpace(() => nameSpace);
+
             var currentNamespace = $"{nameSpace}.Service";
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
                                       .Replace("$namespace$", currentNamespace)
