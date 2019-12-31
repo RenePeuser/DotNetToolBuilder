@@ -14,9 +14,11 @@ namespace DotNetTool.Builder.Test.Validation
         public void All_Expressions_Must_Be_Not_Valid()
         {
             var invalidExpressions = GetAll().ToList();
+            invalidExpressions = (List<ExpressionWithExpectedResult>) (new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg> invalidCommand")).ToIList();
 
             var validExpressions = from expression in invalidExpressions
-                                   let isValid = ExpressionValidator.IsValid(expression.ToolName, expression.Expression).IsValid
+                                   let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
+                                   let isValid = ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid
                                    where isValid
                                    select new { IsValid = isValid, Expression = expression.Expression };
 
@@ -82,11 +84,6 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet [string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet <version>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet --version");
-
-            yield return new ExpressionWithExpectedResult("dotnet", "dotnet  tool");
-            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool  ");
-            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool ");
-            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool  ");
 
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool §");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool %");
@@ -158,7 +155,6 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool - option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -- option");
-            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option ");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <arg");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option arg>");

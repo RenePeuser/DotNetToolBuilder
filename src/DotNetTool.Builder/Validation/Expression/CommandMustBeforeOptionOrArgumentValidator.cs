@@ -3,33 +3,41 @@
     using System;
     using System.Collections.Generic;
     using Extensions;
+    using Models;
+    using Tokenizer.Tokens;
 
     public class CommandMustBeforeOptionOrArgumentValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            var errors = CollectErrors(expression).Flatten(Environment.NewLine);
+            var errors = CollectErrors(expressionInfo.Tokens).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }
 
-        private IEnumerable<string> CollectErrors(string expression)
+        private IEnumerable<string> CollectErrors(IEnumerable<Token> expressionTokens)
         {
-            if (expression.IsNullOrWhiteSpace())
+            Token argumentOrOptionToken = null;
+            foreach (var token in expressionTokens)
             {
-                yield return "The expression must not be null, empty or whitespace";
-            }
-
-            var splittedExpression = expression.Split();
-            bool optionOrArgumentExists = false;
-            foreach (var value in splittedExpression)
-            {
-                if (value.Contains("--") || value.Contains("<") || value.Contains("["))
+                if (token.IsNot<CommandToken>())
                 {
-                    optionOrArgumentExists = true;
+                    argumentOrOptionToken = token;
+                    continue;
                 }
-                else if (optionOrArgumentExists)
+
+                if (token.IsNot<CommandToken>() || argumentOrOptionToken.IsNull())
                 {
-                    yield return $"Command: '{value}' was defined after an argument or an option, must be declared before of them.";
+                    continue;
+                }
+
+                switch (argumentOrOptionToken)
+                {
+                    case ArgumentToken argumentToken:
+                        yield return $"Command: {token.Value}, was defined after an argument: {argumentToken.Value}";
+                        break;
+                    case OptionToken optionToken:
+                        yield return $"Command: {token.Value}, was defined after an option: {optionToken.Value}";
+                        break;
                 }
             }
         }

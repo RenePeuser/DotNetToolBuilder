@@ -1,0 +1,46 @@
+﻿namespace DotNetTool.Builder.Test.Tokenizer
+{
+    using System.Linq;
+    using DotNetTool.Builder.Tokenizer.Tokens;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    [TestClass]
+    public class OnlyRootCommandTest : TokenizerTestBase
+    {
+        [TestMethod]
+        public void Should_Creatable()
+        {
+            Assert.IsNotNull(ExpressionInfo);
+        }
+
+        [TestMethod]
+        public void Should_Return_Original_Expression()
+        {
+            Assert.AreEqual(GetExpression(), ExpressionInfo.Expression);
+        }
+
+        [TestMethod]
+        public void Should_Return_One_Tokens()
+        {
+            Assert.AreEqual(1, ExpressionInfo.Tokens.Count());
+        }
+
+        [TestMethod]
+        public void Should_Return_Command_Token()
+        {
+            var commandToken = ExpressionInfo.Tokens.OfType<CommandToken>();
+            Assert.IsNotNull(commandToken);
+        }
+
+        [TestMethod]
+        public void Should_Return_OptimizedExpressions_Equals_To_OriginalExpression()
+        {
+            Assert.AreEqual(GetExpression(), ExpressionInfo.OptimizedExpressions);
+        }
+
+        protected override string GetExpression()
+        {
+            return "dotnet";
+        }
+    }
+}

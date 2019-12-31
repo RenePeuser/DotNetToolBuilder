@@ -12,6 +12,16 @@ namespace DotNetTool.Builder.Extensions
 {
     public static class StringExtensions
     {
+        public static bool ContainsNotAnyOf(this string source, params string[] notContainStrings)
+        {
+            return !notContainStrings.Any(source.Contains);
+        }
+
+        public static bool ContainsAnyOf(this string source, params string[] notContainStrings)
+        {
+            return notContainStrings.Any(source.Contains);
+        }
+
         public static string FirstCharToUpper(this string input)
         {
             return input switch

@@ -5,6 +5,8 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using Models;
+
     public class ExpressionValidator : IExpressionValidator
     {
         private readonly IEnumerable<IExpressionContentValidator> _expressionContentValidators;
@@ -14,14 +16,14 @@ namespace DotNetTool.Builder.Validation.Expression
             _expressionContentValidators = expressionContentValidators;
         }
 
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            if (expression.IsNullOrWhiteSpace())
+            if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
                 return new ValidationResult(false, "Input must not be 'null', 'empty' or 'whitespace");
             }
 
-            var results = _expressionContentValidators.Select(validator => validator.IsValid(dotNetToolName, expression));
+            var results = _expressionContentValidators.Select(validator => validator.IsValid(dotNetToolName, expressionInfo));
             if (results.All(r => r.IsValid))
             {
                 return new ValidationResult(true, null);
@@ -29,7 +31,7 @@ namespace DotNetTool.Builder.Validation.Expression
 
             var stringBuilder = new StringBuilder();
             results.Where(result => result.IsValid.IsFalse()).ForEach(result => stringBuilder.AppendLine(result.Errors));
-            
+
             return new ValidationResult(false, stringBuilder.ToString());
         }
     }

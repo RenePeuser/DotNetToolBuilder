@@ -5,27 +5,33 @@ namespace DotNetTool.Builder.Validation.Expression
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Models;
 
     public class ToolNameValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            var errros = Validate(dotNetToolName, expression).ToList();
-            return new ValidationResult(errros.IsNullOrEmpty(), errros.Flatten(Environment.NewLine));
+            var errors = CollectErrors(dotNetToolName, expressionInfo).ToList();
+            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
 
-        private IEnumerable<string> Validate(string dotNetToolName, string expression)
+        private IEnumerable<string> CollectErrors(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            if (expression.IsNullOrWhiteSpace())
+            if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
                 yield return "Expression must not be null or empty.";
                 yield break;
             }
 
-            var toolName = expression.Split()[0];
-            if (toolName.NotEqualsTo(dotNetToolName))
+            var firstCommand = expressionInfo.Tokens.FirstOrDefault();
+            if (firstCommand.IsNull())
             {
-                yield return $"Expression must start with your defined dotnet tool name: '{dotNetToolName}'";
+                yield return "Expression must not be null or empty.";
+            }
+
+            if (firstCommand.Value.NotEqualsTo(dotNetToolName))
+            {
+                yield return $"Expression must begin with: '{dotNetToolName}'";
             }
         }
     }

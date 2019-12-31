@@ -4,41 +4,31 @@
     using System.Collections.Generic;
     using System.Linq;
     using Extensions;
+    using Models;
+    using Tokenizer.Tokens;
 
     public class CommandNameValidation : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            var errors = CollectErrors(expression).Flatten(Environment.NewLine);
+            var errors = CollectErrors(expressionInfo).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }
 
-        private IEnumerable<string> CollectErrors(string expression)
+        private IEnumerable<string> CollectErrors(ExpressionInfo expressionInfo)
         {
-            if (expression.IsNullOrWhiteSpace())
+            var commandTokens = expressionInfo.Tokens.OfType<CommandToken>().ToList();
+            foreach (var commandToken in commandTokens)
             {
-                yield return "The expression must not be null, empty or whitespace";
-            }
-
-            var splittedExpression = expression.Split();
-            foreach (var value in splittedExpression)
-            {
-                if (value.IsNullOrWhiteSpace())
+                var command = commandToken.Value;
+                if (command.Contains("--") || command.Contains("<") || command.Contains("["))
                 {
-                    continue;
+                    yield return $"Command: {command} most not contain argument '<arg>', typecast '[type]' or option-syntax '[--option]'.";
                 }
 
-                if (value.StartsWith("--").IsFalse() && value.StartsWith("<").IsFalse() && value.StartsWith("[").IsFalse())
+                if (char.IsLetter(command.First()).IsFalse())
                 {
-                    if (value.Contains("--") || value.Contains("<") || value.Contains("["))
-                    {
-                        yield return $"Command: {value} most not contain argument-, typecast- or option-syntax.";
-                    }
-
-                    if (char.IsLetter(value.First()).IsFalse())
-                    {
-                        yield return $"Argument: {value} must begin with a letter.";
-                    }
+                    yield return $"Argument: {command} must begin with a letter.";
                 }
             }
         }

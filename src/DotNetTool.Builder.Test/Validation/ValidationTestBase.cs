@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using DotNetTool.Builder.Tokenizer;
     using DotNetTool.Builder.Validation;
     using DotNetTool.Builder.Validation.Expression;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,12 +10,21 @@
 
     public abstract class ValidationTestBase
     {
-        internal ExpressionValidator ExpressionValidator { get; private set; }
+        internal IExpressionValidator ExpressionValidator { get; private set; }
+        internal IExpressionTokenizer ExpressionTokenizer { get; private set; }
 
         [TestInitialize]
         public void Init()
         {
+            ExpressionTokenizer = new ExpressionTokenizer(GetTokenizers().ToList());
             ExpressionValidator = new ExpressionValidator(GetValidators().ToList());
+        }
+
+        private IEnumerable<ITokenizer> GetTokenizers()
+        {
+            yield return new CommandTokenizer();
+            yield return new ArgumentTokenizer();
+            yield return new OptionTokenizer();
         }
 
         private IEnumerable<IExpressionContentValidator> GetValidators()
@@ -25,11 +35,11 @@
             yield return new CharValidator();
             yield return new CommandMustBeforeOptionOrArgumentValidator();
             yield return new MinimumCommandValidator();
-            yield return new MultipleWhitespacesValidator();
             yield return new OnlyOneArgumentValidator();
             yield return new OptionValidator(primitiveTypeNameValidator);
             yield return new ToolNameValidator();
             yield return new CommandNameValidation();
+            yield return new UnknownTokenValidator();
         }
     }
 }

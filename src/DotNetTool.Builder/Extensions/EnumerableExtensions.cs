@@ -16,6 +16,13 @@ namespace DotNetTool.Builder.Extensions
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<string> FilterNullOrWhitespace(this IEnumerable<string> source)
+        {
+            Throw.IfNull(() => source);
+
+            return source.Where(s => s.IsNotNullOrWhiteSpace());
+        }
+
         public static IEnumerable<T> FilterNullObjects<T>(this IEnumerable<T> source)
             where T : class
         {
@@ -334,6 +341,14 @@ namespace DotNetTool.Builder.Extensions
             Throw.IfNull(() => expectedItems);
 
             return expectedItems.Any(source.Contains);
+        }
+
+        public static bool ContainsNotAny<T>(this IEnumerable<T> source, params T[] expectedItems)
+        {
+            Throw.IfNull(() => source);
+            Throw.IfNull(() => expectedItems);
+
+            return !expectedItems.Any(source.Contains);
         }
 
         public static bool IsEmpty<T>(this IEnumerable<T> source)

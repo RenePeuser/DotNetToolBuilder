@@ -4,11 +4,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    public interface INewOptionExpressionService
-    {
-        string Build(OptionInfo optionInfo);
-    }
-
     public class NewOptionExpressionService : INewOptionExpressionService
     {
         private readonly IEnumerable<INewOptionExpressionBuilder> _newOptionExpressionBuilders;

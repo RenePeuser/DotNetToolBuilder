@@ -2,11 +2,6 @@
 
 namespace DotNetTool.Builder.Builder.Argument
 {
-    public interface IArgumentInterfaceBuilder
-    {
-        string Build(string projectName, ParameterInfo parameterInfo, string nameSpace);
-    }
-
     public class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string Template =

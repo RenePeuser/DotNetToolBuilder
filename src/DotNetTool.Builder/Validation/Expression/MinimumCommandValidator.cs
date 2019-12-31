@@ -1,24 +1,27 @@
 ﻿namespace DotNetTool.Builder.Validation.Expression
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using Extensions;
+    using Models;
+    using Tokenizer.Tokens;
 
     public class MinimumCommandValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            return new ValidationResult(IsValidInternal(dotNetToolName, expression), $"Your dot net tool expression: '{expression}' must have minimum one command.");
+            var errors = CollectErrors(dotNetToolName, expressionInfo).Flatten(Environment.NewLine);
+            return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }
 
-        private bool IsValidInternal(string dotNetToolName, string expression)
+        private IEnumerable<string> CollectErrors(string dotNetToolName, ExpressionInfo expression)
         {
-            if (expression.IsNullOrWhiteSpace())
+            var commands = expression.Tokens.OfType<CommandToken>().ToList();
+            if (commands.Count < 2)
             {
-                return false;
+                yield return $"The expression must have minimum one command. Sample: '{dotNetToolName} myCommand'";
             }
-
-            var split = expression.Split(' ');
-            return split.Length >= 2 && char.IsLetterOrDigit(split[1].FirstOrDefault());
         }
     }
 }

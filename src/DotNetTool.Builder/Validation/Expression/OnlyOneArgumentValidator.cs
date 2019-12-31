@@ -2,55 +2,40 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Extensions;
+    using Models;
+    using Tokenizer.Tokens;
 
     public class OnlyOneArgumentValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            var errors = ValidateExpression(expression).Flatten(Environment.NewLine);
-            return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
+            var errors = CollectErrors(expressionInfo).ToList();
+            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
 
-        private IEnumerable<string> ValidateExpression(string expression)
+        private IEnumerable<string> CollectErrors(ExpressionInfo expressionInfo)
         {
-            if (expression.IsNullOrWhiteSpace())
+            var tokens = expressionInfo.Tokens;
+            ArgumentToken lastArgumentToken = null;
+
+            foreach (var token in tokens)
             {
-                yield return "The expression must not be null, empty or whitespace";
-            }
-
-            var splittedValue = expression.Split();
-
-
-            for (int i = 0; i < splittedValue.Length; i++)
-            {
-                var current = splittedValue[i];
-                var previous = i > 0 ? splittedValue[i - 1] : null;
-
-                if(previous.IsNull())
+                if (lastArgumentToken.IsNotNull() && token.Is<ArgumentToken>())
                 {
-                    continue;
+                    yield return $"'Argument: {token.Value}' was defined after another argument: {lastArgumentToken.Value}.{Environment.NewLine}You can define an argument only after a command 'myCommand <arg>' or an option '--option <opt-arg>' ";
                 }
 
-                if (current.Contains("<") || current.Contains(">"))
+                if (token is ArgumentToken argumentToken)
                 {
-                    if (previous.Contains("<") || previous.Contains(">"))
-                    {
-                        yield return $"Multiple arguments: {previous} {current} it is not allowed. For each command or option only one argument";
-                    }
+                    lastArgumentToken = argumentToken;
+                }
+                else
+                {
+                    lastArgumentToken = null;
                 }
             }
-        }
-
-        private bool IsValidInternal(string dotNetToolName, string expression)
-        {
-            if (expression.IsNullOrWhiteSpace())
-            {
-                return false;
-            }
-
-            var split = expression.Split(' ');
-            return split.Length > 1;
         }
     }
 }

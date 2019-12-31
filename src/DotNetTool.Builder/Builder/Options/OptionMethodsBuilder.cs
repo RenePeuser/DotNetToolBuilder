@@ -3,11 +3,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    public interface IOptionMethodsBuilder
-    {
-        IEnumerable<MethodInfo> Build(IEnumerable<OptionInfo> options);
-    }
-
     public class OptionMethodsBuilder : IOptionMethodsBuilder
     {
         private const string OptionMethodTemplate =

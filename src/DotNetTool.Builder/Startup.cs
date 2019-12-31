@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder
 {
+    using Tokenizer;
     using ToolNameValidator = Validation.Expression.ToolNameValidator;
 
     public class Startup
@@ -26,6 +27,7 @@ namespace DotNetTool.Builder
             RegisterServices(services);
             RegisterValidation(services);
 
+            RegisterTokenizer(services);
             RegisterArgumentParser(services);
             RegisterOptionsParser(services);
             RegisterParameterParser(services);
@@ -38,6 +40,15 @@ namespace DotNetTool.Builder
             RegisterParameterClassBuilder(services);
             RegisterCommandBuilders(services);
             RegisterStartUpBuilder(services);
+        }
+
+        private void RegisterTokenizer(IServiceCollection services)
+        {
+            services.AddSingleton<IExpressionTokenizer, ExpressionTokenizer>();
+
+            services.AddSingleton<ITokenizer, ArgumentTokenizer>();
+            services.AddSingleton<ITokenizer, OptionTokenizer>();
+            services.AddSingleton<ITokenizer, CommandTokenizer>();
         }
 
         private void RegisterValidation(IServiceCollection services)
@@ -55,9 +66,9 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, ToolNameValidator>();
             services.AddSingleton<IExpressionContentValidator, MinimumCommandValidator>();
             services.AddSingleton<IExpressionContentValidator, OnlyOneArgumentValidator>();
-            services.AddSingleton<IExpressionContentValidator, MultipleWhitespacesValidator>();
             services.AddSingleton<IExpressionContentValidator, CommandMustBeforeOptionOrArgumentValidator>();
             services.AddSingleton<IExpressionContentValidator, CommandNameValidation>();
+            services.AddSingleton<IExpressionContentValidator, UnknownTokenValidator>();
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)

@@ -5,25 +5,23 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     using System;
     using System.Collections.Generic;
+    using Models;
+    using Tokenizer.Tokens;
 
     public class TypeCastValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            var errors = CollectErrors(expression).Flatten(Environment.NewLine);
-            return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
+            var errors = CollectErrors(expressionInfo).ToList();
+            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
 
-        private IEnumerable<string> CollectErrors(string expression)
+        private IEnumerable<string> CollectErrors(ExpressionInfo expressionInfo)
         {
-            if (expression.IsNullOrWhiteSpace())
+            var argumentTokens = expressionInfo.Tokens.OfType<ArgumentToken>();
+            foreach (var argumentToken in argumentTokens)
             {
-                yield return "The expression must not be null, empty or whitespace";
-            }
-
-            var splittedExpression = expression.Split();
-            foreach (var value in splittedExpression)
-            {
+                var value = argumentToken.Value;
                 if (value.Contains("[") || value.Contains("]"))
                 {
                     if (value.Count(c => c == '[' || c == ']') != 2 || value.IndexOf('[') > value.IndexOf(']'))

@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using DotNetTool.Builder.Extensions;
+﻿using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
     using System;
     using System.Collections.Generic;
-
-    class A2
-    {
-    }
+    using System.Linq;
+    using Models;
+    using Tokenizer.Tokens;
 
     public class ArgumentValidator : IExpressionContentValidator
     {
@@ -19,57 +17,39 @@ namespace DotNetTool.Builder.Validation.Expression
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
-            var errors = CheckForErrors(expression).Flatten(Environment.NewLine);
-            return new ValidationResult(errors.IsEmpty(), errors);
+            var errors = CheckForErrors(expressionInfo).ToList();
+            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
-
 
         // Valid argument declarations
         // <arg>
         // <arg>[string]
         // [string]<arg>
-        private IEnumerable<string> CheckForErrors(string expression)
+        private IEnumerable<string> CheckForErrors(ExpressionInfo expressionInfo)
         {
-            if (expression.IsNullOrWhiteSpace())
+            var argumentTokens = expressionInfo.Tokens.OfType<ArgumentToken>().ToList();
+            foreach (var argumentToken in argumentTokens)
             {
-                yield return "Argument must not be null or empty.";
-                yield break;
-
-            }
-
-            var splittedExpression = expression.Split();
-            foreach (var value in splittedExpression)
-            {
-                if (value.IsNullOrWhiteSpace())
+                if (argumentToken.Value.Count(c => c == '<' || c == '>').NotEqualsTo(2))
                 {
+                    yield return $"Argument: '{argumentToken}' contains another argument syntax. Multiple '<' or '>' are not valid";
                     continue;
                 }
 
-                if (value.DoesNotContain("<") && value.DoesNotContain(">"))
+                if (argumentToken.Value.IndexOf('<') > argumentToken.Value.IndexOf('>'))
                 {
+                    yield return $"Argument: '{argumentToken}' must starts with '< and ends with '>'";
                     continue;
                 }
 
-                if(value.Count(c => c == '<' || c == '>').NotEqualsTo(2))
-                {
-                    yield return $"Argument: '{value}' contains another argument syntax. Multiple '<' or '>' are not valid";
-                    continue;
-                }
-
-                if (value.IndexOf('<') > value.IndexOf('>'))
-                {
-                    yield return $"Argument: '{value}' must starts with '< and ends with '>'";
-                    continue;
-                }
-
-                var start = value.IndexOf("<") + 1;
-                var end = value.IndexOf(">");
-                var argumentName = value.Substring(start, end - start);
+                var start = argumentToken.Value.IndexOf("<") + 1;
+                var end = argumentToken.Value.IndexOf(">");
+                var argumentName = argumentToken.Value.Substring(start, end - start);
                 if (argumentName.IsNullOrWhiteSpace())
                 {
-                    yield return $"Missing argument name: {value}";
+                    yield return $"Missing argument name: {argumentToken}";
                     yield break;
                 }
 
@@ -84,26 +64,26 @@ namespace DotNetTool.Builder.Validation.Expression
                     yield return $"The name of an argument does not match a name of a type: {argumentName}";
                 }
 
-                if (value.Contains("--"))
+                if (argumentToken.Value.Contains("--"))
                 {
-                    yield return $"Argument '{value}' contains '--' is only allowed for options, to separate verbs use '-'";
+                    yield return $"Argument '{argumentToken}' contains '--' is only allowed for options, to separate verbs use '-'";
                 }
 
-                var preCast = value.Split('<').First();
+                var preCast = argumentToken.Value.Split('<').First();
                 if (preCast.IsNotNullOrEmpty())
                 {
                     if (preCast.StartsWith("[").IsFalse() || preCast.EndsWith("]").IsFalse())
                     {
-                        yield return $"Argument: {value} is invalid, only a type cast can be attached to an argument. Sample: [string]<arg>";
+                        yield return $"Argument: {argumentToken} is invalid, only a type cast can be attached to an argument. Sample: [string]<arg>";
                     }
                 }
 
-                var postCast = value.Split('>').Last();
+                var postCast = argumentToken.Value.Split('>').Last();
                 if (postCast.IsNotNullOrEmpty())
                 {
                     if (postCast.StartsWith("[").IsFalse() || postCast.EndsWith("]").IsFalse())
                     {
-                        yield return $"Argument: {value} is invalid, only a type cast can be attached to an argument. Sample: <arg>[string]";
+                        yield return $"Argument: {argumentToken} is invalid, only a type cast can be attached to an argument. Sample: <arg>[string]";
                     }
                 }
             }

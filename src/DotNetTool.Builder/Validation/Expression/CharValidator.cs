@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using Extensions;
+    using Models;
+
     public class CharValidator : IExpressionContentValidator
     {
-        private const string ValidationInfo = "Only letters, digits, '[', ']', '<', '>' and '-' allowed";
-
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[]
         {
             char.IsLetterOrDigit,
@@ -21,19 +21,24 @@ namespace DotNetTool.Builder.Validation.Expression
             c => c == '.',
         };
 
-        public ValidationResult IsValid(string dotNetToolName, string expression)
+        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expression)
         {
-            return new ValidationResult(IsValidInternal(expression), ValidationInfo);
+            var errors = CheckForErrors(expression).ToList();
+            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
 
-        private bool IsValidInternal(string value)
+        private IEnumerable<string> CheckForErrors(ExpressionInfo expression)
         {
-            if (value.IsNullOrWhiteSpace())
+            var expressionValue = expression.Expression;
+            if (expressionValue.IsNullOrWhiteSpace())
             {
-                return false;
+                yield break;
             }
 
-            return value.All(c => _validationRules.Any(validation => validation(c)));
+            if(expressionValue.All(c => _validationRules.Any(validation => validation(c))).IsFalse())
+            {
+                yield return "Only letters, digits, '[', ']', '<', '>' and '-' allowed";
+            }
         }
     }
 }
