@@ -134,12 +134,12 @@ Based on the sample "FindAndReplaceTool"
 
 ## Parameter expression structure
 ```
-tool parse <file>[FileInfo] --option <opt-arg>[string]
+tool parse <file>[System.IO.FileInfo] --option <opt-arg>[string]
 
 tool       = Root-Command
 parse      = Root-SubCommand
 <file>     = Argument for 'parse' command
-[FileInfo] = Type casting for argument '<file>'.
+[System.IO.FileInfo] = Type casting for argument '<file>'.
 --option   = Option for 'parse' command
 <opt-arg>  = Argument for the option '--option'
 [string]   = Type casting for argument '<opt-arg>'.
@@ -151,7 +151,7 @@ The cast could be written before or after your argument.
 
 Post-Cast
 ```
-<file>[FileInfo]
+<file>[System.IO.FileInfo]
 ```
 
 Pre-Cast
