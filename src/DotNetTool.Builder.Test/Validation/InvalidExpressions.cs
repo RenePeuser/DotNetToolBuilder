@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Test.Validation
         public void All_Expressions_Must_Be_Not_Valid()
         {
             var invalidExpressions = GetAll().ToList();
-            // invalidExpressions = (List<ExpressionWithExpectedResult>)(new ExpressionWithExpectedResult("a-b", "a-b  tool")).ToIList();
+             //invalidExpressions = (List<ExpressionWithExpectedResult>)(new ExpressionWithExpectedResult("a-b", "a-b command ---invalidoption")).ToIList();
 
             var validExpressions = from expression in invalidExpressions
                                    let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
@@ -155,6 +155,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool -- option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool ---option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <arg");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option arg>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option[string]");
@@ -169,6 +170,8 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <value>[string] -");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <value> -");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option -");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <arg> --option");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option --option");
 
             yield return new ExpressionWithExpectedResult("!§$%&/()=?`´", "!§$%&/()=?`´");
             yield return new ExpressionWithExpectedResult("dotnet", "!§$%&/()=?`´");

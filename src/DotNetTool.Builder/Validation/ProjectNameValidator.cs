@@ -36,13 +36,13 @@ namespace DotNetTool.Builder.Validation
 
             if (value.Contains(" "))
             {
-                yield return $"The project name: '{value}' must not contains whitespace.";
+                yield return $"The project name: '{value}' must not contains whitespace";
                 yield break;
             }
 
             if (value.All(c => _validationRules.Any(validation => validation(c))).IsFalse())
             {
-                yield return $"The project name: '{value}' must only contains letters, digits or '.' are allowed.";
+                yield return $"The project name: '{value}' must only contains letters, digits or '.' are allowed";
             }
 
             if (char.IsLetter(value.First()).IsFalse())

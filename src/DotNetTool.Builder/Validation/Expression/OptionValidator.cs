@@ -29,6 +29,14 @@ namespace DotNetTool.Builder.Validation.Expression
             foreach (var optionToken in optionTokens)
             {
                 var option = optionToken.Value;
+
+                var test = option.Split("--");
+                if (test[1].StartsWith("-"))
+                {
+                    yield return $"Option: '{option}' must start with: '--'. Sample: '--option' or --my-option";
+                    continue;
+                }
+
                 var optionName = option.TrimStart('-');
                 if (optionName.IsNullOrWhiteSpace())
                 {
@@ -58,7 +66,7 @@ namespace DotNetTool.Builder.Validation.Expression
 
                 if (char.IsLetter(optionName.First()).IsFalse())
                 {
-                    yield return $"Option: {optionName} must begin with a letter.";
+                    yield return $"Option: {optionName} must begin with a letter";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsValid(optionName);

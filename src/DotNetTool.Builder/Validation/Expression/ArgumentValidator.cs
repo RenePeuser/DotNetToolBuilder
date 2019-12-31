@@ -29,7 +29,33 @@ namespace DotNetTool.Builder.Validation.Expression
             foreach (var argumentToken in argumentTokens)
             {
                 var argument = argumentToken.Value;
-                if (argument.Count(c => c == '<' || c == '>').NotEqualsTo(2))
+
+                if (argument.StartsWith("[") && argument.EndsWith("]"))
+                {
+                    yield return $"Argument: '{argument}' definition is missing, a type cast must close to an argument. Sample: '<arg>[int]' or [int]<arg>";
+                    continue;
+                }
+
+                var argumentStartEndTokenCount = argument.Count(c => c == '<' || c == '>');
+                if (argumentStartEndTokenCount < 1)
+                {
+                    yield return $"Argument: '{argument}' missing start '<' and end '>' token.";
+                    continue;
+                }
+
+                if (argumentStartEndTokenCount == 1)
+                {
+                    if (argument.Contains("<"))
+                    {
+                        yield return $"Argument: '{argument}' missing end '>' token.";
+                        continue;
+                    }
+
+                    yield return $"Argument: '{argument}' missing start '<' token.";
+                    continue;
+                }
+
+                if (argumentStartEndTokenCount.NotEqualsTo(2))
                 {
                     yield return $"Argument: '{argument}' contains another argument syntax. Multiple '<' or '>' are not valid";
                     continue;
@@ -52,7 +78,7 @@ namespace DotNetTool.Builder.Validation.Expression
 
                 if (char.IsLetter(argumentName.First()).IsFalse())
                 {
-                    yield return $"Argument: {argument} must begin with a letter.";
+                    yield return $"Argument: {argument} must begin with a letter";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsValid(argumentName);
@@ -63,24 +89,34 @@ namespace DotNetTool.Builder.Validation.Expression
 
                 if (argument.Contains("--"))
                 {
-                    yield return $"Argument '{argumentToken}' contains '--' is only allowed for options, to separate verbs use '-'";
+                    yield return $"Argument '{argument}' contains '--' is only allowed for options, to separate verbs use '-'";
                 }
 
                 var preCast = argument.Split('<').First();
                 if (preCast.IsNotNullOrEmpty())
                 {
-                    if (preCast.StartsWith("[").IsFalse() || preCast.EndsWith("]").IsFalse())
+                    if (preCast.StartsWith("[").IsFalse())
                     {
-                        yield return $"Argument: {argumentToken} is invalid, only a type cast can be attached to an argument. Sample: [string]<arg>";
+                        yield return $"Typecast: {argument} must starts with a '['. Sample: [string]<arg>";
+                    }
+
+                    if (preCast.EndsWith("]").IsFalse())
+                    {
+                        yield return $"Typecast: {argument} must ends with a ']'. Sample: [string]<arg>";
                     }
                 }
 
                 var postCast = argument.Split('>').Last();
                 if (postCast.IsNotNullOrEmpty())
                 {
-                    if (postCast.StartsWith("[").IsFalse() || postCast.EndsWith("]").IsFalse())
+                    if (postCast.StartsWith("[").IsFalse())
                     {
-                        yield return $"Argument: {argumentToken} is invalid, only a type cast can be attached to an argument. Sample: <arg>[string]";
+                        yield return $"Typecast: {argument} must starts with a '['. Sample: <arg>[string]";
+                    }
+
+                    if (postCast.EndsWith("]").IsFalse())
+                    {
+                        yield return $"Typecast: {argument} must ends with a ']'. Sample: <arg>[string]";
                     }
                 }
             }

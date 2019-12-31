@@ -23,12 +23,12 @@
                 var command = commandToken.Value;
                 if (command.Contains("--") || command.Contains("<") || command.Contains("["))
                 {
-                    yield return $"Command: {command} most not contain argument '<arg>', typecast '[type]' or option-syntax '[--option]'.";
+                    yield return $"Command: {command} most not contain argument '<arg>', typecast '[type]' or option-syntax '[--option]'";
                 }
 
                 if (char.IsLetter(command.First()).IsFalse())
                 {
-                    yield return $"Argument: {command} must begin with a letter.";
+                    yield return $"Argument: {command} must begin with a letter";
                 }
             }
         }

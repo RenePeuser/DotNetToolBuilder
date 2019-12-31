@@ -40,6 +40,7 @@
             yield return new ToolNameValidator(new DotNetTool.Builder.Validation.ToolNameValidator(new PrimitiveTypeNameValidator()));
             yield return new CommandNameValidation();
             yield return new UnknownTokenValidator();
+            yield return new MultipleOptionValidator();
         }
     }
 }

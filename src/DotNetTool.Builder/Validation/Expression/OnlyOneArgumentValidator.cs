@@ -24,7 +24,7 @@
             {
                 if (lastArgumentToken.IsNotNull() && token.Is<ArgumentToken>())
                 {
-                    yield return $"'Argument: {token.Value}' was defined after another argument: {lastArgumentToken.Value}.{Environment.NewLine}You can define an argument only after a command 'myCommand <arg>' or an option '--option <opt-arg>' ";
+                    yield return $"Argument: {token.Value}' was defined after another argument: {lastArgumentToken.Value}.{Environment.NewLine}You can define an argument only after a command 'myCommand <arg>' or an option '--option <opt-arg>' ";
                 }
 
                 if (token is ArgumentToken argumentToken)

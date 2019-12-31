@@ -26,14 +26,14 @@ namespace DotNetTool.Builder.Validation.Expression
         {
             if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
-                yield return "Expression must not be null or empty.";
+                yield return "Expression must not be null or empty";
                 yield break;
             }
 
             var firstCommand = expressionInfo.Tokens.FirstOrDefault();
             if (firstCommand.IsNull())
             {
-                yield return "Expression must not be null or empty.";
+                yield return "Expression must not be null or empty";
             }
 
             var result = _toolNameValidator.IsValid(firstCommand.Value);
