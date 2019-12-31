@@ -1,6 +1,6 @@
 # DotNetTool.Builder
 
-This dotnet tool will create a dotnet tool based on the System.CommandLine.Experimental package.
+This dotnet tool will create a dotnet tool based on the System.CommandLine.Experimental package from Microsoft.
 
 ## Prerequisites
 * VS2019
