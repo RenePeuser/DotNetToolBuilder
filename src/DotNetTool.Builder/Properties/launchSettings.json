@@ -1,8 +1,7 @@
 {
   "profiles": {
     "trumpf.hmi.dotnettool.builder": {
-      "commandName": "Project",
-      "commandLineArgs": "\"D:\\AzureDevOps\\test.json\""
+      "commandName": "Project"
     }
   }
 }
