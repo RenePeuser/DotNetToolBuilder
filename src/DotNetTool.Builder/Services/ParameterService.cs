@@ -4,17 +4,24 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Services
 {
+    using Tokenizer.Tokens;
+
     public class ParameterService : IParameterService
     {
-        public CommandInfo FindAlreadyExistingCommand(CommandInfo command,
+        public CommandInfo FindAlreadyExistingCommand(CommandToken command,
             CommandInfo current)
         {
+            if (command.IsNull())
+            {
+                return null;
+            }
+
             if (current.IsNull())
             {
                 return null;
             }
 
-            if (current.Name == command.Name)
+            if (current.Name == command.Value)
             {
                 return current;
             }
@@ -23,7 +30,7 @@ namespace DotNetTool.Builder.Services
             {
                 foreach (var cliParameterInfo in current.SubCommands)
                 {
-                    if (cliParameterInfo.Name == command.Name)
+                    if (cliParameterInfo.Name == command.Value)
                     {
                         return cliParameterInfo;
                     }
@@ -47,11 +54,11 @@ namespace DotNetTool.Builder.Services
                 return null;
             }
 
-            if (current.ArgumentInfo.IsNotNull())
+            if (current.Argument.IsNotNull())
             {
-                if (current.ArgumentInfo.Value == argument.Name)
+                if (current.Argument.Value == argument.Name)
                 {
-                    return current.ArgumentInfo;
+                    return current.Argument;
                 }
             }
 

@@ -33,68 +33,39 @@ namespace DotNetTool.Builder.Parser
             _parameterService = parameterService;
         }
 
-        public CommandInfo Parse(ExpressionInfo parameterExpression, CommandInfo lastParameter)
+
+        // dotnet list
+        // dotnet update
+        public CommandInfo Parse(ExpressionInfo parameterExpression, CommandInfo previousCommand)
         {
-            var options = new List<OptionInfo>();
+            IList<OptionInfo> options = new List<OptionInfo>();
             CommandInfo lastCommand = null;
-            ArgumentInfo argument = null;
+            ArgumentInfo lastArgument = null;
 
             foreach (var token in parameterExpression.Tokens.Reverse())
             {
-                CommandInfo parameter = null;
                 switch (token)
                 {
                     case ArgumentToken argumentToken:
                         var currentArgument = _argumentParser.Parse(argumentToken);
-                        var existingArgument = _parameterService.FindAlreadyExistingArgument(currentArgument, lastParameter);
-                        argument = existingArgument.IsNotNull() ? existingArgument : currentArgument;
+                        var existingArgument = _parameterService.FindAlreadyExistingArgument(currentArgument, previousCommand);
+                        lastArgument = existingArgument.IsNotNull() ? existingArgument : currentArgument;
                         break;
                     case OptionToken optionToken:
-                        var currentOption = _optionParser.Parse(optionToken, argument);
-                        var existingOption = _parameterService.FindAlreadyExistingOption(currentOption, lastParameter);
-                        options.Add(existingOption.IsNotNull() ? existingOption : currentOption);
+                        var currentOption = _optionParser.Parse(optionToken, lastArgument);
+                        options.Add(currentOption);
+                        lastArgument = null;
                         break;
                     case CommandToken commandToken:
-                        var currentCommand = _commandParser.Parse(commandToken, options);
-                        var existingCommand = _parameterService.FindAlreadyExistingCommand(currentCommand, lastParameter);
-                        parameter = existingCommand.IsNotNull() ? existingCommand : _commandParser.Parse(commandToken, options, currentCommand);
+                        var optionsInCorrectOrder = options.Reverse().ToList();
+                        var existingCommand = _parameterService.FindAlreadyExistingCommand(commandToken, previousCommand);
+                        lastCommand = _commandParser.Parse(commandToken, lastArgument, optionsInCorrectOrder, lastCommand, existingCommand, previousCommand);
                         options = new List<OptionInfo>();
+                        lastArgument = null;
                         break;
                     default:
                         throw new InvalidOperationException($"Parameter expression: {parameterExpression.OptimizedExpressions} has invalid tokens, please check validation logic.");
                 }
-
-                if (lastCommand.IsNotNull())
-                {
-                    parameter.SubCommands = lastCommand.ToIList();
-                }
-
-                if (parameter.IsNotNull())
-                {
-                    parameter.ArgumentInfo = argument;
-                    if (argument.IsNotNull())
-                    {
-                        argument = null;
-                    }
-                }
-
-                lastCommand = parameter;
-                if (lastParameter.IsNotNull())
-                {
-                    var parentForThis = _parameterService.FindAlreadyExistingCommand(parameter, lastParameter);
-                    if (parentForThis.IsNotNull())
-                    {
-                        if (parentForThis.SubCommands.IsNotNull())
-                        {
-                            parentForThis.SubCommands = parentForThis.SubCommands.Concat(parameter.SubCommands);
-                        }
-                    }
-                }
-            }
-
-            if (lastParameter.IsNotNull())
-            {
-                return lastParameter;
             }
 
             return lastCommand;

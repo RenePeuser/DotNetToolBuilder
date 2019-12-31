@@ -1,17 +1,18 @@
-﻿using System.Linq;
-using DotNetTool.Builder.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace DotNetTool.Builder.Test.Parser
+﻿namespace DotNetTool.Builder.Test.Parser.SingleExpression
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Models;
+
     [TestClass]
     public class Root_Command_Test : ParameterExpressionBaseClass
     {
         private CommandInfo _rootCommand;
 
-        protected override string GetExpressionToParse()
+        protected override IEnumerable<string> GetExpressionsToParse()
         {
-            return "root sub1 <sub1Arg>[System.IO.FileInfo] --sub1-opt <sub-opt-value> --sub-opt2";
+            yield return "root sub1 <sub1Arg>[System.IO.FileInfo] --sub1-opt <sub-opt-value> --sub-opt2";
         }
 
         protected override void OnInit()
@@ -34,7 +35,7 @@ namespace DotNetTool.Builder.Test.Parser
         [TestMethod]
         public void Assert_Root_Command_Argument()
         {
-            Assert.IsNull(_rootCommand.ArgumentInfo);
+            Assert.IsNull(_rootCommand.Argument);
         }
 
         [TestMethod]

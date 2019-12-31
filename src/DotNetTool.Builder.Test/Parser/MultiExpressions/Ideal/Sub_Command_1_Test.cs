@@ -1,18 +1,20 @@
-﻿using System.Linq;
-using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace DotNetTool.Builder.Test.Parser
+﻿namespace DotNetTool.Builder.Test.Parser.MultiExpressions.Ideal
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Extensions;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Models;
+
     [TestClass]
     public class Sub_Command_1_Test : ParameterExpressionBaseClass
     {
         private CommandInfo _subCommand1;
 
-        protected override string GetExpressionToParse()
+        protected override IEnumerable<string> GetExpressionsToParse()
         {
-            return "root sub1 <sub1Arg>[System.IO.FileInfo] --sub1-opt <sub-opt-value> --sub-opt2";
+            yield return "tool command1 <command1-arg>[System.IO.FileInfo] --version <version>";
+            yield return "tool command2 <command2-arg>[string] --version <version>";
         }
 
         protected override void OnInit()
@@ -23,7 +25,7 @@ namespace DotNetTool.Builder.Test.Parser
         [TestMethod]
         public void Assert_Name()
         {
-            Assert.AreEqual("sub1", _subCommand1.Name);
+            Assert.AreEqual("command1", _subCommand1.Name);
         }
 
         [TestMethod]
@@ -35,13 +37,13 @@ namespace DotNetTool.Builder.Test.Parser
         [TestMethod]
         public void Assert_Options_Count()
         {
-            Assert.AreEqual(2, _subCommand1.Options.Count());
+            Assert.AreEqual(1, _subCommand1.Options.Count());
         }
 
         [TestMethod]
         public void Assert_Argument_Is_Not_Null()
         {
-            Assert.IsNotNull(_subCommand1.ArgumentInfo);
+            Assert.IsNotNull(_subCommand1.Argument);
         }
 
         [TestMethod]

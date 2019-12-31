@@ -1,22 +1,24 @@
-﻿using System.Linq;
-using DotNetTool.Builder.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace DotNetTool.Builder.Test.Parser
+﻿namespace DotNetTool.Builder.Test.Parser.MultiExpressions.Ideal
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Models;
+
     [TestClass]
     public class Sub_Command_1_Argument_Test : ParameterExpressionBaseClass
     {
         private ArgumentInfo _argumentInfo;
 
-        protected override string GetExpressionToParse()
+        protected override IEnumerable<string> GetExpressionsToParse()
         {
-            return "root sub1 <sub1Arg>[System.IO.FileInfo] --sub1-opt <sub-opt-value> --sub-opt2";
+            yield return "tool command1 <command1-arg>[System.IO.FileInfo] --version <version>";
+            yield return "tool command2 <command2-arg>[string] --version <version>";
         }
 
         protected override void OnInit()
         {
-            _argumentInfo = ParseResult.SubCommands.First().ArgumentInfo;
+            _argumentInfo = ParseResult.SubCommands.First().Argument;
         }
 
         [TestMethod]
@@ -28,7 +30,7 @@ namespace DotNetTool.Builder.Test.Parser
         [TestMethod]
         public void Assert_Argument_Value()
         {
-            Assert.AreEqual("<sub1Arg>[System.IO.FileInfo]", _argumentInfo.Value);
+            Assert.AreEqual("<command1-arg>[System.IO.FileInfo]", _argumentInfo.Value);
         }
 
         [TestMethod]
@@ -40,13 +42,13 @@ namespace DotNetTool.Builder.Test.Parser
         [TestMethod]
         public void Assert_Argument_Name()
         {
-            Assert.AreEqual("sub1Arg", _argumentInfo.Name);
+            Assert.AreEqual("command1-arg", _argumentInfo.Name);
         }
 
         [TestMethod]
         public void Assert_Argument_NormalizedName()
         {
-            Assert.AreEqual("Sub1Arg", _argumentInfo.NormalizedName);
+            Assert.AreEqual("Command1-arg", _argumentInfo.NormalizedName);
         }
 
         [TestMethod]

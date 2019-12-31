@@ -35,10 +35,10 @@ namespace DotNetTool.Builder.Builder.Argument
             var currentNamespace = $"{nameSpace}.Arguments";
             var newTemplate = Template.Replace("$project-name$", projectName)
                 .Replace("$command-name$", parameterInfo.NormalizedName)
-                .Replace("$argument-name$", parameterInfo.ArgumentInfo.Name)
+                .Replace("$argument-name$", parameterInfo.Argument.Name)
                 .Replace("$namespace$", currentNamespace)
-                .Replace("$type$", parameterInfo.ArgumentInfo.Type)
-                .Replace("$argument-description$", parameterInfo.ArgumentInfo.Description);
+                .Replace("$type$", parameterInfo.Argument.Type)
+                .Replace("$argument-description$", parameterInfo.Argument.Description);
 
             return newTemplate;
         }

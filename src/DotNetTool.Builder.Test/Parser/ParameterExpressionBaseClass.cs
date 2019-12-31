@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Test.Parser
     {
         protected CommandInfo ParseResult { get; private set; }
 
-        protected abstract string GetExpressionToParse();
+        protected abstract IEnumerable<string> GetExpressionsToParse();
 
         [TestInitialize]
         public void Init()
@@ -26,9 +26,17 @@ namespace DotNetTool.Builder.Test.Parser
             var consoleService = Substitute.For<IConsoleService>();
             var paser = new ParameterExpressionParser(new CommandParser(consoleService), new ArgumentParser(consoleService), new OptionParser(consoleService), new ParameterService());
             var tokenizer = new ExpressionTokenizer(GetTokenizer().ToList());
-            var expression = GetExpressionToParse();
-            var expressionInfo = tokenizer.Tokenize(expression);
-            ParseResult = paser.Parse(expressionInfo, null);
+            var expressions = GetExpressionsToParse().ToList();
+
+            CommandInfo lastCommandInfo = null;
+            foreach (var expression in expressions)
+            {
+                var expressionInfo = tokenizer.Tokenize(expression);
+                lastCommandInfo = paser.Parse(expressionInfo, lastCommandInfo);
+            }
+
+            ParseResult = lastCommandInfo;
+
             OnInit();
         }
 

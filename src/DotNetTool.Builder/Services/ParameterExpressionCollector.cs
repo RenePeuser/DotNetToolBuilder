@@ -33,7 +33,7 @@ namespace DotNetTool.Builder.Services
                 while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
                 {
                     _consoleService.WriteInput("Please enter your parameter expression");
-                    _consoleService.WriteSample("Sample: 'myTool install <package> --global");
+                    _consoleService.WriteSample($"Sample: '{dotNetToolName} command <argument> --option");
 
                     var parameterExpression = _consoleService.ReadLine();
                     expressionInfo = _expressionTokenizer.Tokenize(parameterExpression);

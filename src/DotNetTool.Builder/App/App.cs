@@ -98,7 +98,6 @@ namespace DotNetTool.Builder.App
             }
 
             consoleService.WriteSuccess(dotnetBuildResult.Output);
-
             var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
             consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
             consoleService.WriteInfo($"{findExe.Name} --help");

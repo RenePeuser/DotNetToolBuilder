@@ -34,7 +34,7 @@
         {
             Throw.IfNull(() => parameterInfo);
 
-            return parameterInfo.ArgumentInfo.IsNull() && parameterInfo.Options.IsNullOrEmpty();
+            return parameterInfo.Argument.IsNull() && parameterInfo.Options.IsNullOrEmpty();
         }
     }
 }

@@ -24,8 +24,7 @@ namespace DotNetTool.Builder.Builder.Commands
         public $command-name$CommandBuilder(I$command-name$Service $command-service-argument-name$Service, I$command-name$OptionsBuilder optionsBuilder)
         {                    
             _$command-service-argument-name$Service = $command-service-argument-name$Service;
-            _optionsBuilder = optionsBuilder;
-            _argumentBuilder = argumentBuilder;
+            _optionsBuilder = optionsBuilder;            
         }
 
         public Command Build()

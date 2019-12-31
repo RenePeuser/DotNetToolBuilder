@@ -30,14 +30,14 @@ namespace DotNetTool.Builder.Builder.Commands
         {
             Throw.IfNull(() => parameterInfo);
 
-            return parameterInfo.ArgumentInfo.IsNotNull() || parameterInfo.Options.Any();
+            return parameterInfo.Argument.IsNotNull() || parameterInfo.Options.Any();
         }
 
         internal IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 
-            var argumentInfo = parameterInfo.ArgumentInfo;
+            var argumentInfo = parameterInfo.Argument;
             if (argumentInfo.IsNotNull())
             {
                 yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);

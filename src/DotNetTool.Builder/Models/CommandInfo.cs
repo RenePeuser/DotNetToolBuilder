@@ -5,21 +5,32 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
+    using Newtonsoft.Json;
+
     [DebuggerDisplay("{" + nameof(Name) + "}")]
     public class CommandInfo : InfoBase
     {
-        public IEnumerable<CommandInfo> SubCommands { get; set; } = Enumerable.Empty<CommandInfo>();
+        public IEnumerable<CommandInfo> SubCommands { get; }
 
-        public IEnumerable<OptionInfo> Options { get; set; } = Enumerable.Empty<OptionInfo>();
+        public IEnumerable<OptionInfo> Options { get; }
 
-        public ArgumentInfo ArgumentInfo { get; set; }
+        public ArgumentInfo Argument { get; }
 
         public string AsArgumentName => Name.FirstCharToLower();
 
-        public string Description { get; set; }
-
-        public CommandInfo(string value, string name) : base(value, name) 
+        public string Description { get; }
+        
+        public CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options) : this(value, name, description, argumentInfo, options, Enumerable.Empty<CommandInfo>())
         {
+        }
+
+        [JsonConstructor]
+        public CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, IEnumerable<CommandInfo> subCommands) : base(value, name)
+        {
+            Description = description;
+            Argument = argumentInfo;
+            Options = options;
+            SubCommands = subCommands;
         }
     }
 }

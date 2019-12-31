@@ -12,9 +12,9 @@
             Name = name;
         }
 
-        public string Value { get; }
+        public string Value { get; set; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public string NormalizedName => Name.FirstCharToUpper();
     }

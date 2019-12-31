@@ -6,7 +6,6 @@
 
     public interface ICommandParser
     {
-        CommandInfo Parse(CommandToken commandToken, IEnumerable<OptionInfo> options);
-        CommandInfo Parse(CommandToken commandToken, IEnumerable<OptionInfo> options, CommandInfo parameterInfo);
+        CommandInfo Parse(CommandToken commandToken, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, CommandInfo lastCommand, CommandInfo alreadyExistingCommand, CommandInfo previousExpressionCommand);
     }
 }

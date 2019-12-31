@@ -53,7 +53,7 @@ $properties$
         {
             Throw.IfNull(() => parameterInfo);
 
-            return parameterInfo.ArgumentInfo.IsNotNull() || parameterInfo.Options.Any();
+            return parameterInfo.Argument.IsNotNull() || parameterInfo.Options.Any();
         }
 
         private string BuildPropertyString(IEnumerable<Property> properties)
@@ -87,7 +87,7 @@ $properties$
 
         private IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
         {
-            var argumentInfo = parameterInfo.ArgumentInfo;
+            var argumentInfo = parameterInfo.Argument;
             if (argumentInfo.IsNotNull())
             {
                 yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);

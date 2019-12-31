@@ -29,12 +29,12 @@
         {
             Throw.IfNull(() => parameterInfo);
 
-            return parameterInfo.ArgumentInfo.IsNull() && parameterInfo.Options.IsNullOrEmpty();
+            return parameterInfo.Argument.IsNull() && parameterInfo.Options.IsNullOrEmpty();
         }
 
         private IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
         {
-            var argumentInfo = parameterInfo.ArgumentInfo;
+            var argumentInfo = parameterInfo.Argument;
             if (argumentInfo.IsNotNull())
             {
                 yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);

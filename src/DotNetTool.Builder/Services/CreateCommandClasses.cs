@@ -17,6 +17,7 @@ namespace DotNetTool.Builder.Services
         private readonly IArgumentInterfaceBuilder _argumentInterfaceBuilder;
         private readonly ICommandBuilderForSubCommands _commandBuilderForSubCommands;
         private readonly ICommandBuilderSimple _commandBuilderSimple;
+        private readonly ICommandBuilderWithOptions _commandBuilderWithOptions;
         private readonly ICommandBuilderWithArgument _commandBuilderWithArgument;
         private readonly ICommandBuilderWithArgumentAndOption _commandBuilderWithArgumentAndOption;
         private readonly ICommandServiceInterfaceBuilder _commandServiceInterfaceBuilder;
@@ -33,6 +34,7 @@ namespace DotNetTool.Builder.Services
             ICommandBuilderForSubCommands commandBuilderForSubCommands,
             ISubCommandInterfaceBuilder subCommandInterfaceBuilder,
             ICommandBuilderSimple commandBuilderSimple,
+            ICommandBuilderWithOptions commandBuilderWithOptions,
             ICommandBuilderWithArgument commandBuilderWithArgument,
             ICommandBuilderWithArgumentAndOption commandBuilderWithArgumentAndOption,
             IDirectoryService directoryService,
@@ -48,6 +50,7 @@ namespace DotNetTool.Builder.Services
             _commandBuilderForSubCommands = commandBuilderForSubCommands;
             _subCommandInterfaceBuilder = subCommandInterfaceBuilder;
             _commandBuilderSimple = commandBuilderSimple;
+            _commandBuilderWithOptions = commandBuilderWithOptions;
             _commandBuilderWithArgument = commandBuilderWithArgument;
             _commandBuilderWithArgumentAndOption = commandBuilderWithArgumentAndOption;
             _directoryService = directoryService;
@@ -79,7 +82,7 @@ namespace DotNetTool.Builder.Services
                 var subCommnandDirectoryInfo = _directoryService.GetDirectoryInfo(Path.Combine(rootDirectory.FullName, subCommand.NormalizedName));
                 subCommnandDirectoryInfo.Create();
 
-                if (subCommand.ArgumentInfo.IsNotNull())
+                if (subCommand.Argument.IsNotNull())
                 {
                     var argumentFolderPath = Path.Combine(subCommnandDirectoryInfo.FullName, "Arguments");
                     var argumentFolder = _directoryService.CreateDirectory(argumentFolderPath);
@@ -116,7 +119,7 @@ namespace DotNetTool.Builder.Services
                 }
 
 
-                if (subCommand.ArgumentInfo.IsNotNull() || subCommand.Options.Any() || subCommand.SubCommands.IsNullOrEmpty())
+                if (subCommand.Argument.IsNotNull() || subCommand.Options.Any() || subCommand.SubCommands.IsNullOrEmpty())
                 {
                     var parameterModelClass = _parameterClassBuilder.Build(projectName, subCommand, currentPath);
                     var parameterClassFileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
@@ -138,18 +141,23 @@ namespace DotNetTool.Builder.Services
                 else
                 {
                     string command = null;
-                    if (subCommand.ArgumentInfo.IsNull() && subCommand.Options.IsEmpty())
+                    if (subCommand.Argument.IsNull() && subCommand.Options.IsEmpty())
                     {
                         command = _commandBuilderSimple.Build(projectName, subCommand, parameter, currentPath);
                     }
-                    else if (subCommand.ArgumentInfo.IsNotNull() && subCommand.Options.IsEmpty())
+                    else if (subCommand.Argument.IsNull() && subCommand.Options.Any())
+                    {
+                        command = _commandBuilderWithOptions.Build(projectName, subCommand, parameter, currentPath);
+                    }
+                    else if (subCommand.Argument.IsNotNull() && subCommand.Options.IsEmpty())
                     {
                         command = _commandBuilderWithArgument.Build(projectName, subCommand, parameter, currentPath);
                     }
-                    else if (subCommand.ArgumentInfo.IsNotNull() && subCommand.Options.Any())
+                    else if (subCommand.Argument.IsNotNull() && subCommand.Options.Any())
                     {
                         command = _commandBuilderWithArgumentAndOption.Build(projectName, subCommand, parameter, currentPath);
                     }
+                    
 
                     var fileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
                     fileInfo.WriteAllText(command);
