@@ -36,9 +36,9 @@ namespace DotNetTool.Builder.Validation.Expression
                         continue;
                     }
 
-                    var start = value.IndexOf("[") + 1;
-                    var end = value.IndexOf("]");
-                    var typeName = value.Substring(start, end - start);
+                    var start = value.IndexOf("[", StringComparison.Ordinal) + 1;
+                    var end = value.IndexOf("]", StringComparison.Ordinal);
+                    var typeName = value[start..end];
 
                     if (typeName.All(c => char.IsLetterOrDigit(c) || c == '.').IsFalse())
                     {

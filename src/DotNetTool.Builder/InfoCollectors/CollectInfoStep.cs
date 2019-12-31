@@ -25,7 +25,7 @@ namespace DotNetTool.Builder.InfoCollectors
             while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
             {
                 _consoleService.WriteInput(Title);
-                input = _consoleService.ReadLine();
+                input = _consoleService.ReadLine().Trim();
                 validationResult = _inputValidator.IsValid(input);
                 if (validationResult.IsValid.IsFalse())
                 {

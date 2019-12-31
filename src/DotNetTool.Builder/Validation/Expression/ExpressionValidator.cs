@@ -5,6 +5,7 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
+    using Argument.Check;
     using Models;
 
     public class ExpressionValidator : IExpressionValidator
@@ -18,6 +19,9 @@ namespace DotNetTool.Builder.Validation.Expression
 
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
+            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => expressionInfo);
+
             if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
                 return new ValidationResult(false, "Input must not be 'null', 'empty' or 'whitespace");

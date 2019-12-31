@@ -20,7 +20,7 @@ namespace DotNetTool.Builder.Test.Validation
                                    let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
                                    let isValid = ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid
                                    where isValid
-                                   select new { IsValid = isValid, Expression = expression.Expression };
+                                   select new { IsValid = isValid, expression.Expression };
 
 
             Assert.IsTrue(validExpressions.IsEmpty(), validExpressions.ToString($"Following expressions was valid, which should NOT:{Environment.NewLine}", result => result.Expression));

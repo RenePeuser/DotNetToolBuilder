@@ -17,7 +17,7 @@
                                      let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
                                      let isValid = ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid.IsFalse()
                                      where isValid
-                                     select new { IsValid = isValid, Expression = expression.Expression };
+                                     select new { IsValid = isValid, expression.Expression };
 
 
             Assert.IsTrue(invalidExpressions.IsEmpty(), invalidExpressions.ToString($"Following expressions was invalid, which should be valid:{Environment.NewLine}", result => result.Expression));

@@ -23,53 +23,50 @@ namespace DotNetTool.Builder.Validation.Expression
             return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
 
-        // Valid argument declarations
-        // <arg>
-        // <arg>[string]
-        // [string]<arg>
         private IEnumerable<string> CheckForErrors(ExpressionInfo expressionInfo)
         {
             var argumentTokens = expressionInfo.Tokens.OfType<ArgumentToken>().ToList();
             foreach (var argumentToken in argumentTokens)
             {
-                if (argumentToken.Value.Count(c => c == '<' || c == '>').NotEqualsTo(2))
+                var argument = argumentToken.Value;
+                if (argument.Count(c => c == '<' || c == '>').NotEqualsTo(2))
                 {
-                    yield return $"Argument: '{argumentToken}' contains another argument syntax. Multiple '<' or '>' are not valid";
+                    yield return $"Argument: '{argument}' contains another argument syntax. Multiple '<' or '>' are not valid";
                     continue;
                 }
 
-                if (argumentToken.Value.IndexOf('<') > argumentToken.Value.IndexOf('>'))
+                if (argument.IndexOf('<') > argument.IndexOf('>'))
                 {
-                    yield return $"Argument: '{argumentToken}' must starts with '< and ends with '>'";
+                    yield return $"Argument: '{argument}' must starts with '< and ends with '>'";
                     continue;
                 }
 
-                var start = argumentToken.Value.IndexOf("<") + 1;
-                var end = argumentToken.Value.IndexOf(">");
-                var argumentName = argumentToken.Value.Substring(start, end - start);
+                var start = argument.IndexOf("<", StringComparison.Ordinal) + 1;
+                var end = argument.IndexOf(">", StringComparison.Ordinal);
+                var argumentName = argument[start..end];
                 if (argumentName.IsNullOrWhiteSpace())
                 {
-                    yield return $"Missing argument name: {argumentToken}";
+                    yield return $"Missing argument name: {argument}";
                     yield break;
                 }
 
                 if (char.IsLetter(argumentName.First()).IsFalse())
                 {
-                    yield return $"Argument: {argumentName} must begin with a letter.";
+                    yield return $"Argument: {argument} must begin with a letter.";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsValid(argumentName);
                 if (validationResult.IsValid.IsFalse())
                 {
-                    yield return $"The name of an argument does not match a name of a type: {argumentName}";
+                    yield return $"The name of an argument does not match a name of a type: {argument}";
                 }
 
-                if (argumentToken.Value.Contains("--"))
+                if (argument.Contains("--"))
                 {
                     yield return $"Argument '{argumentToken}' contains '--' is only allowed for options, to separate verbs use '-'";
                 }
 
-                var preCast = argumentToken.Value.Split('<').First();
+                var preCast = argument.Split('<').First();
                 if (preCast.IsNotNullOrEmpty())
                 {
                     if (preCast.StartsWith("[").IsFalse() || preCast.EndsWith("]").IsFalse())
@@ -78,7 +75,7 @@ namespace DotNetTool.Builder.Validation.Expression
                     }
                 }
 
-                var postCast = argumentToken.Value.Split('>').Last();
+                var postCast = argument.Split('>').Last();
                 if (postCast.IsNotNullOrEmpty())
                 {
                     if (postCast.StartsWith("[").IsFalse() || postCast.EndsWith("]").IsFalse())
