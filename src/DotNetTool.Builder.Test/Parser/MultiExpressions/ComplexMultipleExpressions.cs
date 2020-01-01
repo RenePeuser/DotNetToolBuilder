@@ -1,7 +1,9 @@
 ﻿namespace DotNetTool.Builder.Test.Parser.MultiExpressions
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.VisualBasic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models;
 

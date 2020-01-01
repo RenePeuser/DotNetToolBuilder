@@ -298,3 +298,20 @@ public Command Build()
     return command;
 }
 ```
+
+## Multiexpressions
+
+Since Version '0.5.6-beta' you can build up your expression step by step.
+
+```
+root cmd1
+root cmd1 <cmd1-arg>
+root cmd1 cmd2
+root cmd1 cmd2 <cmd2-arg>
+root cmd1 cmd2 cmd3
+root cmd1 cmd2 cmd3 <cmd3-arg>
+root cmd1 cmd2 cmd3 cmd4
+root cmd1 cmd2 cmd3 cmd4 <cmd4-arg>
+root cmd1 cmd2 cmd3 cmd4 cmd5
+root cmd1 cmd2 cmd3 cmd4 cmd5 <cmd5-arg>
+```
