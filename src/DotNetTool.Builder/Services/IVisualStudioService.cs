@@ -2,8 +2,10 @@
 
 namespace DotNetTool.Builder.Services
 {
+    using System.Threading.Tasks;
+
     public interface IVisualStudioService
     {
-        void Open(IFileInfo solution);
+        Task OpenAsync(IFileInfo solution);
     }
 }

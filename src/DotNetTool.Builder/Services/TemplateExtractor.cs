@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Services
 {
     using System.Linq;
     
-    public class ExtractTemplate : IExtractTemplate
+    public class TemplateExtractor : ITemplateExtractor
     {
         public void ExtractTo(IDirectoryInfo directoryInfo)
         {

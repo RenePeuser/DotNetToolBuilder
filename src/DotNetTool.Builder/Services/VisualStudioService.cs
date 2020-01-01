@@ -7,31 +7,33 @@ using DotNetTool.Builder.FileSystemAbstraction.Services;
 
 namespace DotNetTool.Builder.Services
 {
+    using System.Threading.Tasks;
+
     public class VisualStudioService : IVisualStudioService
     {
         private readonly IDirectoryService _directoryService;
+        private readonly IConsoleService _consoleService;
         private readonly IProcessService _processService;
 
-        public VisualStudioService(IProcessService processService, IDirectoryService directoryService)
+        public VisualStudioService(IProcessService processService, IDirectoryService directoryService, IConsoleService consoleService)
         {
             _processService = processService;
             _directoryService = directoryService;
+            _consoleService = consoleService;
         }
 
-        public void Open(IFileInfo solution)
+        public Task OpenAsync(IFileInfo solution)
         {
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            var visualStudio2019Folder =
-                _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, @"Microsoft Visual Studio\2019\"));
-            var vs2019 = visualStudio2019Folder.EnumerateFiles("devenv.exe", SearchOption.AllDirectories)
-                .FirstOrDefault();
+            var visualStudio2019Folder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, @"Microsoft Visual Studio\2019\"));
+            var vs2019 = visualStudio2019Folder.EnumerateFiles("devenv.exe", SearchOption.AllDirectories).FirstOrDefault();
+
             if (vs2019.NotExists())
             {
-                throw new InvalidOperationException(
-                    $"Can not start visual studio 2019, because did not find any version of visual studio in path: '{visualStudio2019Folder.FullName}'");
+                throw new InvalidOperationException($"Can not start visual studio 2019, because did not find any version of visual studio in path: '{visualStudio2019Folder.FullName}'");
             }
-
-            _processService.RunCliCommandAsync(vs2019.FullName, solution.FullName);
+            _consoleService.WriteInfo($"Open Visual Studio 2019 with: {solution.Name}");
+            return _processService.RunCliCommandAsync(vs2019.FullName, solution.FullName);
         }
     }
 }

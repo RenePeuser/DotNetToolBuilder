@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Services
 {
-    public interface IExtractTemplate
+    public interface ITemplateExtractor
     {
         void ExtractTo(IDirectoryInfo directoryInfo);
     }

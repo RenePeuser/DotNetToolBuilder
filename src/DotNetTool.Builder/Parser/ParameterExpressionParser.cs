@@ -33,9 +33,6 @@ namespace DotNetTool.Builder.Parser
             _parameterService = parameterService;
         }
 
-
-        // dotnet list
-        // dotnet update
         public CommandInfo Parse(ExpressionInfo parameterExpression, CommandInfo previousCommand)
         {
             IList<OptionInfo> options = new List<OptionInfo>();

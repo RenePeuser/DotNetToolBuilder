@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder
 {
+    using App;
     using Parser.Commands;
     using Tokenizer;
     using ToolNameValidator = Validation.Expression.ToolNameValidator;
@@ -79,7 +80,7 @@ namespace DotNetTool.Builder
 
         private void RegisterServices(IServiceCollection services)
         {
-            services.AddSingleton<IExtractTemplate, ExtractTemplate>();
+            services.AddSingleton<ITemplateExtractor, TemplateExtractor>();
             services.AddSingleton<IConsoleService, ConsoleService>();
             services.AddSingleton<IFileService, FileService>();
             services.AddSingleton<IDirectoryService, DirectoryService>();
@@ -92,7 +93,11 @@ namespace DotNetTool.Builder
             services.AddSingleton<IProcessService, ProcessService>();
             services.AddSingleton<INameSpaceCollector, NameSpaceCollector>();
             services.AddSingleton<IRenameFilesAndFolders, RenameFilesAndFolders>();
+            services.AddSingleton<ITemplateService, TemplateService>();
             services.AddSingleton<IVisualStudioService, VisualStudioService>();
+            services.AddSingleton<IDotNetToolTestService, DotNetToolTestService>();
+            services.AddSingleton<IDotNetToolSerializer, DotNetToolSerializer>();
+            services.AddSingleton<ITargetFolderService, TargetFolderService>();
         }
 
         public void RegisterDotNetToolInfoCollector(IServiceCollection services)

@@ -2,18 +2,14 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Argument.Check;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Builder.Startup;
-using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.App
 {
-    using Extensions;
-
     public class App
     {
         public App(IServiceProvider serviceProvider)
@@ -30,56 +26,42 @@ namespace DotNetTool.Builder.App
 
         private async Task<int> RunInternalAsync(string[] args)
         {
-            var consoleService = ServiceProvider.GetService<IConsoleService>();
             var dotNetToolInfoCollector = ServiceProvider.GetService<IDotNetToolInfoCollector>();
-            var directoryService = ServiceProvider.GetService<IDirectoryService>();
-            var fileService = ServiceProvider.GetService<IFileService>();
             var typeCollector = ServiceProvider.GetService<ICommandTypeCollector>();
             var namespaceCollector = ServiceProvider.GetService<INameSpaceCollector>();
             var visualStudioService = ServiceProvider.GetService<IVisualStudioService>();
-            var renameFilesAndFolders = ServiceProvider.GetService<IRenameFilesAndFolders>();
+            var templateService = ServiceProvider.GetService<ITemplateService>();
             var createCommandClasses = ServiceProvider.GetService<ICreateCommandClasses>();
             var processService = ServiceProvider.GetService<IProcessService>();
             var startUpBuilder = ServiceProvider.GetService<IStartUpBuilder>();
-            var extractTemplate = ServiceProvider.GetService<IExtractTemplate>();
+            var templateExtractor = ServiceProvider.GetService<ITemplateExtractor>();
+            var dotNetToolService = ServiceProvider.GetService<IDotNetToolTestService>();
+            var dotNetToolSerializer = ServiceProvider.GetService<IDotNetToolSerializer>();
+            var targetFolderService = ServiceProvider.GetService<ITargetFolderService>();
+            var consoleService = ServiceProvider.GetService<IConsoleService>();
 
-
-
-            Models.DotNetTool dotNetTool = null;
-            if (args.FirstOrDefault().IsNotNull() && args.First().EndsWith("json"))
+            // if a json file with a dot net tool is given then try to deserialize it
+            var dotNetTool = dotNetToolSerializer.DeserializeFrom(args.FirstOrDefault());
+            if (dotNetTool.IsNull())
             {
-                var dotNetToolSerialized = fileService.GetFileInfo(args.FirstOrDefault());
-                if (dotNetToolSerialized.Exists && dotNetToolSerialized.Extension.EndsWith("json"))
-                {
-                    dotNetTool = JsonConvert.DeserializeObject<Models.DotNetTool>(dotNetToolSerialized.ReadAllText());
-                }
-            }
-            
-            if(dotNetTool.IsNull())
-            {
+                // if tool was not deserialized, then user have to give in all information for this tool.
                 dotNetTool = dotNetToolInfoCollector.Collect();
             }
 
+            // Create target, will create in execution folder and throws exception if target already exists.
+            var targetDirectory = targetFolderService.CreateTargetDirectory(dotNetTool);
 
-            var targetDirectory = directoryService.GetDirectoryInfo(Path.Combine(directoryService.GetCurrentDirectory().FullName, dotNetTool.ProjectName));
-            Throw.If(() => targetDirectory, dir => dir.Exists, $"The directory: {targetDirectory.FullName} already exists.");
+            // Extract the solution template to target directory
+            templateExtractor.ExtractTo(targetDirectory);
 
-            targetDirectory.Create();
-            extractTemplate.ExtractTo(targetDirectory);
-
-            // Solution and projects
-            renameFilesAndFolders.Rename(targetDirectory, "rps.template", dotNetTool.ProjectName);
-
-            // DotNetTool name
-            renameFilesAndFolders.Rename(targetDirectory, "Rps", dotNetTool.NormalizedToolName);
-            renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.ToolName.ToLower());
+            // All templates will renamed with the new tool information
+            templateService.RenameAllIn(targetDirectory, dotNetTool);
 
             // detect folder of root command
             var rootDirectory = targetDirectory.EnumerateDirectories(dotNetTool.ToolName, SearchOption.AllDirectories).Single();
-            var currentPath = dotNetTool.ProjectName;
 
             // Create command structure
-            createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, typeCollector, currentPath, namespaceCollector);
+            createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, typeCollector, dotNetTool.ProjectName, namespaceCollector);
 
             // Find solution file
             var solutionFile = targetDirectory.EnumerateFiles("*.sln", SearchOption.AllDirectories).Single();
@@ -87,25 +69,23 @@ namespace DotNetTool.Builder.App
             // Add type registrations
             startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, typeCollector, dotNetTool.ParameterInfo, namespaceCollector);
 
-            consoleService.WriteInfo($"Build your new '{dotNetTool.ProjectName}' dotnet tool...");
-
+            // Build your new generated tool
             var dotnetBuildResult = await processService.RunCliCommandAsync("dotnet", $"build {solutionFile.FullName}");
             if (dotnetBuildResult.ExitCode != 0)
             {
-                consoleService.WriteError(dotnetBuildResult.Output);
-                visualStudioService.Open(solutionFile);
+                // Also if fail open visual studio, to focus to the error, most case will be incorrect type casts for arguments.
+                await visualStudioService.OpenAsync(solutionFile);
                 return -1;
             }
 
-            consoleService.WriteSuccess(dotnetBuildResult.Output);
-            var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
-            consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
-            consoleService.WriteInfo($"{findExe.Name} --help");
-            var runYourCliResult = await processService.RunCliCommandAsync($"{findExe.FullName}", "--help");
-            consoleService.WriteSuccess(runYourCliResult.Output);
-            consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
+            // Test run with the new tool with --help
+            await dotNetToolService.RunAsync(solutionFile, dotNetTool);
 
-            visualStudioService.Open(solutionFile);
+            // Open visual studio, right now works only with VS2019 !
+            await visualStudioService.OpenAsync(solutionFile);
+
+            // All works fine, enjoy your new cli.
+            consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
 
             return 0;
         }
