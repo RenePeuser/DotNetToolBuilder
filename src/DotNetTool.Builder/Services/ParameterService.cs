@@ -11,15 +11,8 @@ namespace DotNetTool.Builder.Services
         public CommandInfo FindAlreadyExistingCommand(CommandToken command,
             CommandInfo current)
         {
-            if (command.IsNull())
-            {
-                return null;
-            }
-
-            if (current.IsNull())
-            {
-                return null;
-            }
+            if (command.IsNull()) return null;
+            if (current.IsNull()) return null;
 
             if (current.Name == command.Value)
             {
@@ -49,10 +42,7 @@ namespace DotNetTool.Builder.Services
         public ArgumentInfo FindAlreadyExistingArgument(ArgumentInfo argument,
             CommandInfo current)
         {
-            if (current.IsNull())
-            {
-                return null;
-            }
+            if (current.IsNull()) return null;
 
             if (current.Argument.IsNotNull())
             {
@@ -74,18 +64,13 @@ namespace DotNetTool.Builder.Services
                 }
             }
 
-
             return null;
         }
 
         public OptionInfo FindAlreadyExistingOption(OptionInfo option,
             CommandInfo current)
         {
-            if (current.IsNull())
-            {
-                return null;
-            }
-
+            if (current.IsNull()) return null;
 
             var existingOption = current.Options.FirstOrDefault(o => o.Value == option.Value);
             if (existingOption.IsNotNull())

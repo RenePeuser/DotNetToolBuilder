@@ -12,14 +12,11 @@ using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Validation;
 using DotNetTool.Builder.Validation.Expression;
 using Microsoft.Extensions.DependencyInjection;
+using DotNetTool.Builder.Parser.Commands;
+using DotNetTool.Builder.Tokenizer;
 
 namespace DotNetTool.Builder
 {
-    using App;
-    using Parser.Commands;
-    using Tokenizer;
-    using ToolNameValidator = Validation.Expression.ToolNameValidator;
-
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
@@ -62,7 +59,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, ArgumentValidator>();
             services.AddSingleton<IExpressionContentValidator, OptionValidator>();
             services.AddSingleton<IExpressionContentValidator, CharValidator>();
-            services.AddSingleton<IExpressionContentValidator, ToolNameValidator>();
+            services.AddSingleton<IExpressionContentValidator, Validation.Expression.ToolNameValidator>();
             services.AddSingleton<IExpressionContentValidator, MinimumCommandValidator>();
             services.AddSingleton<IExpressionContentValidator, OnlyOneArgumentValidator>();
             services.AddSingleton<IExpressionContentValidator, CommandMustBeforeOptionOrArgumentValidator>();
