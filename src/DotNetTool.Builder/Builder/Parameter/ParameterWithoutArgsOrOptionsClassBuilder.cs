@@ -1,7 +1,9 @@
-﻿namespace DotNetTool.Builder.Builder.Parameter
+﻿using Argument.Check;
+
+namespace DotNetTool.Builder.Builder.Parameter
 {
     using Extensions;
-    using global::Argument.Check;
+    
     using Models;
 
     internal class ParameterWithoutArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder

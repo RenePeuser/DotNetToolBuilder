@@ -1,11 +1,10 @@
 ﻿using System.IO;
 using System.Linq;
 using DotNetTool.Builder.Models;
+using Argument.Check;
 
 namespace DotNetTool.Builder.Builder
 {
-    using global::Argument.Check;
-
     public class AppBuilder
     {
         private const string Template =

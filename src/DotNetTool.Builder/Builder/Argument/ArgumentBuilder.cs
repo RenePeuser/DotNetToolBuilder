@@ -1,9 +1,8 @@
 ﻿using DotNetTool.Builder.Models;
+using Argument.Check;
 
 namespace DotNetTool.Builder.Builder.Argument
 {
-    using global::Argument.Check;
-
     public class ArgumentBuilder : IArgumentBuilder
     {
         private const string Template =

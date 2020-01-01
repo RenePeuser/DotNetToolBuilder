@@ -1,8 +1,10 @@
-﻿namespace DotNetTool.Builder.Builder.Commands
+﻿using Argument.Check;
+
+namespace DotNetTool.Builder.Builder.Commands
 {
     using System.Collections.Generic;
     using System.Linq;
-    using global::Argument.Check;
+    
     using Models;
 
     internal class CommandHandlerBuilder : ICommandHandlerBuilder

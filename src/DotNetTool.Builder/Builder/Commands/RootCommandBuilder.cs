@@ -1,9 +1,10 @@
-﻿using DotNetTool.Builder.Models;
+﻿using Argument.Check;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
     using Extensions;
-    using global::Argument.Check;
+    
 
     internal class RootCommandBuilder : IRootCommandBuilder
     {

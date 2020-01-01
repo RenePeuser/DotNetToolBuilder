@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Argument.Check;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    using global::Argument.Check;
+    
 
     public class OptionImplementationBuilder : IOptionImplementationBuilder
     {

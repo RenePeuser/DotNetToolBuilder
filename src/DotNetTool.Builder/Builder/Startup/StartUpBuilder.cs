@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Argument.Check;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.FileSystemAbstraction;
 using DotNetTool.Builder.Models;
@@ -9,7 +10,7 @@ using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.Builder.Startup
 {
-    using global::Argument.Check;
+    
 
     public class StartUpBuilder : IStartUpBuilder
     {

@@ -1,9 +1,8 @@
-﻿using DotNetTool.Builder.Models;
+﻿using Argument.Check;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    using global::Argument.Check;
-
     internal class CommandBuilderForSubCommands : ICommandBuilderForSubCommands
     {
         private const string Template =

@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Services
                 throw new Exception($"Error occured: '{listResult.Output}'");
             }
 
-            var toolRows = listResult.Output.Split("\r\n");
+            var toolRows = listResult.Output.Split(Environment.NewLine);
             var tool = toolRows.FirstOrDefault(line => line.Contains(toolName.ToLower()));
             if (tool.IsNull())
             {

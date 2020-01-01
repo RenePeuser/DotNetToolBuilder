@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Argument.Check;
 using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Builder.Parameter
 {
-    using global::Argument.Check;
+    
     using Models;
 
     internal class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder

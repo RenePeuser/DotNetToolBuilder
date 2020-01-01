@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Argument.Check;
 using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    using global::Argument.Check;
+    
 
     public class OptionMethodsBuilder : IOptionMethodsBuilder
     {

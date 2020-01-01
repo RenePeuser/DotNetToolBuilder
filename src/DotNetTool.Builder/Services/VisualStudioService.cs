@@ -33,7 +33,7 @@ namespace DotNetTool.Builder.Services
                 throw new InvalidOperationException($"Can not start visual studio 2019, because did not find any version of visual studio in path: '{visualStudio2019Folder.FullName}'");
             }
             _consoleService.WriteInfo($"Open Visual Studio 2019 with: {solution.Name}");
-            return _processService.RunCliCommandAsync(vs2019.FullName, solution.FullName);
+            return _processService.StartCliCommandAsync(vs2019.FullName, solution.FullName);
         }
     }
 }
