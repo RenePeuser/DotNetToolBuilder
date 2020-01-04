@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.Test
     public class ClassesToRefactorTest
     {
         private static IEnumerable<CSharpFileInfo> _csharpFileInfos;
-        private static readonly string[] codeFilesOnWhiteList = { "Startup.cs", "ParameterWithArgsOrOptionsClassBuilder.cs", "ArgumentValidator.cs" };
+        private static readonly string[] codeFilesOnWhiteList = { "Startup.cs", "ParameterWithArgsOrOptionsClassBuilder.cs", "ArgumentValidator.cs", "NewToolService.cs" };
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
