@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.NewTool;
+using FileSystem.Abstraction;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder.App
@@ -23,6 +24,10 @@ namespace DotNetTool.Builder.App
         {
             var rootCommand = ServiceProvider.GetService<IDotnetCommandBuilder>().Build();
             var errorHandler = ServiceProvider.GetService<IErrorHandler>();
+
+            var directoryService = ServiceProvider.GetService<IDirectoryService>();
+            var currentDirectory = directoryService.GetDirectoryInfo(Environment.CurrentDirectory);
+            directoryService.SetCurrentDirectoryInfo(currentDirectory);
 
             var commandLineBuilder = new CommandLineBuilder(rootCommand);
             commandLineBuilder.UseMiddleware(errorHandler.HandleErrors);
