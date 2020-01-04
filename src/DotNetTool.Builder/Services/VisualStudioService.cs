@@ -2,8 +2,7 @@
 using System.IO;
 using System.Linq;
 using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.FileSystemAbstraction;
-using DotNetTool.Builder.FileSystemAbstraction.Services;
+using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services
 {

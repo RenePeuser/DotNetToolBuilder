@@ -1,9 +1,9 @@
-﻿namespace DotNetTool.Builder.Services
+﻿using FileSystem.Abstraction;
+
+namespace DotNetTool.Builder.Services
 {
     using System.IO;
     using Argument.Check;
-    using FileSystemAbstraction;
-    using FileSystemAbstraction.Services;
     using Models;
 
     public class TargetFolderService : ITargetFolderService

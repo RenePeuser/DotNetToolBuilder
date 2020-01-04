@@ -2,9 +2,9 @@
 
 namespace DotNetTool.Builder.App
 {
-    public class AppBuilder
+    internal class AppBuilder
     {
-        public App Build()
+        internal App Build()
         {
             var services = new ServiceCollection();
             var startup = new Startup();

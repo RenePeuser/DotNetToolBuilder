@@ -3,7 +3,6 @@ using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
 using DotNetTool.Builder.Builder.Startup;
-using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
@@ -14,16 +13,17 @@ using DotNetTool.Builder.Validation.Expression;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetTool.Builder.Parser.Commands;
 using DotNetTool.Builder.Tokenizer;
+using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder
 {
-    public class Startup
+    internal class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        internal void ConfigureServices(IServiceCollection services)
         {
             RegisterServices(services);
             RegisterValidation(services);
-
+            
             RegisterTokenizer(services);
             RegisterArgumentParser(services);
             RegisterOptionsParser(services);
@@ -97,7 +97,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<ITargetFolderService, TargetFolderService>();
         }
 
-        public void RegisterDotNetToolInfoCollector(IServiceCollection services)
+        internal void RegisterDotNetToolInfoCollector(IServiceCollection services)
         {
             services.AddSingleton<IDotNetToolInfoCollector, DotNetToolInfoCollector>();
             services.AddSingleton<ICollectProjectName, CollectProjectName>();
@@ -105,29 +105,29 @@ namespace DotNetTool.Builder
             services.AddSingleton<IParameterExpressionCollector, ParameterExpressionCollector>();
         }
 
-        public void RegisterArgumentParser(IServiceCollection services)
+        internal void RegisterArgumentParser(IServiceCollection services)
         {
             services.AddSingleton<IArgumentParser, ArgumentParser>();
         }
 
-        public void RegisterOptionsParser(IServiceCollection services)
+        internal void RegisterOptionsParser(IServiceCollection services)
         {
             services.AddSingleton<IOptionParser, OptionParser>();
         }
 
-        public void RegisterParameterParser(IServiceCollection services)
+        internal void RegisterParameterParser(IServiceCollection services)
         {
             services.AddSingleton<ICommandParser, CommandParser>();
             services.AddSingleton<IParameterExpressionParser, ParameterExpressionParser>();
         }
 
-        public void RegisterArgumentBuilder(IServiceCollection services)
+        internal void RegisterArgumentBuilder(IServiceCollection services)
         {
             services.AddSingleton<IArgumentBuilder, ArgumentBuilder>();
             services.AddSingleton<IArgumentInterfaceBuilder, ArgumentInterfaceBuilder>();
         }
 
-        public void RegisterOptionsBuilder(IServiceCollection services)
+        internal void RegisterOptionsBuilder(IServiceCollection services)
         {
             services.AddSingleton<IOptionInterfaceBuilder, OptionInterfaceBuilder>();
             services.AddSingleton<IOptionImplementationBuilder, OptionImplementationBuilder>();
@@ -137,14 +137,14 @@ namespace DotNetTool.Builder
             services.AddSingleton<INewOptionExpressionService, NewOptionExpressionService>();
         }
 
-        public void RegisterParameterClassBuilder(IServiceCollection services)
+        internal void RegisterParameterClassBuilder(IServiceCollection services)
         {
             services.AddSingleton<IParameterClassBuilder, ParameterClassBuilder>();
             services.AddSingleton<IParameterSpecificClassBuilder, ParameterWithoutArgsOrOptionsClassBuilder>();
             services.AddSingleton<IParameterSpecificClassBuilder, ParameterWithArgsOrOptionsClassBuilder>();
         }
 
-        public void RegisterCommandBuilders(IServiceCollection services)
+        internal void RegisterCommandBuilders(IServiceCollection services)
         {
             services.AddSingleton<ICommandBuilderForSubCommands, CommandBuilderForSubCommands>();
             services.AddSingleton<ICommandBuilderSimple, CommandBuilderSimple>();

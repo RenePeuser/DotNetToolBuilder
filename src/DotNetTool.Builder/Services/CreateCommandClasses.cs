@@ -5,9 +5,8 @@ using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
 using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.FileSystemAbstraction;
-using DotNetTool.Builder.FileSystemAbstraction.Services;
 using DotNetTool.Builder.Models;
+using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services
 {
@@ -107,6 +106,7 @@ namespace DotNetTool.Builder.Services
 
                     var optionsInterfaceSyntaxTree = _optionInterfaceBuilder.Build(projectName, subCommand, currentPath);
                     var optionsInterfaceFilePath = _fileService.GetFileInfo(Path.Combine(optionFolder.FullName, $"I{subCommand.NormalizedName}OptionsBuilder.cs"));
+
                     File.WriteAllText(optionsInterfaceFilePath.FullName, optionsInterfaceSyntaxTree);
 
                     var optionsImplementationSyntaxTree = _optionImplementationBuilder.Build(projectName, subCommand, currentPath);

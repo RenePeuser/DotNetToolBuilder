@@ -1,5 +1,5 @@
-﻿using DotNetTool.Builder.FileSystemAbstraction;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
+using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services
 {

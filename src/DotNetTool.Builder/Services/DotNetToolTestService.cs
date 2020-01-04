@@ -1,10 +1,11 @@
-﻿namespace DotNetTool.Builder.Services
+﻿using FileSystem.Abstraction;
+
+namespace DotNetTool.Builder.Services
 {
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using Argument.Check;
-    using FileSystemAbstraction;
     using Models;
 
     public class DotNetToolTestService : IDotNetToolTestService

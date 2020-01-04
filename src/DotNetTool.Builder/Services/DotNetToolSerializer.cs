@@ -1,10 +1,10 @@
-﻿namespace DotNetTool.Builder.Services
+﻿using FileSystem.Abstraction;
+
+namespace DotNetTool.Builder.Services
 {
     using System.IO;
     using Argument.Check;
     using Extensions;
-    using FileSystemAbstraction;
-    using FileSystemAbstraction.Services;
     using Models;
     using Newtonsoft.Json;
 

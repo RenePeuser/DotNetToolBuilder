@@ -1,7 +1,8 @@
-﻿namespace DotNetTool.Builder.Services
+﻿using FileSystem.Abstraction;
+
+namespace DotNetTool.Builder.Services
 {
     using System.Threading.Tasks;
-    using FileSystemAbstraction;
     using Models;
 
     public interface IDotNetToolTestService

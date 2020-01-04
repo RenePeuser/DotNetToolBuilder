@@ -1,6 +1,7 @@
-﻿namespace DotNetTool.Builder.Services
+﻿using FileSystem.Abstraction;
+
+namespace DotNetTool.Builder.Services
 {
-    using FileSystemAbstraction;
     using Models;
 
     public interface ITemplateService
