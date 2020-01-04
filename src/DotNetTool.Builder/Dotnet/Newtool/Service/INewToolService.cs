@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace DotNetTool.Builder.NewTool.Service
+namespace DotNetTool.Builder.Dotnet.Newtool.Service
 {
     internal interface INewToolService
     {       

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using DotNetTool.Builder.FileStructure;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
 
-namespace DotNetTool.Builder.NewTool.Service
+namespace DotNetTool.Builder.Dotnet.Newtool.Service
 {
     internal class NewToolService : INewToolService
     {
@@ -58,7 +59,7 @@ namespace DotNetTool.Builder.NewTool.Service
         public async Task<int> HandleAsync(NewToolParameters parameters)
         {
             // if a json file with a dot net tool is given then try to deserialize it
-            var dotNetTool = _dotNetToolSerializer.DeserializeFrom(parameters.File);
+            var dotNetTool = _dotNetToolSerializer.DeserializeFrom(parameters.FromFile);
             if (dotNetTool.IsNull())
             {
                 // if tool was not deserialized, then user have to give in all information for this tool.
@@ -91,7 +92,7 @@ namespace DotNetTool.Builder.NewTool.Service
             if (dotnetBuildResult.ExitCode != 0)
             {
                 // Also if fail open visual studio, to focus to the error, most case will be incorrect type casts for arguments.
-                if (parameters.NoVisualStudio.IsFalse())
+                if (parameters.OpenVisualstudio)
                 {
                     await _visualStudioService.OpenAsync(solutionFile);
                 }
@@ -102,7 +103,7 @@ namespace DotNetTool.Builder.NewTool.Service
             // Test run with the new tool with --help
             await _dotNetToolTestService.RunAsync(solutionFile, dotNetTool);
 
-            if (parameters.NoVisualStudio.IsFalse())
+            if (parameters.OpenVisualstudio)
             {
                 // Open visual studio, right now works only with VS2019 !
                 await _visualStudioService.OpenAsync(solutionFile);

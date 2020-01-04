@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.CommandLine;
 
-namespace DotNetTool.Builder.NewTool.Options
+namespace DotNetTool.Builder.Dotnet.Newtool.Options
 {
     public interface INewToolOptionsBuilder
     {

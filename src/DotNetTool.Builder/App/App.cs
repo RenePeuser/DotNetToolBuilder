@@ -4,8 +4,9 @@ using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetTool.Builder.Dotnet;
 using DotNetTool.Builder.ErrorHandling;
-using DotNetTool.Builder.NewTool;
+using DotNetTool.Builder.Services;
 using FileSystem.Abstraction;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +25,7 @@ namespace DotNetTool.Builder.App
         {
             var rootCommand = ServiceProvider.GetService<IDotnetCommandBuilder>().Build();
             var errorHandler = ServiceProvider.GetService<IErrorHandler>();
+            var dotNetCliArgumentFixer = ServiceProvider.GetService<IDotNetCliArgumentFixer>();
 
             var directoryService = ServiceProvider.GetService<IDirectoryService>();
             var currentDirectory = directoryService.GetDirectoryInfo(Environment.CurrentDirectory);
@@ -37,7 +39,8 @@ namespace DotNetTool.Builder.App
             var option = parser.Configuration.RootCommand.Options.Single(o => o.Name == "version") as Option;
             option?.AddAlias("-v");
 
-            return parser.InvokeAsync(args);
+            var fixedArgs = dotNetCliArgumentFixer.Fix(args);
+            return parser.InvokeAsync(fixedArgs);
         }
     }
 }
