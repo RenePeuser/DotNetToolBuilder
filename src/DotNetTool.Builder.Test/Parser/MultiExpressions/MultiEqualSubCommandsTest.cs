@@ -5,6 +5,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Models;
 
+
     [TestClass]
     public class MultiEqualSubCommandsTest : ParameterExpressionBaseClass
     {

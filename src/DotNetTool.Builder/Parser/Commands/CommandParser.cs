@@ -48,7 +48,7 @@ namespace DotNetTool.Builder.Parser.Commands
             {
                 if (lastCommand.IsNull())
                 {
-                    subCommands = alreadyExistingCommand.SubCommands;
+                    subCommands = alreadyExistingCommand.SubCommands.ToList();
                     currentArgument = alreadyExistingCommand.Argument.IsNull() ? currentArgument : alreadyExistingCommand.Argument;
                 }
                 else
@@ -59,7 +59,7 @@ namespace DotNetTool.Builder.Parser.Commands
                     }
                     else
                     {
-                        subCommands = alreadyExistingCommand.SubCommands.Concat(lastCommand);
+                        subCommands = alreadyExistingCommand.SubCommands.Concat(lastCommand).ToList();
                     }
 
                     currentArgument = alreadyExistingCommand.Argument;

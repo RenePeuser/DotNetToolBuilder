@@ -44,13 +44,7 @@ namespace DotNetTool.Builder.Services
                     }
                 }
 
-                var parseResult = _parameterExpressionParser.Parse(expressionInfo, parameter);
-
-                if (parameter.IsNull())
-                {
-                    parameter = parseResult;
-                }
-
+                parameter = _parameterExpressionParser.Parse(expressionInfo, parameter);
                 _consoleService.WriteInput("Do you want to add another parameter expression ? yes(y) or no (n)");
 
                 var result = _consoleService.ReadLine();
