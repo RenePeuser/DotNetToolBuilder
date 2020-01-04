@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Services
         private readonly IConsoleService _consoleService;
         private readonly IProcessService _processService;
 
-        internal VisualStudioService(IProcessService processService, IDirectoryService directoryService, IConsoleService consoleService)
+        public VisualStudioService(IProcessService processService, IDirectoryService directoryService, IConsoleService consoleService)
         {
             _processService = processService;
             _directoryService = directoryService;

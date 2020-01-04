@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Argument.Check;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Parameter
 {
-    
-    using Models;
-
     internal class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
     {
+        private readonly IConstructorArgumentBuilder _constructorArgumentBuilder;
+
         private const string Template =
             @"namespace $namespace$
 {
@@ -27,13 +27,20 @@ $properties$
 
         private const string CtorArgument = @"$type$ $argName$";
 
+        public ParameterWithArgsOrOptionsClassBuilder(IConstructorArgumentBuilder constructorArgumentBuilder)
+        {
+            Throw.IfNull(() => constructorArgumentBuilder);
+
+            _constructorArgumentBuilder = constructorArgumentBuilder;
+        }
+
         public string Build(string projectName, CommandInfo parameterInfo, string nameSpace)
         {
             Throw.IfNullOrWhiteSpace(() => projectName);
             Throw.IfNull(() => parameterInfo);
             Throw.IfNullOrWhiteSpace(() => nameSpace);
 
-            var ctorArguments = BuildCtorArguments(parameterInfo).ToList();
+            var ctorArguments = _constructorArgumentBuilder.Build(parameterInfo).ToList();
             var properties = BuildProperties(ctorArguments).ToList();
             var propertyString = BuildPropertyString(properties);
 
@@ -41,11 +48,11 @@ $properties$
             var propertyInitializer = BuildPropertyInitializerString(ctorArguments, properties);
 
             var newTemplate = Template.Replace("$ctor-arguments$", argumentString)
-                .Replace("$agrument-to-properties$", propertyInitializer)
-                .Replace("$properties$", propertyString)
-                .Replace("$projectName$", projectName)
-                .Replace("$namespace$", nameSpace)
-                .Replace("$command-name$", parameterInfo.NormalizedName);
+                                      .Replace("$agrument-to-properties$", propertyInitializer)
+                                      .Replace("$properties$", propertyString)
+                                      .Replace("$projectName$", projectName)
+                                      .Replace("$namespace$", nameSpace)
+                                      .Replace("$command-name$", parameterInfo.NormalizedName);
 
             return newTemplate;
         }
@@ -83,28 +90,6 @@ $properties$
         {
             var result = ctorArguments.Select(arg => CtorArgument.Replace("$type$", arg.Type).Replace("$argName$", arg.Name)).Flatten(", ");
             return result;
-        }
-
-
-        private IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
-        {
-            var argumentInfo = parameterInfo.Argument;
-            if (argumentInfo.IsNotNull())
-            {
-                yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
-            }
-
-            foreach (var optionInfo in parameterInfo.Options)
-            {
-                if (optionInfo.Argument.IsNotNull())
-                {
-                    yield return new CtorArgument(optionInfo.Argument.Type, optionInfo.ArgumentName);
-                }
-                else
-                {
-                    yield return new CtorArgument("bool", optionInfo.ArgumentName);
-                }
-            }
         }
 
         private IEnumerable<Property> BuildProperties(IEnumerable<CtorArgument> ctorArguments)

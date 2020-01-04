@@ -1,0 +1,48 @@
+﻿using System.IO;
+using DotNetTool.Builder.Builder.Options;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Services;
+using FileSystem.Abstraction;
+
+namespace DotNetTool.Builder.FileStructure
+{
+    internal class CreateOptionsStructure : ICreateOptionsStructure
+    {
+        private readonly IDirectoryService _directoryService;
+        private readonly IFileService _fileService;
+        private readonly IOptionImplementationBuilder _optionImplementationBuilder;
+        private readonly IOptionInterfaceBuilder _optionInterfaceBuilder;
+
+        public CreateOptionsStructure(
+            IOptionInterfaceBuilder optionInterfaceBuilder,
+            IDirectoryService directoryService,
+            IFileService fileService,
+            IOptionImplementationBuilder optionImplementationBuilder)
+        {
+            _optionInterfaceBuilder = optionInterfaceBuilder;
+            _directoryService = directoryService;
+            _fileService = fileService;
+            _optionImplementationBuilder = optionImplementationBuilder;
+        }
+
+        public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
+        {
+            var optionFolderPath = Path.Combine(subCommnandDirectoryInfo.FullName, "Options");
+            var optionFolder = _directoryService.CreateDirectory(optionFolderPath);
+
+            var optionsInterfaceSyntaxTree = _optionInterfaceBuilder.Build(projectName, subCommand, currentPath);
+            var optionsInterfaceFilePath = _fileService.GetFileInfo(Path.Combine(optionFolder.FullName, $"I{subCommand.NormalizedName}OptionsBuilder.cs"));
+
+            File.WriteAllText(optionsInterfaceFilePath.FullName, optionsInterfaceSyntaxTree);
+
+            var optionsImplementationSyntaxTree = _optionImplementationBuilder.Build(projectName, subCommand, currentPath);
+            var optionsImplementationFilePath = _fileService.GetFileInfo(Path.Combine(optionFolder.FullName, $"{subCommand.NormalizedName}OptionsBuilder.cs"));
+            File.WriteAllText(optionsImplementationFilePath.FullName, optionsImplementationSyntaxTree);
+
+            commandTypeCollector.Add(parameter, new TypeToRegister(optionsInterfaceFilePath.FileNameWithoutExtension(), optionsImplementationFilePath.FileNameWithoutExtension()));
+
+            namespaceCollector.Add($"{currentPath}.Options");
+        }
+    }
+}

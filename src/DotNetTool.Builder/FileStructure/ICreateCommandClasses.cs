@@ -1,7 +1,8 @@
 ﻿using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Services;
 using FileSystem.Abstraction;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.FileStructure
 {
     internal interface ICreateCommandClasses
     {

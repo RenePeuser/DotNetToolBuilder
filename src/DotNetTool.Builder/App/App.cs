@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Builder.Startup;
+using DotNetTool.Builder.FileStructure;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
 

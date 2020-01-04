@@ -3,6 +3,7 @@ using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
 using DotNetTool.Builder.Builder.Startup;
+using DotNetTool.Builder.FileStructure;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
@@ -23,7 +24,7 @@ namespace DotNetTool.Builder
         {
             RegisterServices(services);
             RegisterValidation(services);
-            
+
             RegisterTokenizer(services);
             RegisterArgumentParser(services);
             RegisterOptionsParser(services);
@@ -36,6 +37,17 @@ namespace DotNetTool.Builder
             RegisterParameterClassBuilder(services);
             RegisterCommandBuilders(services);
             RegisterStartUpBuilder(services);
+            RegisterFileStructureCreators(services);
+        }
+
+        private void RegisterFileStructureCreators(IServiceCollection services)
+        {
+            services.AddSingleton<ICreateArgumentStructure, CreateArgumentStructure>();
+            services.AddSingleton<ICreateOptionsStructure, CreateOptionsStructure>();
+            services.AddSingleton<ICreateParameterClassStructure, CreateParameterClassStructure>();
+            services.AddSingleton<ICreateSubCommandStructure, CreateSubCommandStructure>();
+            services.AddSingleton<ICommandStructureBuilder, CommandStructureBuilder>();
+            services.AddSingleton<ICommandServiceStructureBuilder, CommandServiceStructureBuilder>();
         }
 
         private void RegisterTokenizer(IServiceCollection services)
@@ -140,6 +152,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IParameterClassBuilder, ParameterClassBuilder>();
             services.AddSingleton<IParameterSpecificClassBuilder, ParameterWithoutArgsOrOptionsClassBuilder>();
             services.AddSingleton<IParameterSpecificClassBuilder, ParameterWithArgsOrOptionsClassBuilder>();
+            services.AddSingleton<IConstructorArgumentBuilder, ConstructorArgumentBuilder>();
         }
 
         internal void RegisterCommandBuilders(IServiceCollection services)

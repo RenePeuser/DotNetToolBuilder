@@ -65,7 +65,6 @@ namespace DotNetTool.Builder.Parser.Commands
                     currentArgument = alreadyExistingCommand.Argument;
                     currentOptions = alreadyExistingCommand.Options;
                 }
-
             }
 
             var result = new CommandInfo(alreadyExistingCommand.Value, alreadyExistingCommand.Name, alreadyExistingCommand.Description, currentArgument, currentOptions, subCommands);

@@ -1,0 +1,30 @@
+﻿using System.Collections.Generic;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
+
+namespace DotNetTool.Builder.Builder.Parameter
+{
+    internal class ConstructorArgumentBuilder : IConstructorArgumentBuilder
+    {
+        public IEnumerable<CtorArgument> Build(CommandInfo parameterInfo)
+        {
+            var argumentInfo = parameterInfo.Argument;
+            if (argumentInfo.IsNotNull())
+            {
+                yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
+            }
+
+            foreach (var optionInfo in parameterInfo.Options)
+            {
+                if (optionInfo.Argument.IsNotNull())
+                {
+                    yield return new CtorArgument(optionInfo.Argument.Type, optionInfo.ArgumentName);
+                }
+                else
+                {
+                    yield return new CtorArgument("bool", optionInfo.ArgumentName);
+                }
+            }
+        }
+    }
+}

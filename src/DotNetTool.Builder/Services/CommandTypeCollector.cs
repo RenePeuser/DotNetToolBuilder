@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Services
     {
         private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToRegister;
 
-        internal CommandTypeCollector()
+        public CommandTypeCollector()
         {
             _typesToRegister = new Dictionary<string, IEnumerable<TypeToRegister>>();
         }
