@@ -43,6 +43,10 @@ Hint: Because of prerelease state you have to use the '--version' option to inst
 
 ![](./assets/dotnet-tool-builder-install.gif)
 
+Now info is also available
+
+![](./assets/info-available.png)
+
 Hint if you do not use the "--version" option you get the latest version, but if it's a prerelease
 state you have to use the specific version otherwise, the tool will not be found.
 
@@ -302,6 +306,8 @@ public Command Build()
 ## Multiexpressions
 
 Since Version '0.5.6-beta' you can build up your expression step by step.
+Before it was buggy that command-argument relation was incorrect. Now it is tested
+and works fine.
 
 ```
 root cmd1
@@ -315,3 +321,4 @@ root cmd1 cmd2 cmd3 cmd4 <cmd4-arg>
 root cmd1 cmd2 cmd3 cmd4 cmd5
 root cmd1 cmd2 cmd3 cmd4 cmd5 <cmd5-arg>
 ```
+
