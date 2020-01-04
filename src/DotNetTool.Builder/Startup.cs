@@ -84,8 +84,6 @@ namespace DotNetTool.Builder
             services.AddSingleton<IParameterService, ParameterService>();
             services.AddSingleton<ICommandTypeCollector, CommandTypeCollector>();
             services.AddSingleton<ICreateCommandClasses, CreateCommandClasses>();
-            services.AddSingleton<IDotNetToolService, DotNetToolService>();
-            services.AddSingleton<IDotNetToolSynchronizer, DotNetToolSynchronizer>();
             services.AddSingleton<IProcessBuilder, ProcessBuilder>();
             services.AddSingleton<IProcessService, ProcessService>();
             services.AddSingleton<INameSpaceCollector, NameSpaceCollector>();

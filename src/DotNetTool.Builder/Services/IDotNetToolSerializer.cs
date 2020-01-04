@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Services
 {
     using Models;
 
-    public interface IDotNetToolSerializer
+    internal interface IDotNetToolSerializer
     {
         DotNetTool DeserializeFrom(IFileInfo fileInfo);
         DotNetTool DeserializeFrom(string fileOrFilePath);
