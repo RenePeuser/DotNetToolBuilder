@@ -12,11 +12,11 @@ namespace DotNetTool.Builder.Test
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    [Ignore]
     [TestClass]
     public class ClassesToRefactorTest
     {
         private static IEnumerable<CSharpFileInfo> _csharpFileInfos;
+        private static readonly string[] codeFilesOnWhiteList = { "Startup.cs", "ParameterWithArgsOrOptionsClassBuilder.cs", "ArgumentValidator.cs" };
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -34,8 +34,9 @@ namespace DotNetTool.Builder.Test
 
         [TestMethod]
         public void All_Class_Should_Have_Maximum_100_Lines_Of_Code()
-        {
+        {   
             var errors = _csharpFileInfos.Where(csharp => csharp.SyntaxTree.GetText().Lines.Count > 100)
+                                         .Where(csharp => !codeFilesOnWhiteList.Any(toIgnore => csharp.FileInfo.Name.EqualsTo(toIgnore)))
                                          .Select(csharp => $"{csharp.FileInfo.FullName} - Line of codes: {csharp.SyntaxTree.GetText().Lines.Count}")
                                          .ToList();
 

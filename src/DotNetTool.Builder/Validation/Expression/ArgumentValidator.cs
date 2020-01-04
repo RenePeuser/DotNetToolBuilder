@@ -45,7 +45,7 @@ namespace DotNetTool.Builder.Validation.Expression
                 var argumentStartEndTokenCount = argument.Count(c => c == '<' || c == '>');
                 if (argumentStartEndTokenCount < 1)
                 {
-                    yield return $"Argument: '{argument}' missing start '<' and end '>' token.";
+                    yield return $"Argument: '{argument}' missing start token '<' and end token'>'.";
                     continue;
                 }
 
