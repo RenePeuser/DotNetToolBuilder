@@ -8,13 +8,13 @@ namespace DotNetTool.Builder.Services
 {
     using System.Threading.Tasks;
 
-    public class VisualStudioService : IVisualStudioService
+    internal class VisualStudioService : IVisualStudioService
     {
         private readonly IDirectoryService _directoryService;
         private readonly IConsoleService _consoleService;
         private readonly IProcessService _processService;
 
-        public VisualStudioService(IProcessService processService, IDirectoryService directoryService, IConsoleService consoleService)
+        internal VisualStudioService(IProcessService processService, IDirectoryService directoryService, IConsoleService consoleService)
         {
             _processService = processService;
             _directoryService = directoryService;

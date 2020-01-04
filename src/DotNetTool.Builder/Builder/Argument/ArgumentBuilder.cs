@@ -3,7 +3,7 @@ using Argument.Check;
 
 namespace DotNetTool.Builder.Builder.Argument
 {
-    public class ArgumentBuilder : IArgumentBuilder
+    internal class ArgumentBuilder : IArgumentBuilder
     {
         private const string Template =
             @"namespace $namespace$

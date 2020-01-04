@@ -5,11 +5,10 @@
     using System.Text;
     using Extensions;
     using Models;
-    using NSubstitute.Core;
 
     public static class AssertHelper
     {
-        internal static IEnumerable<string> AssertAllSubCommandRecursive(this CommandInfo commandInfo, Predicate<CommandInfo> validateFunc, Func<CommandInfo, string> errorMessage)
+        public static IEnumerable<string> AssertAllSubCommandRecursive(this CommandInfo commandInfo, Predicate<CommandInfo> validateFunc, Func<CommandInfo, string> errorMessage)
         {
             if (commandInfo.IsNull())
             {

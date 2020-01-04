@@ -9,13 +9,13 @@ using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.App
 {
-    public class App : ServiceProviderBase
+    internal class App : ServiceProviderBase
     {
         public App(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
 
-        public Task<int> RunAsync(string[] args)
+        internal Task<int> RunAsync(string[] args)
         {
             return RunInternalAsync(args);
         }

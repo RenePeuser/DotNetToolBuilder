@@ -2,6 +2,7 @@
 
 namespace DotNetTool.Builder.Models
 {
+
     public class ArgumentInfo : InfoBase
     {
         public ArgumentInfo(string name, string description, string value, string normalizedName, string type) : base(value, name)

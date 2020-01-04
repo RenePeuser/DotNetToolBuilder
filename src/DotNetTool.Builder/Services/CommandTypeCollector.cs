@@ -4,11 +4,11 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Services
 {
-    public class CommandTypeCollector : ICommandTypeCollector
+    internal class CommandTypeCollector : ICommandTypeCollector
     {
         private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToRegister;
 
-        public CommandTypeCollector()
+        internal CommandTypeCollector()
         {
             _typesToRegister = new Dictionary<string, IEnumerable<TypeToRegister>>();
         }

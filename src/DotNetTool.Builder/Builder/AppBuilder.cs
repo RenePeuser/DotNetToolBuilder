@@ -5,7 +5,7 @@ using Argument.Check;
 
 namespace DotNetTool.Builder.Builder
 {
-    public class AppBuilder
+    internal class AppBuilder
     {
         private const string Template =
             @"namespace $namespace$
@@ -33,7 +33,7 @@ namespace DotNetTool.Builder.Builder
     }
 }";
 
-        public void AddStartup(string projectName, FileInfo solutionFile, CommandInfo rootCommand)
+        internal void AddStartup(string projectName, FileInfo solutionFile, CommandInfo rootCommand)
         {
             Throw.IfNullOrWhiteSpace(() => projectName);
             Throw.IfNull(() => solutionFile);
