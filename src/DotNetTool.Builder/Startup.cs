@@ -3,8 +3,13 @@ using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Builder.Parameter;
 using DotNetTool.Builder.Builder.Startup;
+using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.FileStructure;
 using DotNetTool.Builder.InfoCollectors;
+using DotNetTool.Builder.NewTool;
+using DotNetTool.Builder.NewTool.Arguments;
+using DotNetTool.Builder.NewTool.Options;
+using DotNetTool.Builder.NewTool.Service;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Options;
@@ -22,6 +27,8 @@ namespace DotNetTool.Builder
     {
         internal void ConfigureServices(IServiceCollection services)
         {
+            RegisterCli(services);
+
             RegisterServices(services);
             RegisterValidation(services);
 
@@ -40,6 +47,14 @@ namespace DotNetTool.Builder
             RegisterFileStructureCreators(services);
         }
 
+        private void RegisterCli(IServiceCollection services)
+        {
+            services.AddSingleton<IErrorHandler, ErrorHandler>();
+            services.AddSingleton<IDotnetCommandBuilder, DotnetCommandBuilder>();
+            services.AddSingleton<INewToolService, NewToolService>();
+            services.AddSingleton<INewToolOptionsBuilder, NewToolOptionsBuilder>();
+            services.AddSingleton< INewToolArgumentBuilder, NewToolArgumentBuilder>();
+        }
         private void RegisterFileStructureCreators(IServiceCollection services)
         {
             services.AddSingleton<IBuildCommandFileStructure, CreateArgumentStructure>();

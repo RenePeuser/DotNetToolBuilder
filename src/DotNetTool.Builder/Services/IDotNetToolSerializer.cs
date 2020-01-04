@@ -1,4 +1,5 @@
 ﻿using FileSystem.Abstraction;
+using FileInfo = System.IO.FileInfo;
 
 namespace DotNetTool.Builder.Services
 {
@@ -8,5 +9,6 @@ namespace DotNetTool.Builder.Services
     {
         DotNetTool DeserializeFrom(IFileInfo fileInfo);
         DotNetTool DeserializeFrom(string fileOrFilePath);
+        DotNetTool DeserializeFrom(FileInfo fileInfo);
     }
 }

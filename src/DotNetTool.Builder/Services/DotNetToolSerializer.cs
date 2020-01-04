@@ -39,6 +39,23 @@ namespace DotNetTool.Builder.Services
             return DeserializeFrom(file);
         }
 
+        public DotNetTool DeserializeFrom(FileInfo fileInfo)
+        {
+            if (fileInfo.IsNull())
+            {
+                return null;
+            }
+
+            if (fileInfo.Exists.IsFalse())
+            {
+                _consoleService.WriteError($"File: '{fileInfo.FullName}' does not exists");
+                return null;
+            }
+
+            var file = _fileService.GetFileInfo(fileInfo.FullName);
+            return DeserializeFrom(file);
+        }
+
         public DotNetTool DeserializeFrom(IFileInfo fileInfo)
         {
             Throw.IfNull(() => fileInfo);

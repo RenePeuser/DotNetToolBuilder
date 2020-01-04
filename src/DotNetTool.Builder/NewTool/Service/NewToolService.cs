@@ -1,0 +1,117 @@
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using DotNetTool.Builder.Builder.Startup;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.FileStructure;
+using DotNetTool.Builder.InfoCollectors;
+using DotNetTool.Builder.Services;
+
+namespace DotNetTool.Builder.NewTool.Service
+{
+    internal class NewToolService : INewToolService
+    {
+        private readonly IDotNetToolSerializer _dotNetToolSerializer;
+        private readonly IDotNetToolInfoCollector _dotNetToolInfoCollector;
+        private readonly ITargetFolderService _targetFolderService;
+        private readonly ITemplateExtractor _templateExtractor;
+        private readonly ITemplateService _templateService;
+        private readonly ICreateCommandClasses _createCommandClasses;
+        private readonly ICommandTypeCollector _commandTypeCollector;
+        private readonly INameSpaceCollector _nameSpaceCollector;
+        private readonly IStartUpBuilder _startUpBuilder;
+        private readonly IProcessService _processService;
+        private readonly IVisualStudioService _visualStudioService;
+        private readonly IDotNetToolTestService _dotNetToolTestService;
+        private readonly IConsoleService _consoleService;
+
+        public NewToolService(
+            IDotNetToolSerializer dotNetToolSerializer,
+            IDotNetToolInfoCollector dotNetToolInfoCollector,
+            ITargetFolderService targetFolderService,
+            ITemplateExtractor templateExtractor,
+            ITemplateService templateService,
+            ICreateCommandClasses createCommandClasses,
+            ICommandTypeCollector commandTypeCollector,
+            INameSpaceCollector nameSpaceCollector,
+            IStartUpBuilder startUpBuilder,
+            IProcessService processService,
+            IVisualStudioService visualStudioService,
+            IDotNetToolTestService dotNetToolTestService,
+            IConsoleService consoleService)
+        {
+            _dotNetToolSerializer = dotNetToolSerializer;
+            _dotNetToolInfoCollector = dotNetToolInfoCollector;
+            _targetFolderService = targetFolderService;
+            _templateExtractor = templateExtractor;
+            _templateService = templateService;
+            _createCommandClasses = createCommandClasses;
+            _commandTypeCollector = commandTypeCollector;
+            _nameSpaceCollector = nameSpaceCollector;
+            _startUpBuilder = startUpBuilder;
+            _processService = processService;
+            _visualStudioService = visualStudioService;
+            _dotNetToolTestService = dotNetToolTestService;
+            _consoleService = consoleService;
+        }
+
+        public async Task<int> HandleAsync(NewToolParameters parameters)
+        {
+            // if a json file with a dot net tool is given then try to deserialize it
+            var dotNetTool = _dotNetToolSerializer.DeserializeFrom(parameters.File);
+            if (dotNetTool.IsNull())
+            {
+                // if tool was not deserialized, then user have to give in all information for this tool.
+                dotNetTool = _dotNetToolInfoCollector.Collect();
+            }
+
+            // Create target, will create in execution folder and throws exception if target already exists.
+            var targetDirectory = _targetFolderService.CreateTargetDirectory(dotNetTool);
+
+            // Extract the solution template to target directory
+            _templateExtractor.ExtractTo(targetDirectory);
+
+            // All templates will renamed with the new tool information
+            _templateService.RenameAllIn(targetDirectory, dotNetTool);
+
+            // detect folder of root command
+            var rootDirectory = targetDirectory.EnumerateDirectories(dotNetTool.ToolName, SearchOption.AllDirectories).Single();
+
+            // Create command structure
+            _createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, _commandTypeCollector, dotNetTool.ProjectName, _nameSpaceCollector);
+
+            // Find solution file
+            var solutionFile = targetDirectory.EnumerateFiles("*.sln", SearchOption.AllDirectories).Single();
+
+            // Add type registrations
+            _startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, _commandTypeCollector, dotNetTool.ParameterInfo, _nameSpaceCollector);
+
+            // Build your new generated tool
+            var dotnetBuildResult = await _processService.RunCliCommandAsync("dotnet", $"build {solutionFile.FullName}");
+            if (dotnetBuildResult.ExitCode != 0)
+            {
+                // Also if fail open visual studio, to focus to the error, most case will be incorrect type casts for arguments.
+                if (parameters.NoVisualStudio.IsFalse())
+                {
+                    await _visualStudioService.OpenAsync(solutionFile);
+                }
+
+                return -1;
+            }
+
+            // Test run with the new tool with --help
+            await _dotNetToolTestService.RunAsync(solutionFile, dotNetTool);
+
+            if (parameters.NoVisualStudio.IsFalse())
+            {
+                // Open visual studio, right now works only with VS2019 !
+                await _visualStudioService.OpenAsync(solutionFile);
+            }
+
+            // All works fine, enjoy your new cli.
+            _consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
+
+            return 0;
+        }
+    }
+}

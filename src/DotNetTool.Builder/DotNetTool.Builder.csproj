@@ -36,14 +36,16 @@ Prerequisites
 
   <ItemGroup>
     <None Include="..\..\license.txt" Pack="true" PackagePath="license.txt" />
+    <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Argument.Check" Version="1.0.1" />
     <PackageReference Include="FileSystem.Abstraction" Version="0.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.CommandLine.Experimental" Version="0.3.0-alpha.19577.1" />
   </ItemGroup>
 
 </Project>

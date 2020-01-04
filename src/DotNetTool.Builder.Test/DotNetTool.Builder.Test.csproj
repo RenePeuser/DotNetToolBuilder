@@ -23,4 +23,10 @@
     <ProjectReference Include="..\DotNetTool.Builder\DotNetTool.Builder.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="test.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
