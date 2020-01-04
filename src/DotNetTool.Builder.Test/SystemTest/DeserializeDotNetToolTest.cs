@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.SystemTest
 {
+    [Ignore]
     [TestClass]
     public class DeserializeDotNetToolTest
     {
