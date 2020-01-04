@@ -13,13 +13,15 @@ namespace DotNetTool.Builder.FileStructure
         private readonly IFileService _fileService;
         private readonly IArgumentInterfaceBuilder _argumentInterfaceBuilder;
         private readonly IArgumentBuilder _argumentBuilder;
+        private readonly ITypeService _typeService;
 
-        public CreateArgumentStructure(IDirectoryService directoryService, IFileService fileService, IArgumentInterfaceBuilder argumentInterfaceBuilder, IArgumentBuilder argumentBuilder)
+        public CreateArgumentStructure(IDirectoryService directoryService, IFileService fileService, IArgumentInterfaceBuilder argumentInterfaceBuilder, IArgumentBuilder argumentBuilder, ITypeService typeService)
         {
             _directoryService = directoryService;
             _fileService = fileService;
             _argumentInterfaceBuilder = argumentInterfaceBuilder;
             _argumentBuilder = argumentBuilder;
+            _typeService = typeService;
         }
 
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
@@ -40,7 +42,10 @@ namespace DotNetTool.Builder.FileStructure
             var argumentImplementationFilePath = _fileService.GetFileInfo(Path.Combine(argumentFolder.FullName, $"{subCommand.NormalizedName}ArgumentBuilder.cs"));
             File.WriteAllText(argumentImplementationFilePath.FullName, argumentImplementationSyntaxTree);
 
-            commandTypeCollector.Add(parameter, new TypeToRegister(argumentInterfaceFilePath.FileNameWithoutExtension(), argumentImplementationFilePath.FileNameWithoutExtension()));
+            var interfaceToRegister = _typeService.GetFullqualifiedName(projectName, argumentInterfaceFilePath);
+            var implementationToRegister = _typeService.GetFullqualifiedName(projectName, argumentImplementationFilePath);
+
+            commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceToRegister, implementationToRegister));
 
             namespaceCollector.Add($"{currentPath}.Arguments");
         }

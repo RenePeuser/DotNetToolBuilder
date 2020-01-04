@@ -12,18 +12,21 @@ namespace DotNetTool.Builder.FileStructure
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
         private readonly IOptionImplementationBuilder _optionImplementationBuilder;
+        private readonly ITypeService _typeService;
         private readonly IOptionInterfaceBuilder _optionInterfaceBuilder;
 
         public CreateOptionsStructure(
             IOptionInterfaceBuilder optionInterfaceBuilder,
             IDirectoryService directoryService,
             IFileService fileService,
-            IOptionImplementationBuilder optionImplementationBuilder)
+            IOptionImplementationBuilder optionImplementationBuilder,
+            ITypeService typeService)
         {
             _optionInterfaceBuilder = optionInterfaceBuilder;
             _directoryService = directoryService;
             _fileService = fileService;
             _optionImplementationBuilder = optionImplementationBuilder;
+            _typeService = typeService;
         }
 
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
@@ -45,7 +48,10 @@ namespace DotNetTool.Builder.FileStructure
             var optionsImplementationFilePath = _fileService.GetFileInfo(Path.Combine(optionFolder.FullName, $"{subCommand.NormalizedName}OptionsBuilder.cs"));
             File.WriteAllText(optionsImplementationFilePath.FullName, optionsImplementationSyntaxTree);
 
-            commandTypeCollector.Add(parameter, new TypeToRegister(optionsInterfaceFilePath.FileNameWithoutExtension(), optionsImplementationFilePath.FileNameWithoutExtension()));
+            var interfaceToRegister = _typeService.GetFullqualifiedName(projectName, optionsInterfaceFilePath);
+            var implementationToRegister = _typeService.GetFullqualifiedName(projectName, optionsImplementationFilePath);
+
+            commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceToRegister, implementationToRegister));
 
             namespaceCollector.Add($"{currentPath}.Options");
         }

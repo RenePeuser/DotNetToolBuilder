@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Services
 {
-
     // Hint, System.CommandLine.Experimental needs one root command with one sub command
     // But we want to use https://docs.microsoft.com/de-de/dotnet/core/tools/extensibility
     // to reuse the 'dotnet' root command. So that it feels like this command comes direct
     // from the dotnet cli.
     // 
     // Default: 'dotnet newtool --open-visualstudio'
-
     internal class CommandTypeCollector : ICommandTypeCollector
     {
         private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToRegister;

@@ -2,7 +2,7 @@
   "profiles": {
     "trumpf.hmi.dotnettool.builder": {
       "commandName": "Project",
-      "commandLineArgs": "--help"
+      "commandLineArgs": "--from-file \"D:\\AzureDevOps\\test.json\""
     }
   }
 }

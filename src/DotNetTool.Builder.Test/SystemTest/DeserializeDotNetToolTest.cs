@@ -28,7 +28,7 @@ namespace DotNetTool.Builder.Test.SystemTest
         [TestMethod]
         public async Task Creating_Dot_Net_Tool_From_Serialized_JSon()
         {
-            var result = await Program.Main(new[] { $"--from-file {_serializedDotNetTool.FullName}" });
+            var result = await Program.Main(new[] { $"--from-file", _serializedDotNetTool.FullName });
 
             Assert.AreEqual(0, result);
         }

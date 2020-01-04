@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
@@ -11,6 +12,7 @@ namespace DotNetTool.Builder.FileStructure
     internal class CommandServiceStructureBuilder : IBuildCommandFileStructure
     {
         private readonly ICommandServiceInterfaceBuilder _commandServiceInterfaceBuilder;
+        private readonly ITypeService _typeService;
         private readonly ICommandServiceBuilder _commandServiceBuilder;
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
@@ -19,12 +21,14 @@ namespace DotNetTool.Builder.FileStructure
             IDirectoryService directoryService,
             IFileService fileService,
             ICommandServiceBuilder commandServiceBuilder,
-            ICommandServiceInterfaceBuilder commandServiceInterfaceBuilder)
+            ICommandServiceInterfaceBuilder commandServiceInterfaceBuilder,
+            ITypeService typeService)
         {
             _directoryService = directoryService;
             _fileService = fileService;
             _commandServiceBuilder = commandServiceBuilder;
             _commandServiceInterfaceBuilder = commandServiceInterfaceBuilder;
+            _typeService = typeService;
         }
 
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
@@ -44,7 +48,10 @@ namespace DotNetTool.Builder.FileStructure
             var commandServiceInterface = _fileService.GetFileInfo(Path.Combine(serviceFolder.FullName, $"I{subCommand.NormalizedName}Service.cs"));
             commandServiceInterface.WriteAllText(serviceInterface);
 
-            commandTypeCollector.Add(subCommand, new TypeToRegister($"{commandServiceInterface.FileNameWithoutExtension()}", $"{commandService.FileNameWithoutExtension()}"));
+            var interfaceToRegister = _typeService.GetFullqualifiedName(projectName, commandServiceInterface);
+            var implementationToRegister = _typeService.GetFullqualifiedName(projectName, commandService);
+
+            commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceToRegister, implementationToRegister));
         }
     }
 }

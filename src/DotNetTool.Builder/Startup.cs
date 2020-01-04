@@ -121,6 +121,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IDotNetToolTestService, DotNetToolTestService>();
             services.AddSingleton<IDotNetToolSerializer, DotNetToolSerializer>();
             services.AddSingleton<ITargetFolderService, TargetFolderService>();
+            services.AddSingleton<ITypeService, TypeService>();
         }
 
         internal void RegisterDotNetToolInfoCollector(IServiceCollection services)

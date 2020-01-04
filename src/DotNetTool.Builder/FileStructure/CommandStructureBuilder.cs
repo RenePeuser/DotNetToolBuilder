@@ -15,19 +15,22 @@ namespace DotNetTool.Builder.FileStructure
         private readonly ICommandBuilderWithArgument _commandBuilderWithArgument;
         private readonly ICommandBuilderWithArgumentAndOption _commandBuilderWithArgumentAndOption;
         private readonly IFileService _fileService;
+        private readonly ITypeService _typeService;
 
         public CommandStructureBuilder(
             ICommandBuilderSimple commandBuilderSimple,
             ICommandBuilderWithOptions commandBuilderWithOptions,
             ICommandBuilderWithArgument commandBuilderWithArgument,
             ICommandBuilderWithArgumentAndOption commandBuilderWithArgumentAndOption,
-            IFileService fileService)
+            IFileService fileService,
+            ITypeService typeService)
         {
             _commandBuilderSimple = commandBuilderSimple;
             _commandBuilderWithOptions = commandBuilderWithOptions;
             _commandBuilderWithArgument = commandBuilderWithArgument;
             _commandBuilderWithArgumentAndOption = commandBuilderWithArgumentAndOption;
             _fileService = fileService;
+            _typeService = typeService;
         }
 
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
@@ -55,10 +58,12 @@ namespace DotNetTool.Builder.FileStructure
                 command = _commandBuilderWithArgumentAndOption.Build(projectName, subCommand, parameter, currentPath);
             }
 
-
             var fileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
             fileInfo.WriteAllText(command);
-            commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.NormalizedName}SubCommandBuilder", fileInfo.FileNameWithoutExtension()));
+
+            // var interfaceToRegister = _typeService.GetFullqualifiedName(projectName, commandServiceInterface);
+            var implementationToRegister = _typeService.GetFullqualifiedName(projectName, fileInfo);
+            commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.NormalizedName}SubCommandBuilder", implementationToRegister));
         }
     }
 }
