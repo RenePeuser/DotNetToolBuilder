@@ -29,8 +29,6 @@ namespace DotNetTool.Builder.Services
             _consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
 
             var runYourCliResult = await _processService.RunCliCommandAsync($"{findExe.FullName}", "--help");
-
-            _consoleService.WriteSuccess(runYourCliResult.Output);
         }
     }
 }
