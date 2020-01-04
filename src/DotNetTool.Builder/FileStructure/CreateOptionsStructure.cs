@@ -7,7 +7,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.FileStructure
 {
-    internal class CreateOptionsStructure : ICreateOptionsStructure
+    internal class CreateOptionsStructure : IBuildCommandFileStructure
     {
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
@@ -28,6 +28,11 @@ namespace DotNetTool.Builder.FileStructure
 
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
         {
+            if (subCommand.Options.IsNullOrEmpty())
+            {
+                return;
+            }
+
             var optionFolderPath = Path.Combine(subCommnandDirectoryInfo.FullName, "Options");
             var optionFolder = _directoryService.CreateDirectory(optionFolderPath);
 

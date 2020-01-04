@@ -42,12 +42,12 @@ namespace DotNetTool.Builder
 
         private void RegisterFileStructureCreators(IServiceCollection services)
         {
-            services.AddSingleton<ICreateArgumentStructure, CreateArgumentStructure>();
-            services.AddSingleton<ICreateOptionsStructure, CreateOptionsStructure>();
-            services.AddSingleton<ICreateParameterClassStructure, CreateParameterClassStructure>();
-            services.AddSingleton<ICreateSubCommandStructure, CreateSubCommandStructure>();
-            services.AddSingleton<ICommandStructureBuilder, CommandStructureBuilder>();
-            services.AddSingleton<ICommandServiceStructureBuilder, CommandServiceStructureBuilder>();
+            services.AddSingleton<IBuildCommandFileStructure, CreateArgumentStructure>();
+            services.AddSingleton<IBuildCommandFileStructure, CreateOptionsStructure>();
+            services.AddSingleton<IBuildCommandFileStructure, CreateParameterClassStructure>();
+            services.AddSingleton<IBuildCommandFileStructure, CreateSubCommandStructure>();
+            services.AddSingleton<IBuildCommandFileStructure, CommandStructureBuilder>();
+            services.AddSingleton<IBuildCommandFileStructure, CommandServiceStructureBuilder>();
         }
 
         private void RegisterTokenizer(IServiceCollection services)

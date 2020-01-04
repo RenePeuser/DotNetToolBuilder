@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
@@ -7,7 +8,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.FileStructure
 {
-    internal class CommandServiceStructureBuilder : ICommandServiceStructureBuilder
+    internal class CommandServiceStructureBuilder : IBuildCommandFileStructure
     {
         private readonly ICommandServiceInterfaceBuilder _commandServiceInterfaceBuilder;
         private readonly ICommandServiceBuilder _commandServiceBuilder;
@@ -26,8 +27,13 @@ namespace DotNetTool.Builder.FileStructure
             _commandServiceInterfaceBuilder = commandServiceInterfaceBuilder;
         }
 
-        public void Create(string projectName, ICommandTypeCollector commandTypeCollector, string currentPath, CommandInfo subCommand, IDirectoryInfo subCommnandDirectoryInfo)
+        public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
         {
+            if (subCommand.SubCommands.IsNotNull() && subCommand.SubCommands.Any())
+            {
+                return;
+            }
+
             var commandServiceResult = _commandServiceBuilder.Build(projectName, subCommand, currentPath);
             var serviceFolder = _directoryService.GetDirectoryInfo(Path.Combine(subCommnandDirectoryInfo.FullName, "Service"));
             serviceFolder.Exists.IfFalseThen(() => serviceFolder.Create());

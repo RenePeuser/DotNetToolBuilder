@@ -7,7 +7,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.FileStructure
 {
-    internal class CreateArgumentStructure : ICreateArgumentStructure
+    internal class CreateArgumentStructure : IBuildCommandFileStructure
     {
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
@@ -24,6 +24,11 @@ namespace DotNetTool.Builder.FileStructure
 
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
         {
+            if (subCommand.Argument.IsNull())
+            {
+                return;
+            }
+
             var argumentFolderPath = Path.Combine(subCommnandDirectoryInfo.FullName, "Arguments");
             var argumentFolder = _directoryService.CreateDirectory(argumentFolderPath);
 

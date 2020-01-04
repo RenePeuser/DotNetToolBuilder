@@ -8,7 +8,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.FileStructure
 {
-    internal class CommandStructureBuilder : ICommandStructureBuilder
+    internal class CommandStructureBuilder : IBuildCommandFileStructure
     {
         private readonly ICommandBuilderSimple _commandBuilderSimple;
         private readonly ICommandBuilderWithOptions _commandBuilderWithOptions;
@@ -30,8 +30,13 @@ namespace DotNetTool.Builder.FileStructure
             _fileService = fileService;
         }
 
-        public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, CommandInfo subCommand, IDirectoryInfo subCommnandDirectoryInfo)
+        public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
         {
+            if (subCommand.SubCommands.IsNotNull() && subCommand.SubCommands.Any())
+            {
+                return;
+            }
+
             string command = null;
             if (subCommand.Argument.IsNull() && subCommand.Options.IsEmpty())
             {
