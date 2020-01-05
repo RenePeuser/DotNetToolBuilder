@@ -21,7 +21,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool
         {
             var command = new Command("newtool", "creates a new dotnet tool");
             _optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
-            command.Handler = CommandHandler.Create<System.IO.FileInfo, bool, bool>((fromFile, usecode, usevisualstudio) => _newToolService.HandleAsync(new NewToolParameters(fromFile, usecode, usevisualstudio)));
+            command.Handler = CommandHandler.Create<System.IO.FileInfo, System.IO.DirectoryInfo, bool, bool, bool>((fromFile, saveTo, useCode, usevisualstudio, useRider) => _newToolService.HandleAsync(new NewToolParameters(fromFile, saveTo, useCode, usevisualstudio, useRider)));
             return command;
         }
     }

@@ -6,27 +6,47 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Options
     internal class NewToolOptionsBuilder : INewToolOptionsBuilder
     {
         public IEnumerable<Option> Build()
-        {   
+        {
             yield return BuildFromFileOption();
+            yield return BuildSaveToolToOption();
             yield return BuildUseVisualStudioOption();
             yield return BuildUseVsCodeOption();
+            yield return BuildUseCustomIDEOption();
+        }
+
+        private Option BuildSaveToolToOption()
+        {
+            return new Option(new[] { "--save-to", "-st" }, "Saves the current dotnet tool configuration as json file to given path.")
+            {
+                Required = false,
+                Argument = new Argument<System.IO.DirectoryInfo>("st")
+                {
+                    Description = "The path to the directory to save the generated dotnet tool as json"
+                }
+            };
+        }
+
+        private Option BuildUseCustomIDEOption()
+        {
+            return new Option(new[] { "--use-rider", "-ur" }, "Opens the JetBrains Rider IDE after generating with the new dotnet tool.")
+            {
+                Required = false,
+            };
         }
 
         private Option BuildUseVsCodeOption()
         {
-            return new Option(new[] { "--use-code", "-code" }, "Opens visual studio code after generating with the new dotnet tool.")
+            return new Option(new[] { "--use-code", "-uc" }, "Opens visual studio code after generating with the new dotnet tool.")
             {
-                IsHidden = true,
                 Required = false
             };
         }
 
         private Option BuildFromFileOption()
         {
-            return new Option(new[] { "--from-file", "-f" }, "the option to generate a dotnet tool from a json file")
+            return new Option(new[] { "--from-file", "-ff" }, "Creates a dotnet tool, from an already serialized tool, which was saved as *.json")
             {
                 Required = false,
-                IsHidden = true,
                 Argument = new Argument<System.IO.FileInfo>("fromFile")
                 {
                     Description = "the file path to the dotnet tool which comes from a json file"
@@ -35,11 +55,10 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Options
         }
         private Option BuildUseVisualStudioOption()
         {
-            return new Option(new[] { "--use-visualstudio", "-ov" }, "Opens visual studio after generating the new dotnet tool.")
+            return new Option(new[] { "--use-visualstudio", "-uv" }, "Opens visual studio after generating the new dotnet tool.")
             {
-                IsHidden = true,
                 Required = false
             };
-        }                                       
+        }
     }
 }

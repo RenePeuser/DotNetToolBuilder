@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Argument.Check;
+using DotNetTool.Builder.Dotnet.Newtool;
 using DotNetTool.Builder.Extensions;
 using FileSystem.Abstraction;
 using Newtonsoft.Json;
@@ -21,23 +22,6 @@ namespace DotNetTool.Builder.Services.DotNet
             _fileService = fileService;
         }
 
-        public Models.DotNetTool DeserializeFrom(string fileOrFilePath)
-        {
-            if (fileOrFilePath.IsNullOrWhiteSpace())
-            {
-                return null;
-            }
-
-            if (Path.IsPathFullyQualified(fileOrFilePath).IsFalse())
-            {
-                _consoleService.WriteError($"File path: '{fileOrFilePath}' is not valid");
-                return null;
-            }
-
-            var file = _fileService.GetFileInfo(fileOrFilePath);
-            return DeserializeFrom(file);
-        }
-
         public Models.DotNetTool DeserializeFrom(FileInfo fileInfo)
         {
             if (fileInfo.IsNull())
@@ -55,7 +39,7 @@ namespace DotNetTool.Builder.Services.DotNet
             return DeserializeFrom(file);
         }
 
-        public Models.DotNetTool DeserializeFrom(IFileInfo fileInfo)
+        private Models.DotNetTool DeserializeFrom(IFileInfo fileInfo)
         {
             Throw.IfNull(() => fileInfo);
 
@@ -89,6 +73,28 @@ namespace DotNetTool.Builder.Services.DotNet
                 }
             }
             return dotNetTool;
+        }
+
+        public void Serialize(Models.DotNetTool dotNetTool, NewToolParameters target)
+        {
+            Throw.IfNull(() => dotNetTool);
+            Throw.IfNull(() => target);
+            Throw.IfNull(() => target);
+
+            var targetDirectory = target.SaveToolTo;
+            if (targetDirectory.IsNull())
+            {
+                return;
+            }
+
+            if (targetDirectory.Exists.IsFalse())
+            {
+                target.SaveToolTo.Create();
+            }
+
+            var dotnetToolAsJson = JsonConvert.SerializeObject(dotNetTool);
+            var dotnetToolFile = _fileService.GetFileInfo(Path.Combine(targetDirectory.FullName, $"{dotNetTool.ProjectName}.json"));
+            dotnetToolFile.WriteAllText(dotnetToolAsJson);
         }
     }
 }

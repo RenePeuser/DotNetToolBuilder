@@ -12,12 +12,14 @@ namespace DotNetTool.Builder.Test.SystemTest
     {
         private FileInfo _serializedDotNetTool;
         private DirectoryInfo _createdDirectory;
+        private DirectoryInfo _toolSerializeResult;
 
         [TestInitialize]
         public void Init()
         {
             _serializedDotNetTool = new FileInfo(Path.Combine(Environment.CurrentDirectory, "test.json"));
             _createdDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "my.test"));
+            _toolSerializeResult = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "saved-tools"));
 
             if (_createdDirectory.Exists)
             {
@@ -28,9 +30,18 @@ namespace DotNetTool.Builder.Test.SystemTest
         [TestMethod]
         public async Task Creating_Dot_Net_Tool_From_Serialized_JSon()
         {
-            var result = await Program.Main(new[] { $"--from-file", _serializedDotNetTool.FullName }).ConfigureAwait(false);
+            var result = await Program.Main(new[] { "--from-file", _serializedDotNetTool.FullName }).ConfigureAwait(false);
 
             Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public async Task Sould_Create_Tool_When_Used_Save_Tool_Option()
+        {
+            await Program.Main(new[] { "--from-file", _serializedDotNetTool.FullName, "--save-to", _toolSerializeResult.FullName }).ConfigureAwait(false);
+            var savedDotNetTool = new FileInfo(Path.Combine(_toolSerializeResult.FullName, "my.test.json"));
+
+            Assert.IsTrue(savedDotNetTool.Exists, $"Expected saved tool: '{savedDotNetTool.FullName}' was not created");
         }
 
         [TestCleanup]
@@ -39,6 +50,11 @@ namespace DotNetTool.Builder.Test.SystemTest
             if (_createdDirectory.Exists)
             {
                 _createdDirectory.Delete(true);
+            }
+
+            if (_toolSerializeResult.Exists)
+            {
+                _toolSerializeResult.Delete(true);
             }
         }
     }

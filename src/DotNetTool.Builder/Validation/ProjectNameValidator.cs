@@ -57,9 +57,9 @@ namespace DotNetTool.Builder.Validation
                 yield return $"The project name: '{value}' must start with a letter";
             }
 
-            if (char.IsLetter(value.Last()).IsFalse())
+            if (char.IsLetterOrDigit(value.Last()).IsFalse())
             {
-                yield return $"The project name: '{value}' must end with a letter";
+                yield return $"The project name: '{value}' must end with a letter or digits";
             }
 
             var validationResult = _primitiveTypeNameValidator.IsValid(value);

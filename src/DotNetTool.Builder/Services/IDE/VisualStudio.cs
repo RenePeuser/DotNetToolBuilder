@@ -29,14 +29,17 @@ namespace DotNetTool.Builder.Services.IDE
                 return Task.CompletedTask;
             }
 
+            // C:\Program Files (x86)\Microsoft Visual Studio\2019
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
             var visualStudio2019Folder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, @"Microsoft Visual Studio\2019\"));
             var vs2019 = visualStudio2019Folder.EnumerateFiles("devenv.exe", SearchOption.AllDirectories).FirstOrDefault();
 
             if (vs2019.NotExists())
             {
-                throw new InvalidOperationException($"Can not start visual studio 2019, because did not find any version of visual studio in path: '{visualStudio2019Folder.FullName}'");
+                _consoleService.WriteError($"Can not start visual studio 2019, because did not find any version of visual studio in path: '{visualStudio2019Folder.FullName}'");
+                return Task.CompletedTask;
             }
+
             _consoleService.WriteInfo($"Start Visual Studio 2019 with: {solution.Name}");
             return _processService.StartCliCommandAsync(vs2019.FullName, solution.FullName);
         }

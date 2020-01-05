@@ -2,7 +2,7 @@
   "profiles": {
     "trumpf.hmi.dotnettool.builder": {
       "commandName": "Project",
-      "commandLineArgs": "--from-file \"D:\\AzureDevOps\\test.json\" --use-visualstudio --use-code"
+      "commandLineArgs": "--from-file \"D:\\AzureDevOps\\test.json\""
     }
   }
 }

@@ -68,6 +68,9 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
                 dotNetTool = _dotNetToolInfoCollector.Collect();
             }
 
+            // Save created tool as json.
+            _dotNetToolSerializer.Serialize(dotNetTool, parameters);
+
             // Create target, will create in execution folder and throws exception if target already exists.
             var targetDirectory = _targetFolderService.CreateTargetDirectory(dotNetTool);
 

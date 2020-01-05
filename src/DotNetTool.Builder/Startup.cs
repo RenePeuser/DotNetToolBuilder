@@ -128,6 +128,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IUseIDE, UseIDE>();
             services.AddSingleton<ISpecificIDE, VisualStudio>();
             services.AddSingleton<ISpecificIDE, VisualStudioCode>();
+            services.AddSingleton<ISpecificIDE, JetBrainsRider>();
         }
 
         internal void RegisterDotNetToolInfoCollector(IServiceCollection services)

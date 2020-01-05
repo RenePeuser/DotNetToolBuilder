@@ -15,8 +15,8 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 
 ## Quickguide to your new CLI
 ```
-1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version x.y.z'
-2. Run 'dotnet newtool'
+1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global'
+2. Run 'dotnet newtool --use-visualstudio'
 3. Insert all your expressions, and informations
 4. Implement your logic to the created service for each command, which is called from the aktiv command handler.
 
@@ -43,26 +43,26 @@ Hint: Because of prerelease state you have to use the '--version' option to inst
 
 ![](./assets/dotnet-tool-builder-install.gif)
 
-Now info is also available
-
-![](./assets/info-available.png)
-
-Hint if you do not use the "--version" option you get the latest version, but if it's a prerelease
-state you have to use the specific version otherwise, the tool will not be found.
-
-Install the tool global
+Install the tool globally
 ```bash 
-dotnet tool install DotNetTool.Builder --global --version x.y.z
+dotnet tool install DotNetTool.Builder --global
 ```
 
-Install the tool local
-```bash
-dotnet tool install DotNetTool.Builder --version x.y.z
-```
+## Create a new dotnet tool (generating only):
 
-## Simple sample:
+![](./assets/generating-only.gif)
 
-![](./assets/simple-tool-sample.gif)
+## Create a new dotnet tool and start VS-Code:
+
+![](./assets/use-vscode.gif)
+
+## Create a new dotnet tool and start Visual Studio 2019:
+Hint: Right now we look only for installed VS2019 Versions !
+
+![](./assets/use-visual-studio-ide.gif)
+
+## Create a new dotnet tool and start JetBrains Rider:
+![](./assets/use-rider-ide.gif)
 
 ## Sample multiple expressions
 
