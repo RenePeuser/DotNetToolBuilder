@@ -19,7 +19,7 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 ## Quickguide to your new CLI
 ```
 1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global'
-2. Run 'dotnet newtool --use-visualstudio'
+2. Run 'dotnet newtool [start-option]' (look downwards, to start VS2019, VS-Code or Rider)
 3. Insert all your expressions, and informations
 4. Implement your logic to the created service for each command, which is called from the aktiv command handler.
 
@@ -53,16 +53,16 @@ dotnet tool install DotNetTool.Builder --global
 
 ![](./assets/generating-only.gif)
 
-## Create a new dotnet tool and starts VS-Code:
+## Create a new dotnet tool and start VS-Code:
 
 ![](./assets/use-vscode.gif)
 
-## Create a new dotnet tool and starts Visual Studio 2019:
+## Create a new dotnet tool and start Visual Studio 2019:
 Hint: Right now we look only for installed VS2019 Versions !
 
 ![](./assets/use-visual-studio-ide.gif)
 
-## Create a new dotnet tool and starts JetBrains Rider:
+## Create a new dotnet tool and start JetBrains Rider:
 ![](./assets/use-rider-ide.gif)
 
 ## Sample Create, add your code and run it
