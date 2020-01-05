@@ -13,7 +13,6 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>This is a prerelease version of DotNetTool.Builder
-Now you have to set a options which IDE should be started, see docu.
 
 Prerequisites
 - .NET Core 3.0 SDK or higher

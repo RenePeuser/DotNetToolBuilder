@@ -35,7 +35,7 @@ namespace DotNetTool.Builder.Services.IDE
 
             // C:\Program Files\JetBrains\JetBrains Rider 2019.3.1\bin\rider64.exe
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            var jetbrainsFolder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, "A"));
+            var jetbrainsFolder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, "JetBrains"));
             if (jetbrainsFolder.NotExists)
             {
                 _consoleService.WriteError($"JetBrains Rider IDE could not be started.{Environment.NewLine}Could not find any installation of 'JetBrains Rider' in folder: '{jetbrainsFolder.FullName}'{Environment.NewLine}");
