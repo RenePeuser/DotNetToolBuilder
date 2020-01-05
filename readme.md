@@ -65,7 +65,7 @@ Works only if you have installed Rider in the default installation folder
 
 ![](./assets/use-rider-ide.gif)
 
-## Sample Create, add your code and run it
+## Sample create, add your code and run it
 ```
 Hint this command is now equals to 'dotnet newtool --use-visualstudio'
 Because this gif is not up to date to the new cli syntax !
