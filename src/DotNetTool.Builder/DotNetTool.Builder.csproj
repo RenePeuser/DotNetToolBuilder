@@ -12,7 +12,7 @@
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
-    <PackageReleaseNotes>New Features
+    <PackageReleaseNotes>New features:
 - The command 'dotnet newtool' only cerates, builds and runs the created tool, and did not start any IDE
 - You have now 3 options to start VS-Code, Visual Studio 2019 or JetBrains Rider after generating your tool.
 - The 3 option you can combine it, so you can start multiple IDE's after the tool was generated.
