@@ -12,7 +12,12 @@
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
-    <PackageReleaseNotes>This is a prerelease version of DotNetTool.Builder
+    <PackageReleaseNotes>New Features
+- The command 'dotnet newtool' only cerates, builds and runs the created tool, and did not start any IDE
+- You have now 3 options to start VS-Code, Visual Studio 2019 or JetBrains Rider after generating your tool.
+- The 3 option you can combine it, so you can start multiple IDE's after the tool was generated.
+- You have now the possibility to save a created tool as json
+- You can now create a dotnet tool from an already serialized dotnet tool from json.
 
 Prerequisites
 - .NET Core 3.0 SDK or higher
