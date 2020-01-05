@@ -7,7 +7,6 @@ This dotnet tool will create a dotnet tool based on the System.CommandLine.Exper
 ```
 
 ## Prerequisites
-* VS2019
 * .NET Core 3.0 SDK or higher
 
 
