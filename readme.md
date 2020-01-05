@@ -1,6 +1,10 @@
 # DotNetTool.Builder
 
+```
+You will not loose time to create a cool dotnet tool, then you have to try out this DotNetTool.Builder. You are able to build and run a dot net tool in a few minutes.
+
 This dotnet tool will create a dotnet tool based on the System.CommandLine.Experimental package from Microsoft.
+```
 
 ## Prerequisites
 * VS2019
@@ -42,8 +46,6 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 Hint: Because of prerelease state you have to use the '--version' option to install the prerelease.
 
 ![](./assets/dotnet-tool-builder-install.gif)
-
-Install the tool globally
 ```bash 
 dotnet tool install DotNetTool.Builder --global
 ```
@@ -52,17 +54,24 @@ dotnet tool install DotNetTool.Builder --global
 
 ![](./assets/generating-only.gif)
 
-## Create a new dotnet tool and start VS-Code:
+## Create a new dotnet tool and starts VS-Code:
 
 ![](./assets/use-vscode.gif)
 
-## Create a new dotnet tool and start Visual Studio 2019:
+## Create a new dotnet tool and starts Visual Studio 2019:
 Hint: Right now we look only for installed VS2019 Versions !
 
 ![](./assets/use-visual-studio-ide.gif)
 
-## Create a new dotnet tool and start JetBrains Rider:
+## Create a new dotnet tool and starts JetBrains Rider:
 ![](./assets/use-rider-ide.gif)
+
+## Sample Create, add your code and run it
+```
+Hint this command is now equals to 'dotnet newtool --use-visualstudio'
+Because this gif is not up to date to the new cli syntax !
+```
+![](./assets/simple-tool-sample.gif)
 
 ## Sample multiple expressions
 
