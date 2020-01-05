@@ -2,9 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Process
 {
-    public interface IProcess : IDisposable
+    internal interface IProcess : IDisposable
     {
         bool EnableRaisingEvents { get; set; }
 

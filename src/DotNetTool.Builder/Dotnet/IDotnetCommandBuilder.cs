@@ -2,7 +2,7 @@ using System.CommandLine;
 
 namespace DotNetTool.Builder.Dotnet
 {
-    public interface IDotnetCommandBuilder
+    internal interface IDotnetCommandBuilder
     {
         RootCommand Build();
     }

@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Services
 {
     using Models;
 
-    public interface ITargetFolderService
+    internal interface ITargetFolderService
     {
         IDirectoryInfo CreateTargetDirectory(DotNetTool dotNetTool);
     }

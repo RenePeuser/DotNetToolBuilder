@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Services
 {
-    public interface IParameterExpressionCollector
+    internal interface IParameterExpressionCollector
     {
         CommandInfo CollectFor(string dotnetToolName);
     }

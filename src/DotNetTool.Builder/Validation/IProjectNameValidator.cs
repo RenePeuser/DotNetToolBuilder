@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.Validation
 {
-    public interface IProjectNameValidator : IInputValidator
+    internal interface IProjectNameValidator : IInputValidator
     {
     }
 }

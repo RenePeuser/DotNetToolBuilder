@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Parser.Argument
 {
     using System;
 
-    public class ArgumentParser : IArgumentParser
+    internal class ArgumentParser : IArgumentParser
     {
         private readonly IConsoleService _consoleService;
 

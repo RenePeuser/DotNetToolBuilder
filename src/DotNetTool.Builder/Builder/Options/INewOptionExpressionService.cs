@@ -2,7 +2,7 @@
 {
     using Models;
 
-    public interface INewOptionExpressionService
+    internal interface INewOptionExpressionService
     {
         string Build(OptionInfo optionInfo);
     }

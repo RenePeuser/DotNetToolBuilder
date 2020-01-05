@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Builder.Argument
 {
-    public interface IArgumentBuilder
+    internal interface IArgumentBuilder
     {
         string Build(string projectName, CommandInfo parameterInfo, string nameSpace);
     }

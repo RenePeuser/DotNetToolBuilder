@@ -4,7 +4,7 @@
     using Models;
     using Tokenizer.Tokens;
 
-    public interface ICommandParser
+    internal interface ICommandParser
     {
         CommandInfo Parse(CommandToken commandToken, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, CommandInfo lastCommand, CommandInfo alreadyExistingCommand, CommandInfo previousExpressionCommand);
     }

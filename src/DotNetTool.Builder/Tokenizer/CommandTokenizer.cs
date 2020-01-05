@@ -3,7 +3,7 @@
     using Extensions;
     using Tokens;
 
-    public class CommandTokenizer : ITokenizer
+    internal class CommandTokenizer : ITokenizer
     {
         public Token GetToken(string value)
         {

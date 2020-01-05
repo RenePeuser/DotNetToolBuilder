@@ -5,8 +5,7 @@ using DotNetTool.Builder.Models;
 namespace DotNetTool.Builder.Services
 {
     using Tokenizer.Tokens;
-
-    public class ParameterService : IParameterService
+    internal class ParameterService : IParameterService
     {
         public CommandInfo FindAlreadyExistingCommand(CommandToken command,
             CommandInfo current)

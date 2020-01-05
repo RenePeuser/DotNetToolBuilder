@@ -3,7 +3,7 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Startup
 {
-    public interface ITypeRegistrationBuilder
+    internal interface ITypeRegistrationBuilder
     {
         IEnumerable<string> Build(IEnumerable<TypeToRegister> registrations);
     }

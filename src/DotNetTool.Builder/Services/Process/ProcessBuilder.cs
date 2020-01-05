@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-using Argument.Check;
+﻿using Argument.Check;
 
-
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Process
 {
     internal class ProcessBuilder : IProcessBuilder
     {
@@ -11,7 +9,7 @@ namespace DotNetTool.Builder.Services
             Throw.IfNullOrWhiteSpace(() => command);
             Throw.IfNullOrWhiteSpace(() => arguments);
 
-            var process = new ProcessProxy(new Process());
+            var process = new ProcessProxy(new System.Diagnostics.Process());
 
             process.StartInfo.FileName = command;
             process.StartInfo.Arguments = arguments;

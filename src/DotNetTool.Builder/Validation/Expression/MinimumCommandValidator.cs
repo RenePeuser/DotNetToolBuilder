@@ -8,7 +8,7 @@
     using Models;
     using Tokenizer.Tokens;
 
-    public class MinimumCommandValidator : IExpressionContentValidator
+    internal class MinimumCommandValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {

@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Services
 {
-    public interface ITypeService
+    internal interface ITypeService
     {
         string GetFullqualifiedName(string projectName, IFileInfo fileInfo);
     }

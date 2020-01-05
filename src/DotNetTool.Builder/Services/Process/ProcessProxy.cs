@@ -2,16 +2,15 @@
 using System.Diagnostics;
 using System.IO;
 using Argument.Check;
-
 using DotNetTool.Builder.Models;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Process
 {
     internal class ProcessProxy : DisposableBase, IProcess
     {
-        private readonly Process _process;
+        private readonly System.Diagnostics.Process _process;
 
-        public ProcessProxy(Process process)
+        public ProcessProxy(System.Diagnostics.Process process)
         {
             Throw.IfNull(() => process);
 

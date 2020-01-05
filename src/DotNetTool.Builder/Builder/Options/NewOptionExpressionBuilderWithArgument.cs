@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Builder.Options
 {
     
 
-    public class NewOptionExpressionBuilderWithArgument : INewOptionExpressionBuilder
+    internal class NewOptionExpressionBuilderWithArgument : INewOptionExpressionBuilder
     {
         private const string OptionArgumentTemplate =
             @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")

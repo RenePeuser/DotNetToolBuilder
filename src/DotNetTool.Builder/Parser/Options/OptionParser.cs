@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Parser.Options
 {
     using Tokenizer.Tokens;
 
-    public class OptionParser : IOptionParser
+    internal class OptionParser : IOptionParser
     {
         private readonly IConsoleService _consoleService;
 

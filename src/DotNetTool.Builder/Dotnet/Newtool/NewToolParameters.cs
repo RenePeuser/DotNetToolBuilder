@@ -2,13 +2,17 @@ namespace DotNetTool.Builder.Dotnet.Newtool
 {
     internal class NewToolParameters
     {
-        public NewToolParameters(System.IO.FileInfo fromFile, bool openVisualstudio)
+        internal NewToolParameters(System.IO.FileInfo fromFile, bool usecode, bool usevisualstudio)
         {
             FromFile = fromFile;
-            OpenVisualstudio = openVisualstudio;
+            UseVsCode = usecode;
+            UseVisualStudio = usevisualstudio;
         }
 
-        public System.IO.FileInfo FromFile { get; }
-        public bool OpenVisualstudio { get; }
+        internal System.IO.FileInfo FromFile { get; }
+
+        internal bool UseVsCode { get; }
+
+        internal bool UseVisualStudio { get; }
     }
 }

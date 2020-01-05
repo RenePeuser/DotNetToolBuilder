@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    public interface IOptionInterfaceBuilder
+    internal interface IOptionInterfaceBuilder
     {
         string Build(string projectName, CommandInfo parameterInfo, string nameSpace);
     }

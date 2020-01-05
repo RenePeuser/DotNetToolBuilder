@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Builder.Options
 {
     
 
-    public class NewOptionExpressionService : INewOptionExpressionService
+    internal class NewOptionExpressionService : INewOptionExpressionService
     {
         private readonly IEnumerable<INewOptionExpressionBuilder> _newOptionExpressionBuilders;
 

@@ -3,7 +3,7 @@
     using System.Diagnostics;
 
     [DebuggerDisplay("IsValid: {IsValid}")]
-    public class ValidationResult
+    internal class ValidationResult
     {
         public ValidationResult(bool isValid, string errors)
         {

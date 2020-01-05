@@ -8,7 +8,7 @@
     using Models;
     using Tokenizer.Tokens;
 
-    public class MultipleOptionValidator : IExpressionContentValidator
+    internal class MultipleOptionValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {

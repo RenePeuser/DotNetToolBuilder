@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Builder.Startup
 {
     
 
-    public class TypeRegistrationBuilder : ITypeRegistrationBuilder
+    internal class TypeRegistrationBuilder : ITypeRegistrationBuilder
     {
         public IEnumerable<string> Build(IEnumerable<TypeToRegister> registrations)
         {

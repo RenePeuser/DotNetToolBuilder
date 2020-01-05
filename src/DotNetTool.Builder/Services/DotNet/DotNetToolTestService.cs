@@ -1,14 +1,13 @@
-﻿using FileSystem.Abstraction;
+﻿using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Argument.Check;
+using DotNetTool.Builder.Services.Process;
+using FileSystem.Abstraction;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.DotNet
 {
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Argument.Check;
-    using Models;
-
-    public class DotNetToolTestService : IDotNetToolTestService
+    internal class DotNetToolTestService : IDotNetToolTestService
     {
         private readonly IConsoleService _consoleService;
         private readonly IProcessService _processService;
@@ -22,13 +21,13 @@ namespace DotNetTool.Builder.Services
             _processService = processService;
         }
 
-        public async Task RunAsync(IFileInfo solutionFile, DotNetTool dotNetTool)
+        public Task RunAsync(IFileInfo solutionFile, Models.DotNetTool dotNetTool)
         {
             var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
 
             _consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
 
-            var runYourCliResult = await _processService.RunCliCommandAsync($"{findExe.FullName}", "--help");
+            return _processService.RunCliCommandAsync($"{findExe.FullName}", "--help");
         }
     }
 }

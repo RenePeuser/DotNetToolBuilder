@@ -2,7 +2,7 @@
 {
     using Tokens;
 
-    public class OptionTokenizer : ITokenizer
+    internal class OptionTokenizer : ITokenizer
     {
         public Token GetToken(string value)
         {

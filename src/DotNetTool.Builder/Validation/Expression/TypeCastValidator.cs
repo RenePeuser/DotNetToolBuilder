@@ -9,7 +9,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using Models;
     using Tokenizer.Tokens;
 
-    public class TypeCastValidator : IExpressionContentValidator
+    internal class TypeCastValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {

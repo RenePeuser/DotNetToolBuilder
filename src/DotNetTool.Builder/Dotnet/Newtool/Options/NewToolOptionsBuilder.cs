@@ -3,12 +3,22 @@ using System.CommandLine;
 
 namespace DotNetTool.Builder.Dotnet.Newtool.Options
 {
-    public class NewToolOptionsBuilder : INewToolOptionsBuilder
+    internal class NewToolOptionsBuilder : INewToolOptionsBuilder
     {
         public IEnumerable<Option> Build()
         {   
             yield return BuildFromFileOption();
-            yield return BuildOpenVisualstudioOption();
+            yield return BuildUseVisualStudioOption();
+            yield return BuildUseVsCodeOption();
+        }
+
+        private Option BuildUseVsCodeOption()
+        {
+            return new Option(new[] { "--use-code", "-code" }, "Opens visual studio code after generating with the new dotnet tool.")
+            {
+                IsHidden = true,
+                Required = false
+            };
         }
 
         private Option BuildFromFileOption()
@@ -23,9 +33,9 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Options
                 }
             };
         }
-        private Option BuildOpenVisualstudioOption()
+        private Option BuildUseVisualStudioOption()
         {
-            return new Option(new[] { "--open-visualstudio", "-ov" }, "Opens visual studio after generating the new dotnet tool.")
+            return new Option(new[] { "--use-visualstudio", "-ov" }, "Opens visual studio after generating the new dotnet tool.")
             {
                 IsHidden = true,
                 Required = false

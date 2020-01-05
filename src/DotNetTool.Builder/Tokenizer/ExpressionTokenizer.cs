@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Tokenizer
     using Models;
     using Tokens;
 
-    public class ExpressionTokenizer : IExpressionTokenizer
+    internal class ExpressionTokenizer : IExpressionTokenizer
     {
         private readonly IEnumerable<ITokenizer> _tokenizers;
 

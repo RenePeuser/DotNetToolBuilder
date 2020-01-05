@@ -3,7 +3,7 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(MethodName) + "}")]
-    public class MethodInfo
+    internal class MethodInfo
     {
         public MethodInfo(string methodName, string methodSyntax)
         {

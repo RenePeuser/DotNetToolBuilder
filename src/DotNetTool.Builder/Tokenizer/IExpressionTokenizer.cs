@@ -2,7 +2,7 @@
 {
     using Models;
 
-    public interface IExpressionTokenizer
+    internal interface IExpressionTokenizer
     {
         ExpressionInfo Tokenize(string expression);
     }

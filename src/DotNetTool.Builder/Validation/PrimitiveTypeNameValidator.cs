@@ -6,7 +6,7 @@
     using Argument.Check;
     using Extensions;
 
-    public class PrimitiveTypeNameValidator : IPrimitiveTypeNameValidator
+    internal class PrimitiveTypeNameValidator : IPrimitiveTypeNameValidator
     {
         private readonly IEnumerable<string> _strings;
 

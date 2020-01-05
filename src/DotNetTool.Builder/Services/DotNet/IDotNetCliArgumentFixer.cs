@@ -1,4 +1,4 @@
-﻿namespace DotNetTool.Builder.Services
+﻿namespace DotNetTool.Builder.Services.DotNet
 {
     internal interface IDotNetCliArgumentFixer
     {

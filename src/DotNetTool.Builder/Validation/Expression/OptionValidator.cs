@@ -9,7 +9,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using Models;
     using Tokenizer.Tokens;
 
-    public class OptionValidator : IExpressionContentValidator
+    internal class OptionValidator : IExpressionContentValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 

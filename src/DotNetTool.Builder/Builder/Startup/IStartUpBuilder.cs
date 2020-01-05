@@ -4,7 +4,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Builder.Startup
 {
-    public interface IStartUpBuilder
+    internal interface IStartUpBuilder
     {
         void AddRegistrationsFrom(string projectName, IFileInfo solutionFile,
             ICommandTypeCollector commandTypeCollector, CommandInfo rootCommand,

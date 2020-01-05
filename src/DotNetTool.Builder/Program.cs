@@ -6,7 +6,7 @@ namespace DotNetTool.Builder
     /// <summary>
     /// The program, which represents the dot net tool builder.
     /// </summary>
-    public class Program
+    internal class Program
     {
         /// <summary>
         /// Creates an instance of the dotnet tool builder and starts it.

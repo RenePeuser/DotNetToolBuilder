@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Parser.Argument
 {
     using Tokenizer.Tokens;
 
-    public interface IArgumentParser
+    internal interface IArgumentParser
     {
         ArgumentInfo Parse(ArgumentToken value);
     }

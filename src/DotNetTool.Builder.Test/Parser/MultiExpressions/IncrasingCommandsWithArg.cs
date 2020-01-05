@@ -40,7 +40,7 @@
         [TestMethod]
         public void Root_Command_Does_Not_Have_AnyOptions()
         {
-            Assert.IsTrue(_rootCommand.Options.IsNullOrEmpty());
+            Assert.IsTrue(_rootCommand.Options == null || !_rootCommand.Options.Any());
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@
         {
             var errors = _rootCommand.AssertAllSubCommandRecursive(cmd => Enumerable.Count<CommandInfo>(cmd.SubCommands) > 1, cmd => $"Command: '{cmd.Name}' have more than one sub command").ToList();
 
-            Assert.IsTrue(errors.IsEmpty(), errors.ToErrorMessage("Following errors was collected:"));
+            Assert.IsFalse(errors.Any(), errors.ToErrorMessage("Following errors was collected:"));
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@
         {
             var errors = _rootCommand.SubCommands.First().AssertAllSubCommandRecursive(cmd => cmd.Argument?.Name != $"{cmd.Name}-arg", cmd => $"Command: '{cmd.Name}' have not expected argument name: '{cmd.Name}-arg'").ToList();
 
-            Assert.IsTrue(errors.IsEmpty(), errors.ToErrorMessage("Following errors was collected:"));
+            Assert.IsFalse(errors.Any(), errors.ToErrorMessage("Following errors was collected:"));
         }
     }
 }

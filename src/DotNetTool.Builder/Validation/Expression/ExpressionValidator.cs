@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using Argument.Check;
     using Models;
 
-    public class ExpressionValidator : IExpressionValidator
+    internal class ExpressionValidator : IExpressionValidator
     {
         private readonly IEnumerable<IExpressionContentValidator> _expressionContentValidators;
 

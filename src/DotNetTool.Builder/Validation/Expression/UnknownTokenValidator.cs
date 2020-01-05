@@ -8,7 +8,7 @@
     using Models;
     using Tokenizer.Tokens;
 
-    public class UnknownTokenValidator : IExpressionContentValidator
+    internal class UnknownTokenValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {

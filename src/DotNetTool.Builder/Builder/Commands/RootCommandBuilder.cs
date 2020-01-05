@@ -15,7 +15,7 @@ namespace DotNetTool.Builder.Builder.Commands
     using System.Collections.Generic;    
     using System.CommandLine;    
 
-    public class $command-name$CommandBuilder : I$command-name$CommandBuilder
+    internal class $command-name$CommandBuilder : I$command-name$CommandBuilder
     {
         private readonly IEnumerable<I$command-name$SubCommandBuilder> _$command-argument-name$SubCommandBuilders;
 

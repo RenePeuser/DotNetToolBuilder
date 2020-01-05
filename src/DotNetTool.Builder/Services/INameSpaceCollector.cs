@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Services
 {
-    public interface INameSpaceCollector
+    internal interface INameSpaceCollector
     {
         void Add(string nameSpace);
         IEnumerable<string> GetAll();

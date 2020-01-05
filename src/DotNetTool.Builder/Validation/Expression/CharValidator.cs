@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using Extensions;
     using Models;
 
-    public class CharValidator : IExpressionContentValidator
+    internal class CharValidator : IExpressionContentValidator
     {
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[]
         {

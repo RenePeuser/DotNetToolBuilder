@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Validation
 {
     using Argument.Check;
 
-    public class ToolNameValidator : IToolNameValidator
+    internal class ToolNameValidator : IToolNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 

@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Services
     using Argument.Check;
     using Models;
 
-    public class TargetFolderService : ITargetFolderService
+    internal class TargetFolderService : ITargetFolderService
     {
         private readonly IDirectoryService _directoryService;
 

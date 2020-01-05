@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.Validation
 {
-    public interface IPrimitiveTypeNameValidator
+    internal interface IPrimitiveTypeNameValidator
     {
         ValidationResult IsValid(string value);
     }

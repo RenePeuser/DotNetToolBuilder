@@ -36,11 +36,11 @@ namespace DotNetTool.Builder.Test
         public void All_Class_Should_Have_Maximum_100_Lines_Of_Code()
         {   
             var errors = _csharpFileInfos.Where(csharp => csharp.SyntaxTree.GetText().Lines.Count > 100)
-                                         .Where(csharp => !codeFilesOnWhiteList.Any(toIgnore => csharp.FileInfo.Name.EqualsTo(toIgnore)))
+                                         .Where(csharp => codeFilesOnWhiteList.All(toIgnore => csharp.FileInfo.Name != toIgnore))
                                          .Select(csharp => $"{csharp.FileInfo.FullName} - Line of codes: {csharp.SyntaxTree.GetText().Lines.Count}")
                                          .ToList();
 
-            Assert.IsTrue(errors.IsEmpty(), errors.ToErrorMessage("Following cshapr files should be refactored:"));
+            Assert.IsFalse(errors.Any(), errors.ToErrorMessage("Following cshapr files should be refactored:"));
         }
 
         private static DirectoryInfo FindFolderWithSources(DirectoryInfo startDirectoryInfo, string name)

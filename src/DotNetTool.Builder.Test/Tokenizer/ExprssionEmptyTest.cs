@@ -1,4 +1,6 @@
-﻿namespace DotNetTool.Builder.Test.Tokenizer
+﻿using System.Linq;
+
+namespace DotNetTool.Builder.Test.Tokenizer
 {
     using Extensions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,7 +23,7 @@
         [TestMethod]
         public void Should_Return_No_Tokens()
         {
-            Assert.IsTrue(ExpressionInfo.Tokens.IsEmpty());
+            Assert.IsFalse(ExpressionInfo.Tokens.Any());
         }
 
         [TestMethod]

@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Builder.Commands
     using System.Linq;
     using System.Threading.Tasks;
 
-    public interface I$command-name$Service
+    internal interface I$command-name$Service
     {       
         Task HandleAsync($command-name$Parameters parameters);
     }

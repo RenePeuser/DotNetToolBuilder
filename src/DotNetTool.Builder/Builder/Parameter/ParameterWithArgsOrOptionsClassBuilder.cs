@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Builder.Parameter
         private const string Template =
             @"namespace $namespace$
 {
-    public class $command-name$Parameters
+    internal class $command-name$Parameters
     {
         public $command-name$Parameters($ctor-arguments$)
         {

@@ -3,14 +3,14 @@ using Argument.Check;
 
 namespace DotNetTool.Builder.Builder.Argument
 {
-    public class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
+    internal class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string Template =
 @"namespace $namespace$
 {
     using System.CommandLine;
 
-    public interface I$command-name$ArgumentBuilder
+    internal interface I$command-name$ArgumentBuilder
     {
         Argument Build();
     }

@@ -1,14 +1,13 @@
-﻿using FileSystem.Abstraction;
+﻿using System.IO;
+using Argument.Check;
+using DotNetTool.Builder.Extensions;
+using FileSystem.Abstraction;
+using Newtonsoft.Json;
+using FileInfo = System.IO.FileInfo;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.DotNet
 {
-    using System.IO;
-    using Argument.Check;
-    using Extensions;
-    using Models;
-    using Newtonsoft.Json;
-
-    public class DotNetToolSerializer : IDotNetToolSerializer
+    internal class DotNetToolSerializer : IDotNetToolSerializer
     {
         private readonly IConsoleService _consoleService;
         private readonly IFileService _fileService;
@@ -22,7 +21,7 @@ namespace DotNetTool.Builder.Services
             _fileService = fileService;
         }
 
-        public DotNetTool DeserializeFrom(string fileOrFilePath)
+        public Models.DotNetTool DeserializeFrom(string fileOrFilePath)
         {
             if (fileOrFilePath.IsNullOrWhiteSpace())
             {
@@ -39,7 +38,7 @@ namespace DotNetTool.Builder.Services
             return DeserializeFrom(file);
         }
 
-        public DotNetTool DeserializeFrom(FileInfo fileInfo)
+        public Models.DotNetTool DeserializeFrom(FileInfo fileInfo)
         {
             if (fileInfo.IsNull())
             {
@@ -56,7 +55,7 @@ namespace DotNetTool.Builder.Services
             return DeserializeFrom(file);
         }
 
-        public DotNetTool DeserializeFrom(IFileInfo fileInfo)
+        public Models.DotNetTool DeserializeFrom(IFileInfo fileInfo)
         {
             Throw.IfNull(() => fileInfo);
 
@@ -72,11 +71,11 @@ namespace DotNetTool.Builder.Services
                 return null;
             }
 
-            DotNetTool dotNetTool = null;
+            Models.DotNetTool dotNetTool = null;
             try
             {
                 var dotNetToolAsJson = fileInfo.ReadAllText();
-                dotNetTool = JsonConvert.DeserializeObject<DotNetTool>(dotNetToolAsJson);
+                dotNetTool = JsonConvert.DeserializeObject<Models.DotNetTool>(dotNetToolAsJson);
             }
             catch
             {

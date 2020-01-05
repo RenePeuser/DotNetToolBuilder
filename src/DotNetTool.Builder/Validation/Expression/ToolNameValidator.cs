@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Validation.Expression
     using Argument.Check;
     using Models;
 
-    public class ToolNameValidator : IExpressionContentValidator
+    internal class ToolNameValidator : IExpressionContentValidator
     {
         private readonly IToolNameValidator _toolNameValidator;
 

@@ -9,8 +9,7 @@ namespace DotNetTool.Builder.Parser.Commands
     using Models;
     using Services;
     using Tokenizer.Tokens;
-
-    public class CommandParser : ICommandParser
+    internal class CommandParser : ICommandParser
     {
         private readonly IConsoleService _consoleService;
 
@@ -20,7 +19,6 @@ namespace DotNetTool.Builder.Parser.Commands
 
             _consoleService = consoleService;
         }
-
 
         public CommandInfo Parse(CommandToken commandToken, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, CommandInfo lastCommand, CommandInfo alreadyExistingCommand, CommandInfo previousExpressionCommand)
         {

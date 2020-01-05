@@ -12,7 +12,7 @@ namespace DotNetTool.Builder.Builder.Startup
 {
     
 
-    public class StartUpBuilder : IStartUpBuilder
+    internal class StartUpBuilder : IStartUpBuilder
     {
         private const string Template =
             @"namespace $projectName$
@@ -23,7 +23,7 @@ namespace DotNetTool.Builder.Builder.Startup
     using $projectName$.ErrorHandling;    
 $usings$
 
-    public class Startup
+    internal class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {            

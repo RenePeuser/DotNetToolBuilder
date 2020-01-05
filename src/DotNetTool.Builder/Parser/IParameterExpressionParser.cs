@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Parser
 {
-    public interface IParameterExpressionParser
+    internal interface IParameterExpressionParser
     {
         CommandInfo Parse(ExpressionInfo parameterExpression, CommandInfo previousCommand);
     }

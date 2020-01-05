@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Services
 {
-    public interface IRenameFilesAndFolders
+    internal interface IRenameFilesAndFolders
     {
         void Rename(IDirectoryInfo directoryInfo, string originalName, string newName);
     }

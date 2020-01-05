@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Services
 {
     using Tokenizer.Tokens;
 
-    public interface IParameterService
+    internal interface IParameterService
     {
         CommandInfo FindAlreadyExistingCommand(CommandToken command, CommandInfo current);
 

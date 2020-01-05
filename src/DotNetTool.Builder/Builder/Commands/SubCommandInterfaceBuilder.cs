@@ -12,7 +12,7 @@ namespace DotNetTool.Builder.Builder.Commands
 {
     using System.CommandLine;
 
-    public interface I$command-name$SubCommandBuilder
+    internal interface I$command-name$SubCommandBuilder
     {
         Command Build();
     }

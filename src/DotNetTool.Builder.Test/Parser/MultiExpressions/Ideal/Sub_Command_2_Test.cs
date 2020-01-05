@@ -49,7 +49,7 @@
         [TestMethod]
         public void Assert_SubcCommands_Count()
         {
-            Assert.IsTrue(_subCommand1.SubCommands.IsEmpty());
+            Assert.IsFalse(_subCommand1.SubCommands.Any());
         }
     }
 }

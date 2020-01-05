@@ -8,7 +8,7 @@
     using Models;
     using Tokenizer.Tokens;
 
-    public class OnlyOneArgumentValidator : IExpressionContentValidator
+    internal class OnlyOneArgumentValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {

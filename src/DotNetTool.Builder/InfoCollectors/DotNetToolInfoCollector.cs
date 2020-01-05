@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.InfoCollectors
 {
-    public class DotNetToolInfoCollector : IDotNetToolInfoCollector
+    internal class DotNetToolInfoCollector : IDotNetToolInfoCollector
     {
         private readonly ICollectDotNetToolName _collectDotNetToolName;
         private readonly ICollectProjectName _collectProjectName;

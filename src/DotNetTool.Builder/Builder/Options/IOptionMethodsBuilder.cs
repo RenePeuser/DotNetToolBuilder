@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Models;
 
-    public interface IOptionMethodsBuilder
+    internal interface IOptionMethodsBuilder
     {
         IEnumerable<MethodInfo> Build(IEnumerable<OptionInfo> options);
     }

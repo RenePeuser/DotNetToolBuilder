@@ -13,7 +13,7 @@ namespace DotNetTool.Builder.Builder.Commands
     using System;
     using System.Threading.Tasks;
 
-    public class $command-name$Service : I$command-name$Service
+    internal class $command-name$Service : I$command-name$Service
     {       
         public Task HandleAsync($command-name$Parameters parameters)
         {

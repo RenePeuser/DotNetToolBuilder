@@ -2,7 +2,7 @@ using System;
 
 namespace DotNetTool.Builder.ErrorHandling
 {
-    public class DotNetToolBuilderException : Exception
+    internal class DotNetToolBuilderException : Exception
     {
         public DotNetToolBuilderException(string message) : base(message)
         {   

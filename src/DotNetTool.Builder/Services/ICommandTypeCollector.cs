@@ -3,9 +3,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Services
 {
-    public interface ICommandTypeCollector
+    internal interface ICommandTypeCollector
     {
         void Add(CommandInfo parameterInfo, TypeToRegister typeToRegister);
+
         Dictionary<string, IEnumerable<TypeToRegister>> GetAll();
     }
 }

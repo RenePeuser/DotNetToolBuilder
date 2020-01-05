@@ -15,7 +15,7 @@ namespace DotNetTool.Builder.Builder
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class App
+    internal class App
     {
         public IServiceProvider ServiceProvider { get; }
 

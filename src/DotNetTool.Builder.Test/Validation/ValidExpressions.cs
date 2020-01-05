@@ -15,12 +15,11 @@
             var validExpressions = GetAll().ToList();
             var invalidExpressions = from expression in validExpressions
                                      let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
-                                     let isValid = ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid.IsFalse()
+                                     let isValid = !ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid
                                      where isValid
-                                     select new { IsValid = isValid, expression.Expression };
+                                     select expression.Expression;
 
-
-            Assert.IsTrue(invalidExpressions.IsEmpty(), invalidExpressions.ToString($"Following expressions was invalid, which should be valid:{Environment.NewLine}", result => result.Expression));
+            Assert.IsFalse(invalidExpressions.Any(), AssertHelper.AssertHelper.ToErrorMessage(invalidExpressions, "Following expressions was invalid, which should be valid:"));
         }
 
         public IEnumerable<ExpressionWithExpectedResult> GetAll()

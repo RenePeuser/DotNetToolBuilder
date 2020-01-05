@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Builder.Options
 {
     
 
-    public class OptionMethodsBuilder : IOptionMethodsBuilder
+    internal class OptionMethodsBuilder : IOptionMethodsBuilder
     {
         private const string OptionMethodTemplate =
 @"        private Option Build$option-name$Option()

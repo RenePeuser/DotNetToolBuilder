@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.Services
 {
-    public interface IConsoleService
+    internal interface IConsoleService
     {
         string ReadLine();
 

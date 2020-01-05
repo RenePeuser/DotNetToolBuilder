@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.Builder.Commands
     using $namespace$.Arguments;  
     using $namespace$.Service;
 
-    public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
+    internal class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
         private readonly I$command-name$Service _$command-service-argument-name$Service;        
         private readonly I$command-name$ArgumentBuilder _argumentBuilder;

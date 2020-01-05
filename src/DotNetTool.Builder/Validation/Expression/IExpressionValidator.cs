@@ -2,7 +2,7 @@
 {
     using Models;
 
-    public interface IExpressionValidator
+    internal interface IExpressionValidator
     {
         ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo);
     }

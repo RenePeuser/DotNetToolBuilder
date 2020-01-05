@@ -3,7 +3,7 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(InterfaceType) + "} - " + "{" + nameof(ImplementationType) + "}")]
-    public class TypeToRegister
+    internal class TypeToRegister
     {
         public TypeToRegister(string interfaceType, string implementationType)
         {

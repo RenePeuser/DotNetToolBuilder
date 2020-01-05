@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.InfoCollectors
 {
-    public interface ICollectInfo
+    internal interface ICollectInfo
     {
         string Title { get; }
         string Invoke();

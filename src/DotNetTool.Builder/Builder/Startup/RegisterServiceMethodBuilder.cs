@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.Builder.Startup
 {
-    public class RegisterServiceMethodBuilder : IRegisterServiceMethodBuilder
+    internal class RegisterServiceMethodBuilder : IRegisterServiceMethodBuilder
     {
         private const string RegisterServiceMethod =
 @"private static void Configure$command-name$(IServiceCollection services)

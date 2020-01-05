@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using DotNetTool.Builder.Extensions;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.DotNet
 {
     internal class DotNetCliArgumentFixer : IDotNetCliArgumentFixer
     {
-        private string[] specialArgs = new string[] { "-v", "--version", "-h", "--help" };
+        private string[] specialArgs = new[] { "-v", "--version", "-h", "--help" };
 
         public string[] Fix(string[] args)
         {
@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Services
                 return args;
             }
 
-            var defaultArgs = new[] { "dotnet", "newtool", "--open-visualstudio" };
+            var defaultArgs = new[] { "dotnet", "newtool", "--use-visualstudio" };
             var newArgs = defaultArgs.Concat(args).Distinct().ToList();
 
             // we should remove all alias also, works with duplicated options, but this is more correct.

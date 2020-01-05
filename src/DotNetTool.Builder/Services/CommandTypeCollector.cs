@@ -10,7 +10,7 @@ namespace DotNetTool.Builder.Services
     // to reuse the 'dotnet' root command. So that it feels like this command comes direct
     // from the dotnet cli.
     // 
-    // Default: 'dotnet newtool --open-visualstudio'
+    // Default: 'dotnet newtool --use-visualstudio'
     internal class CommandTypeCollector : ICommandTypeCollector
     {
         private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToRegister;

@@ -12,7 +12,7 @@ namespace DotNetTool.Builder.Builder.Commands
     using System.Collections.Generic;    
     using System.CommandLine;    
 
-    public class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
+    internal class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
         private readonly IEnumerable<I$command-name$SubCommandBuilder> _$command-argument-name$SubCommandBuilders;
 

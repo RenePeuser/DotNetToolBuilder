@@ -4,7 +4,7 @@ using DotNetTool.Builder.Extensions;
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(ToolName) + "}")]
-    public class DotNetTool
+    internal class DotNetTool
     {
         public DotNetTool(string projectName, string toolName, CommandInfo parameterInfo)
         {

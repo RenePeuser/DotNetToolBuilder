@@ -9,19 +9,19 @@ namespace DotNetTool.Builder.Dotnet.Newtool
     internal class NewToolCommandBuilder : IDotnetSubCommandBuilder
     {
         private readonly INewToolService _newToolService;
-        private readonly INewToolOptionsBuilder _optionsBuilder;        
+        private readonly INewToolOptionsBuilder _optionsBuilder;
 
         public NewToolCommandBuilder(INewToolService newToolService, INewToolOptionsBuilder optionsBuilder)
-        {                    
+        {
             _newToolService = newToolService;
-            _optionsBuilder = optionsBuilder;            
+            _optionsBuilder = optionsBuilder;
         }
 
         public Command Build()
         {
             var command = new Command("newtool", "creates a new dotnet tool");
-            _optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));            
-            command.Handler = CommandHandler.Create<System.IO.FileInfo, bool>((fromFile, openVisualstudio) => _newToolService.HandleAsync(new NewToolParameters(fromFile, openVisualstudio)));
+            _optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
+            command.Handler = CommandHandler.Create<System.IO.FileInfo, bool, bool>((fromFile, usecode, usevisualstudio) => _newToolService.HandleAsync(new NewToolParameters(fromFile, usecode, usevisualstudio)));
             return command;
         }
     }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DotNetTool.Builder.Dotnet;
 using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Services.DotNet;
 using FileSystem.Abstraction;
 using Microsoft.Extensions.DependencyInjection;
 

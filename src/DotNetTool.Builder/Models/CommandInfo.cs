@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System.Runtime.CompilerServices;
+using DotNetTool.Builder.Extensions;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using DotNetTool.Builder.Extensions;
+
+[assembly: InternalsVisibleTo("DotNetTool.Builder.Test")]
 
 namespace DotNetTool.Builder.Models
 {
     using Newtonsoft.Json;
-
     [DebuggerDisplay("{" + nameof(Name) + "}")]
-    public class CommandInfo : InfoBase
+    internal class CommandInfo : InfoBase
     {
         public IEnumerable<CommandInfo> SubCommands { get; }
 
@@ -19,13 +21,13 @@ namespace DotNetTool.Builder.Models
         public string AsArgumentName => Name.FirstCharToLower();
 
         public string Description { get; }
-        
-        public CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options) : this(value, name, description, argumentInfo, options, Enumerable.Empty<CommandInfo>())
+
+        internal CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options) : this(value, name, description, argumentInfo, options, Enumerable.Empty<CommandInfo>())
         {
         }
 
         [JsonConstructor]
-        public CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, IEnumerable<CommandInfo> subCommands) : base(value, name)
+        internal CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, IEnumerable<CommandInfo> subCommands) : base(value, name)
         {
             Description = description;
             Argument = argumentInfo;

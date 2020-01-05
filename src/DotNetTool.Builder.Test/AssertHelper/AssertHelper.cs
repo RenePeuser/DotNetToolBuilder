@@ -1,4 +1,6 @@
-﻿namespace DotNetTool.Builder.Test.AssertHelper
+﻿using System.Linq;
+
+namespace DotNetTool.Builder.Test.AssertHelper
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +8,16 @@
     using Extensions;
     using Models;
 
-    public static class AssertHelper
+    internal static class AssertHelper
     {
-        public static IEnumerable<string> AssertAllSubCommandRecursive(this CommandInfo commandInfo, Predicate<CommandInfo> validateFunc, Func<CommandInfo, string> errorMessage)
+        internal static IEnumerable<string> AssertAllSubCommandRecursive(this CommandInfo commandInfo, Predicate<CommandInfo> validateFunc, Func<CommandInfo, string> errorMessage)
         {
             if (commandInfo.IsNull())
             {
                 yield break;
             }
 
-            if (commandInfo.SubCommands.IsNullOrEmpty())
+            if (commandInfo.SubCommands == null || !commandInfo.SubCommands.Any())
             {
                 yield break;
             }
@@ -42,7 +44,7 @@
             stringBuilder.AppendLine(title);
             stringBuilder.AppendLine();
 
-            errors.ForEach(error => stringBuilder.AppendLine($"- {error}"));
+            errors.ToList().ForEach(error => stringBuilder.AppendLine($"- {error}"));
             return stringBuilder.ToString();
         }
     }

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Argument.Check;
-
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Process
 {
     internal class ProcessService : IProcessService
     {

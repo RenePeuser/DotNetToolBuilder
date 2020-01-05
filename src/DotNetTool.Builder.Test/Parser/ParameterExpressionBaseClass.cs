@@ -3,8 +3,8 @@ using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Test.Mocks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NSubstitute;
 
 namespace DotNetTool.Builder.Test.Parser
 {
@@ -16,14 +16,14 @@ namespace DotNetTool.Builder.Test.Parser
     [TestClass]
     public abstract class ParameterExpressionBaseClass
     {
-        protected CommandInfo ParseResult { get; private set; }
+        internal CommandInfo ParseResult { get; private set; }
 
         protected abstract IEnumerable<string> GetExpressionsToParse();
 
         [TestInitialize]
         public void Init()
         {
-            var consoleService = Substitute.For<IConsoleService>();
+            var consoleService = new ConsoleMock();
             var paser = new ParameterExpressionParser(new CommandParser(consoleService), new ArgumentParser(consoleService), new OptionParser(consoleService), new ParameterService());
             var tokenizer = new ExpressionTokenizer(GetTokenizer().ToList());
             var expressions = GetExpressionsToParse().ToList();

@@ -7,7 +7,7 @@
     using Models;
     using Tokenizer.Tokens;
 
-    public class CommandMustBeforeOptionOrArgumentValidator : IExpressionContentValidator
+    internal class CommandMustBeforeOptionOrArgumentValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {

@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Services
 {
     using Models;
 
-    public class TemplateService : ITemplateService
+    internal class TemplateService : ITemplateService
     {
         private readonly IRenameFilesAndFolders _renameFilesAndFolders;
 

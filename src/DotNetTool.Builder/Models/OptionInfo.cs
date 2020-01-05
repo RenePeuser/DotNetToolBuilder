@@ -1,8 +1,14 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
+
+[assembly: InternalsVisibleTo("DotNetTool.Builder.Test")]
+
+namespace DotNetTool.Builder.Models
 {
-    public class OptionInfo : InfoBase
+    internal class OptionInfo : InfoBase
     {
-        public OptionInfo(string value, string name, string alias, string description, bool required,
+        [JsonConstructor]
+        internal OptionInfo(string value, string name, string alias, string description, bool required,
             ArgumentInfo argument, string normalizedValue, string argumentName):base(value, name)
         {
             Alias = alias;

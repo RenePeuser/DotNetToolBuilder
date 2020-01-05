@@ -3,7 +3,7 @@ using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Services
 {
-    public class ConsoleService : IConsoleService
+    internal class ConsoleService : IConsoleService
     {
         public void WriteLine()
         {

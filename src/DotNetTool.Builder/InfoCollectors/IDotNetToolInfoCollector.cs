@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.InfoCollectors
 {
-    public interface IDotNetToolInfoCollector
+    internal interface IDotNetToolInfoCollector
     {
         Models.DotNetTool Collect();
     }

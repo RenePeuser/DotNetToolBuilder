@@ -10,7 +10,7 @@ namespace DotNetTool.Builder.Builder.Argument
 {
     using System.CommandLine;
 
-    public class $command-name$ArgumentBuilder : I$command-name$ArgumentBuilder
+    internal class $command-name$ArgumentBuilder : I$command-name$ArgumentBuilder
     {                                        
         public Argument Build()
         {

@@ -5,16 +5,14 @@ using Argument.Check;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Parser.Argument;
+using DotNetTool.Builder.Parser.Commands;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Parser
 {
-    using Commands;
-    
-    using Tokenizer.Tokens;
-
-    public class ParameterExpressionParser : IParameterExpressionParser
+    internal class ParameterExpressionParser : IParameterExpressionParser
     {
         private readonly ICommandParser _commandParser;
         private readonly IArgumentParser _argumentParser;

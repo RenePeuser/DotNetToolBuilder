@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Tokenizer.Tokens;
 
-    public class ExpressionInfo
+    internal class ExpressionInfo
     {
         public ExpressionInfo(string expression, string optimizedExpressions, IEnumerable<Token> tokens)
         {

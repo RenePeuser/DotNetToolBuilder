@@ -5,7 +5,7 @@ using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.ErrorHandling
 {
-    public class ErrorHandler : IErrorHandler
+    internal class ErrorHandler : IErrorHandler
     {
         private readonly IConsoleService _consoleService;
 
@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.ErrorHandling
         {
             try
             {
-                await next(context);
+                await next(context).ConfigureAwait(false);
             }
             catch (Exception e)
             {

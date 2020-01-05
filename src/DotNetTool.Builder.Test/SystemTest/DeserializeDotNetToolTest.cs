@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DotNetTool.Builder.Test.SystemTest
 {
     // ToDo: fix soon: Some problems at build pipeline on linux.
-    [Ignore]
+    //[Ignore]
     [TestClass]
     public class DeserializeDotNetToolTest
     {
@@ -28,7 +28,7 @@ namespace DotNetTool.Builder.Test.SystemTest
         [TestMethod]
         public async Task Creating_Dot_Net_Tool_From_Serialized_JSon()
         {
-            var result = await Program.Main(new[] { $"--from-file", _serializedDotNetTool.FullName });
+            var result = await Program.Main(new[] { $"--from-file", _serializedDotNetTool.FullName }).ConfigureAwait(false);
 
             Assert.AreEqual(0, result);
         }

@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    public interface INewOptionExpressionBuilder
+    internal interface INewOptionExpressionBuilder
     {
         string Build(OptionInfo optionInfo);
         bool IsBuilderFor(OptionInfo optionInfo);

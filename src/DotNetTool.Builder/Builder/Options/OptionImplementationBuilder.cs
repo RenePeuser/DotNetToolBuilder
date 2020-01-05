@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Builder.Options
 {
     
 
-    public class OptionImplementationBuilder : IOptionImplementationBuilder
+    internal class OptionImplementationBuilder : IOptionImplementationBuilder
     {
         private const string Template =
 @"namespace $namespace$
@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.Builder.Options
     using System.Collections.Generic;
     using System.CommandLine; 
 
-    public class $command-name$OptionsBuilder : I$command-name$OptionsBuilder
+    internal class $command-name$OptionsBuilder : I$command-name$OptionsBuilder
     {
         public IEnumerable<Option> Build()
         {   

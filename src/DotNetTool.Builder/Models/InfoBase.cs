@@ -4,7 +4,7 @@
     using Extensions;
 
     [DebuggerDisplay("{" + nameof(Value) + "}")]
-    public class InfoBase
+    internal class InfoBase
     {
         public InfoBase(string value, string name)
         {

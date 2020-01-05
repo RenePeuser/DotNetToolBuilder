@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +6,9 @@ using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.FileStructure;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Services.DotNet;
+using DotNetTool.Builder.Services.IDE;
+using DotNetTool.Builder.Services.Process;
 
 namespace DotNetTool.Builder.Dotnet.Newtool.Service
 {
@@ -22,7 +24,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
         private readonly INameSpaceCollector _nameSpaceCollector;
         private readonly IStartUpBuilder _startUpBuilder;
         private readonly IProcessService _processService;
-        private readonly IVisualStudioService _visualStudioService;
+        private readonly IUseIDE _useIde;
         private readonly IDotNetToolTestService _dotNetToolTestService;
         private readonly IConsoleService _consoleService;
 
@@ -37,7 +39,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
             INameSpaceCollector nameSpaceCollector,
             IStartUpBuilder startUpBuilder,
             IProcessService processService,
-            IVisualStudioService visualStudioService,
+            IUseIDE useIde,
             IDotNetToolTestService dotNetToolTestService,
             IConsoleService consoleService)
         {
@@ -51,7 +53,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
             _nameSpaceCollector = nameSpaceCollector;
             _startUpBuilder = startUpBuilder;
             _processService = processService;
-            _visualStudioService = visualStudioService;
+            _useIde = useIde;
             _dotNetToolTestService = dotNetToolTestService;
             _consoleService = consoleService;
         }
@@ -88,26 +90,19 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
             _startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, _commandTypeCollector, dotNetTool.ParameterInfo, _nameSpaceCollector);
 
             // Build your new generated tool
-            var dotnetBuildResult = await _processService.RunCliCommandAsync("dotnet", $"build {solutionFile.FullName}");
+            var dotnetBuildResult = await _processService.RunCliCommandAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
             if (dotnetBuildResult.ExitCode != 0)
             {
-                // Also if fail open visual studio, to focus to the error, most case will be incorrect type casts for arguments.
-                if (parameters.OpenVisualstudio)
-                {
-                    await _visualStudioService.OpenAsync(solutionFile);
-                }
-
+                // Opens all per option set IDE
+                await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
                 return -1;
             }
 
             // Test run with the new tool with --help
-            await _dotNetToolTestService.RunAsync(solutionFile, dotNetTool);
+            await _dotNetToolTestService.RunAsync(solutionFile, dotNetTool).ConfigureAwait(false);
 
-            if (parameters.OpenVisualstudio)
-            {
-                // Open visual studio, right now works only with VS2019 !
-                await _visualStudioService.OpenAsync(solutionFile);
-            }
+            // Opens all per option set IDE
+            await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
 
             // All works fine, enjoy your new cli.
             _consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");

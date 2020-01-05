@@ -8,7 +8,7 @@ namespace DotNetTool.Builder.Services
 {
     using Tokenizer;
 
-    public class ParameterExpressionCollector : IParameterExpressionCollector
+    internal class ParameterExpressionCollector : IParameterExpressionCollector
     {
         private readonly IConsoleService _consoleService;
         private readonly IParameterExpressionParser _parameterExpressionParser;

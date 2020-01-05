@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.Parser.Options
 {
     using Tokenizer.Tokens;
 
-    public interface IOptionParser
+    internal interface IOptionParser
     {
         OptionInfo Parse(OptionToken token, ArgumentInfo argument);
     }

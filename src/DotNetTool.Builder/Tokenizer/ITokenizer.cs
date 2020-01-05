@@ -2,7 +2,7 @@
 {
     using Tokens;
 
-    public interface ITokenizer
+    internal interface ITokenizer
     {
         Token GetToken(string value);
         bool IsThisTokenizerFor(string value);

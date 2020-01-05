@@ -1,11 +1,15 @@
-﻿using DotNetTool.Builder.Extensions;
+﻿using System.Runtime.CompilerServices;
+using DotNetTool.Builder.Extensions;
+using Newtonsoft.Json;
+
+[assembly: InternalsVisibleTo("DotNetTool.Builder.Test")]
 
 namespace DotNetTool.Builder.Models
 {
-
-    public class ArgumentInfo : InfoBase
+    internal class ArgumentInfo : InfoBase
     {
-        public ArgumentInfo(string name, string description, string value, string normalizedName, string type) : base(value, name)
+        [JsonConstructor]
+        internal ArgumentInfo(string name, string description, string value, string normalizedName, string type) : base(value, name)
         {
             Description = description;
             NormalizedParameterName = normalizedName.FirstCharToLower();
