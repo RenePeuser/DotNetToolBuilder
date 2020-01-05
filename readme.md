@@ -73,6 +73,13 @@ Because this gif is not up to date to the new cli syntax !
 ```
 ![](./assets/simple-tool-sample.gif)
 
+## Create a dotnet tool and save it as json:
+![](./assets/save-dotnet-tool.gif)
+
+## Create a dotnet tool from an already serialized tool:
+![](./assets/from-file.gif)
+
+
 ## Sample multiple expressions
 
 ```bash
