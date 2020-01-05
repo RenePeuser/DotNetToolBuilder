@@ -50,11 +50,9 @@ dotnet tool install DotNetTool.Builder --global
 ```
 
 ## Create a new dotnet tool (generating only):
-
 ![](./assets/generating-only.gif)
 
 ## Create a new dotnet tool and start VS-Code:
-
 ![](./assets/use-vscode.gif)
 
 ## Create a new dotnet tool and start Visual Studio 2019:
@@ -63,6 +61,8 @@ Hint: Right now we look only for installed VS2019 Versions !
 ![](./assets/use-visual-studio-ide.gif)
 
 ## Create a new dotnet tool and start JetBrains Rider:
+Works only if you have installed Rider in the default installation folder
+
 ![](./assets/use-rider-ide.gif)
 
 ## Sample Create, add your code and run it

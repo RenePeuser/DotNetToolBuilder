@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Services.Process;
@@ -24,6 +25,9 @@ namespace DotNetTool.Builder.Services.IDE
 
         public Task OpenAsync(IFileInfo solutionFileInfo, NewToolParameters parameters)
         {
+            Throw.IfNull(() => solutionFileInfo);
+            Throw.IfNull(() => parameters);
+
             if (parameters.UseVsCode.IsFalse())
             {
                 return Task.CompletedTask;
@@ -47,8 +51,7 @@ namespace DotNetTool.Builder.Services.IDE
                 return _processService.StartCliCommandAsync(codeInProgramFolder.FullName, solutionFileInfo.Directory.Parent.FullName);
             }
 
-            _consoleService.WriteError($"Could not detect installation path of visual studio code. Looked in:{Environment.NewLine}- {codeInLocalAppData.FullName}{Environment.NewLine}- {codeInProgramFolder}");
-
+            _consoleService.WriteError($"Could not detect an installation path of visual studio code. Looked in:{Environment.NewLine}- {codeInLocalAppData.FullName}{Environment.NewLine}- {codeInProgramFolder.FullName}");
             return Task.CompletedTask;
         }
     }

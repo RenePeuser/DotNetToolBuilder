@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Services.Process;
@@ -24,6 +25,9 @@ namespace DotNetTool.Builder.Services.IDE
 
         public Task OpenAsync(IFileInfo solution, NewToolParameters parameters)
         {
+            Throw.IfNull(() => solution);
+            Throw.IfNull(() => parameters);
+
             if (parameters.UseRider.IsFalse())
             {
                 return Task.CompletedTask;
@@ -31,7 +35,13 @@ namespace DotNetTool.Builder.Services.IDE
 
             // C:\Program Files\JetBrains\JetBrains Rider 2019.3.1\bin\rider64.exe
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            var jetbrainsFolder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, "JetBrains"));
+            var jetbrainsFolder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, "A"));
+            if (jetbrainsFolder.NotExists)
+            {
+                _consoleService.WriteError($"JetBrains Rider IDE could not be started.{Environment.NewLine}Could not find any installation of 'JetBrains Rider' in folder: '{jetbrainsFolder.FullName}'{Environment.NewLine}");
+                return Task.CompletedTask;
+            }
+
             var riderDirectory = jetbrainsFolder.EnumerateDirectories().FirstOrDefault(directory => directory.Name.Contains("Rider"));
             if (riderDirectory.IsNull())
             {
