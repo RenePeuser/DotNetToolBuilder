@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using Argument.Check;
 
 namespace DotNetTool.Builder.Extensions
@@ -41,20 +39,6 @@ namespace DotNetTool.Builder.Extensions
             return !source.Any();
         }
 
-
-        internal static string ToString<T>(this IEnumerable<T> source, string title, params Expression<Func<T, object>>[] infoSelector)
-        {
-            Throw.IfNull(() => source);
-            Throw.IfNull(() => title);
-            Throw.IfNull(() => infoSelector);
-
-            var compiledExpressions = infoSelector.ToCompiledExpressionWithInfo();
-            var stringBuilder = new StringBuilder();
-            stringBuilder.AppendLine(title);
-            source.ForEach(item => stringBuilder.AppendLine(item.ToString(compiledExpressions)));
-
-            return stringBuilder.ToString();
-        }
 
         internal static IEnumerable<T> Concat<T>(this IEnumerable<T> source, T itemToConcat)
         {
