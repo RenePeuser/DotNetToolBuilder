@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,9 +18,16 @@ namespace DotNetTool.Builder.Test.SystemTest
         [TestInitialize]
         public void Init()
         {
+
             _serializedDotNetTool = new FileInfo(Path.Combine(Environment.CurrentDirectory, "test.json"));
             _createdDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "my.test"));
             _toolSerializeResult = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "saved-tools"));
+
+            var resourceNames = GetType().Assembly.GetManifestResourceNames();
+            var templateResourceName = resourceNames.Single(resource => resource.Contains("test.json"));
+            using var templateStream = GetType().Assembly.GetManifestResourceStream(templateResourceName);
+            using var fileStream = new FileStream(_serializedDotNetTool.FullName, FileMode.Create, FileAccess.Write);
+            templateStream.CopyTo(fileStream);
 
             if (_createdDirectory.Exists)
             {
@@ -27,7 +35,6 @@ namespace DotNetTool.Builder.Test.SystemTest
             }
         }
 
-        [Ignore]
         [TestMethod]
         public async Task Creating_Dot_Net_Tool_From_Serialized_JSon()
         {
@@ -37,7 +44,7 @@ namespace DotNetTool.Builder.Test.SystemTest
         }
 
         [TestMethod]
-        public async Task Sould_Create_Tool_When_Used_Save_Tool_Option()
+        public async Task Should_Create__A_DotNetTool_When_Used_Save_Tool_Option()
         {
             await Program.Main(new[] { "--from-file", _serializedDotNetTool.FullName, "--save-to", _toolSerializeResult.FullName }).ConfigureAwait(false);
             var savedDotNetTool = new FileInfo(Path.Combine(_toolSerializeResult.FullName, "my.test.json"));
