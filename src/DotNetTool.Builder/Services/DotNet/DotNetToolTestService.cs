@@ -29,7 +29,7 @@ namespace DotNetTool.Builder.Services.DotNet
 
             _consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
 
-            return _processService.RunCliCommandAsync($"{findExe.FullName}", "--help");
+            return _processService.RunCliCommandAsync("dotnet", $"{findExe.FullName} --help");
         }
     }
 }
