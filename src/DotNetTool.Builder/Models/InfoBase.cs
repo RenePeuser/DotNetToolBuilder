@@ -4,9 +4,9 @@ using DotNetTool.Builder.Extensions;
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Value) + "}")]
-    public class InfoBase
+    public abstract class InfoBase
     {
-        public InfoBase(string value, string name)
+        protected InfoBase(string value, string name)
         {
             Value = value;
             Name = name;
