@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.Services
 {
     internal class TypeService : ITypeService
     {
-        public string GetFullqualifiedName(string projectName, IFileInfo fileInfo)
+        public string GetFullQualifiedName(string projectName, IFileInfo fileInfo)
         {
             var path = CollectPath(fileInfo.Directory, projectName).Reverse().ToList();
             var fullQualifiedName = $"{projectName}.{path.Flatten(".")}.{fileInfo.FileNameWithoutExtension()}";
@@ -23,7 +23,8 @@ namespace DotNetTool.Builder.Services
 
             if (startDirectoryInfo.Name != name)
             {
-                yield return startDirectoryInfo.Name;
+                // Hint: Structure in the solutions all was normalized, that first char is to upper.
+                yield return startDirectoryInfo.Name.FirstCharToUpper();
             }
             else
             {
@@ -33,7 +34,8 @@ namespace DotNetTool.Builder.Services
             var result = CollectPath(startDirectoryInfo.Parent, name).ToList();
             foreach (var value in result)
             {
-                yield return value;
+                // Hint: Structure in the solutions all was normalized, that first char is to upper.
+                yield return value.FirstCharToUpper();
             }
         }
     }

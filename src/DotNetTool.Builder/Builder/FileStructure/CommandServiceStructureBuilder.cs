@@ -48,8 +48,8 @@ namespace DotNetTool.Builder.Builder.FileStructure
             var commandServiceInterface = _fileService.GetFileInfo(Path.Combine(serviceFolder.FullName, $"I{subCommand.NormalizedName}Service.cs"));
             commandServiceInterface.WriteAllText(serviceInterface);
 
-            var interfaceToRegister = _typeService.GetFullqualifiedName(projectName, commandServiceInterface);
-            var implementationToRegister = _typeService.GetFullqualifiedName(projectName, commandService);
+            var interfaceToRegister = _typeService.GetFullQualifiedName(projectName, commandServiceInterface);
+            var implementationToRegister = _typeService.GetFullQualifiedName(projectName, commandService);
 
             commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceToRegister, implementationToRegister));
         }

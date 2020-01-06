@@ -33,24 +33,39 @@ namespace DotNetTool.Builder.Services.IDE
                 return Task.CompletedTask;
             }
 
-            // C:\Program Files (x86)\Microsoft Visual Studio\2019
+            // root:\Program Files (x86)\Microsoft Visual Studio\2017
+            // root:\Program Files (x86)\Microsoft Visual Studio\2019
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            var visualStudio2019Folder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, @"Microsoft Visual Studio\2019\"));
-            if (visualStudio2019Folder.NotExists)
+
+            var visualStudioFolder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, @"Microsoft Visual Studio\"));
+            if(visualStudioFolder.NotExists)
             {
-                _consoleService.WriteError($"VS2019 Folder: '{visualStudio2019Folder.FullName}' does not exists.{Environment.NewLine}Can not start VS2019");
+                _consoleService.WriteError($"Visual studio folder: '{visualStudioFolder.FullName}' does not exists.{Environment.NewLine}Can not start any install Visual Studio version.");
                 return Task.CompletedTask;
             }
 
-            var vs2019 = visualStudio2019Folder.EnumerateFiles("devenv.exe", SearchOption.AllDirectories).FirstOrDefault();
-            if (vs2019.NotExists())
+            var lastVisualStudioVersion = visualStudioFolder.EnumerateDirectories("20*").OrderBy(d => d.Name).LastOrDefault();
+            if (lastVisualStudioVersion.IsNull())
             {
-                _consoleService.WriteError($"Could not start VS2019.{Environment.NewLine}Could not found: 'devenv.exe' in VS2019 folder: '{visualStudio2019Folder.FullName}'");
+                _consoleService.WriteError($"No visual studio version folder found in: {visualStudioFolder.FullName}.{Environment.NewLine}Can not start any Version of Visual Studio.");
                 return Task.CompletedTask;
             }
 
-            _consoleService.WriteInfo($"Start Visual Studio 2019 with: {solution.Name}");
-            return _processService.StartCliCommandAsync(vs2019.FullName, solution.FullName);
+            if (lastVisualStudioVersion.NotExists)
+            {
+                _consoleService.WriteError($"Visual Studio folder: '{lastVisualStudioVersion.FullName}' does not exists.{Environment.NewLine}Can not start any Versin of Visual Studio.");
+                return Task.CompletedTask;
+            }
+
+            var latest = lastVisualStudioVersion.EnumerateFiles("devenv.exe", SearchOption.AllDirectories).FirstOrDefault();
+            if (latest.NotExists())
+            {
+                _consoleService.WriteError($"Could not start Visual Studio {lastVisualStudioVersion.NotExists}.{Environment.NewLine}Could not found: 'devenv.exe' in VS2019 folder: '{lastVisualStudioVersion.FullName}'");
+                return Task.CompletedTask;
+            }
+
+            _consoleService.WriteInfo($"Start Visual Studio {lastVisualStudioVersion.NotExists} with: {solution.Name}");
+            return _processService.StartCliCommandAsync(latest.FullName, solution.FullName);
         }
     }
 }

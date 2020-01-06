@@ -1,113 +1,113 @@
 {
-    "ProjectName": "my.test",
-    "ToolName": "tool",
-    "NormalizedToolName": "Tool",
-    "ParameterInfo": {
-        "SubCommands": [
-            {
-                "SubCommands": [],
-                "Options": [
-                    {
-                        "Value": "--kf",
-                        "Name": "kf",
-                        "Alias": "-k",
-                        "Description": "--kf description",
-                        "Required": false,
-                        "Argument": {
-                            "Name": "kv",
-                            "Description": "kv description",
-                            "Value": "<kv>",
-                            "NormalizedName": "Kv",
-                            "NormalizedParameterName": "kv",
-                            "Type": "object"
-                        },
-                        "NormalizedValue": "Kf",
-                        "ArgumentName": "kf"
-                    }
-                ],
-                "ArgumentInfo": {
-                    "Name": "file",
-                    "Description": "file description",
-                    "Value": "<file>",
-                    "NormalizedName": "File",
-                    "NormalizedParameterName": "file",
-                    "Type": "object"
-                },
-                "Name": "list",
-                "NormalizedName": "List",
-                "Description": "list description"
+  "ProjectName": "my.test",
+  "ToolName": "tool",
+  "NormalizedToolName": "Tool",
+  "ParameterInfo": {
+    "SubCommands": [
+      {
+        "SubCommands": [],
+        "Options": [
+          {
+            "Value": "--kf",
+            "Name": "kf",
+            "Alias": "-k",
+            "Description": "--kf description",
+            "Required": false,
+            "Argument": {
+              "Name": "kv",
+              "Description": "kv description",
+              "Value": "<kv>",
+              "NormalizedName": "Kv",
+              "NormalizedParameterName": "kv",
+              "Type": "object"
             },
-            {
-                "SubCommands": [],
-                "Options": [
-                    {
-                        "Value": "--kf",
-                        "Name": "kf",
-                        "Alias": "-k",
-                        "Description": "--kf description",
-                        "Required": false,
-                        "Argument": {
-                            "Name": "kv",
-                            "Description": "kv description",
-                            "Value": "<kv>",
-                            "NormalizedName": "Kv",
-                            "NormalizedParameterName": "kv",
-                            "Type": "object"
-                        },
-                        "NormalizedValue": "Kf",
-                        "ArgumentName": "kf"
-                    }
-                ],
-                "ArgumentInfo": {
-                    "Name": "file",
-                    "Description": "file description",
-                    "Value": "<file>",
-                    "NormalizedName": "File",
-                    "NormalizedParameterName": "file",
-                    "Type": "object"
-                },
-                "Name": "update",
-                "NormalizedName": "Update",
-                "Description": "update description"
-            },
-            {
-                "SubCommands": [],
-                "Options": [
-                    {
-                        "Value": "--kf",
-                        "Name": "kf",
-                        "Alias": "-k",
-                        "Description": "--kf description",
-                        "Required": false,
-                        "Argument": {
-                            "Name": "kv",
-                            "Description": "kv description",
-                            "Value": "<kv>",
-                            "NormalizedName": "Kv",
-                            "NormalizedParameterName": "kv",
-                            "Type": "object"
-                        },
-                        "NormalizedValue": "Kf",
-                        "ArgumentName": "kf"
-                    }
-                ],
-                "ArgumentInfo": {
-                    "Name": "file",
-                    "Description": "file description",
-                    "Value": "<file>",
-                    "NormalizedName": "File",
-                    "NormalizedParameterName": "file",
-                    "Type": "object"
-                },
-                "Name": "delete",
-                "NormalizedName": "Delete",
-                "Description": "delete description"
-            }
+            "NormalizedValue": "Kf",
+            "ArgumentName": "kf"
+          }
         ],
-        "Options": [],
-        "ArgumentInfo": null,
-        "Name": "tool",
-        "NormalizedName": "Tool",
-        "Description": "tool description"
-    }
+        "ArgumentInfo": {
+          "Name": "file",
+          "Description": "file description",
+          "Value": "<file>",
+          "NormalizedName": "File",
+          "NormalizedParameterName": "file",
+          "Type": "object"
+        },
+        "Name": "list",
+        "NormalizedName": "List",
+        "Description": "list description"
+      },
+      {
+        "SubCommands": [],
+        "Options": [
+          {
+            "Value": "--kf",
+            "Name": "kf",
+            "Alias": "-k",
+            "Description": "--kf description",
+            "Required": false,
+            "Argument": {
+              "Name": "kv",
+              "Description": "kv description",
+              "Value": "<kv>",
+              "NormalizedName": "Kv",
+              "NormalizedParameterName": "kv",
+              "Type": "object"
+            },
+            "NormalizedValue": "Kf",
+            "ArgumentName": "kf"
+          }
+        ],
+        "ArgumentInfo": {
+          "Name": "file",
+          "Description": "file description",
+          "Value": "<file>",
+          "NormalizedName": "File",
+          "NormalizedParameterName": "file",
+          "Type": "object"
+        },
+        "Name": "update",
+        "NormalizedName": "Update",
+        "Description": "update description"
+      },
+      {
+        "SubCommands": [],
+        "Options": [
+          {
+            "Value": "--kf",
+            "Name": "kf",
+            "Alias": "-k",
+            "Description": "--kf description",
+            "Required": false,
+            "Argument": {
+              "Name": "kv",
+              "Description": "kv description",
+              "Value": "<kv>",
+              "NormalizedName": "Kv",
+              "NormalizedParameterName": "kv",
+              "Type": "object"
+            },
+            "NormalizedValue": "Kf",
+            "ArgumentName": "kf"
+          }
+        ],
+        "ArgumentInfo": {
+          "Name": "file",
+          "Description": "file description",
+          "Value": "<file>",
+          "NormalizedName": "File",
+          "NormalizedParameterName": "file",
+          "Type": "object"
+        },
+        "Name": "delete",
+        "NormalizedName": "Delete",
+        "Description": "delete description"
+      }
+    ],
+    "Options": [],
+    "ArgumentInfo": null,
+    "Name": "tool",
+    "NormalizedName": "Tool",
+    "Description": "tool description"
+  }
 }

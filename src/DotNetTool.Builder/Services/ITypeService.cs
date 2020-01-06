@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Services
 {
     internal interface ITypeService
     {
-        string GetFullqualifiedName(string projectName, IFileInfo fileInfo);
+        string GetFullQualifiedName(string projectName, IFileInfo fileInfo);
     }
 }

@@ -62,8 +62,8 @@ namespace DotNetTool.Builder.Builder.FileStructure
             var fileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
             fileInfo.WriteAllText(command);
 
-            // var interfaceToRegister = _typeService.GetFullqualifiedName(projectName, commandServiceInterface);
-            var implementationToRegister = _typeService.GetFullqualifiedName(projectName, fileInfo);
+            // var interfaceToRegister = _typeService.GetFullQualifiedName(projectName, commandServiceInterface);
+            var implementationToRegister = _typeService.GetFullQualifiedName(projectName, fileInfo);
             commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.NormalizedName}SubCommandBuilder", implementationToRegister));
         }
     }

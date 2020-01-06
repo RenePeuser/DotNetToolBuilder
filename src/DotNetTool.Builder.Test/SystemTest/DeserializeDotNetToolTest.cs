@@ -1,13 +1,12 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.SystemTest
 {
     // ToDo: fix soon: Some problems at build pipeline on linux.
-    //[Ignore]
+    [Ignore]
     [TestClass]
     public class DeserializeDotNetToolTest
     {
@@ -22,12 +21,6 @@ namespace DotNetTool.Builder.Test.SystemTest
             _serializedDotNetTool = new FileInfo(Path.Combine(Environment.CurrentDirectory, "test.json"));
             _createdDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "my.test"));
             _toolSerializeResult = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "saved-tools"));
-
-            //var resourceNames = GetType().Assembly.GetManifestResourceNames();
-            //var templateResourceName = resourceNames.Single(resource => resource.Contains("test.json"));
-            //using var templateStream = GetType().Assembly.GetManifestResourceStream(templateResourceName);
-            //using var fileStream = new FileStream(_serializedDotNetTool.FullName, FileMode.Create, FileAccess.Write);
-            //templateStream.CopyTo(fileStream);
 
             if (_createdDirectory.Exists)
             {

@@ -49,8 +49,8 @@ namespace DotNetTool.Builder.Builder.FileStructure
             var optionsImplementationFilePath = _fileService.GetFileInfo(Path.Combine(optionFolder.FullName, $"{subCommand.NormalizedName}OptionsBuilder.cs"));
             File.WriteAllText(optionsImplementationFilePath.FullName, optionsImplementationSyntaxTree);
 
-            var interfaceToRegister = _typeService.GetFullqualifiedName(projectName, optionsInterfaceFilePath);
-            var implementationToRegister = _typeService.GetFullqualifiedName(projectName, optionsImplementationFilePath);
+            var interfaceToRegister = _typeService.GetFullQualifiedName(projectName, optionsInterfaceFilePath);
+            var implementationToRegister = _typeService.GetFullQualifiedName(projectName, optionsImplementationFilePath);
 
             commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceToRegister, implementationToRegister));
 
