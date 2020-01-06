@@ -6,16 +6,17 @@ namespace DotNetTool.Builder.Models
     [DebuggerDisplay("{" + nameof(Value) + "}")]
     internal class InfoBase
     {
-        public InfoBase(string value, string name)
+        internal InfoBase(string value, string name)
         {
             Value = value;
             Name = name;
+            NormalizedName = Name.FirstCharToUpper();
         }
 
-        public string Value { get; set; }
+        internal string Value { get; }
 
-        public string Name { get; set; }
+        internal string Name { get; }
 
-        public string NormalizedName => Name.FirstCharToUpper();
+        internal string NormalizedName { get; }
     }
 }

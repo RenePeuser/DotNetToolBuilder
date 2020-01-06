@@ -8,14 +8,13 @@ namespace DotNetTool.Builder.Test.Tokenizer
 {
     public abstract class TokenizerTestBase
     {
-        internal IExpressionTokenizer ExpressionTokenizer { get; private set; }
         internal ExpressionInfo ExpressionInfo { get; private set; }
 
         [TestInitialize]
         public void Init()
         {
-            ExpressionTokenizer = new ExpressionTokenizer(GetTokenizer().ToList());
-            ExpressionInfo = ExpressionTokenizer.Tokenize(GetExpression());
+            var tokenizer = new tokenizer(GetTokenizer().ToList());
+            ExpressionInfo = tokenizer.Tokenize(GetExpression());
         }
 
         protected abstract string GetExpression();

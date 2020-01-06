@@ -25,8 +25,6 @@ namespace DotNetTool.Builder.Parser.Argument
             var end = argumentValue.IndexOf(">", StringComparison.Ordinal);
             var name = argumentValue[start..end];
 
-            var normalizedArgumentName = name.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
-
             var typeInfo = "object";
             if (argumentValue.Contains("["))
             {
@@ -38,7 +36,7 @@ namespace DotNetTool.Builder.Parser.Argument
             _consoleService.WriteInput($"Please enter a description for your argument: '{argumentValue}'");
             var description = _consoleService.ReadLine();
 
-            var argument = new ArgumentInfo(name, description, argumentValue, normalizedArgumentName, typeInfo);
+            var argument = new ArgumentInfo(name, description, argumentValue, typeInfo);
 
             return argument;
         }

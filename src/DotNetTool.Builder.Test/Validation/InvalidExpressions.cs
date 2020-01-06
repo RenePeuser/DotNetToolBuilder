@@ -24,7 +24,7 @@ namespace DotNetTool.Builder.Test.Validation
         }
 
 
-        public IEnumerable<ExpressionWithExpectedResult> GetAll()
+        private IEnumerable<ExpressionWithExpectedResult> GetAll()
         {
             yield return new ExpressionWithExpectedResult("§", "§ tool");
             yield return new ExpressionWithExpectedResult("%", "% tool");

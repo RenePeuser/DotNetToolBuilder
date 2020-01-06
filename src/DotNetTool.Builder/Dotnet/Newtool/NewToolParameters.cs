@@ -21,6 +21,6 @@ namespace DotNetTool.Builder.Dotnet.Newtool
 
         internal bool UseVisualStudio { get; }
 
-        public bool UseRider { get; set; }
+        internal bool UseRider { get; }
     }
 }

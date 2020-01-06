@@ -4,6 +4,7 @@ using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.Linq;
 using System.Threading.Tasks;
+using Argument.Check;
 using DotNetTool.Builder.Dotnet;
 using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.Services.DotNet;
@@ -14,20 +15,22 @@ namespace DotNetTool.Builder.App
 {
     internal class App
     {
+        private readonly IServiceProvider _serviceProvider;
+
         public App(IServiceProvider serviceProvider)
         {
-            ServiceProvider = serviceProvider;
+            _serviceProvider = serviceProvider;
         }
-
-        public IServiceProvider ServiceProvider { get; }
 
         public Task<int> RunAsync(string[] args)
         {
-            var rootCommand = ServiceProvider.GetService<IDotnetCommandBuilder>().Build();
-            var errorHandler = ServiceProvider.GetService<IErrorHandler>();
-            var dotNetCliArgumentFixer = ServiceProvider.GetService<IDotNetCliArgumentFixer>();
+            Throw.IfNull(() => args);
 
-            var directoryService = ServiceProvider.GetService<IDirectoryService>();
+            var rootCommand = _serviceProvider.GetService<IDotnetCommandBuilder>().Build();
+            var errorHandler = _serviceProvider.GetService<IErrorHandler>();
+            var dotNetCliArgumentFixer = _serviceProvider.GetService<IDotNetCliArgumentFixer>();
+
+            var directoryService = _serviceProvider.GetService<IDirectoryService>();
             var currentDirectory = directoryService.GetDirectoryInfo(Environment.CurrentDirectory);
             directoryService.SetCurrentDirectoryInfo(currentDirectory);
 

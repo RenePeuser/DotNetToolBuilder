@@ -20,7 +20,7 @@ namespace DotNetTool.Builder.Test.Validation
             Assert.IsFalse(invalidExpressions.Any(), AssertHelper.AssertHelper.ToErrorMessage(invalidExpressions, "Following expressions was invalid, which should be valid:"));
         }
 
-        public IEnumerable<ExpressionWithExpectedResult> GetAll()
+        private IEnumerable<ExpressionWithExpectedResult> GetAll()
         {
             // New feature multiple whitespaces will be optimized away
             yield return new ExpressionWithExpectedResult("dotnet", " dotnet build");

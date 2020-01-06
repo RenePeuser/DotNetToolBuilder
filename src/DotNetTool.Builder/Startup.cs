@@ -77,7 +77,7 @@ namespace DotNetTool.Builder
 
         private void RegisterTokenizer(IServiceCollection services)
         {
-            services.AddSingleton<IExpressionTokenizer, ExpressionTokenizer>();
+            services.AddSingleton<IExpressionTokenizer, tokenizer>();
             services.AddSingleton<ITokenizer, ArgumentTokenizer>();
             services.AddSingleton<ITokenizer, OptionTokenizer>();
             services.AddSingleton<ITokenizer, CommandTokenizer>();
@@ -136,7 +136,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<ISpecificIDE, JetBrainsRider>();
         }
 
-        internal void RegisterDotNetToolInfoCollector(IServiceCollection services)
+        private void RegisterDotNetToolInfoCollector(IServiceCollection services)
         {
             services.AddSingleton<IDotNetToolInfoCollector, DotNetToolInfoCollector>();
             services.AddSingleton<ICollectProjectName, CollectProjectName>();
@@ -144,29 +144,29 @@ namespace DotNetTool.Builder
             services.AddSingleton<IParameterExpressionCollector, ParameterExpressionCollector>();
         }
 
-        internal void RegisterArgumentParser(IServiceCollection services)
+        private void RegisterArgumentParser(IServiceCollection services)
         {
             services.AddSingleton<IArgumentParser, ArgumentParser>();
         }
 
-        internal void RegisterOptionsParser(IServiceCollection services)
+        private void RegisterOptionsParser(IServiceCollection services)
         {
             services.AddSingleton<IOptionParser, OptionParser>();
         }
 
-        internal void RegisterParameterParser(IServiceCollection services)
+        private void RegisterParameterParser(IServiceCollection services)
         {
             services.AddSingleton<ICommandParser, CommandParser>();
             services.AddSingleton<IParameterExpressionParser, ParameterExpressionParser>();
         }
 
-        internal void RegisterArgumentBuilder(IServiceCollection services)
+        private void RegisterArgumentBuilder(IServiceCollection services)
         {
             services.AddSingleton<IArgumentBuilder, ArgumentBuilder>();
             services.AddSingleton<IArgumentInterfaceBuilder, ArgumentInterfaceBuilder>();
         }
 
-        internal void RegisterOptionsBuilder(IServiceCollection services)
+        private void RegisterOptionsBuilder(IServiceCollection services)
         {
             services.AddSingleton<IOptionInterfaceBuilder, OptionInterfaceBuilder>();
             services.AddSingleton<IOptionImplementationBuilder, OptionImplementationBuilder>();
@@ -176,7 +176,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<INewOptionExpressionService, NewOptionExpressionService>();
         }
 
-        internal void RegisterParameterClassBuilder(IServiceCollection services)
+        private void RegisterParameterClassBuilder(IServiceCollection services)
         {
             services.AddSingleton<IParameterClassBuilder, ParameterClassBuilder>();
             services.AddSingleton<IParameterSpecificClassBuilder, ParameterWithoutArgsOrOptionsClassBuilder>();
@@ -184,7 +184,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IConstructorArgumentBuilder, ConstructorArgumentBuilder>();
         }
 
-        internal void RegisterCommandBuilders(IServiceCollection services)
+        private void RegisterCommandBuilders(IServiceCollection services)
         {
             services.AddSingleton<ICommandBuilderForSubCommands, CommandBuilderForSubCommands>();
             services.AddSingleton<ICommandBuilderSimple, CommandBuilderSimple>();

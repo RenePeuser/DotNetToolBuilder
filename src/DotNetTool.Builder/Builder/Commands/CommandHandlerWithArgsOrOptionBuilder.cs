@@ -32,7 +32,7 @@ namespace DotNetTool.Builder.Builder.Commands
             return parameterInfo.Argument.IsNotNull() || parameterInfo.Options.Any();
         }
 
-        internal IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
+        private IEnumerable<CtorArgument> BuildCtorArguments(CommandInfo parameterInfo)
         {
             Throw.IfNull(() => parameterInfo);
 
