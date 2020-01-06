@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Argument.Check;
@@ -23,7 +24,8 @@ namespace DotNetTool.Builder.Services.DotNet
 
         public Task RunAsync(IFileInfo solutionFile, Models.DotNetTool dotNetTool)
         {
-            var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.exe", SearchOption.AllDirectories).FirstOrDefault();
+            var fileExtension = Environment.OSVersion.VersionString.Contains("windows") ? "exe" : "dll";
+            var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.{fileExtension}", SearchOption.AllDirectories).FirstOrDefault();
 
             _consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
 
