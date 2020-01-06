@@ -41,6 +41,11 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield return "Expression must not be null or empty";
             }
 
+            if (firstCommand.Value.NotEqualsTo(dotNetToolName))
+            {
+                yield return $"Expression must start with your root command: '{dotNetToolName}'";
+            }
+
             var result = _toolNameValidator.IsValid(firstCommand.Value);
             if (result.IsValid.IsFalse())
             {
