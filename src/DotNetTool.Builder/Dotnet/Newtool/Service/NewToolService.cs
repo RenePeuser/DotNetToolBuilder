@@ -1,5 +1,3 @@
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using DotNetTool.Builder.Builder.FileStructure;
 using DotNetTool.Builder.Builder.Startup;
@@ -84,13 +82,13 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
             _templateService.RenameAllIn(targetDirectory, dotNetTool);
 
             // detect folder of root command
-            var rootDirectory = targetDirectory.EnumerateDirectories(dotNetTool.ToolName, SearchOption.AllDirectories).Single();
+            var rootDirectory = _targetFolderService.GetToolFolder(dotNetTool, targetDirectory);
 
             // Create command structure
             _createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, _commandTypeCollector, dotNetTool.ProjectName, _nameSpaceCollector);
 
             // Find solution file
-            var solutionFile = targetDirectory.EnumerateFiles("*.sln", SearchOption.AllDirectories).Single();
+            var solutionFile = _targetFolderService.GetSolutionFile(dotNetTool, targetDirectory);
 
             // Add type registrations
             _startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, _commandTypeCollector, dotNetTool.ParameterInfo, _nameSpaceCollector);

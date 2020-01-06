@@ -8,10 +8,12 @@ namespace DotNetTool.Builder.Services.IO
     internal class TargetFolderService : ITargetFolderService
     {
         private readonly IDirectoryService _directoryService;
+        private readonly IFileService _fileService;
 
-        public TargetFolderService(IDirectoryService directoryService)
+        public TargetFolderService(IDirectoryService directoryService, IFileService fileService)
         {
             _directoryService = directoryService;
+            _fileService = fileService;
         }
 
         public IDirectoryInfo CreateTargetDirectory(Models.DotNetTool dotNetTool)
@@ -26,6 +28,38 @@ namespace DotNetTool.Builder.Services.IO
 
             targetDirectory.Create();
             return targetDirectory;
+        }
+
+        public IDirectoryInfo GetToolFolder(Models.DotNetTool dotNetTool, IDirectoryInfo targetDirectoryInfo)
+        {
+            if (targetDirectoryInfo.NotExists)
+            {
+                throw new DotNetToolBuilderException($"The directory: '{targetDirectoryInfo.FullName}' does not exists.");
+            }
+
+            var toolFolder = _directoryService.GetDirectoryInfo(Path.Combine(targetDirectoryInfo.FullName, dotNetTool.ToolName));
+            if (toolFolder.NotExists)
+            {
+                throw new DotNetToolBuilderException($"The tool folder: '{toolFolder.FullName}' does not exists.");
+            }
+
+            return toolFolder;
+        }
+
+        public IFileInfo GetSolutionFile(Models.DotNetTool dotNetTool, IDirectoryInfo targetDirectoryInfo)
+        {
+            if (targetDirectoryInfo.NotExists)
+            {
+                throw new DotNetToolBuilderException($"The directory: '{targetDirectoryInfo.FullName}' does not exists.");
+            }
+
+            var solutionFile = _fileService.GetFileInfo(Path.Combine(targetDirectoryInfo.FullName, $"{dotNetTool.ProjectName}.sln"));
+            if (solutionFile.NotExists)
+            {
+                throw new DotNetToolBuilderException($"The solution file: '{solutionFile.FullName}' does not exists.");
+            }
+
+            return solutionFile;
         }
     }
 }
