@@ -5,8 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.SystemTest
 {
-    // ToDo: fix soon: Some problems at build pipeline on linux.
-    [Ignore]
     [TestClass]
     public class DeserializeDotNetToolTest
     {
@@ -28,8 +26,6 @@ namespace DotNetTool.Builder.Test.SystemTest
             }
         }
 
-        // Problem with deserializing zip to correct folder at linux pipeline
-        [Ignore]
         [TestMethod]
         public async Task Creating_Dot_Net_Tool_From_Serialized_JSon()
         {
