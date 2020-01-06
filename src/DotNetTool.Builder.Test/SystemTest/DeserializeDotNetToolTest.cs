@@ -27,7 +27,7 @@ namespace DotNetTool.Builder.Test.SystemTest
         }
 
         [TestMethod]
-        public async Task Creating_Dot_Net_Tool_From_Serialized_JSon()
+        public async Task Should_Create_A_DotNetTool_From_A_Json_File()
         {
             var result = await Program.Main(new[] { "--from-file", _serializedDotNetTool.FullName }).ConfigureAwait(false);
 
@@ -35,7 +35,7 @@ namespace DotNetTool.Builder.Test.SystemTest
         }
 
         [TestMethod]
-        public async Task Should_Create__A_DotNetTool_When_Used_Save_Tool_Option()
+        public async Task Should_Create_A_DotNetTool_When_Used_Save_Tool_Option()
         {
             await Program.Main(new[] { "--from-file", _serializedDotNetTool.FullName, "--save-to", _toolSerializeResult.FullName }).ConfigureAwait(false);
             var savedDotNetTool = new FileInfo(Path.Combine(_toolSerializeResult.FullName, "my.test.json"));
