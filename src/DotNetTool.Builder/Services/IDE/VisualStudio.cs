@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
 using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Services.Process;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE
@@ -65,7 +64,7 @@ namespace DotNetTool.Builder.Services.IDE
             }
 
             _consoleService.WriteInfo($"Start Visual Studio {lastVisualStudioVersion.NotExists} with: {solution.Name}");
-            return _processService.StartCliCommandAsync(latest.FullName, solution.FullName);
+            return _processService.StartAsync(latest.FullName, solution.FullName);
         }
     }
 }

@@ -10,6 +10,13 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     internal class CommandNameValidation : IExpressionContentValidator
     {
+        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
+
+        public CommandNameValidation(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
+        {
+            _primitiveTypeNameValidator = primitiveTypeNameValidator;
+        }
+
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
         {
             Throw.IfNullOrWhiteSpace(() => dotNetToolName);
@@ -32,7 +39,13 @@ namespace DotNetTool.Builder.Validation.Expression
 
                 if (char.IsLetter(command.First()).IsFalse())
                 {
-                    yield return $"Argument: {command} must begin with a letter";
+                    yield return $"Command: {command} must begin with a letter";
+                }
+
+                var validationResult = _primitiveTypeNameValidator.IsValid(command);
+                if (validationResult.IsValid.IsFalse())
+                {
+                    yield return $"The dotnet tool name: '{command}' must not be a name of a type";
                 }
             }
         }

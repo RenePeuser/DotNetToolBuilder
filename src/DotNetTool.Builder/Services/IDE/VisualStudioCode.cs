@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
 using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Services.Process;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE
@@ -38,7 +37,7 @@ namespace DotNetTool.Builder.Services.IDE
             if (codeInLocalAppData.Exists)
             {
                 _consoleService.WriteInfo($"Start Visual Studio Code: {solutionFileInfo.Directory.Parent.FullName}");
-                return _processService.StartCliCommandAsync(codeInLocalAppData.FullName, solutionFileInfo.Directory.Parent.FullName);
+                return _processService.StartAsync(codeInLocalAppData.FullName, solutionFileInfo.Directory.Parent.FullName);
             }
 
             // C:/Program Files/Microsoft VS Code/Code.exe
@@ -47,7 +46,7 @@ namespace DotNetTool.Builder.Services.IDE
             if (codeInProgramFolder.Exists)
             {
                 _consoleService.WriteInfo($"Start Visual Studio Code: {solutionFileInfo.Directory.Parent.FullName}");
-                return _processService.StartCliCommandAsync(codeInProgramFolder.FullName, solutionFileInfo.Directory.Parent.FullName);
+                return _processService.StartAsync(codeInProgramFolder.FullName, solutionFileInfo.Directory.Parent.FullName);
             }
 
             _consoleService.WriteError($"Could not detect an installation path of visual studio code. Looked in:{Environment.NewLine}- {codeInLocalAppData.FullName}{Environment.NewLine}- {codeInProgramFolder.FullName}");

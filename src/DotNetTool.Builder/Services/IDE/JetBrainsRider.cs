@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
 using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Services.Process;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE
@@ -57,7 +56,7 @@ namespace DotNetTool.Builder.Services.IDE
             }
 
             _consoleService.WriteInfo($"Start {riderDirectory.Name} with {solution.Name}");
-            return _processService.StartCliCommandAsync(riderExecutable.FullName, solution.FullName);
+            return _processService.StartAsync(riderExecutable.FullName, solution.FullName);
         }
     }
 }

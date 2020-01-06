@@ -12,7 +12,7 @@ namespace DotNetTool.Builder.Validation
 
         public PrimitiveTypeNameValidator()
         {
-            var invalidNames = new[] { "bool", "int" };
+            var invalidNames = new[] { "bool", "int", "long" };
             _strings = typeof(Convert).GetMethods().Where(m => m.Name.StartsWith("To")).Select(m => m.Name.Replace("To", string.Empty)).Distinct().Concat(invalidNames).ToList();
         }
 

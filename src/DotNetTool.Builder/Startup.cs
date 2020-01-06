@@ -19,7 +19,6 @@ using DotNetTool.Builder.Services.Collectors;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
 using DotNetTool.Builder.Services.IO;
-using DotNetTool.Builder.Services.Process;
 using DotNetTool.Builder.Services.Template;
 using DotNetTool.Builder.Tokenizer;
 using DotNetTool.Builder.Validation;
@@ -120,7 +119,6 @@ namespace DotNetTool.Builder
             services.AddSingleton<IParameterService, ParameterService>();
             services.AddSingleton<ICommandTypeCollector, CommandTypeCollector>();
             services.AddSingleton<ICreateCommandClasses, CreateCommandClasses>();
-            services.AddSingleton<IProcessBuilder, ProcessBuilder>();
             services.AddSingleton<IProcessService, ProcessService>();
             services.AddSingleton<INameSpaceCollector, NameSpaceCollector>();
             services.AddSingleton<IRenameFilesAndFolders, RenameFilesAndFolders>();

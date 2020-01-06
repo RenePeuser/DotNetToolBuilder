@@ -1,3 +1,5 @@
+using System;
+using System.CommandLine.Invocation;
 using System.Threading.Tasks;
 using DotNetTool.Builder.Builder.FileStructure;
 using DotNetTool.Builder.Builder.Startup;
@@ -8,7 +10,6 @@ using DotNetTool.Builder.Services.Collectors;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
 using DotNetTool.Builder.Services.IO;
-using DotNetTool.Builder.Services.Process;
 using DotNetTool.Builder.Services.Template;
 
 namespace DotNetTool.Builder.Dotnet.Newtool.Service
@@ -94,7 +95,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
             _startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, _commandTypeCollector, dotNetTool.ParameterInfo, _nameSpaceCollector);
 
             // Build your new generated tool
-            var dotnetBuildResult = await _processService.RunCliCommandAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
+            var dotnetBuildResult = await _processService.RunAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
             if (dotnetBuildResult.ExitCode != 0)
             {
                 // Opens all per option set IDE

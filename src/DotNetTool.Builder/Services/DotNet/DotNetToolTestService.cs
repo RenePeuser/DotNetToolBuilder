@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Argument.Check;
-using DotNetTool.Builder.Services.Process;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.DotNet
@@ -28,7 +27,7 @@ namespace DotNetTool.Builder.Services.DotNet
 
             var findExe = solutionFile.Directory.EnumerateFiles($"{dotNetTool.ProjectName}.dll", SearchOption.AllDirectories).FirstOrDefault();
             _consoleService.WriteInfo($"Test run of your: '{dotNetTool.ProjectName}' dotnet tool");
-            return _processService.RunCliCommandAsync("dotnet", $"{findExe.FullName} --help");
+            return _processService.RunAsync("dotnet", $"{findExe.FullName} --help");
         }
     }
 }
