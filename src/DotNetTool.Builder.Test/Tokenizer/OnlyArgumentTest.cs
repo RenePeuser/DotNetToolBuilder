@@ -1,9 +1,9 @@
-﻿namespace DotNetTool.Builder.Test.Tokenizer
-{
-    using System.Linq;
-    using DotNetTool.Builder.Tokenizer.Tokens;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using DotNetTool.Builder.Tokenizer.Tokens;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Tokenizer
+{
     [TestClass]
     public class OnlyArgumentTest : TokenizerTestBase
     {

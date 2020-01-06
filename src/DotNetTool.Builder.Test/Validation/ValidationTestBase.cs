@@ -1,13 +1,13 @@
-﻿namespace DotNetTool.Builder.Test.Validation
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using DotNetTool.Builder.Tokenizer;
-    using DotNetTool.Builder.Validation;
-    using DotNetTool.Builder.Validation.Expression;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using ToolNameValidator = DotNetTool.Builder.Validation.Expression.ToolNameValidator;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Tokenizer;
+using DotNetTool.Builder.Validation;
+using DotNetTool.Builder.Validation.Expression;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ToolNameValidator = DotNetTool.Builder.Validation.ToolNameValidator;
 
+namespace DotNetTool.Builder.Test.Validation
+{
     public abstract class ValidationTestBase
     {
         internal IExpressionValidator ExpressionValidator { get; private set; }
@@ -37,7 +37,7 @@
             yield return new MinimumCommandValidator();
             yield return new OnlyOneArgumentValidator();
             yield return new OptionValidator(primitiveTypeNameValidator);
-            yield return new ToolNameValidator(new DotNetTool.Builder.Validation.ToolNameValidator(new PrimitiveTypeNameValidator()));
+            yield return new DotNetTool.Builder.Validation.Expression.ToolNameValidator(new ToolNameValidator(new PrimitiveTypeNameValidator()));
             yield return new CommandNameValidation();
             yield return new UnknownTokenValidator();
             yield return new MultipleOptionValidator();

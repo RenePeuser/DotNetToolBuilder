@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Argument.Check;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
-    using Argument.Check;
-    using Models;
-
     internal class ExpressionValidator : IExpressionValidator
     {
         private readonly IEnumerable<IExpressionContentValidator> _expressionContentValidators;

@@ -1,12 +1,10 @@
-﻿namespace DotNetTool.Builder.Test.Parser.MultiExpressions
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.VisualBasic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Parser.MultiExpressions
+{
     [TestClass]
     public class ComplexMultipleExpressions : ParameterExpressionBaseClass
     {

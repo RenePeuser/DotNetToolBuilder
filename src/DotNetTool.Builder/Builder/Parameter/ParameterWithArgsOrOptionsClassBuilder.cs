@@ -9,8 +9,6 @@ namespace DotNetTool.Builder.Builder.Parameter
 {
     internal class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
     {
-        private readonly IConstructorArgumentBuilder _constructorArgumentBuilder;
-
         private const string Template =
             @"namespace $namespace$
 {
@@ -26,6 +24,7 @@ $properties$
 }";
 
         private const string CtorArgument = @"$type$ $argName$";
+        private readonly IConstructorArgumentBuilder _constructorArgumentBuilder;
 
         public ParameterWithArgsOrOptionsClassBuilder(IConstructorArgumentBuilder constructorArgumentBuilder)
         {
@@ -48,11 +47,11 @@ $properties$
             var propertyInitializer = BuildPropertyInitializerString(ctorArguments, properties);
 
             var newTemplate = Template.Replace("$ctor-arguments$", argumentString)
-                                      .Replace("$agrument-to-properties$", propertyInitializer)
-                                      .Replace("$properties$", propertyString)
-                                      .Replace("$projectName$", projectName)
-                                      .Replace("$namespace$", nameSpace)
-                                      .Replace("$command-name$", parameterInfo.NormalizedName);
+                .Replace("$agrument-to-properties$", propertyInitializer)
+                .Replace("$properties$", propertyString)
+                .Replace("$projectName$", projectName)
+                .Replace("$namespace$", nameSpace)
+                .Replace("$command-name$", parameterInfo.NormalizedName);
 
             return newTemplate;
         }

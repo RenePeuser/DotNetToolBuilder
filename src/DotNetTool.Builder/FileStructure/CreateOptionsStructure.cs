@@ -12,8 +12,8 @@ namespace DotNetTool.Builder.FileStructure
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
         private readonly IOptionImplementationBuilder _optionImplementationBuilder;
-        private readonly ITypeService _typeService;
         private readonly IOptionInterfaceBuilder _optionInterfaceBuilder;
+        private readonly ITypeService _typeService;
 
         public CreateOptionsStructure(
             IOptionInterfaceBuilder optionInterfaceBuilder,

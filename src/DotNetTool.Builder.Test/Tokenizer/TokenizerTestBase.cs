@@ -1,11 +1,11 @@
-﻿namespace DotNetTool.Builder.Test.Tokenizer
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using DotNetTool.Builder.Tokenizer;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Tokenizer;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Tokenizer
+{
     public abstract class TokenizerTestBase
     {
         internal IExpressionTokenizer ExpressionTokenizer { get; private set; }

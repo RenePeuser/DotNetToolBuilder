@@ -1,10 +1,8 @@
 ﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.Tokenizer
 {
-    using Extensions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     [TestClass]
     public class ExprssionEmptyTest : TokenizerTestBase
     {

@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using DotNetTool.Builder.Test.AssertHelper;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test
 {
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
-    using AssertHelper;
-    using Extensions;
-    using Microsoft.CodeAnalysis.CSharp;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
     [TestClass]
     public class ClassesToRefactorTest
     {
@@ -26,19 +24,20 @@ namespace DotNetTool.Builder.Test
             var argumentCheckDirectory = FindFolderWithSources(currentDirectory, "DotNetTool.Builder");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             _csharpFileInfos = allCSharpFiles.Select(csharpFile =>
-            {
-                var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(csharpFile.FullName));
-                return new CSharpFileInfo(csharpFile, syntaxTree);
-            }).ToList();
+                {
+                    var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(csharpFile.FullName));
+                    return new CSharpFileInfo(csharpFile, syntaxTree);
+                })
+                .ToList();
         }
 
         [TestMethod]
         public void All_Class_Should_Have_Maximum_100_Lines_Of_Code()
-        {   
+        {
             var errors = _csharpFileInfos.Where(csharp => csharp.SyntaxTree.GetText().Lines.Count > 100)
-                                         .Where(csharp => codeFilesOnWhiteList.All(toIgnore => csharp.FileInfo.Name != toIgnore))
-                                         .Select(csharp => $"{csharp.FileInfo.FullName} - Line of codes: {csharp.SyntaxTree.GetText().Lines.Count}")
-                                         .ToList();
+                .Where(csharp => codeFilesOnWhiteList.All(toIgnore => csharp.FileInfo.Name != toIgnore))
+                .Select(csharp => $"{csharp.FileInfo.FullName} - Line of codes: {csharp.SyntaxTree.GetText().Lines.Count}")
+                .ToList();
 
             Assert.IsFalse(errors.Any(), errors.ToErrorMessage("Following cshapr files should be refactored:"));
         }

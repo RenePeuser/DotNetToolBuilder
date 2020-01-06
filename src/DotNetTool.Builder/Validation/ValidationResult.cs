@@ -1,7 +1,7 @@
-﻿namespace DotNetTool.Builder.Validation
-{
-    using System.Diagnostics;
+﻿using System.Diagnostics;
 
+namespace DotNetTool.Builder.Validation
+{
     [DebuggerDisplay("IsValid: {IsValid}")]
     internal class ValidationResult
     {
@@ -12,6 +12,7 @@
         }
 
         public bool IsValid { get; }
+
         public string Errors { get; }
     }
 }

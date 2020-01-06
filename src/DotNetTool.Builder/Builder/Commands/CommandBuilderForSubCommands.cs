@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Builder.Commands
     internal class CommandBuilderForSubCommands : ICommandBuilderForSubCommands
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.Linq;
     using System.Collections.Generic;    
@@ -48,12 +48,12 @@ namespace DotNetTool.Builder.Builder.Commands
 
             var commandHandler = _commandHandlerBuilder.Build(parameterInfo);
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
-                                      .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
-                                      .Replace("$namespace$", nameSpace)
-                                      .Replace("$command-description$", parameterInfo.Description)
-                                      .Replace("$command-handler$", commandHandler)
-                                      .Replace("$parent-command-name$", parent.NormalizedName)
-                                      .Replace("$project-name$", project);
+                .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
+                .Replace("$namespace$", nameSpace)
+                .Replace("$command-description$", parameterInfo.Description)
+                .Replace("$command-handler$", commandHandler)
+                .Replace("$parent-command-name$", parent.NormalizedName)
+                .Replace("$project-name$", project);
 
             return newTemplate;
         }

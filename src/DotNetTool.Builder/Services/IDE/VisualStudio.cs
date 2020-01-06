@@ -12,8 +12,8 @@ namespace DotNetTool.Builder.Services.IDE
 {
     internal class VisualStudio : ISpecificIDE
     {
-        private readonly IDirectoryService _directoryService;
         private readonly IConsoleService _consoleService;
+        private readonly IDirectoryService _directoryService;
         private readonly IProcessService _processService;
 
         public VisualStudio(IProcessService processService, IDirectoryService directoryService, IConsoleService consoleService)

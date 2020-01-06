@@ -1,13 +1,11 @@
-﻿using Argument.Check;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Argument.Check;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Extensions;
-    
-    using Models;
-
     internal class CommandHandlerNoArgsAndNoOptionBuilder : ICommandHandlerStringBuilder
     {
         private const string Template = "CommandHandler.Create(() => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";

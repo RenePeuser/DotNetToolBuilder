@@ -1,8 +1,9 @@
-﻿namespace DotNetTool.Builder.Test.Tokenizer
-{
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using DotNetTool.Builder.Tokenizer.Tokens;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Tokenizer
+{
     [TestClass]
     public class UnknownTokenTest : TokenizerTestBase
     {
@@ -27,7 +28,7 @@
         [TestMethod]
         public void Should_Return_Command_Token()
         {
-            var commandToken = ExpressionInfo.Tokens.OfType<DotNetTool.Builder.Tokenizer.Tokens.UnknownToken>();
+            var commandToken = ExpressionInfo.Tokens.OfType<UnknownToken>();
             Assert.IsNotNull(commandToken);
         }
 

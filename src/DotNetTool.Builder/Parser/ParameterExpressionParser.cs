@@ -14,8 +14,8 @@ namespace DotNetTool.Builder.Parser
 {
     internal class ParameterExpressionParser : IParameterExpressionParser
     {
-        private readonly ICommandParser _commandParser;
         private readonly IArgumentParser _argumentParser;
+        private readonly ICommandParser _commandParser;
         private readonly IOptionParser _optionParser;
         private readonly IParameterService _parameterService;
 

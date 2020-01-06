@@ -4,8 +4,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Startup
 {
-    
-
     internal class TypeRegistrationBuilder : ITypeRegistrationBuilder
     {
         public IEnumerable<string> Build(IEnumerable<TypeToRegister> registrations)

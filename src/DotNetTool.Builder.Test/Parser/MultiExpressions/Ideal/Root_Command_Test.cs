@@ -1,10 +1,10 @@
-﻿namespace DotNetTool.Builder.Test.Parser.MultiExpressions.Ideal
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Parser.MultiExpressions.Ideal
+{
     [TestClass]
     public class Root_Command_Test : ParameterExpressionBaseClass
     {

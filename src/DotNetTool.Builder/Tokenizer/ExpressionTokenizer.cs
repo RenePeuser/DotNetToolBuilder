@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Tokenizer
 {
-    using System.Linq;
-    using Extensions;
-    using Models;
-    using Tokens;
-
     internal class ExpressionTokenizer : IExpressionTokenizer
     {
         private readonly IEnumerable<ITokenizer> _tokenizers;
@@ -35,6 +34,7 @@ namespace DotNetTool.Builder.Tokenizer
                     {
                         yield return tokenizer.GetToken(token);
                     }
+
                     continue;
                 }
 

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Services.DotNet
 {

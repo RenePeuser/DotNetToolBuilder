@@ -1,19 +1,18 @@
 ﻿using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Parser;
+using DotNetTool.Builder.Tokenizer;
 using DotNetTool.Builder.Validation;
 using DotNetTool.Builder.Validation.Expression;
 
 namespace DotNetTool.Builder.Services
 {
-    using Tokenizer;
-
     internal class ParameterExpressionCollector : IParameterExpressionCollector
     {
         private readonly IConsoleService _consoleService;
-        private readonly IParameterExpressionParser _parameterExpressionParser;
-        private readonly IExpressionValidator _expressionValidator;
         private readonly IExpressionTokenizer _expressionTokenizer;
+        private readonly IExpressionValidator _expressionValidator;
+        private readonly IParameterExpressionParser _parameterExpressionParser;
 
         public ParameterExpressionCollector(IConsoleService consoleService, IParameterExpressionParser parameterExpressionParser, IExpressionValidator expressionValidator, IExpressionTokenizer expressionTokenizer)
         {

@@ -1,7 +1,7 @@
-﻿namespace DotNetTool.Builder.Tokenizer
-{
-    using Tokens;
+﻿using DotNetTool.Builder.Tokenizer.Tokens;
 
+namespace DotNetTool.Builder.Tokenizer
+{
     internal interface ITokenizer
     {
         Token GetToken(string value);

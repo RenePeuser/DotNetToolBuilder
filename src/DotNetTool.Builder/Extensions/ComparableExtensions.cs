@@ -1,7 +1,6 @@
 ﻿using System;
 using Argument.Check;
 
-
 namespace DotNetTool.Builder.Extensions
 {
     internal static class ComparableExtensions

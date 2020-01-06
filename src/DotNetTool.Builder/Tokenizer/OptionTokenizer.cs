@@ -1,7 +1,7 @@
-﻿namespace DotNetTool.Builder.Tokenizer
-{
-    using Tokens;
+﻿using DotNetTool.Builder.Tokenizer.Tokens;
 
+namespace DotNetTool.Builder.Tokenizer
+{
     internal class OptionTokenizer : ITokenizer
     {
         public Token GetToken(string value)

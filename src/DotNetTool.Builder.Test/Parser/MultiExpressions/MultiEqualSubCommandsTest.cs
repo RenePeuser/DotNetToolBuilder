@@ -1,11 +1,10 @@
-﻿namespace DotNetTool.Builder.Test.Parser.MultiExpressions
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace DotNetTool.Builder.Test.Parser.MultiExpressions
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
-
-
     [TestClass]
     public class MultiEqualSubCommandsTest : ParameterExpressionBaseClass
     {

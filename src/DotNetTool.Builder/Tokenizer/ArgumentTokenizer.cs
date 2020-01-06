@@ -1,8 +1,8 @@
-﻿namespace DotNetTool.Builder.Tokenizer
-{
-    using Extensions;
-    using Tokens;
+﻿using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
+namespace DotNetTool.Builder.Tokenizer
+{
     internal class ArgumentTokenizer : ITokenizer
     {
         public Token GetToken(string value)

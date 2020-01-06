@@ -6,12 +6,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    
-
     internal class OptionImplementationBuilder : IOptionImplementationBuilder
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.CommandLine; 

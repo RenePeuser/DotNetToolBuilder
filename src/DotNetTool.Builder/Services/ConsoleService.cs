@@ -1,5 +1,4 @@
 ﻿using System;
-using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Services
 {

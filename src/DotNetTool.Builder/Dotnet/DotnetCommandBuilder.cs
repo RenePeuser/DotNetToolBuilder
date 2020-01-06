@@ -15,11 +15,7 @@ namespace DotNetTool.Builder.Dotnet
 
         public RootCommand Build()
         {
-            var rootCommand = new RootCommand
-            {
-                Name = "dotnet",
-                Description = @"Run 'dotnet [command] --help' in order to get specific information.",
-            };
+            var rootCommand = new RootCommand { Name = "dotnet", Description = @"Run 'dotnet [command] --help' in order to get specific information." };
 
             _dotnetSubCommandBuilders.ToList().ForEach(builder => rootCommand.AddCommand(builder.Build()));
             return rootCommand;

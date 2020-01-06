@@ -1,10 +1,10 @@
-﻿namespace DotNetTool.Builder.Test.Parser.SingleExpression
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Parser.SingleExpression
+{
     [TestClass]
     public class Sub_Command_1_Argument_Test : ParameterExpressionBaseClass
     {

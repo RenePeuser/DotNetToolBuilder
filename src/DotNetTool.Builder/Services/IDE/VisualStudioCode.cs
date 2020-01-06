@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
@@ -12,8 +11,8 @@ namespace DotNetTool.Builder.Services.IDE
 {
     internal class VisualStudioCode : ISpecificIDE
     {
-        private readonly IFileService _fileService;
         private readonly IConsoleService _consoleService;
+        private readonly IFileService _fileService;
         private readonly IProcessService _processService;
 
         public VisualStudioCode(IProcessService processService, IFileService fileService, IConsoleService consoleService)

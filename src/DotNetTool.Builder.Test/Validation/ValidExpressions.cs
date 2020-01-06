@@ -1,11 +1,9 @@
-﻿namespace DotNetTool.Builder.Test.Validation
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Extensions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Validation
+{
     [TestClass]
     public class ValidExpressions : ValidationTestBase
     {
@@ -14,10 +12,10 @@
         {
             var validExpressions = GetAll().ToList();
             var invalidExpressions = from expression in validExpressions
-                                     let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
-                                     let isValid = !ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid
-                                     where isValid
-                                     select expression.Expression;
+                let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
+                let isValid = !ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid
+                where isValid
+                select expression.Expression;
 
             Assert.IsFalse(invalidExpressions.Any(), AssertHelper.AssertHelper.ToErrorMessage(invalidExpressions, "Following expressions was invalid, which should be valid:"));
         }

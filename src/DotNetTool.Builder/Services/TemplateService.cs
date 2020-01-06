@@ -2,8 +2,6 @@
 
 namespace DotNetTool.Builder.Services
 {
-    using Models;
-
     internal class TemplateService : ITemplateService
     {
         private readonly IRenameFilesAndFolders _renameFilesAndFolders;
@@ -13,7 +11,7 @@ namespace DotNetTool.Builder.Services
             _renameFilesAndFolders = renameFilesAndFolders;
         }
 
-        public void RenameAllIn(IDirectoryInfo targetDirectory, DotNetTool dotNetTool)
+        public void RenameAllIn(IDirectoryInfo targetDirectory, Models.DotNetTool dotNetTool)
         {
             // Solution and projects
             _renameFilesAndFolders.Rename(targetDirectory, "rps.template", dotNetTool.ProjectName);

@@ -3,8 +3,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    
-
     internal class CommandBuilderWithArgument : ICommandBuilderWithArgument
     {
         private const string Template =

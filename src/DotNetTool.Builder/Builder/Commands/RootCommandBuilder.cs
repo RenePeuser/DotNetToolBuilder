@@ -3,13 +3,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    using Extensions;
-    
-
     internal class RootCommandBuilder : IRootCommandBuilder
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.Linq;
     using System.Collections.Generic;    

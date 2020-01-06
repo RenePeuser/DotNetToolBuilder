@@ -1,7 +1,7 @@
-﻿namespace DotNetTool.Builder.Builder.Parameter
-{
-    using Models;
+﻿using DotNetTool.Builder.Models;
 
+namespace DotNetTool.Builder.Builder.Parameter
+{
     internal interface IParameterSpecificClassBuilder
     {
         string Build(string projectName, CommandInfo parameterInfo, string nameSpace);

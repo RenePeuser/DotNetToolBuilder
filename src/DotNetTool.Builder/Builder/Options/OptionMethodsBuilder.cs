@@ -4,12 +4,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    
-
     internal class OptionMethodsBuilder : IOptionMethodsBuilder
     {
         private const string OptionMethodTemplate =
-@"        private Option Build$option-name$Option()
+            @"        private Option Build$option-name$Option()
         {
             return new $option$;
         }";

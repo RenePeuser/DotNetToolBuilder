@@ -1,12 +1,12 @@
-﻿using DotNetTool.Builder.Models;
-using Argument.Check;
+﻿using Argument.Check;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Argument
 {
     internal class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.CommandLine;
 

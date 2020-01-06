@@ -1,14 +1,13 @@
-﻿using Argument.Check;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Argument.Check;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Parser.Commands
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using Extensions;
-    
-    using Models;
-    using Services;
-    using Tokenizer.Tokens;
     internal class CommandParser : ICommandParser
     {
         private readonly IConsoleService _consoleService;
@@ -67,7 +66,6 @@ namespace DotNetTool.Builder.Parser.Commands
 
             var result = new CommandInfo(alreadyExistingCommand.Value, alreadyExistingCommand.Name, alreadyExistingCommand.Description, currentArgument, currentOptions, subCommands);
             return result;
-
         }
     }
 }

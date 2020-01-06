@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Argument.Check;
 using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation
 {
-    using Argument.Check;
-
     internal class ToolNameValidator : IToolNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;

@@ -1,9 +1,9 @@
-﻿namespace DotNetTool.Builder.App
-{
-    using System;
-    using Argument.Check;
-    using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Argument.Check;
+using Microsoft.Extensions.DependencyInjection;
 
+namespace DotNetTool.Builder.App
+{
     public abstract class ServiceProviderBase
     {
         private readonly IServiceProvider _serviceProvider;

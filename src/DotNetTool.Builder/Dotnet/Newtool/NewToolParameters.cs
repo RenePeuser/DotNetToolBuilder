@@ -1,8 +1,10 @@
+using System.IO;
+
 namespace DotNetTool.Builder.Dotnet.Newtool
 {
     internal class NewToolParameters
     {
-        internal NewToolParameters(System.IO.FileInfo fromFile, System.IO.DirectoryInfo saveToolToTo, bool useCode, bool useVisualStudio, bool useRider)
+        internal NewToolParameters(FileInfo fromFile, DirectoryInfo saveToolToTo, bool useCode, bool useVisualStudio, bool useRider)
         {
             FromFile = fromFile;
             UseVsCode = useCode;
@@ -11,9 +13,9 @@ namespace DotNetTool.Builder.Dotnet.Newtool
             SaveToolTo = saveToolToTo;
         }
 
-        internal System.IO.FileInfo FromFile { get; }
+        internal FileInfo FromFile { get; }
 
-        internal System.IO.DirectoryInfo SaveToolTo { get; }
+        internal DirectoryInfo SaveToolTo { get; }
 
         internal bool UseVsCode { get; }
 

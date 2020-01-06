@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using Argument.Check;
 
-
 namespace DotNetTool.Builder.Extensions
 {
     public static class KeyValuePairExtensions

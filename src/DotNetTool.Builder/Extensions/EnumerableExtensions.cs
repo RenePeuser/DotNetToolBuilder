@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using System.Text;
 using Argument.Check;
 
-
 namespace DotNetTool.Builder.Extensions
 {
     internal static class EnumerableExtensions

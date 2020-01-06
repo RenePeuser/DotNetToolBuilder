@@ -1,13 +1,13 @@
-﻿namespace DotNetTool.Builder.Validation.Expression
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Argument.Check;
-    using Extensions;
-    using Models;
-    using Tokenizer.Tokens;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Argument.Check;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
+namespace DotNetTool.Builder.Validation.Expression
+{
     internal class UnknownTokenValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
@@ -31,6 +31,7 @@
             {
                 yield return "Unknown tokens detected:";
             }
+
             foreach (var commandToken in unknownTokens)
             {
                 yield return commandToken.Value;

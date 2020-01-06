@@ -4,7 +4,7 @@ using DotNetTool.Builder.Validation;
 
 namespace DotNetTool.Builder.InfoCollectors
 {
-    internal  abstract class CollectInfoStep : ICollectInfo
+    internal abstract class CollectInfoStep : ICollectInfo
     {
         private readonly IConsoleService _consoleService;
         private readonly IInputValidator _inputValidator;

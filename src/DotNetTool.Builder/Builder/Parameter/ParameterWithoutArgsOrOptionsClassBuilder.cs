@@ -1,15 +1,13 @@
 ﻿using Argument.Check;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Parameter
 {
-    using Extensions;
-    
-    using Models;
-
     internal class ParameterWithoutArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     internal class $command-name$Parameters
     {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 
-
 namespace DotNetTool.Builder.Extensions
 {
     public static class StringExtensions

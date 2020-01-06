@@ -12,17 +12,18 @@ using DotNetTool.Builder.FileStructure;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
+using DotNetTool.Builder.Parser.Commands;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
-using DotNetTool.Builder.Validation;
-using DotNetTool.Builder.Validation.Expression;
-using Microsoft.Extensions.DependencyInjection;
-using DotNetTool.Builder.Parser.Commands;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
 using DotNetTool.Builder.Services.Process;
 using DotNetTool.Builder.Tokenizer;
+using DotNetTool.Builder.Validation;
+using DotNetTool.Builder.Validation.Expression;
 using FileSystem.Abstraction;
+using Microsoft.Extensions.DependencyInjection;
+using ToolNameValidator = DotNetTool.Builder.Validation.ToolNameValidator;
 
 namespace DotNetTool.Builder
 {
@@ -60,6 +61,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IDotnetSubCommandBuilder, NewToolCommandBuilder>();
             services.AddSingleton<INewToolService, NewToolService>();
         }
+
         private void RegisterFileStructureCreators(IServiceCollection services)
         {
             services.AddSingleton<IBuildCommandFileStructure, CreateArgumentStructure>();
@@ -81,7 +83,7 @@ namespace DotNetTool.Builder
         private void RegisterValidation(IServiceCollection services)
         {
             services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
-            services.AddSingleton<IToolNameValidator, Validation.ToolNameValidator>();
+            services.AddSingleton<IToolNameValidator, ToolNameValidator>();
 
             services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
 

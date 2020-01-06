@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using DotNetTool.Builder.Dotnet;
 using DotNetTool.Builder.ErrorHandling;
-using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.DotNet;
 using FileSystem.Abstraction;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,12 +14,12 @@ namespace DotNetTool.Builder.App
 {
     internal class App
     {
-        public IServiceProvider ServiceProvider { get; }
-
         public App(IServiceProvider serviceProvider)
         {
             ServiceProvider = serviceProvider;
         }
+
+        public IServiceProvider ServiceProvider { get; }
 
         public Task<int> RunAsync(string[] args)
         {

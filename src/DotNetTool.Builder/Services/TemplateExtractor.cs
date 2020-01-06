@@ -1,10 +1,9 @@
 ﻿using System.IO.Compression;
+using System.Linq;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services
 {
-    using System.Linq;
-    
     internal class TemplateExtractor : ITemplateExtractor
     {
         public void ExtractTo(IDirectoryInfo directoryInfo)

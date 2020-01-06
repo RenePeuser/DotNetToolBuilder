@@ -8,8 +8,8 @@ namespace DotNetTool.Builder.Services.Process
 {
     internal class ProcessService : IProcessService
     {
-        private readonly IProcessBuilder _processBuilder;
         private readonly IConsoleService _consoleService;
+        private readonly IProcessBuilder _processBuilder;
 
         public ProcessService(IProcessBuilder processBuilder, IConsoleService consoleService)
         {
@@ -31,8 +31,8 @@ namespace DotNetTool.Builder.Services.Process
             {
                 var readToEnd = process.StandardOutput.ReadToEnd();
                 process.ExitCode.IsEqualTo(0)
-                                .IfTrueThen(() => _consoleService.WriteSuccess(readToEnd))
-                                .IfFalseThen(() => _consoleService.WriteError(readToEnd));
+                    .IfTrueThen(() => _consoleService.WriteSuccess(readToEnd))
+                    .IfFalseThen(() => _consoleService.WriteError(readToEnd));
 
                 tcs.TrySetResult(new CliRunResult(process.ExitCode, readToEnd));
             };
@@ -63,6 +63,7 @@ namespace DotNetTool.Builder.Services.Process
             {
                 tcs.SetException(new Exception($"Failed to start cli command: {command} {arguments}"));
             }
+
             return tcs.Task;
         }
     }

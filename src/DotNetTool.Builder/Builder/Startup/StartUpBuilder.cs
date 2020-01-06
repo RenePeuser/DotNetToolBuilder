@@ -10,8 +10,6 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Builder.Startup
 {
-    
-
     internal class StartUpBuilder : IStartUpBuilder
     {
         private const string Template =

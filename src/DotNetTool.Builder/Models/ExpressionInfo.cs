@@ -1,8 +1,8 @@
-﻿namespace DotNetTool.Builder.Models
-{
-    using System.Collections.Generic;
-    using Tokenizer.Tokens;
+﻿using System.Collections.Generic;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
+namespace DotNetTool.Builder.Models
+{
     internal class ExpressionInfo
     {
         public ExpressionInfo(string expression, string optimizedExpressions, IEnumerable<Token> tokens)

@@ -4,8 +4,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    
-
     internal class NewOptionExpressionBuilderWithoutArgument : INewOptionExpressionBuilder
     {
         private const string OptionTemplate =
@@ -19,9 +17,9 @@ namespace DotNetTool.Builder.Builder.Options
             Throw.IfNull(() => optionInfo);
 
             var newTemplate = OptionTemplate.Replace("$option-name$", optionInfo.Value)
-                                            .Replace("$option-alias$", optionInfo.Alias)
-                                            .Replace("$option-description$", optionInfo.Description)
-                                            .Replace("$required-value$", optionInfo.Required.ToString().ToLower());
+                .Replace("$option-alias$", optionInfo.Alias)
+                .Replace("$option-description$", optionInfo.Description)
+                .Replace("$required-value$", optionInfo.Required.ToString().ToLower());
 
             return newTemplate;
         }

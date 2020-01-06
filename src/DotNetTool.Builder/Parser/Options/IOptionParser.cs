@@ -1,9 +1,8 @@
 ﻿using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Parser.Options
 {
-    using Tokenizer.Tokens;
-
     internal interface IOptionParser
     {
         OptionInfo Parse(OptionToken token, ArgumentInfo argument);

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DotNetTool.Builder.Services;
+﻿using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.Test.Mocks
 {

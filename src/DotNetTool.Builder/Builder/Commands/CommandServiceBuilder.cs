@@ -3,8 +3,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    
-
     internal class CommandServiceBuilder : ICommandServiceBuilder
     {
         private const string Template =
@@ -30,8 +28,8 @@ namespace DotNetTool.Builder.Builder.Commands
 
             var currentNamespace = $"{nameSpace}.Service";
             var newTemplate = Template.Replace("$command-name$", parameterInfo.NormalizedName)
-                                      .Replace("$namespace$", currentNamespace)
-                                      .Replace("$project-name$", project);
+                .Replace("$namespace$", currentNamespace)
+                .Replace("$project-name$", project);
 
             return newTemplate;
         }

@@ -1,7 +1,7 @@
-﻿namespace DotNetTool.Builder.Builder.Commands
-{
-    using Models;
+﻿using DotNetTool.Builder.Models;
 
+namespace DotNetTool.Builder.Builder.Commands
+{
     internal interface ICommandHandlerBuilder
     {
         string Build(CommandInfo parameterInfo);

@@ -10,11 +10,11 @@ namespace DotNetTool.Builder.FileStructure
 {
     internal class CommandServiceStructureBuilder : IBuildCommandFileStructure
     {
-        private readonly ICommandServiceInterfaceBuilder _commandServiceInterfaceBuilder;
-        private readonly ITypeService _typeService;
         private readonly ICommandServiceBuilder _commandServiceBuilder;
+        private readonly ICommandServiceInterfaceBuilder _commandServiceInterfaceBuilder;
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
+        private readonly ITypeService _typeService;
 
         public CommandServiceStructureBuilder(
             IDirectoryService directoryService,

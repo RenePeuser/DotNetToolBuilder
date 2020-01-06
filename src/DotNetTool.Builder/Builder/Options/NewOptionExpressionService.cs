@@ -5,8 +5,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    
-
     internal class NewOptionExpressionService : INewOptionExpressionService
     {
         private readonly IEnumerable<INewOptionExpressionBuilder> _newOptionExpressionBuilders;

@@ -54,5 +54,4 @@ namespace DotNetTool.Builder.ErrorHandling
             return exception;
         }
     }
-
 }

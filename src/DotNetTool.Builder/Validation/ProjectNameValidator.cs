@@ -1,21 +1,16 @@
-﻿using DotNetTool.Builder.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Argument.Check;
+using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Validation
 {
-    using Argument.Check;
-
     internal class ProjectNameValidator : IProjectNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 
-        private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[]
-        {
-            char.IsLetterOrDigit,
-            c => c == '.'
-        };
+        private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetterOrDigit, c => c == '.' };
 
         public ProjectNameValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
         {

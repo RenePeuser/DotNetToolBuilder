@@ -1,13 +1,12 @@
-﻿using DotNetTool.Builder.Extensions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Argument.Check;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Argument.Check;
-    using Models;
-
     internal class ToolNameValidator : IExpressionContentValidator
     {
         private readonly IToolNameValidator _toolNameValidator;
@@ -49,4 +48,4 @@ namespace DotNetTool.Builder.Validation.Expression
             }
         }
     }
-};
+}

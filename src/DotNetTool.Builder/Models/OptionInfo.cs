@@ -9,7 +9,7 @@ namespace DotNetTool.Builder.Models
     {
         [JsonConstructor]
         internal OptionInfo(string value, string name, string alias, string description, bool required,
-            ArgumentInfo argument, string normalizedValue, string argumentName):base(value, name)
+            ArgumentInfo argument, string normalizedValue, string argumentName) : base(value, name)
         {
             Alias = alias;
             Description = description;

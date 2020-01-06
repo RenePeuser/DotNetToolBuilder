@@ -9,10 +9,10 @@ namespace DotNetTool.Builder.FileStructure
 {
     internal class CreateArgumentStructure : IBuildCommandFileStructure
     {
+        private readonly IArgumentBuilder _argumentBuilder;
+        private readonly IArgumentInterfaceBuilder _argumentInterfaceBuilder;
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;
-        private readonly IArgumentInterfaceBuilder _argumentInterfaceBuilder;
-        private readonly IArgumentBuilder _argumentBuilder;
         private readonly ITypeService _typeService;
 
         public CreateArgumentStructure(IDirectoryService directoryService, IFileService fileService, IArgumentInterfaceBuilder argumentInterfaceBuilder, IArgumentBuilder argumentBuilder, ITypeService typeService)

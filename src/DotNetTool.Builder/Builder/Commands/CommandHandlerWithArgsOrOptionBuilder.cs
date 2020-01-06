@@ -6,8 +6,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    
-
     internal class CommandHandlerWithArgsOrOptionBuilder : ICommandHandlerStringBuilder
     {
         private const string Template = "CommandHandler.Create<$types$>(($argument-names$) => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
@@ -21,9 +19,9 @@ namespace DotNetTool.Builder.Builder.Commands
             var argNames = arguments.Select(arg => arg.Name).Flatten(", ");
 
             var newTemplate = Template.Replace("$types$", types)
-                                      .Replace("$command-name$", parameterInfo.NormalizedName)
-                                      .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
-                                      .Replace("$argument-names$", argNames);
+                .Replace("$command-name$", parameterInfo.NormalizedName)
+                .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
+                .Replace("$argument-names$", argNames);
             return newTemplate;
         }
 

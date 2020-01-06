@@ -1,18 +1,17 @@
-﻿using DotNetTool.Builder.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
+using DotNetTool.Builder.Parser.Commands;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Test.Mocks;
+using DotNetTool.Builder.Tokenizer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.Parser
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using DotNetTool.Builder.Parser.Commands;
-    using DotNetTool.Builder.Tokenizer;
-
     [TestClass]
     public abstract class ParameterExpressionBaseClass
     {

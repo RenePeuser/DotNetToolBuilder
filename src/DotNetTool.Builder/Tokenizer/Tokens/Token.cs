@@ -1,7 +1,7 @@
-﻿namespace DotNetTool.Builder.Tokenizer.Tokens
-{
-    using System.Diagnostics;
+﻿using System.Diagnostics;
 
+namespace DotNetTool.Builder.Tokenizer.Tokens
+{
     [DebuggerDisplay("{" + nameof(Value) + "}")]
     public abstract class Token
     {

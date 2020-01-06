@@ -2,11 +2,10 @@
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Parser.Options
 {
-    using Tokenizer.Tokens;
-
     internal class OptionParser : IOptionParser
     {
         private readonly IConsoleService _consoleService;

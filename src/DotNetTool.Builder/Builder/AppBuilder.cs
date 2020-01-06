@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
-using DotNetTool.Builder.Models;
 using Argument.Check;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder
 {
@@ -43,7 +43,7 @@ namespace DotNetTool.Builder.Builder
             var app = solutionFile.Directory.EnumerateFiles("App.cs", SearchOption.AllDirectories).FirstOrDefault();
 
             var newStartUp = Template.Replace("$namespace$", projectName)
-                                     .Replace("$interface-startup-command$", $"I{rootCommand.NormalizedName}CommandBuilder");
+                .Replace("$interface-startup-command$", $"I{rootCommand.NormalizedName}CommandBuilder");
 
             File.WriteAllText(app.FullName, newStartUp);
         }

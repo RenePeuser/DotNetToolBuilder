@@ -1,5 +1,4 @@
-﻿using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.Services;
+﻿using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Validation;
 
 namespace DotNetTool.Builder.InfoCollectors

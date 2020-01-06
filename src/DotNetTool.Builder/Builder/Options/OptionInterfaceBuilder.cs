@@ -3,8 +3,6 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Options
 {
-    
-
     internal class OptionInterfaceBuilder : IOptionInterfaceBuilder
     {
         private const string Template =
@@ -27,8 +25,8 @@ namespace DotNetTool.Builder.Builder.Options
 
             var currentNamespace = $"{nameSpace}.Options";
             var newTemplate = Template.Replace("$projectName$", projectName)
-                                      .Replace("$namespace$", currentNamespace)
-                                      .Replace("$command-name$", parameterInfo.NormalizedName);
+                .Replace("$namespace$", currentNamespace)
+                .Replace("$command-name$", parameterInfo.NormalizedName);
 
             return newTemplate;
         }

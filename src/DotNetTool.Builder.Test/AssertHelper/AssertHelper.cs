@@ -1,13 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Test.AssertHelper
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Extensions;
-    using Models;
-
     internal static class AssertHelper
     {
         internal static IEnumerable<string> AssertAllSubCommandRecursive(this CommandInfo commandInfo, Predicate<CommandInfo> validateFunc, Func<CommandInfo, string> errorMessage)

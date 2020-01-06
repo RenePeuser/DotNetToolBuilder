@@ -1,17 +1,24 @@
 ﻿using System.Linq;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Services
 {
-    using Tokenizer.Tokens;
     internal class ParameterService : IParameterService
     {
         public CommandInfo FindAlreadyExistingCommand(CommandToken command,
             CommandInfo current)
         {
-            if (command.IsNull()) return null;
-            if (current.IsNull()) return null;
+            if (command.IsNull())
+            {
+                return null;
+            }
+
+            if (current.IsNull())
+            {
+                return null;
+            }
 
             if (current.Name == command.Value)
             {
@@ -41,7 +48,10 @@ namespace DotNetTool.Builder.Services
         public ArgumentInfo FindAlreadyExistingArgument(ArgumentInfo argument,
             CommandInfo current)
         {
-            if (current.IsNull()) return null;
+            if (current.IsNull())
+            {
+                return null;
+            }
 
             if (current.Argument.IsNotNull())
             {
@@ -69,7 +79,10 @@ namespace DotNetTool.Builder.Services
         public OptionInfo FindAlreadyExistingOption(OptionInfo option,
             CommandInfo current)
         {
-            if (current.IsNull()) return null;
+            if (current.IsNull())
+            {
+                return null;
+            }
 
             var existingOption = current.Options.FirstOrDefault(o => o.Value == option.Value);
             if (existingOption.IsNotNull())

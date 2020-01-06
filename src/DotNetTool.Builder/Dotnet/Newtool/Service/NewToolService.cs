@@ -14,19 +14,19 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
 {
     internal class NewToolService : INewToolService
     {
-        private readonly IDotNetToolSerializer _dotNetToolSerializer;
+        private readonly ICommandTypeCollector _commandTypeCollector;
+        private readonly IConsoleService _consoleService;
+        private readonly ICreateCommandClasses _createCommandClasses;
         private readonly IDotNetToolInfoCollector _dotNetToolInfoCollector;
+        private readonly IDotNetToolSerializer _dotNetToolSerializer;
+        private readonly IDotNetToolTestService _dotNetToolTestService;
+        private readonly INameSpaceCollector _nameSpaceCollector;
+        private readonly IProcessService _processService;
+        private readonly IStartUpBuilder _startUpBuilder;
         private readonly ITargetFolderService _targetFolderService;
         private readonly ITemplateExtractor _templateExtractor;
         private readonly ITemplateService _templateService;
-        private readonly ICreateCommandClasses _createCommandClasses;
-        private readonly ICommandTypeCollector _commandTypeCollector;
-        private readonly INameSpaceCollector _nameSpaceCollector;
-        private readonly IStartUpBuilder _startUpBuilder;
-        private readonly IProcessService _processService;
         private readonly IUseIDE _useIde;
-        private readonly IDotNetToolTestService _dotNetToolTestService;
-        private readonly IConsoleService _consoleService;
 
         public NewToolService(
             IDotNetToolSerializer dotNetToolSerializer,

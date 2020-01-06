@@ -1,8 +1,8 @@
-﻿namespace DotNetTool.Builder.Models
-{
-    using System.Diagnostics;
-    using Extensions;
+﻿using System.Diagnostics;
+using DotNetTool.Builder.Extensions;
 
+namespace DotNetTool.Builder.Models
+{
     [DebuggerDisplay("{" + nameof(Value) + "}")]
     internal class InfoBase
     {

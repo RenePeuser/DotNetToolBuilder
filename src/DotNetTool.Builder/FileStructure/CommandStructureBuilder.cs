@@ -11,9 +11,9 @@ namespace DotNetTool.Builder.FileStructure
     internal class CommandStructureBuilder : IBuildCommandFileStructure
     {
         private readonly ICommandBuilderSimple _commandBuilderSimple;
-        private readonly ICommandBuilderWithOptions _commandBuilderWithOptions;
         private readonly ICommandBuilderWithArgument _commandBuilderWithArgument;
         private readonly ICommandBuilderWithArgumentAndOption _commandBuilderWithArgumentAndOption;
+        private readonly ICommandBuilderWithOptions _commandBuilderWithOptions;
         private readonly IFileService _fileService;
         private readonly ITypeService _typeService;
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
@@ -6,8 +7,6 @@ using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Parser.Argument
 {
-    using System;
-
     internal class ArgumentParser : IArgumentParser
     {
         private readonly IConsoleService _consoleService;
@@ -20,8 +19,8 @@ namespace DotNetTool.Builder.Parser.Argument
         public ArgumentInfo Parse(ArgumentToken value)
         {
             var argumentToken = value.As<ArgumentToken>();
-            var argumentValue = argumentToken.Value; 
-            
+            var argumentValue = argumentToken.Value;
+
             var start = argumentValue.IndexOf("<", StringComparison.Ordinal) + 1;
             var end = argumentValue.IndexOf(">", StringComparison.Ordinal);
             var name = argumentValue[start..end];
@@ -31,7 +30,7 @@ namespace DotNetTool.Builder.Parser.Argument
             var typeInfo = "object";
             if (argumentValue.Contains("["))
             {
-                var startIndex = argumentValue.IndexOf("[", StringComparison.Ordinal) +1;
+                var startIndex = argumentValue.IndexOf("[", StringComparison.Ordinal) + 1;
                 var endIndex = argumentValue.IndexOf("]", StringComparison.Ordinal);
                 typeInfo = argumentValue[startIndex..endIndex];
             }

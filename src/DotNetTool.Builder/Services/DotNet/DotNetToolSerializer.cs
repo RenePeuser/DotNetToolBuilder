@@ -39,6 +39,28 @@ namespace DotNetTool.Builder.Services.DotNet
             return DeserializeFrom(file);
         }
 
+        public void Serialize(Models.DotNetTool dotNetTool, NewToolParameters target)
+        {
+            Throw.IfNull(() => dotNetTool);
+            Throw.IfNull(() => target);
+            Throw.IfNull(() => target);
+
+            var targetDirectory = target.SaveToolTo;
+            if (targetDirectory.IsNull())
+            {
+                return;
+            }
+
+            if (targetDirectory.Exists.IsFalse())
+            {
+                target.SaveToolTo.Create();
+            }
+
+            var dotnetToolAsJson = JsonConvert.SerializeObject(dotNetTool);
+            var dotnetToolFile = _fileService.GetFileInfo(Path.Combine(targetDirectory.FullName, $"{dotNetTool.ProjectName}.json"));
+            dotnetToolFile.WriteAllText(dotnetToolAsJson);
+        }
+
         private Models.DotNetTool DeserializeFrom(IFileInfo fileInfo)
         {
             Throw.IfNull(() => fileInfo);
@@ -72,29 +94,8 @@ namespace DotNetTool.Builder.Services.DotNet
                     _consoleService.WriteSuccess($"DotNetTool successfully deserialized from file: '{fileInfo.FullName}'");
                 }
             }
+
             return dotNetTool;
-        }
-
-        public void Serialize(Models.DotNetTool dotNetTool, NewToolParameters target)
-        {
-            Throw.IfNull(() => dotNetTool);
-            Throw.IfNull(() => target);
-            Throw.IfNull(() => target);
-
-            var targetDirectory = target.SaveToolTo;
-            if (targetDirectory.IsNull())
-            {
-                return;
-            }
-
-            if (targetDirectory.Exists.IsFalse())
-            {
-                target.SaveToolTo.Create();
-            }
-
-            var dotnetToolAsJson = JsonConvert.SerializeObject(dotNetTool);
-            var dotnetToolFile = _fileService.GetFileInfo(Path.Combine(targetDirectory.FullName, $"{dotNetTool.ProjectName}.json"));
-            dotnetToolFile.WriteAllText(dotnetToolAsJson);
         }
     }
 }

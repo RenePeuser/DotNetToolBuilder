@@ -10,8 +10,8 @@ namespace DotNetTool.Builder.Test.SystemTest
     [TestClass]
     public class DeserializeDotNetToolTest
     {
-        private FileInfo _serializedDotNetTool;
         private DirectoryInfo _createdDirectory;
+        private FileInfo _serializedDotNetTool;
         private DirectoryInfo _toolSerializeResult;
 
         [TestInitialize]

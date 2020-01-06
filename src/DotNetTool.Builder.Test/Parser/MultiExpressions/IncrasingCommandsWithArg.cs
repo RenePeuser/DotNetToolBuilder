@@ -1,12 +1,11 @@
-﻿namespace DotNetTool.Builder.Test.Parser.MultiExpressions
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using AssertHelper;
-    using Extensions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DotNetTool.Builder.Models;
+using DotNetTool.Builder.Test.AssertHelper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace DotNetTool.Builder.Test.Parser.MultiExpressions
+{
     [TestClass]
     public class IncrasingCommandsWithArg : ParameterExpressionBaseClass
     {
@@ -46,7 +45,7 @@
         [TestMethod]
         public void All_Sub_Commands_Count_Must_Be_One()
         {
-            var errors = _rootCommand.AssertAllSubCommandRecursive(cmd => Enumerable.Count<CommandInfo>(cmd.SubCommands) > 1, cmd => $"Command: '{cmd.Name}' have more than one sub command").ToList();
+            var errors = _rootCommand.AssertAllSubCommandRecursive(cmd => cmd.SubCommands.Count() > 1, cmd => $"Command: '{cmd.Name}' have more than one sub command").ToList();
 
             Assert.IsFalse(errors.Any(), errors.ToErrorMessage("Following errors was collected:"));
         }

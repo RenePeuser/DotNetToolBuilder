@@ -1,6 +1,5 @@
-﻿using DotNetTool.Builder.Dotnet.Newtool;
-using FileSystem.Abstraction;
-using FileInfo = System.IO.FileInfo;
+﻿using System.IO;
+using DotNetTool.Builder.Dotnet.Newtool;
 
 namespace DotNetTool.Builder.Services.DotNet
 {

@@ -1,7 +1,7 @@
-﻿namespace DotNetTool.Builder.Validation.Expression
-{
-    using Models;
+﻿using DotNetTool.Builder.Models;
 
+namespace DotNetTool.Builder.Validation.Expression
+{
     internal interface IExpressionValidator
     {
         ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo);

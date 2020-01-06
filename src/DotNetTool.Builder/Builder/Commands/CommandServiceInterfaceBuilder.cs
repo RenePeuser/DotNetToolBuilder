@@ -3,12 +3,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
 {
-    
-
     internal class CommandServiceInterfaceBuilder : ICommandServiceInterfaceBuilder
     {
         private const string Template =
-@"namespace $namespace$
+            @"namespace $namespace$
 {
     using System.Collections.Generic;
     using System.Linq;
