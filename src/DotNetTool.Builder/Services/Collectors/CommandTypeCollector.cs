@@ -2,7 +2,7 @@
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Collectors
 {
     // Hint, System.CommandLine.Experimental needs one root command with one sub command
     // But we want to use https://docs.microsoft.com/de-de/dotnet/core/tools/extensibility

@@ -1,6 +1,6 @@
 ﻿using DotNetTool.Builder.Models;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Collectors
 {
     internal interface IParameterExpressionCollector
     {

@@ -1,5 +1,6 @@
 ﻿using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Services.Collectors;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Builder.Startup

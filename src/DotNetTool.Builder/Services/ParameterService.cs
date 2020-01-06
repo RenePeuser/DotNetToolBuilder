@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Argument.Check;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Tokenizer.Tokens;
@@ -7,102 +9,86 @@ namespace DotNetTool.Builder.Services
 {
     internal class ParameterService : IParameterService
     {
-        public CommandInfo FindAlreadyExistingCommand(CommandToken command,
-            CommandInfo current)
+        public CommandInfo FindAlreadyExistingCommand(CommandToken commandToken,
+            CommandInfo commandInfo)
         {
-            if (command.IsNull())
+            Throw.IfNull(() => commandToken);
+
+            if (commandInfo.IsNull())
             {
                 return null;
             }
 
-            if (current.IsNull())
-            {
-                return null;
-            }
-
-            if (current.Name == command.Value)
-            {
-                return current;
-            }
-
-            if (current.SubCommands.IsNotNull())
-            {
-                foreach (var cliParameterInfo in current.SubCommands)
-                {
-                    if (cliParameterInfo.Name == command.Value)
-                    {
-                        return cliParameterInfo;
-                    }
-
-                    var match = FindAlreadyExistingCommand(command, cliParameterInfo);
-                    if (match.IsNotNull())
-                    {
-                        return match;
-                    }
-                }
-            }
-
-            return null;
+            return Find(commandInfo, cmdInfo => cmdInfo.Name == commandToken.Value ? cmdInfo : default);
         }
 
-        public ArgumentInfo FindAlreadyExistingArgument(ArgumentInfo argument,
-            CommandInfo current)
+        public ArgumentInfo FindAlreadyExistingArgument(ArgumentInfo argumentInfo,
+            CommandInfo commandInfo)
         {
-            if (current.IsNull())
+            Throw.IfNull(() => argumentInfo);
+
+            if (commandInfo.IsNull())
             {
                 return null;
             }
 
-            if (current.Argument.IsNotNull())
-            {
-                if (current.Argument.Value == argument.Name)
-                {
-                    return current.Argument;
-                }
-            }
-
-            if (current.SubCommands.IsNotNull())
-            {
-                foreach (var subCommand in current.SubCommands)
-                {
-                    var match = FindAlreadyExistingArgument(argument, subCommand);
-                    if (match.IsNotNull())
-                    {
-                        return match;
-                    }
-                }
-            }
-
-            return null;
+            return Find(commandInfo, cmdInfo => cmdInfo?.Argument?.Value == argumentInfo.Name ? cmdInfo?.Argument : default);
         }
 
         public OptionInfo FindAlreadyExistingOption(OptionInfo option,
-            CommandInfo current)
+            CommandInfo commandInfo)
         {
-            if (current.IsNull())
+
+            Throw.IfNull(() => option);
+
+            if (commandInfo.IsNull())
             {
                 return null;
             }
 
-            var existingOption = current.Options.FirstOrDefault(o => o.Value == option.Value);
-            if (existingOption.IsNotNull())
+            return Find(commandInfo, cmdInfo =>
             {
-                return existingOption;
+                var existingOption = cmdInfo.Options.FirstOrDefault(o => o.Value == option.Value);
+                if (existingOption.IsNotNull())
+                {
+                    return existingOption;
+                }
+
+                return null;
+            });
+        }
+
+        public T Find<T>(CommandInfo commandInfo, Func<CommandInfo, T> findPredicate)
+        {
+            if (findPredicate.IsNull())
+            {
+                return default;
             }
 
-            if (current.SubCommands.IsNotNull())
+            if (commandInfo.IsNull())
             {
-                foreach (var subCommand in current.SubCommands)
+                return default;
+            }
+
+            var result = findPredicate(commandInfo);
+            if (result.IsNotNull())
+            {
+                return result;
+            }
+
+            if (commandInfo.SubCommands.IsNotNull())
+            {
+                foreach (var subcCommand in commandInfo.SubCommands)
                 {
-                    var match = FindAlreadyExistingOption(option, subCommand);
-                    if (match.IsNotNull())
+                    var recursiveResult = Find(subcCommand, findPredicate);
+                    if (recursiveResult.IsNotNull())
                     {
-                        return match;
+                        return recursiveResult;
                     }
                 }
             }
 
-            return null;
+            return default;
         }
     }
 }

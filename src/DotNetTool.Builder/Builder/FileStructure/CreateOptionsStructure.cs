@@ -3,9 +3,10 @@ using DotNetTool.Builder.Builder.Options;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Services.Collectors;
 using FileSystem.Abstraction;
 
-namespace DotNetTool.Builder.FileStructure
+namespace DotNetTool.Builder.Builder.FileStructure
 {
     internal class CreateOptionsStructure : IBuildCommandFileStructure
     {

@@ -3,7 +3,7 @@ using System.IO;
 using DotNetTool.Builder.ErrorHandling;
 using FileSystem.Abstraction;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.IO
 {
     internal class TargetFolderService : ITargetFolderService
     {

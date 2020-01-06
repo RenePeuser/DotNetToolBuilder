@@ -2,7 +2,7 @@
 using System.Linq;
 using FileSystem.Abstraction;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Template
 {
     internal class TemplateExtractor : ITemplateExtractor
     {

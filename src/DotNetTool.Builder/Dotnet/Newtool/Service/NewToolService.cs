@@ -1,14 +1,17 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetTool.Builder.Builder.FileStructure;
 using DotNetTool.Builder.Builder.Startup;
 using DotNetTool.Builder.Extensions;
-using DotNetTool.Builder.FileStructure;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Services.Collectors;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
+using DotNetTool.Builder.Services.IO;
 using DotNetTool.Builder.Services.Process;
+using DotNetTool.Builder.Services.Template;
 
 namespace DotNetTool.Builder.Dotnet.Newtool.Service
 {

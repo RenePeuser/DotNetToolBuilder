@@ -1,6 +1,7 @@
-﻿using FileSystem.Abstraction;
+﻿using DotNetTool.Builder.Services.IO;
+using FileSystem.Abstraction;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Template
 {
     internal class TemplateService : ITemplateService
     {

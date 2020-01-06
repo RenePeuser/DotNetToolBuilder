@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Test
     public class ClassesToRefactorTest
     {
         private static IEnumerable<CSharpFileInfo> _csharpFileInfos;
-        private static readonly string[] codeFilesOnWhiteList = { "Startup.cs", "ParameterWithArgsOrOptionsClassBuilder.cs", "ArgumentValidator.cs", "NewToolService.cs" };
+        private static readonly string[] codeFilesOnWhiteList = new[] { "Startup.cs", "ArgumentValidator.cs" };
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -32,14 +32,14 @@ namespace DotNetTool.Builder.Test
         }
 
         [TestMethod]
-        public void All_Class_Should_Have_Maximum_100_Lines_Of_Code()
+        public void All_Class_Should_Have_Maximum_120_Lines_Of_Code()
         {
-            var errors = _csharpFileInfos.Where(csharp => csharp.SyntaxTree.GetText().Lines.Count > 100)
+            var errors = _csharpFileInfos.Where(csharp => csharp.SyntaxTree.GetText().Lines.Count > 120)
                 .Where(csharp => codeFilesOnWhiteList.All(toIgnore => csharp.FileInfo.Name != toIgnore))
                 .Select(csharp => $"{csharp.FileInfo.FullName} - Line of codes: {csharp.SyntaxTree.GetText().Lines.Count}")
                 .ToList();
 
-            Assert.IsFalse(errors.Any(), errors.ToErrorMessage("Following cshapr files should be refactored:"));
+            Assert.IsFalse(errors.Any(), errors.ToErrorMessage("Following C# files should be refactored:"));
         }
 
         private static DirectoryInfo FindFolderWithSources(DirectoryInfo startDirectoryInfo, string name)

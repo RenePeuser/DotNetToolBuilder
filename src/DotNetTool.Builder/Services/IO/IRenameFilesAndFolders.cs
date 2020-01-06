@@ -1,6 +1,6 @@
 ﻿using FileSystem.Abstraction;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.IO
 {
     internal interface IRenameFilesAndFolders
     {

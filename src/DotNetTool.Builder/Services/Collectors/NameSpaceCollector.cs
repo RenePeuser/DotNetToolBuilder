@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Collectors
 {
     internal class NameSpaceCollector : INameSpaceCollector
     {

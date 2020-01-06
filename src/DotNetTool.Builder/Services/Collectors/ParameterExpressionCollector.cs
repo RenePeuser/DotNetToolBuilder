@@ -5,7 +5,7 @@ using DotNetTool.Builder.Tokenizer;
 using DotNetTool.Builder.Validation;
 using DotNetTool.Builder.Validation.Expression;
 
-namespace DotNetTool.Builder.Services
+namespace DotNetTool.Builder.Services.Collectors
 {
     internal class ParameterExpressionCollector : IParameterExpressionCollector
     {
