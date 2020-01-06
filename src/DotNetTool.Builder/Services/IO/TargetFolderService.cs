@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using DotNetTool.Builder.ErrorHandling;
+using DotNetTool.Builder.Extensions;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IO
@@ -38,7 +39,7 @@ namespace DotNetTool.Builder.Services.IO
                 throw new DotNetToolBuilderException($"The directory: '{targetDirectoryInfo.FullName}' does not exists.");
             }
 
-            var toolFolder = _directoryService.GetDirectoryInfo(Path.Combine(targetDirectoryInfo.FullName,"src", dotNetTool.ProjectName, dotNetTool.ToolName));
+            var toolFolder = _directoryService.GetDirectoryInfo(Path.Combine(targetDirectoryInfo.FullName,"src", dotNetTool.ProjectName, dotNetTool.ToolName.FirstCharToUpper()));
             if (toolFolder.NotExists)
             {
                 throw new DotNetToolBuilderException($"The tool folder: '{toolFolder.FullName}' does not exists.");
