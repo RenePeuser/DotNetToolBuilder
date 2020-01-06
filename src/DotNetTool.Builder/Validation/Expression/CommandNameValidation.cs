@@ -34,18 +34,23 @@ namespace DotNetTool.Builder.Validation.Expression
                 var command = commandToken.Value;
                 if (command.Contains("--") || command.Contains("<") || command.Contains("["))
                 {
-                    yield return $"Command: {command} most not contain argument '<arg>', typecast '[type]' or option-syntax '[--option]'";
+                    yield return $"The Command: {command} most not contain argument '<arg>', typecast '[type]' or option-syntax '[--option]'";
                 }
 
                 if (char.IsLetter(command.First()).IsFalse())
                 {
-                    yield return $"Command: {command} must begin with a letter";
+                    yield return $"The Command: {command} must begin with a letter";
+                }
+
+                if (command.All(char.IsLetterOrDigit).IsFalse())
+                {
+                    yield return $"The Command: {command} must only contains letters or digits";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsValid(command);
                 if (validationResult.IsValid.IsFalse())
                 {
-                    yield return $"The dotnet tool name: '{command}' must not be a name of a type";
+                    yield return $"The Command: '{command}' must not be a name of a type";
                 }
             }
         }
