@@ -14,14 +14,14 @@ namespace DotNetTool.Builder.Builder.Commands
         {
             Throw.IfNull(() => parameterInfo);
 
-            var arguments = BuildCtorArguments(parameterInfo);
+            var arguments = BuildCtorArguments(parameterInfo).ToList();
             var types = arguments.Select(arg => arg.Type).Flatten(", ");
             var argNames = arguments.Select(arg => arg.Name).Flatten(", ");
 
             var newTemplate = Template.Replace("$types$", types)
-                .Replace("$command-name$", parameterInfo.NormalizedName)
-                .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
-                .Replace("$argument-names$", argNames);
+                                      .Replace("$command-name$", parameterInfo.NormalizedName)
+                                      .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
+                                      .Replace("$argument-names$", argNames);
             return newTemplate;
         }
 

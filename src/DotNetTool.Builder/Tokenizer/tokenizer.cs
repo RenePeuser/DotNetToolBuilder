@@ -6,20 +6,20 @@ using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Tokenizer
 {
-    internal class tokenizer : IExpressionTokenizer
+    internal class Tokenizer : IExpressionTokenizer
     {
         private readonly IEnumerable<ITokenizer> _tokenizers;
 
-        public tokenizer(IEnumerable<ITokenizer> tokenizers)
+        public Tokenizer(IEnumerable<ITokenizer> tokenizers)
         {
             _tokenizers = tokenizers;
         }
 
         public ExpressionInfo Tokenize(string expression)
         {
-            var splitted = expression.Split().FilterNullOrWhitespace();
-            var optimizedExpression = splitted.Flatten(" ");
-            var tokens = GetAllTokensFrom(splitted).ToList();
+            var splittedExpression = expression.Split().FilterNullOrWhitespace();
+            var optimizedExpression = splittedExpression.Flatten(" ");
+            var tokens = GetAllTokensFrom(splittedExpression).ToList();
             return new ExpressionInfo(expression, optimizedExpression, tokens);
         }
 

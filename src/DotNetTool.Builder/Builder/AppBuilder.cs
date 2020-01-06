@@ -42,8 +42,7 @@ namespace DotNetTool.Builder.Builder
 
             var app = solutionFile.Directory.EnumerateFiles("App.cs", SearchOption.AllDirectories).FirstOrDefault();
 
-            var newStartUp = Template.Replace("$namespace$", projectName)
-                .Replace("$interface-startup-command$", $"I{rootCommand.NormalizedName}CommandBuilder");
+            var newStartUp = Template.Replace("$namespace$", projectName).Replace("$interface-startup-command$", $"I{rootCommand.NormalizedName}CommandBuilder");
 
             File.WriteAllText(app.FullName, newStartUp);
         }

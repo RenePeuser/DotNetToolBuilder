@@ -5,18 +5,12 @@
         internal static T As<T>(this object source)
         {
             var result = default(T);
-
-            if (source is T)
-            {
-                result = (T) source;
-            }
-
-            return result;
+            return source is T castedObject ? castedObject : result;
         }
 
         internal static T Cast<T>(this object source) where T : class
         {
-            return (T) source;
+            return (T)source;
         }
 
         internal static bool Is<T>(this object source)

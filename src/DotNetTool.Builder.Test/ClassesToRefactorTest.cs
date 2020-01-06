@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Test
     public class ClassesToRefactorTest
     {
         private static IEnumerable<CSharpFileInfo> _csharpFileInfos;
-        private static readonly string[] codeFilesOnWhiteList = new[] { "Startup.cs", "ArgumentValidator.cs" };
+        private static readonly string[] CodeFilesOnWhiteList = new[] { "Startup.cs", "ArgumentValidator.cs" };
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -35,7 +35,7 @@ namespace DotNetTool.Builder.Test
         public void All_Class_Should_Have_Maximum_120_Lines_Of_Code()
         {
             var errors = _csharpFileInfos.Where(csharp => csharp.SyntaxTree.GetText().Lines.Count > 120)
-                .Where(csharp => codeFilesOnWhiteList.All(toIgnore => csharp.FileInfo.Name != toIgnore))
+                .Where(csharp => CodeFilesOnWhiteList.All(toIgnore => csharp.FileInfo.Name != toIgnore))
                 .Select(csharp => $"{csharp.FileInfo.FullName} - Line of codes: {csharp.SyntaxTree.GetText().Lines.Count}")
                 .ToList();
 

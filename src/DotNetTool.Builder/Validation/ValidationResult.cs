@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Validation
 {
-    [DebuggerDisplay("IsValid: {IsValid}")]
+    [DebuggerDisplay("IsValid: {" + nameof(IsValid) + "}")]
     internal class ValidationResult
     {
         public ValidationResult(bool isValid, string errors)

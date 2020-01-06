@@ -20,7 +20,7 @@ namespace DotNetTool.Builder.Builder.Options
         {
             Throw.IfNull(() => optionInfo);
 
-            var builder = _newOptionExpressionBuilders.Single(builder => builder.IsBuilderFor(optionInfo));
+            var builder = _newOptionExpressionBuilders.Single(b => b.IsBuilderFor(optionInfo));
             return builder.Build(optionInfo);
         }
     }

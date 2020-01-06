@@ -50,14 +50,9 @@ namespace DotNetTool.Builder.Parser.Commands
                 }
                 else
                 {
-                    if (alreadyExistingCommand.SubCommands.All(s => s.Name.Equals(lastCommand.Name)))
-                    {
-                        subCommands = lastCommand.ToIList();
-                    }
-                    else
-                    {
-                        subCommands = alreadyExistingCommand.SubCommands.Concat(lastCommand).ToList();
-                    }
+                    subCommands = alreadyExistingCommand.SubCommands.All(s => s.Name.Equals(lastCommand.Name)) ?
+                                    lastCommand.ToIList() :
+                                    alreadyExistingCommand.SubCommands.Concat(lastCommand).ToList();
 
                     currentArgument = alreadyExistingCommand.Argument;
                     currentOptions = alreadyExistingCommand.Options;

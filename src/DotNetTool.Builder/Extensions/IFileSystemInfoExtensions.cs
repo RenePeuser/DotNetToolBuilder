@@ -3,7 +3,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Extensions
 {
-    internal static class IFileSystemInfoExtensions
+    internal static class FileSystemInfoExtensions
     {
         internal static bool NotExists(this IFileSystemInfo fileSystemInfo)
         {

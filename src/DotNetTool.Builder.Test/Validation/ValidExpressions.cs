@@ -11,11 +11,11 @@ namespace DotNetTool.Builder.Test.Validation
         public void All_Expressions_Must_Be_Valid()
         {
             var validExpressions = GetAll().ToList();
-            var invalidExpressions = from expression in validExpressions
-                let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
-                let isValid = !ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid
-                where isValid
-                select expression.Expression;
+            var invalidExpressions = (from expression in validExpressions
+                                      let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
+                                      let isValid = !ExpressionValidator.IsValid(expression.ToolName, expressionInfo).IsValid
+                                      where isValid
+                                      select expression.Expression).ToList();
 
             Assert.IsFalse(invalidExpressions.Any(), AssertHelper.AssertHelper.ToErrorMessage(invalidExpressions, "Following expressions was invalid, which should be valid:"));
         }

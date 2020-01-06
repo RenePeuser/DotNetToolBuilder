@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Argument.Check;
+using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
@@ -60,6 +61,11 @@ $methods$
             Throw.IfNull(() => nameSpaceCollector);
 
             var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
+            if (startUpFile.IsNull())
+            {
+                throw new DotNetToolBuilderException($"Code file: 'startup.cs' was not found");
+            }
+
             var methods = GenerateMethods(commandTypeCollector).ToList();
             var commandRegistrations = methods.Select(m => $"            {m.MethodName}(services);").Flatten(Environment.NewLine);
             var registrationMethods = methods.Select(m => $"        {m.MethodSyntax}").Flatten(Environment.NewLine);

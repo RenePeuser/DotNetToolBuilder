@@ -22,7 +22,7 @@ namespace DotNetTool.Builder.Builder.Parameter
             Throw.IfNull(() => parameterInfo);
             Throw.IfNullOrWhiteSpace(() => nameSpace);
 
-            var builder = _parameterSpecificClassBuilders.Single(builder => builder.IsThisBuilderFor(parameterInfo));
+            var builder = _parameterSpecificClassBuilders.Single(b => b.IsThisBuilderFor(parameterInfo));
             return builder.Build(projectName, parameterInfo, nameSpace);
         }
     }

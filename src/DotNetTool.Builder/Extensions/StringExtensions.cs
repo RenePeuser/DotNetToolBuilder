@@ -30,11 +30,6 @@ namespace DotNetTool.Builder.Extensions
             };
         }
 
-        internal static bool IsNullOrEmpty(this string source)
-        {
-            return string.IsNullOrEmpty(source);
-        }
-
         internal static bool IsNotNullOrEmpty(this string source)
         {
             return !source.IsNullOrEmpty();

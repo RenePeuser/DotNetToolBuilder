@@ -40,7 +40,8 @@ namespace DotNetTool.Builder.Builder.FileStructure
                 var subCommnandDirectoryInfo = _directoryService.GetDirectoryInfo(Path.Combine(rootDirectory.FullName, subCommand.NormalizedName));
                 subCommnandDirectoryInfo.Create();
 
-                _commandFileStructures.ForEach(structue => structue.Create(projectName, parameter, commandTypeCollector, currentPath, namespaceCollector, subCommnandDirectoryInfo, subCommand));
+                var closure = currentPath;
+                _commandFileStructures.ForEach(structure => structure.Create(projectName, parameter, commandTypeCollector, closure, namespaceCollector, subCommnandDirectoryInfo, subCommand));
 
                 Invoke(projectName, subCommand, subCommnandDirectoryInfo, commandTypeCollector, currentRootPath, namespaceCollector);
             }

@@ -4,16 +4,16 @@ namespace DotNetTool.Builder.Services.Collectors
 {
     internal class NameSpaceCollector : INameSpaceCollector
     {
-        private readonly List<string> items = new List<string>();
+        private readonly List<string> _items = new List<string>();
 
         public void Add(string nameSpace)
         {
-            items.Add(nameSpace);
+            _items.Add(nameSpace);
         }
 
         public IEnumerable<string> GetAll()
         {
-            return items;
+            return _items;
         }
     }
 }

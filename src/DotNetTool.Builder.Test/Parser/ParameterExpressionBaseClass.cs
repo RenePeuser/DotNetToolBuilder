@@ -24,7 +24,7 @@ namespace DotNetTool.Builder.Test.Parser
         {
             var consoleService = new ConsoleMock();
             var paser = new ParameterExpressionParser(new CommandParser(consoleService), new ArgumentParser(consoleService), new OptionParser(consoleService), new ParameterService());
-            var tokenizer = new tokenizer(GetTokenizer().ToList());
+            var tokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizer().ToList());
             var expressions = GetExpressionsToParse().ToList();
 
             CommandInfo lastCommandInfo = null;
