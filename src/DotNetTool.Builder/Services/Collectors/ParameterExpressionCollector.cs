@@ -44,10 +44,15 @@ namespace DotNetTool.Builder.Services.Collectors
                 }
 
                 parameter = _parameterExpressionParser.Parse(expressionInfo, parameter);
-                _consoleService.WriteInput("Do you want to add another parameter expression ? yes(y) or no (n)");
 
-                var result = _consoleService.ReadLine();
-                if (result.Contains("no") || result.Contains("n"))
+                string input = string.Empty;
+                while (input.NotEqualsAnyOf("yes", "y", "no", "n") || input.IsNullOrWhiteSpace())
+                {
+                    _consoleService.WriteInput("Do you want to add another parameter expression ? yes(y) or no (n)");
+                    input = _consoleService.ReadLine().Trim();
+                }
+
+                if (input.EqualsAnyOf("n", "no"))
                 {
                     return parameter;
                 }
