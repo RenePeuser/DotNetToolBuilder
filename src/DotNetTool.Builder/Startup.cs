@@ -101,6 +101,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, CommandNameValidation>();
             services.AddSingleton<IExpressionContentValidator, UnknownTokenValidator>();
             services.AddSingleton<IExpressionContentValidator, MultipleOptionValidator>();
+            services.AddSingleton<IExpressionContentValidator, DuplicatedCommandValidator>();
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)

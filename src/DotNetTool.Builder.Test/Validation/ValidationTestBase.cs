@@ -41,6 +41,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new CommandNameValidation(primitiveTypeNameValidator);
             yield return new UnknownTokenValidator();
             yield return new MultipleOptionValidator();
+            yield return new DuplicatedCommandValidator();
         }
     }
 }

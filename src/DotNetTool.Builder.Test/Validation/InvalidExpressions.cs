@@ -171,7 +171,8 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option <arg> --option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool --option --option");
 
-            yield return new ExpressionWithExpectedResult("dotnet", "dotnet to-ol --option --option");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet to-ol --option");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool tool --option");
 
             yield return new ExpressionWithExpectedResult("!§$%&/()=?`´", "!§$%&/()=?`´");
             yield return new ExpressionWithExpectedResult("dotnet", "!§$%&/()=?`´");
