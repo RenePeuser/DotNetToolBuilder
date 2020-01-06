@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.Models
 {
-    internal class OptionInfo : InfoBase
+    public class OptionInfo : InfoBase
     {
         [JsonConstructor]
-        internal OptionInfo(string value, string name, string alias, string description, bool required,
+        public OptionInfo(string value, string name, string alias, string description, bool required,
             ArgumentInfo argument, string normalizedValue, string argumentName) : base(value, name)
         {
             Alias = alias;

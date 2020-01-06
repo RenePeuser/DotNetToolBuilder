@@ -2,7 +2,7 @@
   "profiles": {
     "trumpf.hmi.dotnettool.builder": {
       "commandName": "Project",
-      "commandLineArgs": "--use-visualstudio"
+      "commandLineArgs": "--use-visualstudio --from-file \"D:\\Test\\Tools\\mega.man.json\""
     }
   }
 }

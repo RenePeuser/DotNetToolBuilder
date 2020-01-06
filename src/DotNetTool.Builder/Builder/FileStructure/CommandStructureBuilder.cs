@@ -62,9 +62,16 @@ namespace DotNetTool.Builder.Builder.FileStructure
             var fileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
             fileInfo.WriteAllText(command);
 
-            // var interfaceToRegister = _typeService.GetFullQualifiedName(projectName, commandServiceInterface);
+
+            var splittedNamespace = currentPath.Split(".").ToList();
+            splittedNamespace.Remove(splittedNamespace.Last());
+            var newNamespaceForInterface = splittedNamespace.Flatten(".");
+
+            var interfaceName = $"{newNamespaceForInterface}.I{parameter.NormalizedName}SubCommandBuilder";
             var implementationToRegister = _typeService.GetFullQualifiedName(projectName, fileInfo);
-            commandTypeCollector.Add(subCommand, new TypeToRegister($"I{parameter.NormalizedName}SubCommandBuilder", implementationToRegister));
+
+
+            commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceName, implementationToRegister));
         }
     }
 }

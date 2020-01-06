@@ -4,19 +4,19 @@ using DotNetTool.Builder.Extensions;
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Value) + "}")]
-    internal class InfoBase
+    public class InfoBase
     {
-        internal InfoBase(string value, string name)
+        public InfoBase(string value, string name)
         {
             Value = value;
             Name = name;
             NormalizedName = Name.FirstCharToUpper();
         }
 
-        internal string Value { get; }
+        public string Value { get; }
 
-        internal string Name { get; }
+        public string Name { get; }
 
-        internal string NormalizedName { get; }
+        public string NormalizedName { get; }
     }
 }

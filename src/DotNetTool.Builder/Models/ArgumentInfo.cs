@@ -5,18 +5,18 @@ using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.Models
 {
-    internal class ArgumentInfo : InfoBase
+    public class ArgumentInfo : InfoBase
     {
         [JsonConstructor]
-        internal ArgumentInfo(string name, string description, string value, string type) : base(value, name)
+        public ArgumentInfo(string name, string description, string value, string type) : base(value, name)
         {
             Description = description;
             Type = type;
         }
 
-        internal string Description { get; }
+        public string Description { get; }
 
 
-        internal string Type { get; }
+        public string Type { get; }
     }
 }

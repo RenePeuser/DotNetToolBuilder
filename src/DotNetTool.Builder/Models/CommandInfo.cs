@@ -10,14 +10,14 @@ using Newtonsoft.Json;
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Name) + "}")]
-    internal class CommandInfo : InfoBase
+    public class CommandInfo : InfoBase
     {
-        internal CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options) : this(value, name, description, argumentInfo, options, Enumerable.Empty<CommandInfo>())
+        public CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options) : this(value, name, description, argumentInfo, options, Enumerable.Empty<CommandInfo>())
         {
         }
 
         [JsonConstructor]
-        internal CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, IEnumerable<CommandInfo> subCommands) : base(value, name)
+        public CommandInfo(string value, string name, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, IEnumerable<CommandInfo> subCommands) : base(value, name)
         {
             Description = description;
             Argument = argumentInfo;
