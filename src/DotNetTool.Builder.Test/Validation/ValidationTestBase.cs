@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new OnlyOneArgumentValidator();
             yield return new OptionValidator(primitiveTypeNameValidator);
             yield return new DotNetTool.Builder.Validation.Expression.ToolNameValidator(new ToolNameValidator(new PrimitiveTypeNameValidator()));
-            yield return new CommandNameValidation();
+            yield return new CommandNameValidation(primitiveTypeNameValidator);
             yield return new UnknownTokenValidator();
             yield return new MultipleOptionValidator();
         }
