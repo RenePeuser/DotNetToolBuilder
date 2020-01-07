@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Options
 
         private Option BuildSaveToolToOption()
         {
-            return new Option(new[] { "--save-to", "-st" }, "Saves the current dotnet tool configuration as json file to given path.") { Required = false, Argument = new Argument<DirectoryInfo>("directoryInfo") { Description = "The path to the directory to save the generated dotnet tool as json" } };
+            return new Option(new[] { "--save-to", "-st" }, "Saves the current dotnet tool configuration as json file to given path.") { Required = false, Argument = new Argument<DirectoryInfo>("directoryPath") { Description = "The path to the directory to save the generated dotnet tool as json" } };
         }
 
         private Option BuildUseCustomIDEOption()
