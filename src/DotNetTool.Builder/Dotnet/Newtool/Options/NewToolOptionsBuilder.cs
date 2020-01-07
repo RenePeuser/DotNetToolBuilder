@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Options
 
         private Option BuildSaveToolToOption()
         {
-            return new Option(new[] { "--save-to", "-st" }, "Saves the current dotnet tool configuration as json file to given path.") { Required = false, Argument = new Argument<DirectoryInfo>("st") { Description = "The path to the directory to save the generated dotnet tool as json" } };
+            return new Option(new[] { "--save-to", "-st" }, "Saves the current dotnet tool configuration as json file to given path.") { Required = false, Argument = new Argument<DirectoryInfo>("directoryInfo") { Description = "The path to the directory to save the generated dotnet tool as json" } };
         }
 
         private Option BuildUseCustomIDEOption()
@@ -32,7 +32,7 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Options
 
         private Option BuildFromFileOption()
         {
-            return new Option(new[] { "--from-file", "-ff" }, "Creates a dotnet tool, from an already serialized tool, which was saved as *.json") { Required = false, Argument = new Argument<FileInfo>("fromFile") { Description = "the file path to the dotnet tool which comes from a json file" } };
+            return new Option(new[] { "--from-file", "-ff" }, "Creates a dotnet tool, from an already serialized tool, which was saved as *.json") { Required = false, Argument = new Argument<FileInfo>("filePath") { Description = "the file path to the dotnet tool which comes from a json file" } };
         }
 
         private Option BuildUseVisualStudioOption()
