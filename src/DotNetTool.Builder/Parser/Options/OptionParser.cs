@@ -24,6 +24,13 @@ namespace DotNetTool.Builder.Parser.Options
             _consoleService.WriteInput($"Please enter an alias for your option: '{value}' suggestion: '-{suggestion}'");
             var alias = _consoleService.ReadLine();
 
+            string input = string.Empty;
+            while (input.NotEqualsAnyOf("o", "r") || input.IsNullOrWhiteSpace())
+            {
+                _consoleService.WriteInput($"Is your option required (r) or optional (o): '{value}'");
+                input = _consoleService.ReadLine().Trim();
+            }
+
             _consoleService.WriteInput($"Is your option required (r) or optional (o): '{value}'");
             var required = _consoleService.ReadLine();
             var boolRequired = required.ToLower().Equals("r");

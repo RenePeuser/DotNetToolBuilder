@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.Services
 
         public void WriteInput(string value)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Green;
             WriteLine(value);
             Console.ForegroundColor = ConsoleColor.White;
         }
