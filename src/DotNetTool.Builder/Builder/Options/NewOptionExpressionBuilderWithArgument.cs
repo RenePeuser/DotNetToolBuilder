@@ -25,7 +25,7 @@ namespace DotNetTool.Builder.Builder.Options
                 .Replace("$option-argument-name$", optionInfo.ArgumentName)
                 .Replace("$option-description$", optionInfo.Description)
                 .Replace("$required-value$", optionInfo.Required.ToString().ToLower())
-                .Replace("$type$", optionInfo.Argument.Type)
+                .Replace("$type$", optionInfo.Argument.OptimizedType)
                 .Replace("$argument-description$", optionInfo.Argument.Description);
 
             return newTemplate;

@@ -56,5 +56,11 @@ namespace DotNetTool.Builder.Test.Parser.SingleExpression
         {
             Assert.AreEqual("System.IO.FileInfo", _argumentInfo.Type);
         }
+
+        [TestMethod]
+        public void Assert_Argument_Optimized_Type_Name()
+        {
+            Assert.AreEqual("System.IO.FileInfo", _argumentInfo.OptimizedType);
+        }
     }
 }

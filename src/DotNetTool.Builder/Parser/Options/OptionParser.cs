@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
@@ -9,10 +10,12 @@ namespace DotNetTool.Builder.Parser.Options
     internal class OptionParser : IOptionParser
     {
         private readonly IConsoleService _consoleService;
+        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
 
-        public OptionParser(IConsoleService consoleService)
+        public OptionParser(IConsoleService consoleService, ICollectTillInputCorrect collectTillInputCorrect)
         {
             _consoleService = consoleService;
+            _collectTillInputCorrect = collectTillInputCorrect;
         }
 
         public OptionInfo Parse(OptionToken token, ArgumentInfo argument)
@@ -24,15 +27,7 @@ namespace DotNetTool.Builder.Parser.Options
             _consoleService.WriteInput($"Please enter an alias for your option: '{value}' suggestion: '-{suggestion}'");
             var alias = _consoleService.ReadLine();
 
-            string input = string.Empty;
-            while (input.NotEqualsAnyOf("o", "r") || input.IsNullOrWhiteSpace())
-            {
-                _consoleService.WriteInput($"Is your option required (r) or optional (o): '{value}'");
-                input = _consoleService.ReadLine().Trim();
-            }
-
-            _consoleService.WriteInput($"Is your option required (r) or optional (o): '{value}'");
-            var required = _consoleService.ReadLine();
+            string required = _collectTillInputCorrect.CollectTillUserInputOk($"Is your option required (r) or optional (o): '{value}'", "o", "r");
             var boolRequired = required.ToLower().Equals("r");
 
             _consoleService.WriteInput($"Please enter a description for your option: '{value}'");

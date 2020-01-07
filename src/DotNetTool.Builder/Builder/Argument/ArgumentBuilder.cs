@@ -36,7 +36,7 @@ namespace DotNetTool.Builder.Builder.Argument
                 .Replace("$command-name$", parameterInfo.NormalizedName)
                 .Replace("$argument-name$", parameterInfo.Argument.Name)
                 .Replace("$namespace$", currentNamespace)
-                .Replace("$type$", parameterInfo.Argument.Type)
+                .Replace("$type$", parameterInfo.Argument.OptimizedType)
                 .Replace("$argument-description$", parameterInfo.Argument.Description);
 
             return newTemplate;

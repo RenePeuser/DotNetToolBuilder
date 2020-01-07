@@ -11,14 +11,14 @@ namespace DotNetTool.Builder.Builder.Parameter
             var argumentInfo = parameterInfo.Argument;
             if (argumentInfo.IsNotNull())
             {
-                yield return new CtorArgument(argumentInfo.Type, argumentInfo.Name);
+                yield return new CtorArgument(argumentInfo.OptimizedType, argumentInfo.Name);
             }
 
             foreach (var optionInfo in parameterInfo.Options)
             {
                 if (optionInfo.Argument.IsNotNull())
                 {
-                    yield return new CtorArgument(optionInfo.Argument.Type, optionInfo.ArgumentName);
+                    yield return new CtorArgument(optionInfo.Argument.OptimizedType, optionInfo.ArgumentName);
                 }
                 else
                 {

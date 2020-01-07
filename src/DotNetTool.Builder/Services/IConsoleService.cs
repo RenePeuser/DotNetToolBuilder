@@ -1,4 +1,8 @@
-﻿namespace DotNetTool.Builder.Services
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+
+namespace DotNetTool.Builder.Services
 {
     internal interface IConsoleService
     {

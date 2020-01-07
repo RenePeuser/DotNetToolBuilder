@@ -1,4 +1,5 @@
-﻿using DotNetTool.Builder.Builder.Argument;
+﻿using System.IO;
+using DotNetTool.Builder.Builder.Argument;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.FileStructure;
 using DotNetTool.Builder.Builder.Options;
@@ -19,6 +20,7 @@ using DotNetTool.Builder.Services.Collectors;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
 using DotNetTool.Builder.Services.IO;
+using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Services.Template;
 using DotNetTool.Builder.Tokenizer;
 using DotNetTool.Builder.Validation;
@@ -51,6 +53,15 @@ namespace DotNetTool.Builder
             RegisterCommandBuilders(services);
             RegisterStartUpBuilder(services);
             RegisterFileStructureCreators(services);
+            RegisterArgumentTypeOptimizer(services);
+        }
+
+        private void RegisterArgumentTypeOptimizer(IServiceCollection services)
+        {
+            services.AddSingleton<IArgumentTypeOptimizer, ArgumentTypeOptimizer>();
+            services.AddSingleton<ITypeNameOptimizer, FileInfoOptimizer>();
+            services.AddSingleton<ITypeNameOptimizer, DirectoryInfoOptimizer>();
+            services.AddSingleton<ITypeNameOptimizer, FileSystemInfoOptimizer>();
         }
 
         private void RegisterCli(IServiceCollection services)
@@ -133,6 +144,8 @@ namespace DotNetTool.Builder
             services.AddSingleton<ISpecificIDE, VisualStudio>();
             services.AddSingleton<ISpecificIDE, VisualStudioCode>();
             services.AddSingleton<ISpecificIDE, JetBrainsRider>();
+
+            services.AddSingleton<ICollectTillInputCorrect, CollectTillInputCorrect>();
         }
 
         private void RegisterDotNetToolInfoCollector(IServiceCollection services)

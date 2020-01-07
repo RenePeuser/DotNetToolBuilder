@@ -71,7 +71,12 @@ namespace DotNetTool.Builder.Validation.Expression
 
                 if (char.IsLetter(optionName.First()).IsFalse())
                 {
-                    yield return $"Option: {optionName} must begin with a letter";
+                    yield return $"Option: '{optionName}' must begin with a letter";
+                }
+
+                if (optionName.Contains("."))
+                {
+                    yield return $"Option: '{optionName}' must not contains '.'";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsValid(optionName);

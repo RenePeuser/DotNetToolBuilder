@@ -1,5 +1,3 @@
-using System;
-using System.CommandLine.Invocation;
 using System.Threading.Tasks;
 using DotNetTool.Builder.Builder.FileStructure;
 using DotNetTool.Builder.Builder.Startup;

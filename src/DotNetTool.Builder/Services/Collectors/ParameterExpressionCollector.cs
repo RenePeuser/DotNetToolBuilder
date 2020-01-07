@@ -11,15 +11,22 @@ namespace DotNetTool.Builder.Services.Collectors
     {
         private readonly IConsoleService _consoleService;
         private readonly IExpressionTokenizer _expressionTokenizer;
+        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
         private readonly IExpressionValidator _expressionValidator;
         private readonly IParameterExpressionParser _parameterExpressionParser;
 
-        public ParameterExpressionCollector(IConsoleService consoleService, IParameterExpressionParser parameterExpressionParser, IExpressionValidator expressionValidator, IExpressionTokenizer expressionTokenizer)
+        public ParameterExpressionCollector(
+            IConsoleService consoleService, 
+            IParameterExpressionParser parameterExpressionParser, 
+            IExpressionValidator expressionValidator, 
+            IExpressionTokenizer expressionTokenizer,
+            ICollectTillInputCorrect collectTillInputCorrect)
         {
             _consoleService = consoleService;
             _parameterExpressionParser = parameterExpressionParser;
             _expressionValidator = expressionValidator;
             _expressionTokenizer = expressionTokenizer;
+            _collectTillInputCorrect = collectTillInputCorrect;
         }
 
         public CommandInfo CollectFor(string dotNetToolName)
@@ -45,14 +52,8 @@ namespace DotNetTool.Builder.Services.Collectors
 
                 parameter = _parameterExpressionParser.Parse(expressionInfo, parameter);
 
-                string input = string.Empty;
-                while (input.NotEqualsAnyOf("yes", "y", "no", "n") || input.IsNullOrWhiteSpace())
-                {
-                    _consoleService.WriteInput("Do you want to add another parameter expression ? yes(y) or no (n)");
-                    input = _consoleService.ReadLine().Trim();
-                }
-
-                if (input.EqualsAnyOf("n", "no"))
+                var required = _collectTillInputCorrect.CollectTillUserInputOk("Do you want to add another parameter expression ? yes(y) or no (n)", "yes", "y", "no", "n");
+                if (required.EqualsAnyOf("n", "no"))
                 {
                     return parameter;
                 }
