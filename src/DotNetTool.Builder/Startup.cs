@@ -97,6 +97,7 @@ namespace DotNetTool.Builder
         {
             services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
             services.AddSingleton<IToolNameValidator, ToolNameValidator>();
+            services.AddSingleton<IOptionAliasValidator, OptionAliasValidator>();
 
             services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
 
@@ -153,6 +154,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IDotNetToolInfoCollector, DotNetToolInfoCollector>();
             services.AddSingleton<ICollectProjectName, CollectProjectName>();
             services.AddSingleton<ICollectDotNetToolName, CollectDotNetToolName>();
+            services.AddSingleton<ICollectOptionAlias, CollectOptionAlias>();
             services.AddSingleton<IParameterExpressionCollector, ParameterExpressionCollector>();
         }
 

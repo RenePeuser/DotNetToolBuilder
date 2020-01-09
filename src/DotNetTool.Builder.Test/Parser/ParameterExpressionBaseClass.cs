@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Parser;
 using DotNetTool.Builder.Parser.Argument;
@@ -25,8 +26,11 @@ namespace DotNetTool.Builder.Test.Parser
         {
             var consoleService = Substitute.For<IConsoleService>();
             var collectTillOk = Substitute.For<ICollectTillInputCorrect>();
+            var optionAliasCollector = Substitute.For<ICollectOptionAlias>();
             var argumentTypeOptimizer = new ArgumentTypeOptimizer(GetTypeNameOptimizers().ToList());
-            var paser = new ParameterExpressionParser(new CommandParser(consoleService), new ArgumentParser(consoleService, argumentTypeOptimizer), new OptionParser(consoleService, collectTillOk), new ParameterService());
+            var argumentParser = new ArgumentParser(consoleService, argumentTypeOptimizer);
+            var optionParser = new OptionParser(consoleService, collectTillOk, optionAliasCollector);
+            var parser = new ParameterExpressionParser(new CommandParser(consoleService), argumentParser, optionParser, new ParameterService());
             var tokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizer().ToList());
             var expressions = GetExpressionsToParse().ToList();
 
@@ -34,7 +38,7 @@ namespace DotNetTool.Builder.Test.Parser
             foreach (var expression in expressions)
             {
                 var expressionInfo = tokenizer.Tokenize(expression);
-                lastCommandInfo = paser.Parse(expressionInfo, lastCommandInfo);
+                lastCommandInfo = parser.Parse(expressionInfo, lastCommandInfo);
             }
 
             ParseResult = lastCommandInfo;

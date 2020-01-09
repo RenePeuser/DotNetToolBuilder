@@ -5,6 +5,6 @@ namespace DotNetTool.Builder.Parser.Options
 {
     internal interface IOptionParser
     {
-        OptionInfo Parse(OptionToken token, ArgumentInfo argument);
+        OptionInfo Parse(OptionToken optionToken, ArgumentInfo argumentInfo);
     }
 }

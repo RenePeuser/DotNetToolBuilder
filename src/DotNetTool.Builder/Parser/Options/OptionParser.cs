@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Tokenizer.Tokens;
@@ -11,23 +12,21 @@ namespace DotNetTool.Builder.Parser.Options
     {
         private readonly IConsoleService _consoleService;
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;
+        private readonly ICollectOptionAlias _collectOptionAlias;
 
-        public OptionParser(IConsoleService consoleService, ICollectTillInputCorrect collectTillInputCorrect)
+        public OptionParser(IConsoleService consoleService, ICollectTillInputCorrect collectTillInputCorrect, ICollectOptionAlias collectOptionAlias)
         {
             _consoleService = consoleService;
             _collectTillInputCorrect = collectTillInputCorrect;
+            _collectOptionAlias = collectOptionAlias;
         }
 
-        public OptionInfo Parse(OptionToken token, ArgumentInfo argument)
+        public OptionInfo Parse(OptionToken optionToken, ArgumentInfo argumentInfo)
         {
-            var value = token.Value;
-            var splitted = value.TrimStart('-').Split('-');
-            var suggestion = new string(splitted.Select(s => s.First()).ToArray());
+            var alias = _collectOptionAlias.Invoke(optionToken);
 
-            _consoleService.WriteInput($"Please enter an alias for your option: '{value}' suggestion: '-{suggestion}'");
-            var alias = _consoleService.ReadLine();
-
-            string required = _collectTillInputCorrect.CollectTillUserInputOk($"Is your option required (r) or optional (o): '{value}'", "o", "r");
+            var value = optionToken.Value;
+            string required = _collectTillInputCorrect.CollectTillInoutIsValid($"Is your option required (r) or optional (o): '{value}'", "o", "r");
             var boolRequired = required.ToLower().Equals("r");
 
             _consoleService.WriteInput($"Please enter a description for your option: '{value}'");
@@ -37,7 +36,7 @@ namespace DotNetTool.Builder.Parser.Options
             var normalizedOptiontName = optioName.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
             var optionArgumentName = normalizedOptiontName.FirstCharToLower();
 
-            var option = new OptionInfo(value, optioName, alias, description, boolRequired, argument, normalizedOptiontName, optionArgumentName);
+            var option = new OptionInfo(value, optioName, alias, description, boolRequired, argumentInfo, normalizedOptiontName, optionArgumentName);
             return option;
         }
     }

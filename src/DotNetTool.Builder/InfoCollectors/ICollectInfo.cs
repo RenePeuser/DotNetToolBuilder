@@ -2,7 +2,6 @@
 {
     internal interface ICollectInfo
     {
-        string Title { get; }
         string Invoke();
     }
 }

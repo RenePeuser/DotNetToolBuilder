@@ -3,10 +3,23 @@ using DotNetTool.Builder.Validation;
 
 namespace DotNetTool.Builder.InfoCollectors
 {
-    internal class CollectProjectName : CollectInfoStep, ICollectProjectName
+    internal class CollectProjectName : ICollectProjectName
     {
-        public CollectProjectName(IConsoleService consoleService, IProjectNameValidator inputValidator) : base(consoleService, inputValidator, "Please enter the name of your project: (Sample: 'My.New.Tool', this is the name of your solution !)")
+        private const string Title = "Please enter the name of your project: (Sample: 'My.New.Tool', this is the name of your solution !)";
+
+        private readonly IProjectNameValidator _inputValidator;
+        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
+
+        public CollectProjectName(IProjectNameValidator inputValidator, ICollectTillInputCorrect collectTillInputCorrect)
         {
+            _inputValidator = inputValidator;
+            _collectTillInputCorrect = collectTillInputCorrect;
+        }
+
+        public string Invoke()
+        {
+            var input = _collectTillInputCorrect.CollectTillInoutIsValid(Title, _inputValidator);
+            return input;
         }
     }
 }

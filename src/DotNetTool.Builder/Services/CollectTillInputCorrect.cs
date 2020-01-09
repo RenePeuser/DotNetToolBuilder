@@ -1,4 +1,5 @@
 ﻿using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Validation;
 
 namespace DotNetTool.Builder.Services
 {
@@ -11,7 +12,7 @@ namespace DotNetTool.Builder.Services
             _consoleService = consoleService;
         }
 
-        public string CollectTillUserInputOk(string messageForUser, params string[] expectedInput)
+        public string CollectTillInoutIsValid(string messageForUser, params string[] expectedInput)
         {
             string required = string.Empty;
             while (required.NotEqualsAnyOf(expectedInput) || required.IsNullOrWhiteSpace())
@@ -21,6 +22,24 @@ namespace DotNetTool.Builder.Services
             }
 
             return required;
+        }
+
+        public string CollectTillInoutIsValid(string messageForUser, IInputValidator inputValidator)
+        {
+            string input = null;
+            ValidationResult validationResult = null;
+            while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
+            {
+                _consoleService.WriteInput(messageForUser);
+                input = _consoleService.ReadLine().Trim();
+                validationResult = inputValidator.IsValid(input);
+                if (validationResult.IsValid.IsFalse())
+                {
+                    _consoleService.WriteError(validationResult.Errors);
+                }
+            }
+
+            return input;
         }
     }
 }
