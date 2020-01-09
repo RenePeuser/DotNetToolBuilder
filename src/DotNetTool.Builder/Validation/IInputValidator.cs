@@ -2,6 +2,6 @@
 {
     internal interface IInputValidator
     {
-        ValidationResult IsValid(string value);
+        ValidationResult Validate(string value);
     }
 }

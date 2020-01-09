@@ -98,6 +98,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
             services.AddSingleton<IToolNameValidator, ToolNameValidator>();
             services.AddSingleton<IOptionAliasValidator, OptionAliasValidator>();
+            services.AddSingleton<IDescriptionValidator, DescriptionValidator>();
 
             services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
 

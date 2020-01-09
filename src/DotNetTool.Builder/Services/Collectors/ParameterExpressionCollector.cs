@@ -16,9 +16,9 @@ namespace DotNetTool.Builder.Services.Collectors
         private readonly IParameterExpressionParser _parameterExpressionParser;
 
         public ParameterExpressionCollector(
-            IConsoleService consoleService, 
-            IParameterExpressionParser parameterExpressionParser, 
-            IExpressionValidator expressionValidator, 
+            IConsoleService consoleService,
+            IParameterExpressionParser parameterExpressionParser,
+            IExpressionValidator expressionValidator,
             IExpressionTokenizer expressionTokenizer,
             ICollectTillInputCorrect collectTillInputCorrect)
         {
@@ -52,7 +52,7 @@ namespace DotNetTool.Builder.Services.Collectors
 
                 parameter = _parameterExpressionParser.Parse(expressionInfo, parameter);
 
-                var required = _collectTillInputCorrect.CollectTillInputIsValid("Do you want to add another parameter expression ? yes(y) or no (n)", "yes", "y", "no", "n");
+                var required = _collectTillInputCorrect.CollectTillInputIsValid("Do you want to add another parameter expression ? yes(y) or no (n)", input => input.ContainsAnyOf("yes", "y", "no", "n"), input => $"Input: '{input}' does not match any of yes(y) or no (n)");
                 if (required.EqualsAnyOf("n", "no"))
                 {
                     return parameter;

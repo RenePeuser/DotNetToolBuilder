@@ -8,8 +8,8 @@ namespace DotNetTool.Builder.Services
 {
     internal interface ICollectTillInputCorrect
     {
-        string CollectTillInputIsValid(string messageForUser, params string[] expectedInput);
+        string CollectTillInputIsValid(string messageForUser, Predicate<string> inputValidation, Func<string, string> getErrorMessageForInput);
+
         string CollectTillInputIsValid(string messageForUser, IInputValidator inputValidator);
-        string CollectTillInputIsValid(string messageForUser, Predicate<string> inputValidation);
     }
 }

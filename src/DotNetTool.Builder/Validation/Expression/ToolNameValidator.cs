@@ -46,7 +46,7 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield return $"Expression must start with your root command: '{dotNetToolName}'";
             }
 
-            var result = _toolNameValidator.IsValid(firstCommand.Value);
+            var result = _toolNameValidator.Validate(firstCommand.Value);
             if (result.IsValid.IsFalse())
             {
                 yield return result.Errors;

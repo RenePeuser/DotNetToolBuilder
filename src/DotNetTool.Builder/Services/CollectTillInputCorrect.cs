@@ -14,29 +14,25 @@ namespace DotNetTool.Builder.Services
             _consoleService = consoleService;
         }
 
-        public string CollectTillInputIsValid(string messageForUser, params string[] expectedInput)
-        {
-            Throw.IfNullOrWhiteSpace(() => messageForUser);
-            Throw.IfNull(() => expectedInput);
-
-            return CollectTillInputIsValid(messageForUser, input => input.ContainsAnyOf(expectedInput));
-        }
-
-        public string CollectTillInputIsValid(string messageForUser, Predicate<string> inputValidation)
+        public string CollectTillInputIsValid(string messageForUser, Predicate<string> inputValidation, Func<string, string> getErrorMessageForInput)
         {
             Throw.IfNullOrWhiteSpace(() => messageForUser);
             Throw.IfNull(() => inputValidation);
 
             bool isValid = false;
-            string description = string.Empty;
+            string input = string.Empty;
             while (isValid.IsFalse())
             {
                 _consoleService.WriteInput(messageForUser);
-                description = _consoleService.ReadLine().Trim();
-                isValid = inputValidation(description);
+                input = _consoleService.ReadLine().Trim();
+                isValid = inputValidation(input);
+                if (isValid.IsFalse())
+                {
+                    _consoleService.WriteError(getErrorMessageForInput(input));
+                }
             }
 
-            return description;
+            return input;
         }
 
         public string CollectTillInputIsValid(string messageForUser, IInputValidator inputValidator)
@@ -50,7 +46,7 @@ namespace DotNetTool.Builder.Services
             {
                 _consoleService.WriteInput(messageForUser);
                 input = _consoleService.ReadLine().Trim();
-                validationResult = inputValidator.IsValid(input);
+                validationResult = inputValidator.Validate(input);
                 if (validationResult.IsValid.IsFalse())
                 {
                     _consoleService.WriteError(validationResult.Errors);

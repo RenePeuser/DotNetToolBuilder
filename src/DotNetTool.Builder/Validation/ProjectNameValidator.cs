@@ -19,7 +19,7 @@ namespace DotNetTool.Builder.Validation
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
-        public ValidationResult IsValid(string value)
+        public ValidationResult Validate(string value)
         {
             // No argument check here !
             // Throw.IfNullOrWhiteSpace(() => value);

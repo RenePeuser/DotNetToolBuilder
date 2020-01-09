@@ -26,7 +26,7 @@ namespace DotNetTool.Builder.Parser.Options
             var alias = _collectOptionAlias.Invoke(optionToken);
 
             var value = optionToken.Value;
-            string required = _collectTillInputCorrect.CollectTillInputIsValid($"Is your option required (r) or optional (o): '{value}'", "o", "r");
+            var required = _collectTillInputCorrect.CollectTillInputIsValid($"Is your option required (r) or optional (o): '{value}'", input => input.ContainsAnyOf("o", "r"), input => $"Input: '{input}' is not valid. Only '(r)' or '(o)' is a valid input");
             var boolRequired = required.ToLower().Equals("r");
 
             var description = _collectDescription.Collect($"Please enter a description for your option: '{value}'");

@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Validation
 {
     internal class OptionAliasValidator : IOptionAliasValidator
     {
-        public ValidationResult IsValid(string value)
+        public ValidationResult Validate(string value)
         {
             if (value.IsNullOrWhiteSpace())
             {
