@@ -15,10 +15,10 @@ namespace DotNetTool.Builder.InfoCollectors
             _collectTillInputCorrect = collectTillInputCorrect;
         }
 
-        public string Invoke()
+        public string Collect()
         {
-            var input = _collectTillInputCorrect.CollectTillInoutIsValid(Title, _inputValidator);
-            return input;
+            var dotNetToolName = _collectTillInputCorrect.CollectTillInputIsValid(Title, _inputValidator);
+            return dotNetToolName;
         }
     }
 }

@@ -151,6 +151,7 @@ namespace DotNetTool.Builder
 
         private void RegisterDotNetToolInfoCollector(IServiceCollection services)
         {
+            services.AddSingleton<ICollectDescription, CollectDescription>();
             services.AddSingleton<IDotNetToolInfoCollector, DotNetToolInfoCollector>();
             services.AddSingleton<ICollectProjectName, CollectProjectName>();
             services.AddSingleton<ICollectDotNetToolName, CollectDotNetToolName>();

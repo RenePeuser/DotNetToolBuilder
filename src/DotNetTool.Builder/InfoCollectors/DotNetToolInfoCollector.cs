@@ -18,8 +18,8 @@ namespace DotNetTool.Builder.InfoCollectors
 
         public Models.DotNetTool Collect()
         {
-            var projectName = _collectProjectName.Invoke();
-            var dotnetToolName = _collectDotNetToolName.Invoke();
+            var projectName = _collectProjectName.Collect();
+            var dotnetToolName = _collectDotNetToolName.Collect();
             var parameter = _parameterExpressionCollector.CollectFor(dotnetToolName);
 
             return new Models.DotNetTool(projectName, dotnetToolName, parameter);

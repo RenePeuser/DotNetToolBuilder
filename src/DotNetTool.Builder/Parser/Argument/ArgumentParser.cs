@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
-using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Tokenizer.Tokens;
 
@@ -11,13 +9,13 @@ namespace DotNetTool.Builder.Parser.Argument
 {
     internal class ArgumentParser : IArgumentParser
     {
-        private readonly IConsoleService _consoleService;
         private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
+        private readonly ICollectDescription _collectDescription;
 
-        public ArgumentParser(IConsoleService consoleService, IArgumentTypeOptimizer argumentTypeOptimizer)
+        public ArgumentParser(IArgumentTypeOptimizer argumentTypeOptimizer, ICollectDescription collectDescription)
         {
-            _consoleService = consoleService;
             _argumentTypeOptimizer = argumentTypeOptimizer;
+            _collectDescription = collectDescription;
         }
 
         public ArgumentInfo Parse(ArgumentToken value)
@@ -37,13 +35,10 @@ namespace DotNetTool.Builder.Parser.Argument
                 typeInfo = argumentValue[startIndex..endIndex];
             }
 
-            _consoleService.WriteInput($"Please enter a description for your argument: '{argumentValue}'");
-            var description = _consoleService.ReadLine();
-
+            var description = _collectDescription.Collect($"Please enter a description for your argument: '{argumentValue}'");
             var optmmizedTypeInfo = _argumentTypeOptimizer.OptimizeType(typeInfo);
 
             var argument = new ArgumentInfo(name, description, argumentValue, typeInfo, optmmizedTypeInfo);
-
             return argument;
         }
     }

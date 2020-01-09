@@ -21,8 +21,8 @@ namespace DotNetTool.Builder.InfoCollectors
             var value = optionToken.Value;
             var splittedOption = value.TrimStart('-').Split('-');
             var suggestion = new string(splittedOption.Select(s => s.First()).ToArray());
-            var input = _collectTillInputCorrect.CollectTillInoutIsValid($"Please enter an alias for your option: '{value}' suggestion: '-{suggestion}'", _inputValidator);
-            return input;
+            var optionAlias = _collectTillInputCorrect.CollectTillInputIsValid($"Please enter an alias for your option: '{value}' suggestion: '-{suggestion}'", _inputValidator);
+            return optionAlias;
         }
     }
 }

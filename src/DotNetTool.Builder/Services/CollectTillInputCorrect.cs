@@ -1,4 +1,6 @@
-﻿using DotNetTool.Builder.Extensions;
+﻿using System;
+using Argument.Check;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Validation;
 
 namespace DotNetTool.Builder.Services
@@ -12,20 +14,36 @@ namespace DotNetTool.Builder.Services
             _consoleService = consoleService;
         }
 
-        public string CollectTillInoutIsValid(string messageForUser, params string[] expectedInput)
+        public string CollectTillInputIsValid(string messageForUser, params string[] expectedInput)
         {
-            string required = string.Empty;
-            while (required.NotEqualsAnyOf(expectedInput) || required.IsNullOrWhiteSpace())
-            {
-                _consoleService.WriteInput(messageForUser);
-                required = _consoleService.ReadLine().Trim();
-            }
+            Throw.IfNullOrWhiteSpace(() => messageForUser);
+            Throw.IfNull(() => expectedInput);
 
-            return required;
+            return CollectTillInputIsValid(messageForUser, input => input.ContainsAnyOf(expectedInput));
         }
 
-        public string CollectTillInoutIsValid(string messageForUser, IInputValidator inputValidator)
+        public string CollectTillInputIsValid(string messageForUser, Predicate<string> inputValidation)
         {
+            Throw.IfNullOrWhiteSpace(() => messageForUser);
+            Throw.IfNull(() => inputValidation);
+
+            bool isValid = false;
+            string description = string.Empty;
+            while (isValid.IsFalse())
+            {
+                _consoleService.WriteInput(messageForUser);
+                description = _consoleService.ReadLine().Trim();
+                isValid = inputValidation(description);
+            }
+
+            return description;
+        }
+
+        public string CollectTillInputIsValid(string messageForUser, IInputValidator inputValidator)
+        {
+            Throw.IfNullOrWhiteSpace(() => messageForUser);
+            Throw.IfNull(() => inputValidator);
+
             string input = null;
             ValidationResult validationResult = null;
             while (validationResult.IsNull() || validationResult.IsValid.IsFalse())

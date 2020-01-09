@@ -1,6 +1,7 @@
 ﻿namespace DotNetTool.Builder.InfoCollectors
 {
-    internal interface ICollectDotNetToolName : ICollectInfo
+    internal interface ICollectDotNetToolName
     {
+        string Collect();
     }
 }

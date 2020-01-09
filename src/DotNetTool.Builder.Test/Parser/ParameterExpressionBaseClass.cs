@@ -24,13 +24,13 @@ namespace DotNetTool.Builder.Test.Parser
         [TestInitialize]
         public void Init()
         {
-            var consoleService = Substitute.For<IConsoleService>();
             var collectTillOk = Substitute.For<ICollectTillInputCorrect>();
+            var descriptionCollector = Substitute.For<ICollectDescription>();
             var optionAliasCollector = Substitute.For<ICollectOptionAlias>();
             var argumentTypeOptimizer = new ArgumentTypeOptimizer(GetTypeNameOptimizers().ToList());
-            var argumentParser = new ArgumentParser(consoleService, argumentTypeOptimizer);
-            var optionParser = new OptionParser(consoleService, collectTillOk, optionAliasCollector);
-            var parser = new ParameterExpressionParser(new CommandParser(consoleService), argumentParser, optionParser, new ParameterService());
+            var argumentParser = new ArgumentParser(argumentTypeOptimizer, descriptionCollector);
+            var optionParser = new OptionParser(collectTillOk, optionAliasCollector, descriptionCollector);
+            var parser = new ParameterExpressionParser(new CommandParser(descriptionCollector), argumentParser, optionParser, new ParameterService());
             var tokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizer().ToList());
             var expressions = GetExpressionsToParse().ToList();
 

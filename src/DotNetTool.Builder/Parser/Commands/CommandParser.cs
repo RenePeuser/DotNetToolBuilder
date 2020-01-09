@@ -2,6 +2,7 @@
 using System.Linq;
 using Argument.Check;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Tokenizer.Tokens;
@@ -10,13 +11,13 @@ namespace DotNetTool.Builder.Parser.Commands
 {
     internal class CommandParser : ICommandParser
     {
-        private readonly IConsoleService _consoleService;
+        private readonly ICollectDescription _collectDescription;
 
-        public CommandParser(IConsoleService consoleService)
+        public CommandParser(ICollectDescription collectDescription)
         {
-            Throw.IfNull(() => consoleService);
+            Throw.IfNull(() => collectDescription);
 
-            _consoleService = consoleService;
+            _collectDescription = collectDescription;
         }
 
         public CommandInfo Parse(CommandToken commandToken, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, CommandInfo lastCommand, CommandInfo alreadyExistingCommand, CommandInfo previousExpressionCommand)
@@ -24,15 +25,17 @@ namespace DotNetTool.Builder.Parser.Commands
             // Null allowed
             // Throw.IfNull(() => argumentInfo);
             // Throw.IfNull(() => previousCommand);
-            Throw.IfNull(() => commandToken);
+            // Throw.IfNull(() => lastCommand);
+            // Throw.IfNull(() => alreadyExistingCommand);
+            // Throw.IfNull(() => previousExpressionCommand);
             Throw.IfNull(() => options);
+            Throw.IfNull(() => commandToken);
 
             var value = commandToken.Value;
 
             if (alreadyExistingCommand.IsNull())
             {
-                _consoleService.WriteInput($"Please enter a description for your command: '{value}'");
-                var description = _consoleService.ReadLine();
+                var description = _collectDescription.Collect($"Please enter a description for your command: '{value}'");
                 var commands = lastCommand.IsNotNull() ? lastCommand.ToIList() : Enumerable.Empty<CommandInfo>();
                 var command = new CommandInfo(value, value, description, argumentInfo, options, commands);
                 return command;
