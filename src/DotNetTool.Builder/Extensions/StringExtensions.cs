@@ -10,17 +10,6 @@ namespace DotNetTool.Builder.Extensions
             return !notContainStrings.Any(source.Contains);
         }
 
-        internal static bool ContainsAnyOf(this string source, params string[] notContainStrings)
-        {
-            return notContainStrings.Any(source.Contains);
-        }
-
-
-        internal static bool NotEqualsAnyOf(this string source, params string[] notContainStrings)
-        {
-            return !source.EqualsAnyOf(notContainStrings);
-        }
-
         internal static bool EqualsAnyOf(this string source, params string[] notContainStrings)
         {
             return notContainStrings.Any(s => s.ToLower().EqualsTo(source));

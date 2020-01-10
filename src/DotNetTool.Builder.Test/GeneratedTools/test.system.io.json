@@ -12,7 +12,7 @@
           {
             "Alias": "-c",
             "Description": "description for --fileinfo",
-            "Required": false,
+            "IsRequired": false,
             "Argument": {
               "Description": "description for <fileinfo>[fileinfo]",
               "Type": "fileinfo",
@@ -30,7 +30,7 @@
           {
             "Alias": "-b",
             "Description": "description for --system-io-file",
-            "Required": false,
+            "IsRequired": false,
             "Argument": {
               "Description": "description for <sif>[system.io.file]",
               "Type": "system.io.file",
@@ -48,7 +48,7 @@
           {
             "Alias": "-a",
             "Description": "description for --system-io-fileinfo",
-            "Required": false,
+            "IsRequired": false,
             "Argument": {
               "Description": "argument siof",
               "Type": "system.io.fileinfo",
@@ -83,7 +83,7 @@
           {
             "Alias": "-f",
             "Description": "description --directoryinfo",
-            "Required": false,
+            "IsRequired": false,
             "Argument": {
               "Description": "description for <directoryinfo>[directoryinfo]",
               "Type": "directoryinfo",
@@ -101,7 +101,7 @@
           {
             "Alias": "-e",
             "Description": "description for --system-io-directory",
-            "Required": false,
+            "IsRequired": false,
             "Argument": {
               "Description": "description for <sif>[system.io.directory]",
               "Type": "system.io.directory",
@@ -119,7 +119,7 @@
           {
             "Alias": "-d",
             "Description": "description --system-io-directoryinfo",
-            "Required": false,
+            "IsRequired": false,
             "Argument": {
               "Description": "descritpion <siodir>[system.io.directoryinfo]",
               "Type": "system.io.directoryinfo",

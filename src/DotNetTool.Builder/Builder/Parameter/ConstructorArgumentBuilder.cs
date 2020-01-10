@@ -18,11 +18,11 @@ namespace DotNetTool.Builder.Builder.Parameter
             {
                 if (optionInfo.Argument.IsNotNull())
                 {
-                    yield return new CtorArgument(optionInfo.Argument.OptimizedType, optionInfo.ArgumentName);
+                    yield return new CtorArgument(optionInfo.Argument.OptimizedType, optionInfo.NormalizedName.FirstCharToLower());
                 }
                 else
                 {
-                    yield return new CtorArgument("bool", optionInfo.ArgumentName);
+                    yield return new CtorArgument("bool", optionInfo.NormalizedName.FirstCharToLower());
                 }
             }
         }

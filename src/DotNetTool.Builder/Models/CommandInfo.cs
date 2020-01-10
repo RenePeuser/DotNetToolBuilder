@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using DotNetTool.Builder.Extensions;
 using Newtonsoft.Json;
 
 [assembly: InternalsVisibleTo("DotNetTool.Builder.Test")]

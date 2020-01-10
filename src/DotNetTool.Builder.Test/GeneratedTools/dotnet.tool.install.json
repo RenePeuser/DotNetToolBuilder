@@ -12,7 +12,7 @@
           {
             "Alias": "-v",
             "Description": "description for --version",
-            "Required": false,
+            "IsRequired": false,
             "Argument": {
               "Description": "description for <version>[string]",
               "Type": "string",
@@ -30,7 +30,7 @@
           {
             "Alias": "-pr",
             "Description": "description for --include-prerelease",
-            "Required": false,
+            "IsRequired": false,
             "Argument": null,
             "NormalizedValue": "IncludePrerelease",
             "ArgumentName": "includePrerelease",
