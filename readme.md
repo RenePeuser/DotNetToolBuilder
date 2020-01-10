@@ -49,7 +49,7 @@ Hint: Because of prerelease state you have to use the '--version' option to inst
 dotnet tool install DotNetTool.Builder --global
 ```
 
-## Create a new dotnet tool (generating only):
+## Create a new simple dotnet tool (generating only):
 ![](./assets/generating-only.gif)
 
 ## Create a new dotnet tool and start VS-Code:
@@ -77,6 +77,14 @@ Because this gif is not up to date to the new cli syntax !
 
 ## Create a dotnet tool from an already serialized tool:
 ![](./assets/from-file.gif)
+
+## Create a dotnet tool which extends the existing dotnet cli:
+```
+What does did means. You are able to extend the root command of the 'dotnet'
+cli with your command. This have a nice effeyt that your tools feels like it comes
+from the dotnet cli.
+```
+![](./assets/dotnet-tool.gif)
 
 
 ## Sample multiple expressions
