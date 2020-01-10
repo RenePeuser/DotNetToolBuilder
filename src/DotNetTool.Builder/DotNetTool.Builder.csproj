@@ -13,14 +13,14 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes
-- Better validation for request 'optional' (o) or 'required' (r) parameter
-- Change console text color to green for better readability.
-- Fix agrument info when use --help for --from-file and --save-to option.
-- Fix last fore color when cancel with strg+c
-- Add validation name of an option must not contains '.'
-- Add type optimizer for FileInfo, DirectoryInfo and FileSystemInfo,
-  so 'file', 'fileinfo', 'directory' etc. will now automaticall converted
-  to correct System.IO.FileInfo or System.IO.DirectoryInfo
+- Add validation for option alias. Alias must begin with a "-"
+- Add description check, must have no minimum 10 characters.
+- Fix input for optional (o) and required (r) question.
+- A root command can contains now "-" name splitter. To use 'my-tool'
+  or 'dotnet-mytool' or anything else.
+- Fix worng &lt;ToolCommandName&gt; ins csproj file, after generating the tool.
+- !! Hint '--from-file' can not be used any more, with older generated tool
+  json files !!.
 
 Prerequisites
 - .NET Core 3.0 SDK or higher</PackageReleaseNotes>
