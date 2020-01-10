@@ -18,7 +18,7 @@
 - Fix input for optional (o) and required (r) question.
 - A root command can contains now "-" name splitter. To use 'my-tool'
   or 'dotnet-mytool' or anything else.
-- Fix worng &lt;ToolCommandName&gt; ins csproj file, after generating the tool.
+- Fix wrong &lt;ToolCommandName&gt; name in the csproj file, after generating the tool.
 - !! Hint '--from-file' can not be used any more, with older generated tool
   json files !!.
 

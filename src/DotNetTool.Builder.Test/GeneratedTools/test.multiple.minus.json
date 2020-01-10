@@ -1,0 +1,46 @@
+{
+  "ProjectName": "test.multiple.minus",
+  "DotNetToolName": {
+    "Value": "my-tool-now",
+    "NormalizedName": "MyToolNow"
+  },
+  "ParameterInfo": {
+    "SubCommands": [
+      {
+        "SubCommands": [
+          {
+            "SubCommands": [
+              {
+                "SubCommands": [],
+                "Options": [],
+                "Argument": null,
+                "Description": "vdsvddsvs vd d svd",
+                "Value": "two",
+                "Name": "two",
+                "NormalizedName": "Two"
+              }
+            ],
+            "Options": [],
+            "Argument": null,
+            "Description": "vsv sdv dvvds vdsds",
+            "Value": "one",
+            "Name": "one",
+            "NormalizedName": "One"
+          }
+        ],
+        "Options": [],
+        "Argument": null,
+        "Description": "svsdv sdv dsv dsv s",
+        "Value": "test",
+        "Name": "test",
+        "NormalizedName": "Test"
+      }
+    ],
+    "Options": [],
+    "Argument": null,
+    "Description": "sdv  d svv dsv sdv sd",
+    "Value": "my-tool-now",
+    "Name": "my-tool-now",
+    "NormalizedName": "MyToolNow"
+  }
+}
