@@ -1,0 +1,159 @@
+{
+  "ProjectName": "test.system.io",
+  "DotNetToolName": {
+    "Value": "test",
+    "NormalizedName": "Test"
+  },
+  "ParameterInfo": {
+    "SubCommands": [
+      {
+        "SubCommands": [],
+        "Options": [
+          {
+            "Alias": "-c",
+            "Description": "description for --fileinfo",
+            "Required": false,
+            "Argument": {
+              "Description": "description for <fileinfo>[fileinfo]",
+              "Type": "fileinfo",
+              "OptimizedType": "System.IO.FileInfo",
+              "Value": "<fileinfo>[fileinfo]",
+              "Name": "fileinfo",
+              "NormalizedName": "Fileinfo"
+            },
+            "NormalizedValue": "Fileinfo",
+            "ArgumentName": "fileinfo",
+            "Value": "--fileinfo",
+            "Name": "fileinfo",
+            "NormalizedName": "Fileinfo"
+          },
+          {
+            "Alias": "-b",
+            "Description": "description for --system-io-file",
+            "Required": false,
+            "Argument": {
+              "Description": "description for <sif>[system.io.file]",
+              "Type": "system.io.file",
+              "OptimizedType": "System.IO.FileInfo",
+              "Value": "<sif>[system.io.file]",
+              "Name": "sif",
+              "NormalizedName": "Sif"
+            },
+            "NormalizedValue": "SystemIoFile",
+            "ArgumentName": "systemIoFile",
+            "Value": "--system-io-file",
+            "Name": "system-io-file",
+            "NormalizedName": "SystemIoFile"
+          },
+          {
+            "Alias": "-a",
+            "Description": "description for --system-io-fileinfo",
+            "Required": false,
+            "Argument": {
+              "Description": "argument siof",
+              "Type": "system.io.fileinfo",
+              "OptimizedType": "System.IO.FileInfo",
+              "Value": "<siof>[system.io.fileinfo]",
+              "Name": "siof",
+              "NormalizedName": "Siof"
+            },
+            "NormalizedValue": "SystemIoFileinfo",
+            "ArgumentName": "systemIoFileinfo",
+            "Value": "--system-io-fileinfo",
+            "Name": "system-io-fileinfo",
+            "NormalizedName": "SystemIoFileinfo"
+          }
+        ],
+        "Argument": {
+          "Description": "descrption for <file>[file]",
+          "Type": "file",
+          "OptimizedType": "System.IO.FileInfo",
+          "Value": "<file>[file]",
+          "Name": "file",
+          "NormalizedName": "File"
+        },
+        "Description": "description usefile",
+        "Value": "usefile",
+        "Name": "usefile",
+        "NormalizedName": "Usefile"
+      },
+      {
+        "SubCommands": [],
+        "Options": [
+          {
+            "Alias": "-f",
+            "Description": "description --directoryinfo",
+            "Required": false,
+            "Argument": {
+              "Description": "description for <directoryinfo>[directoryinfo]",
+              "Type": "directoryinfo",
+              "OptimizedType": "System.IO.DirectoryInfo",
+              "Value": "<directoryinfo>[directoryinfo]",
+              "Name": "directoryinfo",
+              "NormalizedName": "Directoryinfo"
+            },
+            "NormalizedValue": "Directoryinfo",
+            "ArgumentName": "directoryinfo",
+            "Value": "--directoryinfo",
+            "Name": "directoryinfo",
+            "NormalizedName": "Directoryinfo"
+          },
+          {
+            "Alias": "-e",
+            "Description": "description for --system-io-directory",
+            "Required": false,
+            "Argument": {
+              "Description": "description for <sif>[system.io.directory]",
+              "Type": "system.io.directory",
+              "OptimizedType": "System.IO.DirectoryInfo",
+              "Value": "<sif>[system.io.directory]",
+              "Name": "sif",
+              "NormalizedName": "Sif"
+            },
+            "NormalizedValue": "SystemIoDirectory",
+            "ArgumentName": "systemIoDirectory",
+            "Value": "--system-io-directory",
+            "Name": "system-io-directory",
+            "NormalizedName": "SystemIoDirectory"
+          },
+          {
+            "Alias": "-d",
+            "Description": "description --system-io-directoryinfo",
+            "Required": false,
+            "Argument": {
+              "Description": "descritpion <siodir>[system.io.directoryinfo]",
+              "Type": "system.io.directoryinfo",
+              "OptimizedType": "System.IO.DirectoryInfo",
+              "Value": "<siodir>[system.io.directoryinfo]",
+              "Name": "siodir",
+              "NormalizedName": "Siodir"
+            },
+            "NormalizedValue": "SystemIoDirectoryinfo",
+            "ArgumentName": "systemIoDirectoryinfo",
+            "Value": "--system-io-directoryinfo",
+            "Name": "system-io-directoryinfo",
+            "NormalizedName": "SystemIoDirectoryinfo"
+          }
+        ],
+        "Argument": {
+          "Description": "description <directory>[directory]",
+          "Type": "directory",
+          "OptimizedType": "System.IO.DirectoryInfo",
+          "Value": "<directory>[directory]",
+          "Name": "directory",
+          "NormalizedName": "Directory"
+        },
+        "Description": "description usedirectory",
+        "Value": "usedirectory",
+        "Name": "usedirectory",
+        "NormalizedName": "Usedirectory"
+      }
+    ],
+    "Options": [],
+    "Argument": null,
+    "Description": "description test",
+    "Value": "test",
+    "Name": "test",
+    "NormalizedName": "Test"
+  }
+}

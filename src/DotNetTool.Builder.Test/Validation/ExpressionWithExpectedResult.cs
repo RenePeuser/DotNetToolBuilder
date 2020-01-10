@@ -4,9 +4,9 @@ namespace DotNetTool.Builder.Test.Validation
 {
     public class ExpressionWithExpectedResult
     {
-        internal ExpressionWithExpectedResult(DotNetToolName dotNetToolName, string expression)
+        internal ExpressionWithExpectedResult(string dotNetToolName, string expression)
         {
-            DotNetToolName = dotNetToolName;
+            DotNetToolName = new DotNetToolName(dotNetToolName, dotNetToolName);
             Expression = expression;
         }
 

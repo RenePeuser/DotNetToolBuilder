@@ -1,0 +1,63 @@
+{
+  "ProjectName": "dotnet.tool.install",
+  "DotNetToolName": {
+    "Value": "dotnet-tool",
+    "NormalizedName": "Tool"
+  },
+  "ParameterInfo": {
+    "SubCommands": [
+      {
+        "SubCommands": [],
+        "Options": [
+          {
+            "Alias": "-v",
+            "Description": "description for --version",
+            "Required": false,
+            "Argument": {
+              "Description": "description for <version>[string]",
+              "Type": "string",
+              "OptimizedType": "string",
+              "Value": "<version>[string]",
+              "Name": "version",
+              "NormalizedName": "Version"
+            },
+            "NormalizedValue": "Version",
+            "ArgumentName": "version",
+            "Value": "--version",
+            "Name": "version",
+            "NormalizedName": "Version"
+          },
+          {
+            "Alias": "-pr",
+            "Description": "description for --include-prerelease",
+            "Required": false,
+            "Argument": null,
+            "NormalizedValue": "IncludePrerelease",
+            "ArgumentName": "includePrerelease",
+            "Value": "--include-prerelease",
+            "Name": "include-prerelease",
+            "NormalizedName": "IncludePrerelease"
+          }
+        ],
+        "Argument": {
+          "Description": "description for <package>[string]",
+          "Type": "string",
+          "OptimizedType": "string",
+          "Value": "<package>[string]",
+          "Name": "package",
+          "NormalizedName": "Package"
+        },
+        "Description": "description for install",
+        "Value": "install",
+        "Name": "install",
+        "NormalizedName": "Install"
+      }
+    ],
+    "Options": [],
+    "Argument": null,
+    "Description": "description dotnet-tool",
+    "Value": "dotnet-tool",
+    "Name": "dotnet-tool",
+    "NormalizedName": "Tool"
+  }
+}

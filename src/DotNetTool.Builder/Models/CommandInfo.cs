@@ -31,8 +31,6 @@ namespace DotNetTool.Builder.Models
 
         public ArgumentInfo Argument { get; }
 
-        public string AsArgumentName => Name.FirstCharToLower();
-
         public string Description { get; }
     }
 }

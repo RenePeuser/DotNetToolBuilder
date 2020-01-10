@@ -1,4 +1,5 @@
 ﻿using Argument.Check;
+using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Builder.Commands
@@ -53,7 +54,7 @@ namespace DotNetTool.Builder.Builder.Commands
                 .Replace("$parent-command-name$", parent.NormalizedName)
                 .Replace("$command-description$", parameterInfo.Description)
                 .Replace("$command-argument-name$", parameterInfo.Name)
-                .Replace("$command-service-argument-name$", parameterInfo.AsArgumentName)
+                .Replace("$command-service-argument-name$", parameterInfo.NormalizedName.FirstCharToLower())
                 .Replace("$command-handler$", commandHandler)
                 .Replace("$namespace$", nameSpace)
                 .Replace("$project-name$", project);

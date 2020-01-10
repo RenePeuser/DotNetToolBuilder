@@ -1,13 +1,15 @@
-﻿namespace DotNetTool.Builder.Models
+﻿using Argument.Check;
+using Newtonsoft.Json;
+
+namespace DotNetTool.Builder.Models
 {
     public class DotNetToolName
     {
-        public DotNetToolName(string value) : this(value, value)
-        {
-        }
-
         public DotNetToolName(string value, string normalizedName)
         {
+            Throw.IfNullOrWhiteSpace(() => value);
+            Throw.IfNullOrWhiteSpace(() => normalizedName);
+
             Value = value;
             NormalizedName = normalizedName;
         }

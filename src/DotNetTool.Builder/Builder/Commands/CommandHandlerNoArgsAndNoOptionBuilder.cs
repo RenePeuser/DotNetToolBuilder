@@ -20,7 +20,7 @@ namespace DotNetTool.Builder.Builder.Commands
 
             var newTemplate = Template.Replace("$types$", types)
                                       .Replace("$command-name$", parameterInfo.NormalizedName)
-                                      .Replace("$command-argument-name$", parameterInfo.AsArgumentName)
+                                      .Replace("$command-argument-name$", parameterInfo.NormalizedName.FirstCharToLower())
                                       .Replace("$argument-names$", argNames);
             return newTemplate;
         }

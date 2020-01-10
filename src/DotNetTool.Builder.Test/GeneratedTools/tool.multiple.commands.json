@@ -1,0 +1,81 @@
+{
+  "ProjectName": "tool.multiple.commands",
+  "DotNetToolName": {
+    "Value": "tool",
+    "NormalizedName": "Tool"
+  },
+  "ParameterInfo": {
+    "SubCommands": [
+      {
+        "SubCommands": [],
+        "Options": [],
+        "Argument": {
+          "Description": "description for <file>[file]",
+          "Type": "file",
+          "OptimizedType": "System.IO.FileInfo",
+          "Value": "<file>[file]",
+          "Name": "file",
+          "NormalizedName": "File"
+        },
+        "Description": "description for list",
+        "Value": "list",
+        "Name": "list",
+        "NormalizedName": "List"
+      },
+      {
+        "SubCommands": [],
+        "Options": [],
+        "Argument": {
+          "Description": "description for file",
+          "Type": "file",
+          "OptimizedType": "System.IO.FileInfo",
+          "Value": "<file>[file]",
+          "Name": "file",
+          "NormalizedName": "File"
+        },
+        "Description": "description for update",
+        "Value": "update",
+        "Name": "update",
+        "NormalizedName": "Update"
+      },
+      {
+        "SubCommands": [],
+        "Options": [],
+        "Argument": {
+          "Description": "description for <file>[file]",
+          "Type": "file",
+          "OptimizedType": "System.IO.FileInfo",
+          "Value": "<file>[file]",
+          "Name": "file",
+          "NormalizedName": "File"
+        },
+        "Description": "description for delete",
+        "Value": "delete",
+        "Name": "delete",
+        "NormalizedName": "Delete"
+      },
+      {
+        "SubCommands": [],
+        "Options": [],
+        "Argument": {
+          "Description": "description for <file>[file]",
+          "Type": "file",
+          "OptimizedType": "System.IO.FileInfo",
+          "Value": "<file>[file]",
+          "Name": "file",
+          "NormalizedName": "File"
+        },
+        "Description": "description for install",
+        "Value": "install",
+        "Name": "install",
+        "NormalizedName": "Install"
+      }
+    ],
+    "Options": [],
+    "Argument": null,
+    "Description": "description for tool",
+    "Value": "tool",
+    "Name": "tool",
+    "NormalizedName": "Tool"
+  }
+}

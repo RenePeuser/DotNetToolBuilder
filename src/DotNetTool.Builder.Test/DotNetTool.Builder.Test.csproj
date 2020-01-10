@@ -25,10 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="GeneratedTools\mega.man.json">
+    <None Update="GeneratedTools\dotnet.tool.install.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="GeneratedTools\my.test.json">
+    <None Update="GeneratedTools\test.system.io.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="GeneratedTools\tool.multiple.commands.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

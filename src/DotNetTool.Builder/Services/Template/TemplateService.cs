@@ -22,7 +22,7 @@ namespace DotNetTool.Builder.Services.Template
 
             // class etc. and rest
             _renameFilesAndFolders.Rename(targetDirectory, "Rps", dotNetTool.DotNetToolName.NormalizedName);
-            _renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.DotNetToolName.Value.ToLower());
+            _renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.DotNetToolName.NormalizedName.ToLower());
         }
     }
 }

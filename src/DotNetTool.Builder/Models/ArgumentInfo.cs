@@ -8,25 +8,18 @@ namespace DotNetTool.Builder.Models
 {
     public class ArgumentInfo : InfoBase
     {
-        private string _optimizedType;
-
         [JsonConstructor]
         public ArgumentInfo(string name, string description, string value, string type, string optimizedType, string normalizedName) : base(value, name, normalizedName)
         {
             Description = description;
             Type = type;
-            _optimizedType = optimizedType;
+            OptimizedType = optimizedType;
         }
 
         public string Description { get; }
 
         public string Type { get; }
 
-        // ToDo: make it clean, this is to hold compatibility to older serialized tools.
-        // Fast workaround to keep compatibility
-        public string OptimizedType
-        {
-            get => _optimizedType.IsNull() ? Type : _optimizedType;
-        }
+        public string OptimizedType { get; }
     }
 }
