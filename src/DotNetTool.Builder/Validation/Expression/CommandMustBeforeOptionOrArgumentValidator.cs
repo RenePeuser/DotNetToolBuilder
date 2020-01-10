@@ -9,9 +9,9 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     internal class CommandMustBeforeOptionOrArgumentValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
-            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
 
             var errors = CollectErrors(expressionInfo.Tokens).Flatten(Environment.NewLine);

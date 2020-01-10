@@ -10,16 +10,16 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     internal class UnknownTokenValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
-            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
 
-            var errors = CollectErrors(dotNetToolName, expressionInfo).Flatten(Environment.NewLine);
+            var errors = CollectErrors(dotNetDotNetToolName, expressionInfo).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }
 
-        private IEnumerable<string> CollectErrors(string dotNetToolName, ExpressionInfo expressionInfo)
+        private IEnumerable<string> CollectErrors(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
             var unknownTokens = expressionInfo.Tokens.OfType<UnknownToken>().ToList();
             if (unknownTokens.IsEmpty())
@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Validation.Expression
             }
 
             yield return "Only commands, options or aguments are allowed. Sample:";
-            yield return $"{dotNetToolName} command <cmd-arg> --option <opt-arg>";
+            yield return $"{dotNetDotNetToolName.Value} command <cmd-arg> --option <opt-arg>";
         }
     }
 }

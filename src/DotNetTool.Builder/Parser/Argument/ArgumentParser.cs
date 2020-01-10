@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Parser.Argument
             var description = _collectDescription.Collect($"Please enter a description for your argument: '{argumentValue}'");
             var optmmizedTypeInfo = _argumentTypeOptimizer.OptimizeType(typeInfo);
 
-            var argument = new ArgumentInfo(name, description, argumentValue, typeInfo, optmmizedTypeInfo);
+            var argument = new ArgumentInfo(name, description, argumentValue, typeInfo, optmmizedTypeInfo, name.FirstCharToUpper());
             return argument;
         }
     }

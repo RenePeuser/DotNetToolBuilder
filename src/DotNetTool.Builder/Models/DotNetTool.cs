@@ -1,24 +1,20 @@
 ﻿using System.Diagnostics;
-using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
-    [DebuggerDisplay("{" + nameof(ToolName) + "}")]
+    [DebuggerDisplay("{" + nameof(DotNetToolName) + "}")]
     internal class DotNetTool
     {
-        public DotNetTool(string projectName, string toolName, CommandInfo parameterInfo)
+        public DotNetTool(string projectName, DotNetToolName dotNetToolName, CommandInfo parameterInfo)
         {
             ProjectName = projectName;
-            ToolName = toolName;
-            NormalizedToolName = toolName.FirstCharToUpper();
+            DotNetToolName = dotNetToolName;
             ParameterInfo = parameterInfo;
         }
 
         public string ProjectName { get; }
 
-        public string ToolName { get; }
-
-        public string NormalizedToolName { get; }
+        public DotNetToolName DotNetToolName { get; }
 
         public CommandInfo ParameterInfo { get; }
     }

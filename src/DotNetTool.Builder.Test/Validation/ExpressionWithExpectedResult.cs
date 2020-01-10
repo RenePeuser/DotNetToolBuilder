@@ -1,14 +1,16 @@
-﻿namespace DotNetTool.Builder.Test.Validation
+﻿using DotNetTool.Builder.Models;
+
+namespace DotNetTool.Builder.Test.Validation
 {
     public class ExpressionWithExpectedResult
     {
-        public ExpressionWithExpectedResult(string toolName, string expression)
+        internal ExpressionWithExpectedResult(DotNetToolName dotNetToolName, string expression)
         {
-            ToolName = toolName;
+            DotNetToolName = dotNetToolName;
             Expression = expression;
         }
 
-        public string ToolName { get; }
+        internal DotNetToolName DotNetToolName { get; }
 
         public string Expression { get; }
     }

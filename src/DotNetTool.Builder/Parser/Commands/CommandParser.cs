@@ -4,7 +4,7 @@ using Argument.Check;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
-using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Parser.Commands
@@ -12,12 +12,14 @@ namespace DotNetTool.Builder.Parser.Commands
     internal class CommandParser : ICommandParser
     {
         private readonly ICollectDescription _collectDescription;
+        private readonly IDotNetToolNameNormalizer _dotNetToolNameNormalizer;
 
-        public CommandParser(ICollectDescription collectDescription)
+        public CommandParser(ICollectDescription collectDescription, IDotNetToolNameNormalizer dotNetToolNameNormalizer)
         {
             Throw.IfNull(() => collectDescription);
 
             _collectDescription = collectDescription;
+            _dotNetToolNameNormalizer = dotNetToolNameNormalizer;
         }
 
         public CommandInfo Parse(CommandToken commandToken, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, CommandInfo lastCommand, CommandInfo alreadyExistingCommand, CommandInfo previousExpressionCommand)
@@ -32,12 +34,13 @@ namespace DotNetTool.Builder.Parser.Commands
             Throw.IfNull(() => commandToken);
 
             var value = commandToken.Value;
+            var normalizedValue = _dotNetToolNameNormalizer.Normalize(value);
 
             if (alreadyExistingCommand.IsNull())
             {
                 var description = _collectDescription.Collect($"Please enter a description for your command: '{value}'");
                 var commands = lastCommand.IsNotNull() ? lastCommand.ToIList() : Enumerable.Empty<CommandInfo>();
-                var command = new CommandInfo(value, value, description, argumentInfo, options, commands);
+                var command = new CommandInfo(value, value, normalizedValue, description, argumentInfo, options, commands);
                 return command;
             }
 
@@ -62,7 +65,7 @@ namespace DotNetTool.Builder.Parser.Commands
                 }
             }
 
-            var result = new CommandInfo(alreadyExistingCommand.Value, alreadyExistingCommand.Name, alreadyExistingCommand.Description, currentArgument, currentOptions, subCommands);
+            var result = new CommandInfo(alreadyExistingCommand.Value, alreadyExistingCommand.Name, alreadyExistingCommand.NormalizedName, alreadyExistingCommand.Description, currentArgument, currentOptions, subCommands);
             return result;
         }
     }

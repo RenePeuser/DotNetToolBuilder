@@ -1,16 +1,15 @@
 ﻿using System.Diagnostics;
-using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Value) + "}")]
     public abstract class InfoBase
     {
-        protected InfoBase(string value, string name)
+        protected InfoBase(string value, string name, string normalizedName)
         {
             Value = value;
             Name = name;
-            NormalizedName = Name.FirstCharToUpper();
+            NormalizedName = normalizedName;
         }
 
         public string Value { get; }

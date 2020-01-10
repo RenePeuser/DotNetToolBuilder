@@ -62,6 +62,8 @@ namespace DotNetTool.Builder
             services.AddSingleton<ITypeNameOptimizer, FileInfoOptimizer>();
             services.AddSingleton<ITypeNameOptimizer, DirectoryInfoOptimizer>();
             services.AddSingleton<ITypeNameOptimizer, FileSystemInfoOptimizer>();
+
+            services.AddSingleton<IDotNetToolNameNormalizer, DotNetToolNameNormalizer>();
         }
 
         private void RegisterCli(IServiceCollection services)
@@ -101,7 +103,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IDescriptionValidator, DescriptionValidator>();
 
             services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
-
+            
             services.AddSingleton<IExpressionValidator, ExpressionValidator>();
             services.AddSingleton<IExpressionContentValidator, TypeCastValidator>();
             services.AddSingleton<IExpressionContentValidator, ArgumentValidator>();
@@ -115,6 +117,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, UnknownTokenValidator>();
             services.AddSingleton<IExpressionContentValidator, MultipleOptionValidator>();
             services.AddSingleton<IExpressionContentValidator, DuplicatedCommandValidator>();
+            services.AddSingleton<IExpressionContentValidator, RootCommandNameValidation>();
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)

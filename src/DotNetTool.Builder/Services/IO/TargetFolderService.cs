@@ -39,7 +39,7 @@ namespace DotNetTool.Builder.Services.IO
                 throw new DotNetToolBuilderException($"The directory: '{targetDirectoryInfo.FullName}' does not exists.");
             }
 
-            var toolFolder = _directoryService.GetDirectoryInfo(Path.Combine(targetDirectoryInfo.FullName,"src", dotNetTool.ProjectName, dotNetTool.ToolName.FirstCharToUpper()));
+            var toolFolder = _directoryService.GetDirectoryInfo(Path.Combine(targetDirectoryInfo.FullName,"src", dotNetTool.ProjectName, dotNetTool.DotNetToolName.NormalizedName));
             if (toolFolder.NotExists)
             {
                 throw new DotNetToolBuilderException($"The tool folder: '{toolFolder.FullName}' does not exists.");

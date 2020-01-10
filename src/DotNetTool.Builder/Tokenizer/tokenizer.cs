@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
@@ -17,9 +18,15 @@ namespace DotNetTool.Builder.Tokenizer
 
         public ExpressionInfo Tokenize(string expression)
         {
-            var splittedExpression = expression.Split().FilterNullOrWhitespace();
+            var splittedExpression = expression.Split().FilterNullOrWhitespace().ToList();
             var optimizedExpression = splittedExpression.Flatten(" ");
             var tokens = GetAllTokensFrom(splittedExpression).ToList();
+            var firstCommandIsRootCommand = tokens.OfType<CommandToken>().FirstOrDefault();
+            if (firstCommandIsRootCommand.IsNotNull())
+            {
+                tokens[tokens.IndexOf(firstCommandIsRootCommand)] = new RootCommandToken(firstCommandIsRootCommand.Value);
+            }
+
             return new ExpressionInfo(expression, optimizedExpression, tokens);
         }
 
@@ -27,7 +34,7 @@ namespace DotNetTool.Builder.Tokenizer
         {
             foreach (var token in tokens)
             {
-                var tokenizers = _tokenizers.Where(tokenizer => tokenizer.IsThisTokenizerFor(token));
+                var tokenizers = _tokenizers.Where(tokenizer => tokenizer.IsThisTokenizerFor(token)).ToList();
                 if (tokenizers.Any())
                 {
                     foreach (var tokenizer in tokenizers)

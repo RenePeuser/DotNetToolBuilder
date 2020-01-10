@@ -18,8 +18,11 @@ namespace DotNetTool.Builder.Services.Template
             _renameFilesAndFolders.Rename(targetDirectory, "rps.template", dotNetTool.ProjectName);
 
             // DotNetTool name
-            _renameFilesAndFolders.Rename(targetDirectory, "Rps", dotNetTool.NormalizedToolName);
-            _renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.ToolName.ToLower());
+            _renameFilesAndFolders.Rename(targetDirectory, "rps-command-name", dotNetTool.DotNetToolName.Value.ToLower());
+
+            // class etc. and rest
+            _renameFilesAndFolders.Rename(targetDirectory, "Rps", dotNetTool.DotNetToolName.NormalizedName);
+            _renameFilesAndFolders.Rename(targetDirectory, "rps", dotNetTool.DotNetToolName.Value.ToLower());
         }
     }
 }

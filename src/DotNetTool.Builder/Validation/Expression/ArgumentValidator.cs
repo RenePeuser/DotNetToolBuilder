@@ -17,9 +17,9 @@ namespace DotNetTool.Builder.Validation.Expression
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
-        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
-            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
 
             var errors = CheckForErrors(expressionInfo).ToList();

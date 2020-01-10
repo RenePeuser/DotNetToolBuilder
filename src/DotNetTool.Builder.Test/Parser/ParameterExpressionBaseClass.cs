@@ -27,10 +27,11 @@ namespace DotNetTool.Builder.Test.Parser
             var collectTillOk = Substitute.For<ICollectTillInputCorrect>();
             var descriptionCollector = Substitute.For<ICollectDescription>();
             var optionAliasCollector = Substitute.For<ICollectOptionAlias>();
+            var dotNetToolNameNormalizer = new DotNetToolNameNormalizer();
             var argumentTypeOptimizer = new ArgumentTypeOptimizer(GetTypeNameOptimizers().ToList());
             var argumentParser = new ArgumentParser(argumentTypeOptimizer, descriptionCollector);
             var optionParser = new OptionParser(collectTillOk, optionAliasCollector, descriptionCollector);
-            var parser = new ParameterExpressionParser(new CommandParser(descriptionCollector), argumentParser, optionParser, new ParameterService());
+            var parser = new ParameterExpressionParser(new CommandParser(descriptionCollector, dotNetToolNameNormalizer), argumentParser, optionParser, new ParameterService());
             var tokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizer().ToList());
             var expressions = GetExpressionsToParse().ToList();
 

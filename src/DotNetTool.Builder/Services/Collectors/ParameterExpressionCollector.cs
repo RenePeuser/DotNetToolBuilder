@@ -29,7 +29,7 @@ namespace DotNetTool.Builder.Services.Collectors
             _collectTillInputCorrect = collectTillInputCorrect;
         }
 
-        public CommandInfo CollectFor(string dotNetToolName)
+        public CommandInfo CollectFor(DotNetToolName dotNetDotNetToolName)
         {
             CommandInfo parameter = null;
             while (true)
@@ -39,11 +39,11 @@ namespace DotNetTool.Builder.Services.Collectors
                 while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
                 {
                     _consoleService.WriteInput("Please enter your parameter expression");
-                    _consoleService.WriteSample($"Sample: '{dotNetToolName} command <argument> --option");
+                    _consoleService.WriteSample($"Sample: '{dotNetDotNetToolName.Value} command <argument> --option");
 
                     var parameterExpression = _consoleService.ReadLine();
                     expressionInfo = _expressionTokenizer.Tokenize(parameterExpression);
-                    validationResult = _expressionValidator.IsValid(dotNetToolName, expressionInfo);
+                    validationResult = _expressionValidator.IsValid(dotNetDotNetToolName, expressionInfo);
                     if (validationResult.IsValid.IsFalse())
                     {
                         _consoleService.WriteError(validationResult.Errors);

@@ -11,7 +11,7 @@ namespace DotNetTool.Builder.Models
         private string _optimizedType;
 
         [JsonConstructor]
-        public ArgumentInfo(string name, string description, string value, string type, string optimizedType) : base(value, name)
+        public ArgumentInfo(string name, string description, string value, string type, string optimizedType, string normalizedName) : base(value, name, normalizedName)
         {
             Description = description;
             Type = type;

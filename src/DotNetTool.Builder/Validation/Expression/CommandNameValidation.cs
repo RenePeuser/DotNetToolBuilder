@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.CommandLine;
 using System.Linq;
 using Argument.Check;
 using DotNetTool.Builder.Extensions;
@@ -17,9 +18,9 @@ namespace DotNetTool.Builder.Validation.Expression
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
-        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
-            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
 
             var errors = CollectErrors(expressionInfo).Flatten(Environment.NewLine);
@@ -28,7 +29,7 @@ namespace DotNetTool.Builder.Validation.Expression
 
         private IEnumerable<string> CollectErrors(ExpressionInfo expressionInfo)
         {
-            var commandTokens = expressionInfo.Tokens.OfType<CommandToken>().ToList();
+            var commandTokens = expressionInfo.Tokens.AllTypeEquals<CommandToken>().ToList();
             foreach (var commandToken in commandTokens)
             {
                 var command = commandToken.Value;

@@ -18,16 +18,16 @@ namespace DotNetTool.Builder.Validation.Expression
             _toolNameValidator = toolNameValidator;
         }
 
-        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
-            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
 
-            var errors = CollectErrors(dotNetToolName, expressionInfo).ToList();
+            var errors = CollectErrors(dotNetDotNetToolName, expressionInfo).ToList();
             return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
         }
 
-        private IEnumerable<string> CollectErrors(string dotNetToolName, ExpressionInfo expressionInfo)
+        private IEnumerable<string> CollectErrors(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
             if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
@@ -41,9 +41,9 @@ namespace DotNetTool.Builder.Validation.Expression
                 yield return "Expression must not be null or empty";
             }
 
-            if (firstCommand.Value.NotEqualsTo(dotNetToolName))
+            if (firstCommand.Value.NotEqualsTo(dotNetDotNetToolName.Value))
             {
-                yield return $"Expression must start with your root command: '{dotNetToolName}'";
+                yield return $"Expression must start with your root command: '{dotNetDotNetToolName.Value}'";
             }
 
             var result = _toolNameValidator.Validate(firstCommand.Value);

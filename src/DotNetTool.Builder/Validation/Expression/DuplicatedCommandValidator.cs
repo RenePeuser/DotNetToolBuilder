@@ -10,16 +10,16 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     internal class DuplicatedCommandValidator : IExpressionContentValidator
     {
-        public ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
         {
-            Throw.IfNullOrWhiteSpace(() => dotNetToolName);
+            Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
 
-            var errors = CollectErrors(dotNetToolName, expressionInfo).Flatten(Environment.NewLine);
+            var errors = CollectErrors(expressionInfo).Flatten(Environment.NewLine);
             return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
         }
 
-        private IEnumerable<string> CollectErrors(string dotNetToolName, ExpressionInfo expression)
+        private IEnumerable<string> CollectErrors(ExpressionInfo expression)
         {
             var commands = expression.Tokens.OfType<CommandToken>().ToList();
 

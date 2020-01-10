@@ -8,6 +8,20 @@ namespace DotNetTool.Builder.Extensions
 {
     internal static class EnumerableExtensions
     {
+        internal static IEnumerable<TResult> AllTypeEquals<TResult>(this IEnumerable source)
+        {
+            Throw.IfNull(() => source);
+
+            foreach (var item in source)
+            {
+                // Hint not use 'item is TResult', because here we want explicit type not the derived type !!!
+                if (item.GetType() == typeof(TResult))
+                {
+                    yield return (TResult)item;
+                }
+            }
+        }
+
         internal static IEnumerable<string> FilterNullOrWhitespace(this IEnumerable<string> source)
         {
             Throw.IfNull(() => source);

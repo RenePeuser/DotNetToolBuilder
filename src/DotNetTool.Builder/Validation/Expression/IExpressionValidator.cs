@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     internal interface IExpressionValidator
     {
-        ValidationResult IsValid(string dotNetToolName, ExpressionInfo expressionInfo);
+        ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo);
     }
 }
