@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.Extensions;
 
 namespace DotNetTool.Builder.Services.Optimizer
 {
@@ -15,13 +14,8 @@ namespace DotNetTool.Builder.Services.Optimizer
 
         public string OptimizeType(string typeName)
         {
-            var optimizer = _typeNameOptimizers.FirstOrDefault(optimizer => optimizer.OptimizerFor(typeName));
-            if (optimizer.IsNull())
-            {
-                return typeName;
-            }
-
-            return optimizer.Optimize(typeName);
+            var result = _typeNameOptimizers.Aggregate(typeName, (current, next) => next.Optimize(current));
+            return result;
         }
     }
 }

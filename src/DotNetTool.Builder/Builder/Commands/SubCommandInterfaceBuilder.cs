@@ -8,6 +8,8 @@ namespace DotNetTool.Builder.Builder.Commands
         private const string Template =
             @"namespace $namespace$
 {
+    using System;
+    using System.IO;
     using System.CommandLine;
 
     internal interface I$command-name$SubCommandBuilder

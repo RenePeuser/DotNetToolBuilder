@@ -50,8 +50,8 @@ namespace DotNetTool.Builder.Validation
                 yield return $"The dotnet tool name: '{value}' must start with a letter";
             }
 
-            var validationResult = _primitiveTypeNameValidator.IsValid(value);
-            if (validationResult.IsValid.IsFalse())
+            var validationResult = _primitiveTypeNameValidator.IsTypeName(value);
+            if (validationResult.IsValid)
             {
                 yield return $"The dotnet tool name: '{value}' must not be a name of a type";
             }

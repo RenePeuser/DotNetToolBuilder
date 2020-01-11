@@ -9,6 +9,7 @@ using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Tokenizer;
+using DotNetTool.Builder.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
@@ -59,6 +60,7 @@ namespace DotNetTool.Builder.Test.Parser
             yield return new FileInfoOptimizer();
             yield return new DirectoryInfoOptimizer();
             yield return new FileSystemInfoOptimizer();
+            yield return new SystemTypeNameOptimizer(new PrimitiveTypeNameValidator());
         }
 
         protected abstract void OnInit();

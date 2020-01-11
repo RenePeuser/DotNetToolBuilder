@@ -3,7 +3,5 @@
     internal interface ITypeNameOptimizer
     {
         string Optimize(string typeName);
-
-        bool OptimizerFor(string typeName);
     }
 }

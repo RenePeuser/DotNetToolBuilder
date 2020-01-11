@@ -8,6 +8,8 @@ namespace DotNetTool.Builder.Builder.Argument
         private const string Template =
             @"namespace $namespace$
 {
+    using System;
+    using System.IO;
     using System.CommandLine;
 
     internal class $command-name$ArgumentBuilder : I$command-name$ArgumentBuilder

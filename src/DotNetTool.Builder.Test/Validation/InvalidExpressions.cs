@@ -74,6 +74,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet <version>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet --version");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool []<>");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool <arg>[]i");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool §");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool %");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool &");

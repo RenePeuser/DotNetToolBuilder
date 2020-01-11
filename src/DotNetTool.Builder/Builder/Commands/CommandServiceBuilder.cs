@@ -9,6 +9,7 @@ namespace DotNetTool.Builder.Builder.Commands
             @"namespace $namespace$
 {
     using System;
+    using System.IO; 
     using System.Threading.Tasks;
 
     internal class $command-name$Service : I$command-name$Service

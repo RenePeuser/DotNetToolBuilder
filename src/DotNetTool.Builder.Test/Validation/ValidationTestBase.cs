@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Tokenizer;
 using DotNetTool.Builder.Validation;
 using DotNetTool.Builder.Validation.Expression;
@@ -30,6 +31,9 @@ namespace DotNetTool.Builder.Test.Validation
         private IEnumerable<IExpressionContentValidator> GetValidators()
         {
             var primitiveTypeNameValidator = new PrimitiveTypeNameValidator();
+            var toolNameValidator = new ToolNameValidator(primitiveTypeNameValidator);
+            var argumentTypeOptimizer = new ArgumentTypeOptimizer(GetTypeNameOptimizers().ToList());
+
             yield return new ArgumentValidator(primitiveTypeNameValidator);
             yield return new TypeCastValidator();
             yield return new CharValidator();
@@ -37,11 +41,20 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new MinimumCommandValidator();
             yield return new OnlyOneArgumentValidator();
             yield return new OptionValidator(primitiveTypeNameValidator);
-            yield return new DotNetTool.Builder.Validation.Expression.ToolNameValidator(new ToolNameValidator(new PrimitiveTypeNameValidator()));
+            yield return new DotNetTool.Builder.Validation.Expression.ToolNameValidator(toolNameValidator);
             yield return new CommandNameValidation(primitiveTypeNameValidator);
             yield return new UnknownTokenValidator();
             yield return new MultipleOptionValidator();
             yield return new DuplicatedCommandValidator();
+            yield return new ArgumentTypeValidator(primitiveTypeNameValidator, argumentTypeOptimizer);
+        }
+
+        private IEnumerable<ITypeNameOptimizer> GetTypeNameOptimizers()
+        {
+            yield return new FileInfoOptimizer();
+            yield return new DirectoryInfoOptimizer();
+            yield return new FileSystemInfoOptimizer();
+            yield return new SystemTypeNameOptimizer(new PrimitiveTypeNameValidator());
         }
     }
 }

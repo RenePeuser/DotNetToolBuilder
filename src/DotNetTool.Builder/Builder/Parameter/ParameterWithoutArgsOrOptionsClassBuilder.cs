@@ -9,6 +9,9 @@ namespace DotNetTool.Builder.Builder.Parameter
         private const string Template =
             @"namespace $namespace$
 {
+    using System;
+    using System.IO;
+
     internal class $command-name$Parameters
     {
         public $command-name$Parameters()

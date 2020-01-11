@@ -86,8 +86,8 @@ namespace DotNetTool.Builder.Validation.Expression
                     yield return $"Argument: {argument} must begin with a letter";
                 }
 
-                var validationResult = _primitiveTypeNameValidator.IsValid(argumentName);
-                if (validationResult.IsValid.IsFalse())
+                var validationResult = _primitiveTypeNameValidator.IsTypeName(argumentName);
+                if (validationResult.IsValid)
                 {
                     yield return $"The name of an argument does not match a name of a type: {argument}";
                 }

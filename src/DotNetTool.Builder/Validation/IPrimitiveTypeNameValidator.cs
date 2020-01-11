@@ -1,7 +1,9 @@
-﻿namespace DotNetTool.Builder.Validation
+﻿using System.Collections.Generic;
+
+namespace DotNetTool.Builder.Validation
 {
     internal interface IPrimitiveTypeNameValidator
     {
-        ValidationResult IsValid(string value);
+        PrimitiveTypeValidationResult IsTypeName(string value);
     }
 }

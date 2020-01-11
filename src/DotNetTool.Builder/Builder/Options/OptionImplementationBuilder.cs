@@ -11,6 +11,8 @@ namespace DotNetTool.Builder.Builder.Options
         private const string Template =
             @"namespace $namespace$
 {
+    using System;
+    using System.IO;
     using System.Collections.Generic;
     using System.CommandLine; 
 

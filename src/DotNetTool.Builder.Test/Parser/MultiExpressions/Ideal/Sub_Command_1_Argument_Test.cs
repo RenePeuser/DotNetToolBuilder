@@ -60,7 +60,7 @@ namespace DotNetTool.Builder.Test.Parser.MultiExpressions.Ideal
         [TestMethod]
         public void Assert_Argument_Type_Optimized()
         {
-            Assert.AreEqual("System.IO.FileInfo", _argumentInfo.OptimizedType);
+            Assert.AreEqual("FileInfo", _argumentInfo.OptimizedType);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using Argument.Check;
 
 namespace DotNetTool.Builder.Validation
 {
@@ -14,5 +16,16 @@ namespace DotNetTool.Builder.Validation
         public bool IsValid { get; }
 
         public string Errors { get; }
+    }
+
+    [DebuggerDisplay("Validate: {" + nameof(IsValid) + "}")]
+    internal class PrimitiveTypeValidationResult : ValidationResult
+    {
+        public PrimitiveTypeValidationResult(bool isValid, string errors, Type type) : base(isValid, errors)
+        {
+            Type = type;
+        }
+
+        public Type Type { get; }
     }
 }

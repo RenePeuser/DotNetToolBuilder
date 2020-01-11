@@ -30,7 +30,9 @@ namespace DotNetTool.Builder.Services
 
         public string ReadLine()
         {
-            return Console.ReadLine();
+            var result = Console.ReadLine();
+            Console.WriteLine();
+            return result;
         }
 
         public void WriteSample(string value)
@@ -50,7 +52,6 @@ namespace DotNetTool.Builder.Services
 
         private void WriteLine(string value)
         {
-            Console.WriteLine();
             Console.WriteLine(value);
         }
     }

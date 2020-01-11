@@ -48,8 +48,8 @@ namespace DotNetTool.Builder.Validation.Expression
                     yield return $"The Command: {command} must only contains letters or digits";
                 }
 
-                var validationResult = _primitiveTypeNameValidator.IsValid(command);
-                if (validationResult.IsValid.IsFalse())
+                var validationResult = _primitiveTypeNameValidator.IsTypeName(command);
+                if (validationResult.IsValid)
                 {
                     yield return $"The Command: '{command}' must not be a name of a type";
                 }
