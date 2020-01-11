@@ -24,7 +24,7 @@ namespace DotNetTool.Builder.Validation.Expression
             var commands = expression.Tokens.OfType<CommandToken>().ToList();
             if (commands.Count < 2)
             {
-                yield return $"The expression must have minimum one command. Sample: '{dotNetDotNetToolName.Value} myCommand'";
+                yield return $"The expression:'{expression.Expression}' must have minimum one command. Sample: '{dotNetDotNetToolName.Value} myCommand'";
             }
         }
     }

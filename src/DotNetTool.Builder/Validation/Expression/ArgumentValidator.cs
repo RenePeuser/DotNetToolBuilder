@@ -77,13 +77,13 @@ namespace DotNetTool.Builder.Validation.Expression
                 var argumentName = argument[start..end];
                 if (argumentName.IsNullOrWhiteSpace())
                 {
-                    yield return $"Missing argument name: {argument}";
+                    yield return $"Missing argument name: '{argument}'";
                     yield break;
                 }
 
                 if (char.IsLetter(argumentName.First()).IsFalse())
                 {
-                    yield return $"The argument: {argument} must begin with a letter";
+                    yield return $"The argument: '{argument}' must begin with a letter";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsTypeName(argumentName);
@@ -102,12 +102,12 @@ namespace DotNetTool.Builder.Validation.Expression
                 {
                     if (preCast.StartsWith("[").IsFalse())
                     {
-                        yield return $"The typecast: {argument} must starts with a '['. Sample: [string]<arg>";
+                        yield return $"The typecast: '{argument}' must starts with a '['. Sample: [string]<arg>";
                     }
 
                     if (preCast.EndsWith("]").IsFalse())
                     {
-                        yield return $"The typecast: {argument} must ends with a ']'. Sample: [string]<arg>";
+                        yield return $"The typecast: '{argument}' must ends with a ']'. Sample: [string]<arg>";
                     }
                 }
 
@@ -116,12 +116,12 @@ namespace DotNetTool.Builder.Validation.Expression
                 {
                     if (postCast.StartsWith("[").IsFalse())
                     {
-                        yield return $"The typecast: {argument} must starts with a '['. Sample: <arg>[string]";
+                        yield return $"The typecast: '{argument}' must starts with a '['. Sample: <arg>[string]";
                     }
 
                     if (postCast.EndsWith("]").IsFalse())
                     {
-                        yield return $"The typecast: {argument} must ends with a ']'. Sample: <arg>[string]";
+                        yield return $"The typecast: '{argument}' must ends with a ']'. Sample: <arg>[string]";
                     }
                 }
             }

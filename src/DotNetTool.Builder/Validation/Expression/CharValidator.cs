@@ -30,7 +30,7 @@ namespace DotNetTool.Builder.Validation.Expression
 
             if (expressionValue.All(c => _validationRules.Any(validation => validation(c))).IsFalse())
             {
-                yield return "Only letters, digits, '[', ']', '<', '>' and '-' allowed";
+                yield return $"The expression: '{expression.Expression}' must only contains letters, digits, '[', ']', '<', '>' and '-' allowed";
             }
         }
     }

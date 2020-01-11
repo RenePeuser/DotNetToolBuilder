@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace DotNetTool.Builder.Validation
 {
-    [DebuggerDisplay("Validate: {" + nameof(IsValid) + "}")]
+    [DebuggerDisplay("Validate: '{" + nameof(IsValid) + "}")]
     internal class ValidationResult
     {
         public ValidationResult(bool isValid, string errors)
@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Validation
         public string Errors { get; }
     }
 
-    [DebuggerDisplay("Validate: {" + nameof(IsValid) + "}")]
+    [DebuggerDisplay("Validate: '{" + nameof(IsValid) + "}")]
     internal class PrimitiveTypeValidationResult : ValidationResult
     {
         public PrimitiveTypeValidationResult(bool isValid, string errors, Type type) : base(isValid, errors)

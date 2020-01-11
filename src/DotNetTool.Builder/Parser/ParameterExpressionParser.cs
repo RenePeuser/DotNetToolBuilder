@@ -60,7 +60,7 @@ namespace DotNetTool.Builder.Parser
                         lastArgument = null;
                         break;
                     default:
-                        throw new InvalidOperationException($"Parameter expression: {parameterExpression.OptimizedExpressions} has invalid tokens, please check validation logic.");
+                        throw new InvalidOperationException($"Parameter expression: '{parameterExpression.OptimizedExpressions} has invalid tokens, please check validation logic.");
                 }
             }
 

@@ -82,7 +82,7 @@ namespace DotNetTool.Builder.Validation.Expression
                 var validationResult = _primitiveTypeNameValidator.IsTypeName(optionName);
                 if (validationResult.IsValid)
                 {
-                    yield return $"The name of an argument does not match a name of a type: {optionName}";
+                    yield return $"The name of an argument does not match a name of a type: '{optionName}'";
                 }
             }
         }

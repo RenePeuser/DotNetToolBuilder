@@ -23,7 +23,7 @@ namespace DotNetTool.Builder.InfoCollectors
 
             if (trimmedValue.Length < 10)
             {
-                yield return $"Description: '{value}' should have minimum 10 letters for a good description";
+                yield return $"Description: '{value}' should have minimum 10 characters for a good description";
             }
         }
     }

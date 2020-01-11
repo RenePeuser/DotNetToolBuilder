@@ -54,7 +54,7 @@ namespace DotNetTool.Builder.Services
             }
             else
             {
-                tcs.SetException(new Exception($"Failed to start cli command: {command} {arguments}"));
+                tcs.SetException(new Exception($"Failed to start cli command: '{command} {arguments}'"));
             }
 
             return tcs.Task;

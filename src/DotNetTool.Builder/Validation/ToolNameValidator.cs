@@ -42,7 +42,7 @@ namespace DotNetTool.Builder.Validation
 
             if (value.All(c => char.IsLetterOrDigit(c) || c == '-').IsFalse())
             {
-                yield return $"The dotnet tool: {value} name must only contains letters or digits";
+                yield return $"The dotnet tool: '{value}' name must only contains letters, digits or '-'.";
             }
 
             if (char.IsLetter(value.First()).IsFalse())

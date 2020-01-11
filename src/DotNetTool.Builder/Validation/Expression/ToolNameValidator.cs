@@ -31,19 +31,19 @@ namespace DotNetTool.Builder.Validation.Expression
         {
             if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
-                yield return "Expression must not be null or empty";
+                yield return $"The expression:'{expressionInfo.Expression}' must not be null or empty";
                 yield break;
             }
 
             var firstCommand = expressionInfo.Tokens.FirstOrDefault();
             if (firstCommand.IsNull())
             {
-                yield return "Expression must not be null or empty";
+                yield return $"The expression:'{expressionInfo.Expression}' must not be null or empty";
             }
 
             if (firstCommand.Value.NotEqualsTo(dotNetDotNetToolName.Value))
             {
-                yield return $"Expression must start with your root command: '{dotNetDotNetToolName.Value}'";
+                yield return $"The expression:'{expressionInfo.Expression}' must start with your root command: '{dotNetDotNetToolName.Value}'";
             }
 
             var result = _toolNameValidator.Validate(firstCommand.Value);

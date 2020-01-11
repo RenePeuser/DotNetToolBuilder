@@ -46,7 +46,7 @@ namespace DotNetTool.Builder.Services.IDE
             var lastVisualStudioVersion = visualStudioFolder.EnumerateDirectories("20*").OrderBy(d => d.Name).LastOrDefault();
             if (lastVisualStudioVersion.IsNull())
             {
-                _consoleService.WriteError($"No visual studio version folder found in: {visualStudioFolder.FullName}.{Environment.NewLine}Can not start any Version of Visual Studio.");
+                _consoleService.WriteError($"No visual studio version folder found in: '{visualStudioFolder.FullName}'.{Environment.NewLine}Can not start any Version of Visual Studio.");
                 return Task.CompletedTask;
             }
 
@@ -63,7 +63,7 @@ namespace DotNetTool.Builder.Services.IDE
                 return Task.CompletedTask;
             }
 
-            _consoleService.WriteInfo($"Start Visual Studio {lastVisualStudioVersion.NotExists} with: {solution.Name}");
+            _consoleService.WriteInfo($"Start Visual Studio {lastVisualStudioVersion.NotExists} with: '{solution.Name}'");
             return _processService.StartAsync(latest.FullName, solution.FullName);
         }
     }

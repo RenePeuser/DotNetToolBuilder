@@ -36,7 +36,7 @@ namespace DotNetTool.Builder.Services.IDE
             var codeInLocalAppData = _fileService.GetFileInfo(Path.Combine(localAppData, "Programs", "Microsoft VS Code", "code.exe"));
             if (codeInLocalAppData.Exists)
             {
-                _consoleService.WriteInfo($"Start Visual Studio Code: {solutionFileInfo.Directory.Parent.FullName}");
+                _consoleService.WriteInfo($"Start Visual Studio Code: '{solutionFileInfo.Directory.Parent.FullName}'");
                 return _processService.StartAsync(codeInLocalAppData.FullName, solutionFileInfo.Directory.Parent.FullName);
             }
 
@@ -45,7 +45,7 @@ namespace DotNetTool.Builder.Services.IDE
             var codeInProgramFolder = _fileService.GetFileInfo(Path.Combine(programFiles, "Microsoft VS Code", "code.exe"));
             if (codeInProgramFolder.Exists)
             {
-                _consoleService.WriteInfo($"Start Visual Studio Code: {solutionFileInfo.Directory.Parent.FullName}");
+                _consoleService.WriteInfo($"Start Visual Studio Code: '{solutionFileInfo.Directory.Parent.FullName}'");
                 return _processService.StartAsync(codeInProgramFolder.FullName, solutionFileInfo.Directory.Parent.FullName);
             }
 

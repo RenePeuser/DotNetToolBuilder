@@ -51,7 +51,7 @@ namespace DotNetTool.Builder.Services.IDE
             var riderExecutable = riderDirectory.EnumerateFiles("rider*.exe", SearchOption.AllDirectories).FirstOrDefault();
             if (riderExecutable.IsNull())
             {
-                _consoleService.WriteError($"Can not find 'rider*.exe: ' in directory and its sub directories: {jetbrainsFolder.FullName}'");
+                _consoleService.WriteError($"Can not find 'rider*.exe: ' in directory and its sub directories: '{jetbrainsFolder.FullName}'");
                 return Task.CompletedTask;
             }
 

@@ -29,6 +29,7 @@ namespace DotNetTool.Builder.Services
                 if (isValid.IsFalse())
                 {
                     _consoleService.WriteError(getErrorMessageForInput(input));
+                    _consoleService.WriteLine();
                 }
             }
 
@@ -50,6 +51,7 @@ namespace DotNetTool.Builder.Services
                 if (validationResult.IsValid.IsFalse())
                 {
                     _consoleService.WriteError(validationResult.Errors);
+                    _consoleService.WriteLine();
                 }
             }
 
