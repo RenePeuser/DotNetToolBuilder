@@ -3,7 +3,6 @@ using System.Linq;
 using DotNetTool.Builder.Builder.Parameter;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
-using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Collectors;
 using FileSystem.Abstraction;
 

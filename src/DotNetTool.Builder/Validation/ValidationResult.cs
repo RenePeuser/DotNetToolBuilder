@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using Argument.Check;
 
 namespace DotNetTool.Builder.Validation
 {

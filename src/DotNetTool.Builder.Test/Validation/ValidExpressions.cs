@@ -12,10 +12,10 @@ namespace DotNetTool.Builder.Test.Validation
         {
             var validExpressions = GetAll().ToList();
             var invalidExpressions = (from expression in validExpressions
-                                      let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
-                                      let isValid = !ExpressionValidator.IsValid(expression.DotNetToolName, expressionInfo).IsValid
-                                      where isValid
-                                      select expression.Expression).ToList();
+                let expressionInfo = ExpressionTokenizer.Tokenize(expression.Expression)
+                let isValid = !ExpressionValidator.IsValid(expression.DotNetToolName, expressionInfo).IsValid
+                where isValid
+                select expression.Expression).ToList();
 
             Assert.IsFalse(invalidExpressions.Any(), AssertHelper.AssertHelper.ToErrorMessage(invalidExpressions, "Following expressions was invalid, which should be valid:"));
         }
@@ -30,19 +30,19 @@ namespace DotNetTool.Builder.Test.Validation
 
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution>");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --no-restore");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration <build-config>");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution>[System.IO.FileInfo]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build [System.IO.FileInfo]<solution>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution>[System.IO.FileInfo] --no-restore");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build [System.IO.FileInfo]<solution> --no-restore");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration <build-config>");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration <build-config>[string]");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet build <solution> --configuration [string]<build-config>");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet  build  <solution>  --configuration  [string]<build-config>");
 
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet collect dragonballs --all");
@@ -53,24 +53,24 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet-tool", " dotnet-tool    build");
             yield return new ExpressionWithExpectedResult("dotnet-tool", " dotnet-tool build");
             yield return new ExpressionWithExpectedResult("dotnet-tool", " dotnet-tool build   ");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution>");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution> --no-restore");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution> --configuration <build-config>");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution>[System.IO.FileInfo]");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build [System.IO.FileInfo]<solution>");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution>[System.IO.FileInfo] --no-restore");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build [System.IO.FileInfo]<solution> --no-restore");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution> --configuration <build-config>");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution> --configuration <build-config>[string]");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool build <solution> --configuration [string]<build-config>");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool  build  <solution>  --configuration  [string]<build-config>");
-            
+
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool collect dragonballs --all");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool do transform to <saiyajin-level>");
             yield return new ExpressionWithExpectedResult("dotnet-tool", "dotnet-tool do transform to <saiyajin-level> --use-sensobean");

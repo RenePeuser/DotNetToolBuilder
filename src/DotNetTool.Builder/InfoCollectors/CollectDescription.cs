@@ -13,6 +13,7 @@ namespace DotNetTool.Builder.InfoCollectors
             _collectTillInputCorrect = collectTillInputCorrect;
             _descriptionValidator = descriptionValidator;
         }
+
         public string Collect(string title)
         {
             Throw.IfNullOrWhiteSpace(() => title);

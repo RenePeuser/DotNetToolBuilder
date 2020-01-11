@@ -11,9 +11,9 @@ namespace DotNetTool.Builder.Test.SystemTest
     [TestClass]
     public class DeserializeDotNetToolTest
     {
-        private DirectoryInfo _toolSerializeResult;
-        private DirectoryInfo _generatedTools;
         private DirectoryInfo _currentDirectory;
+        private DirectoryInfo _generatedTools;
+        private DirectoryInfo _toolSerializeResult;
 
         [TestInitialize]
         public void Init()
@@ -37,10 +37,10 @@ namespace DotNetTool.Builder.Test.SystemTest
         {
             foreach (var tool in toolsToDeserialize)
             {
-                var result = await Program.Main(new[] { "--from-file", tool.FullName, "--save-to", _toolSerializeResult.FullName});
+                var result = await Program.Main(new[] { "--from-file", tool.FullName, "--save-to", _toolSerializeResult.FullName });
                 if (result.NotEqualsTo(0))
                 {
-                     yield return tool;
+                    yield return tool;
                 }
 
                 var savedTool = _toolSerializeResult.EnumerateFiles().First(f => f.Name.ToLower().EqualsTo(tool.Name));

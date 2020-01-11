@@ -1,5 +1,4 @@
-﻿using System.IO;
-using DotNetTool.Builder.Builder.Argument;
+﻿using DotNetTool.Builder.Builder.Argument;
 using DotNetTool.Builder.Builder.Commands;
 using DotNetTool.Builder.Builder.FileStructure;
 using DotNetTool.Builder.Builder.Options;
@@ -104,7 +103,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IDescriptionValidator, DescriptionValidator>();
 
             services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
-            
+
             services.AddSingleton<IExpressionValidator, ExpressionValidator>();
             services.AddSingleton<IExpressionContentValidator, TypeCastValidator>();
             services.AddSingleton<IExpressionContentValidator, ArgumentValidator>();

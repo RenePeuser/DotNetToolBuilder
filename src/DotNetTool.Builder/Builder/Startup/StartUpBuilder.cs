@@ -6,7 +6,6 @@ using Argument.Check;
 using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
-using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Collectors;
 using FileSystem.Abstraction;
 
@@ -65,7 +64,7 @@ $methods$
             var startUpFile = solutionFile.Directory.EnumerateFiles("*.cs", SearchOption.AllDirectories).FirstOrDefault(file => file.Name.ToLower().EqualsTo("startup.cs"));
             if (startUpFile.IsNull())
             {
-                throw new DotNetToolBuilderException($"Code file: 'startup.cs' was not found");
+                throw new DotNetToolBuilderException("Code file: 'startup.cs' was not found");
             }
 
             var methods = GenerateMethods(commandTypeCollector).ToList();

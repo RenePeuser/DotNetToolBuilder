@@ -7,8 +7,8 @@ namespace DotNetTool.Builder.InfoCollectors
 {
     internal class CollectOptionAlias : ICollectOptionAlias
     {
-        private readonly IOptionAliasValidator _inputValidator;
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;
+        private readonly IOptionAliasValidator _inputValidator;
 
         public CollectOptionAlias(IOptionAliasValidator inputValidator, ICollectTillInputCorrect collectTillInputCorrect)
         {

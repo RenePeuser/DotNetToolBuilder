@@ -5,7 +5,7 @@ namespace DotNetTool.Builder.Services.Optimizer
 {
     internal class ArgumentTypeOptimizer : IArgumentTypeOptimizer
     {
-        readonly IEnumerable<ITypeNameOptimizer> _typeNameOptimizers;
+        private readonly IEnumerable<ITypeNameOptimizer> _typeNameOptimizers;
 
         public ArgumentTypeOptimizer(IEnumerable<ITypeNameOptimizer> typeNameOptimizers)
         {

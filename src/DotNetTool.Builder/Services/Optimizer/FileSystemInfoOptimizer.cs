@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace DotNetTool.Builder.Services.Optimizer
+﻿namespace DotNetTool.Builder.Services.Optimizer
 {
     internal class FileSystemInfoOptimizer : ITypeNameOptimizer
     {

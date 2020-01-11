@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
@@ -10,9 +9,9 @@ namespace DotNetTool.Builder.Parser.Options
 {
     internal class OptionParser : IOptionParser
     {
-        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
-        private readonly ICollectOptionAlias _collectOptionAlias;
         private readonly ICollectDescription _collectDescription;
+        private readonly ICollectOptionAlias _collectOptionAlias;
+        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
 
         public OptionParser(ICollectTillInputCorrect collectTillInputCorrect, ICollectOptionAlias collectOptionAlias, ICollectDescription collectDescription)
         {
@@ -32,7 +31,7 @@ namespace DotNetTool.Builder.Parser.Options
             var description = _collectDescription.Collect($"Please enter a description for your option: '{value}'");
             var optionName = value.TrimStart('-');
             var normalizedOptiontName = optionName.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
-            
+
             var option = new OptionInfo(value, optionName, alias, description, boolRequired, argumentInfo, normalizedOptiontName);
             return option;
         }

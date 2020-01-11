@@ -11,8 +11,8 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     internal class ArgumentTypeValidator : IExpressionContentValidator
     {
-        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
         private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
+        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 
         public ArgumentTypeValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator, IArgumentTypeOptimizer argumentTypeOptimizer)
         {

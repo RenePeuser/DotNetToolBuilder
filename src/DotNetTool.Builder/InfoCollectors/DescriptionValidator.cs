@@ -25,7 +25,6 @@ namespace DotNetTool.Builder.InfoCollectors
             {
                 yield return $"Description: '{value}' should have minimum 10 letters for a good description";
             }
-
         }
     }
 }

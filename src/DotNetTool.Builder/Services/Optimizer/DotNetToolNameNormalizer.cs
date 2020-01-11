@@ -33,7 +33,6 @@ namespace DotNetTool.Builder.Services.Optimizer
             splittedNormalizedToolName.Remove(splittedNormalizedToolName.First());
             var trimmedDotNet = splittedNormalizedToolName.Flatten();
             return trimmedDotNet;
-
         }
     }
 }

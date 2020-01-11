@@ -1,5 +1,4 @@
 ﻿using Argument.Check;
-using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.Models
 {

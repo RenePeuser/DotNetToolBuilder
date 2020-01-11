@@ -1,17 +1,17 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Validation;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.Validation
 {
     [TestClass]
     public class TypesWhichAreValidButTheyAreNotExistsThatWayInSystemAssembly
     {
-        private PrimitiveTypeNameValidator _primitiveTypeConverter;
         private ArgumentTypeOptimizer _argumentTypeOptimizer;
+        private PrimitiveTypeNameValidator _primitiveTypeConverter;
 
         [TestInitialize]
         public void OnInit()

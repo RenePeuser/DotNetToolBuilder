@@ -19,8 +19,8 @@ namespace DotNetTool.Builder.Services
             Throw.IfNullOrWhiteSpace(() => messageForUser);
             Throw.IfNull(() => inputValidation);
 
-            bool isValid = false;
-            string input = string.Empty;
+            var isValid = false;
+            var input = string.Empty;
             while (isValid.IsFalse())
             {
                 _consoleService.WriteInput(messageForUser);

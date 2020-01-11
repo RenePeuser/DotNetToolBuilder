@@ -38,7 +38,6 @@ namespace DotNetTool.Builder.Services
         public OptionInfo FindAlreadyExistingOption(OptionInfo option,
             CommandInfo commandInfo)
         {
-
             Throw.IfNull(() => option);
 
             if (commandInfo.IsNull())

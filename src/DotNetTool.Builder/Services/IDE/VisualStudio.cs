@@ -37,7 +37,7 @@ namespace DotNetTool.Builder.Services.IDE
             var programx86Path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
 
             var visualStudioFolder = _directoryService.GetDirectoryInfo(Path.Combine(programx86Path, @"Microsoft Visual Studio\"));
-            if(visualStudioFolder.NotExists)
+            if (visualStudioFolder.NotExists)
             {
                 _consoleService.WriteError($"Visual studio folder: '{visualStudioFolder.FullName}' does not exists.{Environment.NewLine}Can not start any install Visual Studio version.");
                 return Task.CompletedTask;

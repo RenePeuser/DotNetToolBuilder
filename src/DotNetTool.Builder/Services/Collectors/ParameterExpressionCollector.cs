@@ -9,9 +9,9 @@ namespace DotNetTool.Builder.Services.Collectors
 {
     internal class ParameterExpressionCollector : IParameterExpressionCollector
     {
+        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
         private readonly IConsoleService _consoleService;
         private readonly IExpressionTokenizer _expressionTokenizer;
-        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
         private readonly IExpressionValidator _expressionValidator;
         private readonly IParameterExpressionParser _parameterExpressionParser;
 

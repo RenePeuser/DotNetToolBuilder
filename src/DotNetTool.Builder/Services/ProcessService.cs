@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CommandLine.Invocation;
 using System.Text;
 using System.Threading.Tasks;
 using Argument.Check;
@@ -23,7 +24,7 @@ namespace DotNetTool.Builder.Services
             _consoleService.WriteInfo($"{command} {arguments}");
 
             var stringBuilder = new StringBuilder();
-            var result = await System.CommandLine.Invocation.Process.ExecuteAsync(command, arguments, null, s => stringBuilder.AppendLine(s));
+            var result = await Process.ExecuteAsync(command, arguments, null, s => stringBuilder.AppendLine(s));
             var output = stringBuilder.ToString();
             if (result.NotEqualsTo(0))
             {
@@ -43,7 +44,7 @@ namespace DotNetTool.Builder.Services
 
             var tcs = new TaskCompletionSource<CliRunResult>();
             var stringBuilder = new StringBuilder();
-            var process = System.CommandLine.Invocation.Process.StartProcess(command, arguments, null, s => stringBuilder.AppendLine(s));
+            var process = Process.StartProcess(command, arguments, null, s => stringBuilder.AppendLine(s));
             var start = process.Start();
             if (start)
             {

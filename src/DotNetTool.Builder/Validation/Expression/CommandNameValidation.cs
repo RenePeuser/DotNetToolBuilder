@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.CommandLine;
 using System.Linq;
 using Argument.Check;
 using DotNetTool.Builder.Extensions;
