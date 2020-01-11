@@ -13,14 +13,11 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes
-- Add validation for option alias. Alias must begin with a "-"
-- Add description check, must have no minimum 10 characters.
-- Fix input for optional (o) and required (r) question.
-- A root command can contains now "-" name splitter. To use 'my-tool'
-  or 'dotnet-mytool' or anything else.
-- Fix wrong &lt;ToolCommandName&gt; name in the csproj file, after generating the tool.
-- !! Hint '--from-file' can not be used any more, with older generated tool
-  json files !!.
+- Add type validation, no invalid types can be used any more (Only types from System and System.IO)
+- Add fix that some argument-, option- or command name can not be named like a type.
+- Fix console output, remove duplicated blank lines.
+- Add type name optimizers, so for a 'System.IO.FileInfo' you can use only 'file', will be corrected
+  automatically to 'FileInfo'
 
 Prerequisites
 - .NET Core 3.0 SDK or higher</PackageReleaseNotes>

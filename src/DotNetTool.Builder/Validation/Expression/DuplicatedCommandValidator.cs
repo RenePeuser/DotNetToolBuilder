@@ -28,7 +28,7 @@ namespace DotNetTool.Builder.Validation.Expression
             {
                 if (lastCommandToken?.Value?.ToLower() == commandToken?.Value?.ToLower())
                 {
-                    yield return $"Current command: '{commandToken.Value}' must not be equal to the previous one: {lastCommandToken.Value}";
+                    yield return $"The command: '{commandToken.Value}', must not be equal to the previous one: {lastCommandToken.Value}";
                 }
 
                 lastCommandToken = commandToken;

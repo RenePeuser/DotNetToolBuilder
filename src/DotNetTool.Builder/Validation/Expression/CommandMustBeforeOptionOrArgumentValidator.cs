@@ -37,10 +37,10 @@ namespace DotNetTool.Builder.Validation.Expression
                 switch (argumentOrOptionToken)
                 {
                     case ArgumentToken argumentToken:
-                        yield return $"Command: {token.Value}, was defined after an argument: {argumentToken.Value}";
+                        yield return $"The command: {token.Value}, was defined after an argument: {argumentToken.Value}";
                         break;
                     case OptionToken optionToken:
-                        yield return $"Command: {token.Value}, was defined after an option: {optionToken.Value}";
+                        yield return $"The command: {token.Value}, was defined after an option: {optionToken.Value}";
                         break;
                 }
             }

@@ -37,14 +37,14 @@ namespace DotNetTool.Builder.Validation.Expression
 
                 if (argument.StartsWith("[") && argument.EndsWith("]"))
                 {
-                    yield return $"Argument: '{argument}' definition is missing, a type cast must close to an argument. Sample: '<arg>[int]' or [int]<arg>";
+                    yield return $"The argument: '{argument}' definition is missing, a type cast must close to an argument. Sample: '<arg>[int]' or [int]<arg>";
                     continue;
                 }
 
                 var argumentStartEndTokenCount = argument.Count(c => c == '<' || c == '>');
                 if (argumentStartEndTokenCount < 1)
                 {
-                    yield return $"Argument: '{argument}' missing start token '<' and end token'>'.";
+                    yield return $"The argument: '{argument}' missing start token '<' and end token'>'.";
                     continue;
                 }
 
@@ -52,23 +52,23 @@ namespace DotNetTool.Builder.Validation.Expression
                 {
                     if (argument.Contains("<"))
                     {
-                        yield return $"Argument: '{argument}' missing end '>' token.";
+                        yield return $"The argument: '{argument}' missing end '>' token.";
                         continue;
                     }
 
-                    yield return $"Argument: '{argument}' missing start '<' token.";
+                    yield return $"The argument: '{argument}' missing start '<' token.";
                     continue;
                 }
 
                 if (argumentStartEndTokenCount.NotEqualsTo(2))
                 {
-                    yield return $"Argument: '{argument}' contains another argument syntax. Multiple '<' or '>' are not valid";
+                    yield return $"The argument: '{argument}' contains another argument syntax. Multiple '<' or '>' are not valid";
                     continue;
                 }
 
                 if (argument.IndexOf('<') > argument.IndexOf('>'))
                 {
-                    yield return $"Argument: '{argument}' must starts with '< and ends with '>'";
+                    yield return $"The argument: '{argument}' must starts with '< and ends with '>'";
                     continue;
                 }
 
@@ -83,18 +83,18 @@ namespace DotNetTool.Builder.Validation.Expression
 
                 if (char.IsLetter(argumentName.First()).IsFalse())
                 {
-                    yield return $"Argument: {argument} must begin with a letter";
+                    yield return $"The argument: {argument} must begin with a letter";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsTypeName(argumentName);
                 if (validationResult.IsValid)
                 {
-                    yield return $"The name of an argument does not match a name of a type: {argument}";
+                    yield return $"The argument: '{argument}' must not be a name of a type.";
                 }
 
                 if (argument.Contains("--"))
                 {
-                    yield return $"Argument '{argument}' contains '--' is only allowed for options, to separate verbs use '-'";
+                    yield return $"The argument '{argument}' contains '--' is only allowed for options, to separate verbs use '-'";
                 }
 
                 var preCast = argument.Split('<').First();
@@ -102,12 +102,12 @@ namespace DotNetTool.Builder.Validation.Expression
                 {
                     if (preCast.StartsWith("[").IsFalse())
                     {
-                        yield return $"Typecast: {argument} must starts with a '['. Sample: [string]<arg>";
+                        yield return $"The typecast: {argument} must starts with a '['. Sample: [string]<arg>";
                     }
 
                     if (preCast.EndsWith("]").IsFalse())
                     {
-                        yield return $"Typecast: {argument} must ends with a ']'. Sample: [string]<arg>";
+                        yield return $"The typecast: {argument} must ends with a ']'. Sample: [string]<arg>";
                     }
                 }
 
@@ -116,12 +116,12 @@ namespace DotNetTool.Builder.Validation.Expression
                 {
                     if (postCast.StartsWith("[").IsFalse())
                     {
-                        yield return $"Typecast: {argument} must starts with a '['. Sample: <arg>[string]";
+                        yield return $"The typecast: {argument} must starts with a '['. Sample: <arg>[string]";
                     }
 
                     if (postCast.EndsWith("]").IsFalse())
                     {
-                        yield return $"Typecast: {argument} must ends with a ']'. Sample: <arg>[string]";
+                        yield return $"The typecast: {argument} must ends with a ']'. Sample: <arg>[string]";
                     }
                 }
             }

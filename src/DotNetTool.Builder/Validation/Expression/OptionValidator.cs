@@ -38,45 +38,45 @@ namespace DotNetTool.Builder.Validation.Expression
                 var test = option.Split("--");
                 if (test[1].StartsWith("-"))
                 {
-                    yield return $"Option: '{option}' must start with: '--'. Sample: '--option' or --my-option";
+                    yield return $"The option: '{option}' must start with: '--'. Sample: '--option' or --my-option";
                     continue;
                 }
 
                 var optionName = option.TrimStart('-');
                 if (optionName.IsNullOrWhiteSpace())
                 {
-                    yield return $"Option: '{option}' is missing name";
+                    yield return $"The option: '{option}' is missing name";
                     continue;
                 }
 
                 if (optionName.Contains("<") || optionName.Contains(">"))
                 {
-                    yield return $"Option '{option}' contains argument syntax, please separate the argument with a whitespace";
+                    yield return $"The option: '{option}' contains argument syntax, please separate the argument with a whitespace";
                 }
 
                 if (optionName.Contains("[") || optionName.Contains("]"))
                 {
-                    yield return $"Option '{option}' contains type cast syntax, type cast is only valid at argument";
+                    yield return $"The option: '{option}' contains type cast syntax, type cast is only valid at argument";
                 }
 
                 if (optionName.Contains("--"))
                 {
-                    yield return $"Option '{option}' contains '--' is only allowed at the beginning, to separate verbs use '-'";
+                    yield return $"The option: '{option}' contains '--' is only allowed at the beginning, to separate verbs use '-'";
                 }
 
                 if (char.IsLetterOrDigit(option.Last()).IsFalse())
                 {
-                    yield return $"Option: '{option}' must ends only with a letter or digit";
+                    yield return $"The option: '{option}' must ends only with a letter or digit";
                 }
 
                 if (char.IsLetter(optionName.First()).IsFalse())
                 {
-                    yield return $"Option: '{optionName}' must begin with a letter";
+                    yield return $"The option: '{optionName}' must begin with a letter";
                 }
 
                 if (optionName.Contains("."))
                 {
-                    yield return $"Option: '{optionName}' must not contains '.'";
+                    yield return $"The option: '{optionName}' must not contains '.'";
                 }
 
                 var validationResult = _primitiveTypeNameValidator.IsTypeName(optionName);
