@@ -62,6 +62,8 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
         {
             // if a json file with a dot net tool is given then try to deserialize it
             var dotNetTool = _dotNetToolSerializer.DeserializeFrom(parameters.FromFile);
+            // ToDo: Validation of an serialized tool !!
+
             if (dotNetTool.IsNull())
             {
                 // if tool was not deserialized, then user have to give in all information for this tool.
