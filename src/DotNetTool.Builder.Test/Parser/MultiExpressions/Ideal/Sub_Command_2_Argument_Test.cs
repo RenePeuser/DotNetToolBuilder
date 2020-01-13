@@ -48,7 +48,7 @@ namespace DotNetTool.Builder.Test.Parser.MultiExpressions.Ideal
         [TestMethod]
         public void Assert_Argument_NormalizedName()
         {
-            Assert.AreEqual("Command2-arg", _argumentInfo.NormalizedName);
+            Assert.AreEqual("Command2Arg", _argumentInfo.NormalizedName);
         }
 
         [TestMethod]

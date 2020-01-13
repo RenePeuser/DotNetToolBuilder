@@ -13,11 +13,10 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes
-- Add type validation, no invalid types can be used any more (Only types from System and System.IO)
-- Add fix that some argument-, option- or command name can not be named like a type.
-- Fix console output, remove duplicated blank lines.
-- Add type name optimizers, so for a 'System.IO.FileInfo' you can use only 'file', will be corrected
-  automatically to 'FileInfo'
+- Fix bug with argument names, which use '-' name splitter
+- Fix that project or tool name must not contains any type name separated with
+  dots. Sample: 'project.byte', 'project.long' or 'project.bool'. To prevent namespace
+  conflicts.
 
 Prerequisites
 - .NET Core 3.0 SDK or higher</PackageReleaseNotes>

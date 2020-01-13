@@ -11,7 +11,7 @@ namespace DotNetTool.Builder.Builder.Parameter
             var argumentInfo = parameterInfo.Argument;
             if (argumentInfo.IsNotNull())
             {
-                yield return new CtorArgument(argumentInfo.OptimizedType, argumentInfo.Name);
+                yield return new CtorArgument(argumentInfo.OptimizedType, argumentInfo.NormalizedName.FirstCharToLower());
             }
 
             foreach (var optionInfo in parameterInfo.Options)

@@ -57,10 +57,13 @@ namespace DotNetTool.Builder.Test.Parser
 
         private IEnumerable<ITypeNameOptimizer> GetTypeNameOptimizers()
         {
+            var builtInTypetable = new BuiltInTypeTableService();
+            var primitiveTypeNameValidator = new PrimitiveTypeNameValidator(builtInTypetable);
+
             yield return new FileInfoOptimizer();
             yield return new DirectoryInfoOptimizer();
             yield return new FileSystemInfoOptimizer();
-            yield return new SystemTypeNameOptimizer(new PrimitiveTypeNameValidator());
+            yield return new SystemTypeNameOptimizer(primitiveTypeNameValidator, builtInTypetable);
         }
 
         protected abstract void OnInit();

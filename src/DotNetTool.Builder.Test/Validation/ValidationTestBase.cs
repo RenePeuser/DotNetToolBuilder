@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Tokenizer;
 using DotNetTool.Builder.Validation;
@@ -30,7 +31,8 @@ namespace DotNetTool.Builder.Test.Validation
 
         private IEnumerable<IExpressionContentValidator> GetValidators()
         {
-            var primitiveTypeNameValidator = new PrimitiveTypeNameValidator();
+            var builtInTypeTableService = new BuiltInTypeTableService();
+            var primitiveTypeNameValidator = new PrimitiveTypeNameValidator(builtInTypeTableService);
             var toolNameValidator = new ToolNameValidator(primitiveTypeNameValidator);
             var argumentTypeOptimizer = new ArgumentTypeOptimizer(GetTypeNameOptimizers().ToList());
 
@@ -51,10 +53,13 @@ namespace DotNetTool.Builder.Test.Validation
 
         private IEnumerable<ITypeNameOptimizer> GetTypeNameOptimizers()
         {
+            var builtInTypeTableService = new BuiltInTypeTableService();
+            var primitiveTypeNameValidator = new PrimitiveTypeNameValidator(builtInTypeTableService);
+
             yield return new FileInfoOptimizer();
             yield return new DirectoryInfoOptimizer();
             yield return new FileSystemInfoOptimizer();
-            yield return new SystemTypeNameOptimizer(new PrimitiveTypeNameValidator());
+            yield return new SystemTypeNameOptimizer(primitiveTypeNameValidator, builtInTypeTableService);
         }
     }
 }

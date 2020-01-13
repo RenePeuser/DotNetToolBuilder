@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Validation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -17,7 +18,7 @@ namespace DotNetTool.Builder.Test.Validation
         public void OnInit()
         {
             _argumentTypeOptimizer = new ArgumentTypeOptimizer(GetTypeOptimizers().ToList());
-            _primitiveTypeConverter = new PrimitiveTypeNameValidator();
+            _primitiveTypeConverter = new PrimitiveTypeNameValidator(new BuiltInTypeTableService());
         }
 
         [TestMethod]
@@ -32,10 +33,12 @@ namespace DotNetTool.Builder.Test.Validation
 
         private IEnumerable<ITypeNameOptimizer> GetTypeOptimizers()
         {
+            var builtInTypeTableService = new BuiltInTypeTableService();
+
             yield return new DirectoryInfoOptimizer();
             yield return new FileInfoOptimizer();
             yield return new FileSystemInfoOptimizer();
-            yield return new SystemTypeNameOptimizer(new PrimitiveTypeNameValidator());
+            yield return new SystemTypeNameOptimizer(new PrimitiveTypeNameValidator(builtInTypeTableService), builtInTypeTableService);
         }
 
         private IEnumerable<string> ValidTypeNames()

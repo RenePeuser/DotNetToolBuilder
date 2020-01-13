@@ -152,6 +152,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<ISpecificIDE, JetBrainsRider>();
 
             services.AddSingleton<ICollectTillInputCorrect, CollectTillInputCorrect>();
+            services.AddSingleton<IBuiltInTypeTableService, BuiltInTypeTableService>();
         }
 
         private void RegisterDotNetToolInfoCollector(IServiceCollection services)

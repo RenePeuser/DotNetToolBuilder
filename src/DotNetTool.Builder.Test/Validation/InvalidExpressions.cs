@@ -231,6 +231,12 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet to-ol --option");
             yield return new ExpressionWithExpectedResult("dotnet", "dotnet tool tool --option");
             yield return new ExpressionWithExpectedResult("dotnet", "!§$%&/()=?`´");
+
+            yield return new ExpressionWithExpectedResult("bool", "bool cmd1 <arg> --opt");
+            yield return new ExpressionWithExpectedResult("bool", "bool int <byte> --sbyte");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet int <ok> --valid");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet jo <long> --valid");
+            yield return new ExpressionWithExpectedResult("dotnet", "dotnet jo <good> --short");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
@@ -37,8 +38,9 @@ namespace DotNetTool.Builder.Parser.Argument
 
             var description = _collectDescription.Collect($"Please enter a description for your argument: '{argumentValue}'");
             var optmmizedTypeInfo = _argumentTypeOptimizer.OptimizeType(typeInfo);
+            var normalizedName = name.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
 
-            var argument = new ArgumentInfo(name, description, argumentValue, typeInfo, optmmizedTypeInfo, name.FirstCharToUpper());
+            var argument = new ArgumentInfo(name, description, argumentValue, typeInfo, optmmizedTypeInfo, normalizedName);
             return argument;
         }
     }

@@ -57,10 +57,17 @@ namespace DotNetTool.Builder.Validation
                 yield return $"The project name: '{value}' must end with a letter or digits";
             }
 
-            var validationResult = _primitiveTypeNameValidator.IsTypeName(value);
-            if (validationResult.IsValid)
+            // A dot is allowed in project name, so we have to check that not any part which is separated
+            // by a dot is a type name, otherwise we can not compile because of namespace conflicts.
+            var splittedProjectName = value.Split('.');
+
+            var validationResults = splittedProjectName.Select(name => _primitiveTypeNameValidator.IsTypeName(name));
+            foreach (var validationResult in validationResults)
             {
-                yield return $"The project name: '{value}' must not be a name of a type";
+                if (validationResult.IsValid)
+                {
+                    yield return $"The project, or a part of the project name: '{validationResult.Alias}' must not contains a name of a system type";
+                }
             }
         }
     }

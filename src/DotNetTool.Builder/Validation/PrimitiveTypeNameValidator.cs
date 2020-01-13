@@ -1,36 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Argument.Check;
 using DotNetTool.Builder.Extensions;
+using DotNetTool.Builder.Services;
 
 namespace DotNetTool.Builder.Validation
 {
+   
     internal class PrimitiveTypeNameValidator : IPrimitiveTypeNameValidator
     {
-        // ToDo: centralize this later.
-        // This is because we do not want use the real Systemtypes if it is possible.
-        // Sample for 'object' find result will be 'Object' but we want prefer the low letter
-        // case 'object' in such cases.
-        private static readonly Dictionary<string, Type> typeExceptions = new Dictionary<string, Type>
-        {
-            { "object", typeof(object) },
-            { "string", typeof(string) },
-            { "byte", typeof(byte) },
-            { "sbyte", typeof(sbyte) },
-            { "double", typeof(double) },
-            { "decimal", typeof(decimal) },
-            { "char", typeof(char) },
-            { "bool", typeof(bool) },
-            { "int", typeof(int) },
-            { "long", typeof(long) }
-        };
-
+        private readonly IBuiltInTypeTableService _builtInTypeTableService;
         private readonly Type[] supportedTypes;
 
-        public PrimitiveTypeNameValidator()
+        public PrimitiveTypeNameValidator(IBuiltInTypeTableService builtInTypeTableService)
         {
+            _builtInTypeTableService = builtInTypeTableService;
             var systemTypes = typeof(double).Assembly.GetTypes();
             var systemIoTypes = typeof(FileInfo).Assembly.GetTypes();
 
@@ -41,17 +26,17 @@ namespace DotNetTool.Builder.Validation
         {
             Throw.IfNullOrWhiteSpace(() => value);
 
-            var primitiveType = typeExceptions.GetValueOrDefault(value, null);
+            var primitiveType = _builtInTypeTableService.GetTypeFor(value);
             if (primitiveType.IsNotNull())
             {
-                return new PrimitiveTypeValidationResult(true, "", primitiveType);
+                return new PrimitiveTypeValidationResult(true, "", primitiveType.Type, primitiveType.Alias);
             }
 
             var lowerTypeName = value.ToLower();
-            var match = supportedTypes.Where(t => t.Name.ToLower().EqualsTo(lowerTypeName) || t.FullName.ToLower().EqualsTo(lowerTypeName)).ToList();
+            var typeMatch = supportedTypes.Where(t => t.Name.ToLower().EqualsTo(lowerTypeName) || t.FullName.ToLower().EqualsTo(lowerTypeName)).ToList().FirstOrDefault();
 
             var errorMessage = $"The type: '{value}' for the argument type cast: '[{value}]' is not a valid system type. Sample: <myArg>[string] or <myArg>[FileInfo] or many more.";
-            return new PrimitiveTypeValidationResult(match.Any(), errorMessage, match.FirstOrDefault());
+            return new PrimitiveTypeValidationResult(typeMatch.IsNotNull(), errorMessage, typeMatch, typeMatch?.Name);
         }
 
         public ValidationResult IsNotTypeName(string value)
