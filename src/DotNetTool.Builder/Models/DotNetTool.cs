@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Models
 {
-    [DebuggerDisplay("{" + nameof(DotNetToolName) + "}")]
+    [DebuggerDisplay("Project: {" + nameof(ProjectName) + "} ToolName: {" + nameof(Models.DotNetToolName.Value) + "}")]
     internal class DotNetTool
     {
         public DotNetTool(string projectName, DotNetToolName dotNetToolName, CommandInfo parameterInfo)

@@ -56,7 +56,7 @@ namespace DotNetTool.Builder.Services.DotNet
                 target.SaveToolTo.Create();
             }
 
-            var dotnetToolAsJson = JsonConvert.SerializeObject(dotNetTool);
+            var dotnetToolAsJson = JsonConvert.SerializeObject(dotNetTool, Formatting.Indented);
             var dotnetToolFile = _fileService.GetFileInfo(Path.Combine(targetDirectory.FullName, $"{dotNetTool.ProjectName}.json"));
             dotnetToolFile.WriteAllText(dotnetToolAsJson);
         }

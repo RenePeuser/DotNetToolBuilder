@@ -1,0 +1,74 @@
+{
+  "ProjectName": "project.with.special.args",
+  "DotNetToolName": {
+    "Value": "test",
+    "NormalizedName": "Test"
+  },
+  "ParameterInfo": {
+    "SubCommands": [
+      {
+        "SubCommands": [
+          {
+            "SubCommands": [
+              {
+                "SubCommands": [
+                  {
+                    "SubCommands": [],
+                    "Options": [
+                      {
+                        "Alias": "-so",
+                        "Description": "description for --split-option",
+                        "IsIsRequired": false,
+                        "Argument": null,
+                        "NormalizedValue": "SplitOption",
+                        "Value": "--split-option",
+                        "Name": "split-option",
+                        "NormalizedName": "SplitOption"
+                      }
+                    ],
+                    "Argument": {
+                      "Description": "description for <arg-test>[string]",
+                      "Type": "string",
+                      "OptimizedType": "string",
+                      "Value": "<arg-test>[string]",
+                      "Name": "arg-test",
+                      "NormalizedName": "ArgTest"
+                    },
+                    "Description": "description for arg",
+                    "Value": "arg",
+                    "Name": "arg",
+                    "NormalizedName": "Arg"
+                  }
+                ],
+                "Options": [],
+                "Argument": null,
+                "Description": "description with",
+                "Value": "with",
+                "Name": "with",
+                "NormalizedName": "With"
+              }
+            ],
+            "Options": [],
+            "Argument": null,
+            "Description": "description tool",
+            "Value": "tool",
+            "Name": "tool",
+            "NormalizedName": "Tool"
+          }
+        ],
+        "Options": [],
+        "Argument": null,
+        "Description": "description my",
+        "Value": "my",
+        "Name": "my",
+        "NormalizedName": "My"
+      }
+    ],
+    "Options": [],
+    "Argument": null,
+    "Description": "description test",
+    "Value": "test",
+    "Name": "test",
+    "NormalizedName": "Test"
+  }
+}
