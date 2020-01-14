@@ -18,8 +18,8 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 
 ## Quickguide to your new CLI
 ```
-1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global'
-2. Run 'dotnet newtool [start-option]' (look downwards, to start VS2019, VS-Code or Rider)
+1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version 0.8.4'
+2. Run 'dotnet newtool --use-code'
 3. Insert all your expressions, and informations
 4. Implement your logic to the created service for each command, which is called from the aktiv command handler.
 
