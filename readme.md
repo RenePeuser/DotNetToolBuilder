@@ -1,10 +1,8 @@
 # DotNetTool.Builder
 
-```
 You will not loose time to create a cool dotnet tool, then you have to try out this DotNetTool.Builder. You are able to build and run a dot net tool in a few minutes.
 
-This dotnet tool will create a dotnet tool based on the System.CommandLine package from Microsoft.
-```
+This dotnet tool will create a dotnet tool based on the [System.CommandLine](https://www.nuget.org/packages/System.CommandLine/) package from Microsoft.
 
 ## Prerequisites
 * .NET Core 3.0 SDK or higher
