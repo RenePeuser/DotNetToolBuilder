@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using DotNetTool.Builder.Builder.Options;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Collectors;
+using Extensions.Pack;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Builder.FileStructure

@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
-using DotNetTool.Builder.Extensions;
+
+using Extensions.Pack;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE
@@ -57,7 +58,7 @@ namespace DotNetTool.Builder.Services.IDE
             }
 
             var latest = lastVisualStudioVersion.EnumerateFiles("devenv.exe", SearchOption.AllDirectories).FirstOrDefault();
-            if (latest.NotExists())
+            if (latest.NotExists)
             {
                 _consoleService.WriteError($"Could not start Visual Studio {lastVisualStudioVersion.NotExists}.{Environment.NewLine}Could not found: 'devenv.exe' in VS2019 folder: '{lastVisualStudioVersion.FullName}'");
                 return Task.CompletedTask;

@@ -4,9 +4,10 @@ using System.IO;
 using System.Linq;
 using Argument.Check;
 using DotNetTool.Builder.ErrorHandling;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services.Collectors;
+using Extensions.Pack;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Builder.Startup

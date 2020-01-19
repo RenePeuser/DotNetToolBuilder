@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Argument.Check;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Tokenizer.Tokens;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Validation.Expression
 {
@@ -28,7 +29,7 @@ namespace DotNetTool.Builder.Validation.Expression
 
         private IEnumerable<string> CollectErrors(ExpressionInfo expressionInfo)
         {
-            var commandTokens = expressionInfo.Tokens.AllTypeEquals<CommandToken>().ToList();
+            var commandTokens = expressionInfo.Tokens.AllTypesAreEqualsTo<CommandToken>().ToList();
             foreach (var commandToken in commandTokens)
             {
                 var command = commandToken.Value;

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services.Collectors;
+using Extensions.Pack;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Builder.FileStructure

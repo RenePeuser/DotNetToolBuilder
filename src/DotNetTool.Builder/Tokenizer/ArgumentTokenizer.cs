@@ -1,5 +1,6 @@
-﻿using DotNetTool.Builder.Extensions;
+﻿
 using DotNetTool.Builder.Tokenizer.Tokens;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Tokenizer
 {

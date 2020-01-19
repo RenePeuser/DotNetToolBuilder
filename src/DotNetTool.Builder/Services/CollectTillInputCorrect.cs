@@ -1,7 +1,8 @@
 ﻿using System;
 using Argument.Check;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Validation;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services
 {

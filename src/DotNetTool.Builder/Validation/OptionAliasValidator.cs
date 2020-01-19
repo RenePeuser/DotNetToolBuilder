@@ -1,5 +1,6 @@
 ﻿using System.Linq;
-using DotNetTool.Builder.Extensions;
+
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Validation
 {

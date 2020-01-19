@@ -1,9 +1,10 @@
 ﻿using System.Linq;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Tokenizer.Tokens;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Parser.Options
 {

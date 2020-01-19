@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Linq;
 using DotNetTool.Builder.Builder.Commands;
-using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Services.Collectors;
+using Extensions.Pack;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Builder.FileStructure
@@ -43,7 +43,7 @@ namespace DotNetTool.Builder.Builder.FileStructure
             splittedNamespace.Remove(splittedNamespace.Last());
             var newNamespaceForInterface = splittedNamespace.Flatten(".");
             var interfaceType = $"{newNamespaceForInterface}.I{parameter.NormalizedName}SubCommandBuilder";
-            var implementation = $"{currentPath}.{filePath0.FileNameWithoutExtension()}";
+            var implementation = $"{currentPath}.{filePath0.NameWithoutExtension}";
 
             commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceType, implementation));
         }

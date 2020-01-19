@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
-using DotNetTool.Builder.Extensions;
+
+using Extensions.Pack;
 using FileSystem.Abstraction;
 using Newtonsoft.Json;
 using FileInfo = System.IO.FileInfo;
@@ -65,7 +66,7 @@ namespace DotNetTool.Builder.Services.DotNet
         {
             Throw.IfNull(() => fileInfo);
 
-            if (fileInfo.NotExists())
+            if (fileInfo.NotExists)
             {
                 _consoleService.WriteError($"File: '{fileInfo.FullName}' does not exists");
                 return null;

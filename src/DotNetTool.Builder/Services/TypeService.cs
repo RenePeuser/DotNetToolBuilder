@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.Extensions;
+using Extensions.Pack;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services
@@ -10,7 +10,7 @@ namespace DotNetTool.Builder.Services
         public string GetFullQualifiedName(string projectName, IFileInfo fileInfo)
         {
             var path = CollectPath(fileInfo.Directory, projectName).Reverse().ToList();
-            var fullQualifiedName = $"{projectName}.{path.Flatten(".")}.{fileInfo.FileNameWithoutExtension()}";
+            var fullQualifiedName = $"{projectName}.{path.Flatten(".")}.{fileInfo.NameWithoutExtension}";
             return fullQualifiedName;
         }
 

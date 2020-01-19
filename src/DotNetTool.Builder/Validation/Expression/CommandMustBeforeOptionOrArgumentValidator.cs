@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Argument.Check;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Tokenizer.Tokens;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Validation.Expression
 {

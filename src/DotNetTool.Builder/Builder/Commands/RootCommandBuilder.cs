@@ -1,6 +1,7 @@
 ﻿using Argument.Check;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Models;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Builder.Commands
 {

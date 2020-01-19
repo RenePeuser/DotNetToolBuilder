@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.Extensions;
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Tokenizer.Tokens;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Tokenizer
 {
-    internal class Tokenizer : IExpressionTokenizer
+    internal class tokenizer : IExpressionTokenizer
     {
         private readonly IEnumerable<ITokenizer> _tokenizers;
 
-        public Tokenizer(IEnumerable<ITokenizer> tokenizers)
+        public tokenizer(IEnumerable<ITokenizer> tokenizers)
         {
             _tokenizers = tokenizers;
         }

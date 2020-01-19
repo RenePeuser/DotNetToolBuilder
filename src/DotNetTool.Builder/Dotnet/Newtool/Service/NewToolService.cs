@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using DotNetTool.Builder.Builder.FileStructure;
 using DotNetTool.Builder.Builder.Startup;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Collectors;
@@ -9,6 +9,7 @@ using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
 using DotNetTool.Builder.Services.IO;
 using DotNetTool.Builder.Services.Template;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Dotnet.Newtool.Service
 {

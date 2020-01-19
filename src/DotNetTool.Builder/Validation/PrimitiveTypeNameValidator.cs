@@ -2,8 +2,9 @@
 using System.IO;
 using System.Linq;
 using Argument.Check;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Services;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Validation
 {

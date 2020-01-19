@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Argument.Check;
-using DotNetTool.Builder.Extensions;
+
 using DotNetTool.Builder.Models;
 using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Commands;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Tokenizer.Tokens;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Parser
 {

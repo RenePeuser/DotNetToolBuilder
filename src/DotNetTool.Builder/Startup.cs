@@ -89,7 +89,7 @@ namespace DotNetTool.Builder
 
         private void RegisterTokenizer(IServiceCollection services)
         {
-            services.AddSingleton<IExpressionTokenizer, Tokenizer.Tokenizer>();
+            services.AddSingleton<IExpressionTokenizer, Tokenizer.tokenizer>();
             services.AddSingleton<ITokenizer, ArgumentTokenizer>();
             services.AddSingleton<ITokenizer, OptionTokenizer>();
             services.AddSingleton<ITokenizer, CommandTokenizer>();

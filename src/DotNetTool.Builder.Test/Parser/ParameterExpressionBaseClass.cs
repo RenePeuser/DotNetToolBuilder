@@ -33,7 +33,7 @@ namespace DotNetTool.Builder.Test.Parser
             var argumentParser = new ArgumentParser(argumentTypeOptimizer, descriptionCollector);
             var optionParser = new OptionParser(collectTillOk, optionAliasCollector, descriptionCollector);
             var parser = new ParameterExpressionParser(new CommandParser(descriptionCollector, dotNetToolNameNormalizer), argumentParser, optionParser, new ParameterService());
-            var tokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizer().ToList());
+            var tokenizer = new DotNetTool.Builder.Tokenizer.tokenizer(GetTokenizer().ToList());
             var expressions = GetExpressionsToParse().ToList();
 
             CommandInfo lastCommandInfo = null;

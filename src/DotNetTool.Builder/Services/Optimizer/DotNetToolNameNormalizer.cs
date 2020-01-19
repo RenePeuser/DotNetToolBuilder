@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Argument.Check;
-using DotNetTool.Builder.Extensions;
+
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Optimizer
 {
