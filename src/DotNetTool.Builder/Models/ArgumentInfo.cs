@@ -19,6 +19,6 @@ namespace DotNetTool.Builder.Models
 
         public string Type { get; }
 
-        public string OptimizedType { get; }
+        public string OptimizedType { get; set; }
     }
 }

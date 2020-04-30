@@ -15,12 +15,15 @@ using DotNetTool.Builder.Parser.Argument;
 using DotNetTool.Builder.Parser.Commands;
 using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.Services.Builders;
 using DotNetTool.Builder.Services.Collectors;
 using DotNetTool.Builder.Services.DotNet;
+using DotNetTool.Builder.Services.Fixer;
 using DotNetTool.Builder.Services.IDE;
 using DotNetTool.Builder.Services.IO;
 using DotNetTool.Builder.Services.Optimizer;
 using DotNetTool.Builder.Services.Template;
+using DotNetTool.Builder.Services.Validation;
 using DotNetTool.Builder.Tokenizer;
 using DotNetTool.Builder.Validation;
 using DotNetTool.Builder.Validation.Expression;
@@ -53,6 +56,9 @@ namespace DotNetTool.Builder
             RegisterStartUpBuilder(services);
             RegisterFileStructureCreators(services);
             RegisterArgumentTypeOptimizer(services);
+
+            RegisterJsonFixer(services);
+            RegisterJsonValidators(services);
         }
 
         private void RegisterArgumentTypeOptimizer(IServiceCollection services)
@@ -89,7 +95,7 @@ namespace DotNetTool.Builder
 
         private void RegisterTokenizer(IServiceCollection services)
         {
-            services.AddSingleton<IExpressionTokenizer, Tokenizer.tokenizer>();
+            services.AddSingleton<IExpressionTokenizer, Tokenizer.Tokenizer>();
             services.AddSingleton<ITokenizer, ArgumentTokenizer>();
             services.AddSingleton<ITokenizer, OptionTokenizer>();
             services.AddSingleton<ITokenizer, CommandTokenizer>();
@@ -100,7 +106,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IProjectNameValidator, ProjectNameValidator>();
             services.AddSingleton<IToolNameValidator, ToolNameValidator>();
             services.AddSingleton<IOptionAliasValidator, OptionAliasValidator>();
-            services.AddSingleton<IDescriptionValidator, DescriptionValidator>();
+            services.AddSingleton<IDescriptionValidator, DotNetTool.Builder.InfoCollectors.DescriptionValidator>();
 
             services.AddSingleton<IPrimitiveTypeNameValidator, PrimitiveTypeNameValidator>();
 
@@ -128,6 +134,25 @@ namespace DotNetTool.Builder
             services.AddSingleton<ITypeRegistrationBuilder, TypeRegistrationBuilder>();
         }
 
+        private void RegisterJsonFixer(IServiceCollection services)
+        {
+            services.AddSingleton<DotNetToolFromJsonFixer>();
+            services.AddSingleton<IDotNetToolFromJsonFixer, DotNetToolCommandFixer>();
+            services.AddSingleton<IDotNetToolFromJsonFixer, DotNetToolNameFixer>();
+
+            services.AddSingleton<ICommandFixer, ArgumentOptimizer>();
+            services.AddSingleton<ICommandFixer, CommandOptimizer>();
+            services.AddSingleton<ICommandFixer, OptionOptimizer>();
+        }
+
+        private void RegisterJsonValidators(IServiceCollection services)
+        {
+            services.AddSingleton<DotNetToolValidator>();
+            services.AddSingleton<IDotNetToolFromJsonValidator, CommandFromJsonValidator>();
+            services.AddSingleton<IDotNetToolFromJsonValidator, ProjectNameToolFromJsonValidator>();
+            services.AddSingleton<IDotNetToolFromJsonValidator, ToolNameFromJsonValidator>();
+        }
+
         private void RegisterServices(IServiceCollection services)
         {
             services.AddSingleton<ITemplateExtractor, TemplateExtractor>();
@@ -141,8 +166,15 @@ namespace DotNetTool.Builder
             services.AddSingleton<INameSpaceCollector, NameSpaceCollector>();
             services.AddSingleton<IRenameFilesAndFolders, RenameFilesAndFolders>();
             services.AddSingleton<ITemplateService, TemplateService>();
+
             services.AddSingleton<IDotNetToolTestService, DotNetToolTestService>();
-            services.AddSingleton<IDotNetToolSerializer, DotNetToolSerializer>();
+            services.AddSingleton<IDotNetToolSerializer, DotNetToolJsonSerializer>();
+
+
+            services.AddSingleton<IBuildDotNetToolStrategy, CreateDotNetToolFromJson>();
+            services.AddSingleton<IBuildDotNetToolStrategy, CreateDotNetToolFromConsole>();
+            services.AddSingleton<DotNetToolToolBuildFromStrategy>();
+
             services.AddSingleton<ITargetFolderService, TargetFolderService>();
             services.AddSingleton<ITypeService, TypeService>();
 

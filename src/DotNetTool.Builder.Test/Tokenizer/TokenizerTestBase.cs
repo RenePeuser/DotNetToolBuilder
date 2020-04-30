@@ -13,7 +13,7 @@ namespace DotNetTool.Builder.Test.Tokenizer
         [TestInitialize]
         public void Init()
         {
-            var tokenizer = new DotNetTool.Builder.Tokenizer.tokenizer(GetTokenizer().ToList());
+            var tokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizer().ToList());
             ExpressionInfo = tokenizer.Tokenize(GetExpression());
         }
 

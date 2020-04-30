@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Test.Validation
         [TestInitialize]
         public void Init()
         {
-            ExpressionTokenizer = new DotNetTool.Builder.Tokenizer.tokenizer(GetTokenizers().ToList());
+            ExpressionTokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizers().ToList());
             ExpressionValidator = new ExpressionValidator(GetValidators().ToList());
         }
 

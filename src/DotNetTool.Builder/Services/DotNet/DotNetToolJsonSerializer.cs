@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Argument.Check;
 using DotNetTool.Builder.Dotnet.Newtool;
-
+using DotNetTool.Builder.ErrorHandling;
 using Extensions.Pack;
 using FileSystem.Abstraction;
 using Newtonsoft.Json;
@@ -9,12 +9,12 @@ using FileInfo = System.IO.FileInfo;
 
 namespace DotNetTool.Builder.Services.DotNet
 {
-    internal class DotNetToolSerializer : IDotNetToolSerializer
+    internal class DotNetToolJsonSerializer : IDotNetToolSerializer
     {
         private readonly IConsoleService _consoleService;
         private readonly IFileService _fileService;
 
-        public DotNetToolSerializer(IConsoleService consoleService, IFileService fileService)
+        public DotNetToolJsonSerializer(IConsoleService consoleService, IFileService fileService)
         {
             Throw.IfNull(() => consoleService);
             Throw.IfNull(() => fileService);
@@ -37,7 +37,7 @@ namespace DotNetTool.Builder.Services.DotNet
             }
 
             var file = _fileService.GetFileInfo(fileInfo.FullName);
-            return DeserializeFrom(file);
+            return DeserializeFromInternal(file);
         }
 
         public void Serialize(Models.DotNetTool dotNetTool, NewToolParameters target)
@@ -62,20 +62,18 @@ namespace DotNetTool.Builder.Services.DotNet
             dotnetToolFile.WriteAllText(dotnetToolAsJson);
         }
 
-        private Models.DotNetTool DeserializeFrom(IFileInfo fileInfo)
+        private Models.DotNetTool DeserializeFromInternal(IFileInfo fileInfo)
         {
             Throw.IfNull(() => fileInfo);
 
             if (fileInfo.NotExists)
             {
-                _consoleService.WriteError($"File: '{fileInfo.FullName}' does not exists");
-                return null;
+                throw new DotNetToolBuilderException($"File: '{fileInfo.FullName}' does not exists");
             }
 
             if (fileInfo.Extension.NotEqualsTo(".json"))
             {
-                _consoleService.WriteError($"File: '{fileInfo.FullName}' must be a json to deserialize to a dot net tool");
-                return null;
+                throw new DotNetToolBuilderException($"File: '{fileInfo.FullName}' must be a json to deserialize to a dot net tool");
             }
 
             Models.DotNetTool dotNetTool = null;

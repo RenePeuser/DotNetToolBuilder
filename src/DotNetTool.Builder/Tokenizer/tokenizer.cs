@@ -6,11 +6,11 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Tokenizer
 {
-    internal class tokenizer : IExpressionTokenizer
+    internal class Tokenizer : IExpressionTokenizer
     {
         private readonly IEnumerable<ITokenizer> _tokenizers;
 
-        public tokenizer(IEnumerable<ITokenizer> tokenizers)
+        public Tokenizer(IEnumerable<ITokenizer> tokenizers)
         {
             _tokenizers = tokenizers;
         }
