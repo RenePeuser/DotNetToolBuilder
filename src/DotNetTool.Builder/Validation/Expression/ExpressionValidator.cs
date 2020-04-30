@@ -26,19 +26,19 @@ namespace DotNetTool.Builder.Validation.Expression
 
             if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
-                return new ValidationResult(false, "Input must not be 'null', 'empty' or 'whitespace");
+                return new ValidationResult("Input must not be 'null', 'empty' or 'whitespace");
             }
 
             var results = _expressionContentValidators.Select(validator => validator.IsValid(dotNetDotNetToolName, expressionInfo));
             if (results.All(r => r.IsValid))
             {
-                return new ValidationResult(true, null);
+                return new ValidationResult(null);
             }
 
             var stringBuilder = new StringBuilder();
             results.Where(result => result.IsValid.IsFalse()).ForEach(result => stringBuilder.AppendLine(result.Errors));
 
-            return new ValidationResult(false, stringBuilder.ToString());
+            return new ValidationResult(stringBuilder.ToString());
         }
     }
 }

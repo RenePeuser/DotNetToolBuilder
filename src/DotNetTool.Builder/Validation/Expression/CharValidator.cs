@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Validation.Expression
             Throw.IfNull(() => expressionInfo);
 
             var errors = CheckForErrors(expressionInfo).ToList();
-            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
+            return new ValidationResult(errors.Flatten(Environment.NewLine));
         }
 
         private IEnumerable<string> CheckForErrors(ExpressionInfo expression)

@@ -17,7 +17,7 @@ namespace DotNetTool.Builder.Validation.Expression
             Throw.IfNull(() => expressionInfo);
 
             var errors = CollectErrors(expressionInfo).ToList();
-            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
+            return new ValidationResult(errors.Flatten(Environment.NewLine));
         }
 
         private IEnumerable<string> CollectErrors(ExpressionInfo expressionInfo)
@@ -43,7 +43,6 @@ namespace DotNetTool.Builder.Validation.Expression
                     var start = value.IndexOf("[", StringComparison.Ordinal) + 1;
                     var end = value.IndexOf("]", StringComparison.Ordinal);
                     var typeName = value[start..end];
-
                     if (typeName.IsNullOrWhiteSpace())
                     {
                         yield return $"The typecast: '{typeName}' must only contains letter, digits or '.'. Sample: '[string]' or '[System.IO.FileInfo]'";

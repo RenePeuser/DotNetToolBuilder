@@ -25,7 +25,7 @@ namespace DotNetTool.Builder.Validation.Expression
             Throw.IfNull(() => expressionInfo);
 
             var errors = CollectErrors(dotNetDotNetToolName, expressionInfo).ToList();
-            return new ValidationResult(errors.IsEmpty(), errors.Flatten(Environment.NewLine));
+            return new ValidationResult(errors.Flatten(Environment.NewLine));
         }
 
         private IEnumerable<string> CollectErrors(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)

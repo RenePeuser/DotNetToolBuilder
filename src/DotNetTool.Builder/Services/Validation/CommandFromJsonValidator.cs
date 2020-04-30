@@ -37,41 +37,4 @@ namespace DotNetTool.Builder.Services.Validation
             }
         }
     }
-
-    internal interface ICommandInfoValidator
-    {
-        IEnumerable<ValidationResult> Validate(CommandInfo commandInfo);
-    }
-
-    internal class ArgumentInfoValidator : ICommandInfoValidator
-    {
-        public IEnumerable<ValidationResult> Validate(CommandInfo commandInfo)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    internal class DescriptionValidator : ICommandInfoValidator
-    {
-        public IEnumerable<ValidationResult> Validate(CommandInfo commandInfo)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    internal class OptionsValidator : ICommandInfoValidator
-    {
-        public IEnumerable<ValidationResult> Validate(CommandInfo commandInfo)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
-
-    internal class CommandNameValidator : ICommandInfoValidator
-    {
-        public IEnumerable<ValidationResult> Validate(CommandInfo commandInfo)
-        {
-            throw new System.NotImplementedException();
-        }
-    }
 }

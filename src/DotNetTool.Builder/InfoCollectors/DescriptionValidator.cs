@@ -11,7 +11,7 @@ namespace DotNetTool.Builder.InfoCollectors
         public ValidationResult Validate(string value)
         {
             var errors = CollectErrors(value).Flatten(Environment.NewLine);
-            return new ValidationResult(errors.IsEmpty(), errors);
+            return new ValidationResult(errors);
         }
 
         private IEnumerable<string> CollectErrors(string value)

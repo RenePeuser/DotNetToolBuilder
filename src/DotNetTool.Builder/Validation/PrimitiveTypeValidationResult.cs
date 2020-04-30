@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Validation
     [DebuggerDisplay("Validate: '{" + nameof(IsValid) + "}")]
     internal class PrimitiveTypeValidationResult : ValidationResult
     {
-        public PrimitiveTypeValidationResult(bool isValid, string errors, Type type, string alias) : base(isValid, errors)
+        public PrimitiveTypeValidationResult(string errors, Type type, string alias) : base(errors)
         {
             Type = type;
             Alias = alias;

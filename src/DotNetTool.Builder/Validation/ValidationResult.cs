@@ -1,14 +1,16 @@
 ﻿using System.Diagnostics;
+using System.Linq;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.Validation
 {
     [DebuggerDisplay("Validate: '{" + nameof(IsValid) + "}")]
     internal class ValidationResult
     {
-        public ValidationResult(bool isValid, string errors)
+        public ValidationResult(string errors)
         {
-            IsValid = isValid;
             Errors = errors;
+            IsValid = errors.IsNotNullOrEmpty();
         }
 
         public bool IsValid { get; }

@@ -35,6 +35,7 @@ namespace DotNetTool.Builder.Test.Validation
             var primitiveTypeNameValidator = new PrimitiveTypeNameValidator(builtInTypeTableService);
             var toolNameValidator = new ToolNameValidator(primitiveTypeNameValidator);
             var argumentTypeOptimizer = new ArgumentTypeOptimizer(GetTypeNameOptimizers().ToList());
+            var validateCommandNameFromString = new ValidateCommandNameFromString(primitiveTypeNameValidator);
 
             yield return new ArgumentValidator(primitiveTypeNameValidator);
             yield return new TypeCastValidator();
@@ -44,7 +45,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new OnlyOneArgumentValidator();
             yield return new OptionValidator(primitiveTypeNameValidator);
             yield return new DotNetTool.Builder.Validation.Expression.ToolNameValidator(toolNameValidator);
-            yield return new CommandNameValidation(primitiveTypeNameValidator);
+            yield return new CommandNameValidation(validateCommandNameFromString);
             yield return new UnknownTokenValidator();
             yield return new MultipleOptionValidator();
             yield return new DuplicatedCommandValidator();

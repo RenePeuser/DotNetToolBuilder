@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.Validation.Expression
             Throw.IfNull(() => expressionInfo);
 
             var errors = CollectErrors(expressionInfo.Tokens).Flatten(Environment.NewLine);
-            return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
+            return new ValidationResult(errors);
         }
 
         private IEnumerable<string> CollectErrors(IEnumerable<Token> expressionTokens)

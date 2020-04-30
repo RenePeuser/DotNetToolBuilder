@@ -11,11 +11,11 @@ namespace DotNetTool.Builder.Validation.Expression
 {
     internal class CommandNameValidation : IExpressionContentValidator
     {
-        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
+        private readonly ValidateCommandNameFromString _validateCommandNameFromString;
 
-        public CommandNameValidation(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
+        public CommandNameValidation(ValidateCommandNameFromString validateCommandNameFromString)
         {
-            _primitiveTypeNameValidator = primitiveTypeNameValidator;
+            _validateCommandNameFromString = validateCommandNameFromString;
         }
 
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
@@ -24,7 +24,7 @@ namespace DotNetTool.Builder.Validation.Expression
             Throw.IfNull(() => expressionInfo);
 
             var errors = CollectErrors(expressionInfo).Flatten(Environment.NewLine);
-            return new ValidationResult(errors.IsNullOrWhiteSpace(), errors);
+            return new ValidationResult(errors);
         }
 
         private IEnumerable<string> CollectErrors(ExpressionInfo expressionInfo)
@@ -33,25 +33,11 @@ namespace DotNetTool.Builder.Validation.Expression
             foreach (var commandToken in commandTokens)
             {
                 var command = commandToken.Value;
-                if (command.Contains("--") || command.Contains("<") || command.Contains("["))
-                {
-                    yield return $"The command: '{command}' most not contain argument '<arg>', typecast '[type]' or option-syntax '[--option]'";
-                }
+                var errors = _validateCommandNameFromString.CollectErrors(command);
 
-                if (char.IsLetter(command.First()).IsFalse())
+                foreach (var error in errors)
                 {
-                    yield return $"The command: '{command}' must begin with a letter";
-                }
-
-                if (command.All(char.IsLetterOrDigit).IsFalse())
-                {
-                    yield return $"The command: '{command}' must only contains letters or digits";
-                }
-
-                var validationResult = _primitiveTypeNameValidator.IsTypeName(command);
-                if (validationResult.IsValid)
-                {
-                    yield return $"The command: '{command}' must not be a name of a type";
+                    yield return error;
                 }
             }
         }
