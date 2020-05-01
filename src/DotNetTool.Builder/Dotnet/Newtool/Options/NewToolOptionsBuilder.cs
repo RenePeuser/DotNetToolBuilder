@@ -13,6 +13,7 @@ namespace DotNetTool.Builder.DotNet.Newtool.Options
             yield return BuildUseVisualStudioOption();
             yield return BuildUseVsCodeOption();
             yield return BuildUseCustomIDEOption();
+            yield return BuildAndZipDotNetTool();
         }
 
         private Option BuildSaveToolToOption()
@@ -38,6 +39,11 @@ namespace DotNetTool.Builder.DotNet.Newtool.Options
         private Option BuildUseVisualStudioOption()
         {
             return new Option(new[] { "--use-visualstudio", "-uv" }, "Opens visual studio after generating the new dotnet tool.") { Required = false };
+        }
+
+        private Option BuildAndZipDotNetTool()
+        {
+            return new Option(new[] { "--as-zip", "-az" }, "Generate a dotnet tool and zip is as zip file.") { Required = false };
         }
     }
 }

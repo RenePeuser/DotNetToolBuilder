@@ -34,7 +34,6 @@
         "Argument": {
           "Description": "description for <package>[string]",
           "Type": "string",
-          "OptimizedType": "string",
           "Name": "package"
         },
         "Description": "description for install",
