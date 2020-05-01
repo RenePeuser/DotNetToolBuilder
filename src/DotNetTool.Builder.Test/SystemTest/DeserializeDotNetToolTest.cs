@@ -43,12 +43,6 @@ namespace DotNetTool.Builder.Test.SystemTest
                 {
                     yield return tool;
                 }
-
-                var savedTool = _toolSerializeResult.EnumerateFiles().First(f => f.Name.ToLower().EqualsTo(tool.Name));
-                if (savedTool.IsNull())
-                {
-                    yield return savedTool;
-                }
             }
         }
 

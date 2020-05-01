@@ -38,7 +38,7 @@ namespace DotNetTool.Builder.Services.Validation
         {
             var argumentValidationResult = _validateArgumentInfo.Validate(commandInfo.Argument);
             var optionsValidationResults = commandInfo.Options.Select(option => _validateOptionInfo.Validate(option)).Select(result => result.Errors).ToList();
-            var commandNameValidationResult = _validateCommandNameFromString.CollectErrors(commandInfo.Name).ToList();
+            var commandNameValidationResult = _validateCommandNameFromString.CollectErrors(commandInfo.NormalizedName).ToList();
 
             var allErrors = argumentValidationResult.Errors.Concat(optionsValidationResults).Concat(commandNameValidationResult).FilterNullOrWhitespace().ToList();
 

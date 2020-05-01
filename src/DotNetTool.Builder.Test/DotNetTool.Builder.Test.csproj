@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="GeneratedTools\test.newformat.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="GeneratedTools\dotnet.tool.install.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

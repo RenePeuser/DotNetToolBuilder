@@ -28,8 +28,8 @@ namespace DotNetTool.Builder.SolutionBuilder.Options
             foreach (var option in options)
             {
                 var neewOptionStatement = _newOptionExpressionService.Build(option);
-                var newMethod = OptionMethodTemplate.Replace("$option$", neewOptionStatement).Replace("$option-name$", option.NormalizedValue);
-                var methodName = $"Build{option.NormalizedValue}Option";
+                var newMethod = OptionMethodTemplate.Replace("$option$", neewOptionStatement).Replace("$option-name$", option.NormalizedName);
+                var methodName = $"Build{option.NormalizedName}Option";
                 yield return new MethodInfo(methodName, newMethod);
             }
         }

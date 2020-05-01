@@ -13,26 +13,26 @@ namespace DotNetTool.Builder.ToolBuilder.FromJson.Builder
     internal class CreateDotNetToolFromJson : IBuildDotNetTool
     {
         private readonly IDotNetToolSerializer _dotNetToolJsonSerializer;
-        private readonly DotNetToolFromJsonFixer _dotNetToolFromJsonFixer;
+        private readonly DotNetToolOptimizer _dotNetToolOptimizer;
         private readonly DotNetToolValidator _dotNetToolValidator;
 
-        public CreateDotNetToolFromJson(IDotNetToolSerializer dotNetToolJsonSerializer, DotNetToolFromJsonFixer dotNetToolFromJsonFixer, DotNetToolValidator dotNetToolValidator)
+        public CreateDotNetToolFromJson(IDotNetToolSerializer dotNetToolJsonSerializer, DotNetToolOptimizer dotNetToolOptimizer, DotNetToolValidator dotNetToolValidator)
         {
             _dotNetToolJsonSerializer = dotNetToolJsonSerializer;
-            _dotNetToolFromJsonFixer = dotNetToolFromJsonFixer;
+            _dotNetToolOptimizer = dotNetToolOptimizer;
             _dotNetToolValidator = dotNetToolValidator;
         }
 
         public Models.DotNetTool BuildFrom(NewToolParameters newToolParameters)
         {
             var deserializedTool = _dotNetToolJsonSerializer.DeserializeFrom(newToolParameters.FromFile);
-            var optimizedTool = _dotNetToolFromJsonFixer.FixMissingValues(deserializedTool);
+            var optimizedTool = _dotNetToolOptimizer.FixMissingValues(deserializedTool);
             var validationResult = _dotNetToolValidator.Validate(optimizedTool);
             if (validationResult.HasErrors)
             {
                 throw new DotNetToolBuilderException($"Deserialized tool: '{newToolParameters.FromFile.FullName}' has following errors: {validationResult.ValidationResults.Select(result => result.Errors).Flatten(Environment.NewLine)}");
             }
-            return deserializedTool;
+            return optimizedTool;
         }
 
         public bool IsThisBuilderFor(NewToolParameters newToolParameters)

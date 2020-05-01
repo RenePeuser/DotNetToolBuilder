@@ -142,13 +142,12 @@ namespace DotNetTool.Builder
 
         private void RegisterJsonFixer(IServiceCollection services)
         {
-            services.AddSingleton<DotNetToolFromJsonFixer>();
-            services.AddSingleton<IDotNetToolFromJsonFixer, DotNetToolCommandFixer>();
-            services.AddSingleton<IDotNetToolFromJsonFixer, DotNetToolNameFixer>();
+            services.AddSingleton<DotNetToolOptimizer>();
+            services.AddSingleton<DotNetToolNameOptimizer>();
 
-            services.AddSingleton<ICommandFixer, ArgumentOptimizer>();
-            services.AddSingleton<ICommandFixer, CommandOptimizer>();
-            services.AddSingleton<ICommandFixer, OptionOptimizer>();
+            services.AddSingleton<ArgumentInfoOptimizer>();
+            services.AddSingleton<CommandInfoOptimizer>();
+            services.AddSingleton<OptionInfoOptimizer>();
         }
 
         private void RegisterJsonValidators(IServiceCollection services)

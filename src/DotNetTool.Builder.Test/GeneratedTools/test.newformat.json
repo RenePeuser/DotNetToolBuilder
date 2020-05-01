@@ -1,0 +1,51 @@
+{
+  "ProjectName": "test.newformat",
+  "DotNetToolName": {
+    "Value": "dotnet-tool"
+  },
+  "ParameterInfo": {
+    "SubCommands": [
+      {
+        "SubCommands": [],
+        "Options": [
+          {
+            "Alias": "-v",
+            "Description": "description for --version",
+            "IsRequired": false,
+            "Argument": {
+              "Description": "description for <version>[string]",
+              "Type": "string",
+              "Name": "version"
+            },
+            "ArgumentName": "version",
+            "Value": "--version",
+            "Name": "version"
+          },
+          {
+            "Alias": "-pr",
+            "Description": "description for --include-prerelease",
+            "IsRequired": false,
+            "Argument": null,
+            "ArgumentName": "includePrerelease",
+            "Value": "--include-prerelease",
+            "Name": "include-prerelease"
+          }
+        ],
+        "Argument": {
+          "Description": "description for <package>[string]",
+          "Type": "string",
+          "OptimizedType": "string",
+          "Name": "package"
+        },
+        "Description": "description for install",
+        "Value": "install",
+        "Name": "install"
+      }
+    ],
+    "Options": [],
+    "Argument": null,
+    "Description": "description dotnet-tool",
+    "Value": "dotnet-tool",
+    "Name": "dotnet-tool"
+  }
+}

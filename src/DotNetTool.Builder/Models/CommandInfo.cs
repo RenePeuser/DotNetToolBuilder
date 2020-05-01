@@ -23,7 +23,7 @@ namespace DotNetTool.Builder.Models
 
         public IEnumerable<OptionInfo> Options { get; }
 
-        public ArgumentInfo Argument { get; }
+        public ArgumentInfo Argument { get; set; }
 
         public string Description { get; }
     }

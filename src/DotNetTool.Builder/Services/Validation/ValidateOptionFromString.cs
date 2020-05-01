@@ -18,6 +18,11 @@ namespace DotNetTool.Builder.Services.Validation
 
         internal IEnumerable<string> CollectErrors(string option)
         {
+            if (option.IsNullOrEmpty())
+            {
+                yield break;
+            }
+
             var test = option.Split("--");
             if (test[1].StartsWith("-"))
             {

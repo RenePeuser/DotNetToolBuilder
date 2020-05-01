@@ -14,7 +14,7 @@ namespace DotNetTool.Builder.Services.Validation
 
         public IEnumerable<ValidationResult> Validate(Models.DotNetTool dotNetTool)
         {
-            yield return _toolNameValidator.Validate(dotNetTool.DotNetToolName.Value);
+            yield return _toolNameValidator.Validate(dotNetTool.DotNetToolName.NormalizedName);
         }
     }
 }

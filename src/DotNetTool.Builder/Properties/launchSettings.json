@@ -1,8 +1,7 @@
 {
   "profiles": {
     "trumpf.hmi.dotnettool.builder": {
-      "commandName": "Project",
-      "commandLineArgs": "--save-to d:\\test"
+      "commandName": "Project"
     }
   }
 }
