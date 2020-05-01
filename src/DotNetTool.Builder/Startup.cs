@@ -198,6 +198,8 @@ namespace DotNetTool.Builder
 
             services.AddSingleton<ICollectTillInputCorrect, CollectTillInputCorrect>();
             services.AddSingleton<IBuiltInTypeTableService, BuiltInTypeTableService>();
+
+            services.AddSingleton<PackAsZipService>();
         }
 
         private void RegisterDotNetToolInfoCollector(IServiceCollection services)
