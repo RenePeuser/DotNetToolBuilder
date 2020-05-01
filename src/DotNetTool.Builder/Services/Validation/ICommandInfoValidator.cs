@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DotNetTool.Builder.Models;
-using DotNetTool.Builder.Validation;
+using DotNetTool.Builder.Models.Validation;
 
 namespace DotNetTool.Builder.Services.Validation
 {

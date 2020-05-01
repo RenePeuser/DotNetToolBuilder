@@ -1,7 +1,8 @@
 ﻿using System.IO;
 using Argument.Check;
-using DotNetTool.Builder.Dotnet.Newtool;
+using DotNetTool.Builder.DotNet.Newtool;
 using DotNetTool.Builder.ErrorHandling;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 using Extensions.Pack;
 using FileSystem.Abstraction;
 using Newtonsoft.Json;

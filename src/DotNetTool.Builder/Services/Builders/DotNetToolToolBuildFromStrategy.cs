@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.Dotnet.Newtool;
+using DotNetTool.Builder.DotNet.Newtool;
 using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.Extensions;
 using Extensions.Pack;
@@ -11,9 +11,9 @@ namespace DotNetTool.Builder.Services.Builders
 {
     internal class DotNetToolToolBuildFromStrategy
     {
-        private readonly IEnumerable<IBuildDotNetToolStrategy> _dotNetToolStrategies;
+        private readonly IEnumerable<IBuildDotNetTool> _dotNetToolStrategies;
 
-        public DotNetToolToolBuildFromStrategy(IEnumerable<IBuildDotNetToolStrategy> dotNetToolStrategies)
+        public DotNetToolToolBuildFromStrategy(IEnumerable<IBuildDotNetTool> dotNetToolStrategies)
         {
             _dotNetToolStrategies = dotNetToolStrategies;
         }

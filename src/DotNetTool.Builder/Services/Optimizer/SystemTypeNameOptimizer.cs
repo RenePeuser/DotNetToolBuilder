@@ -1,5 +1,4 @@
-﻿
-using DotNetTool.Builder.Validation;
+﻿using DotNetTool.Builder.Services.Validation;
 using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Optimizer
@@ -32,11 +31,6 @@ namespace DotNetTool.Builder.Services.Optimizer
             }
 
             return typeName;
-        }
-
-        public bool OptimizerFor(string typeName)
-        {
-            return true;
         }
     }
 }

@@ -1,15 +1,16 @@
 using System.Threading.Tasks;
-using DotNetTool.Builder.Builder.FileStructure;
-using DotNetTool.Builder.Builder.Startup;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Builders;
-using DotNetTool.Builder.Services.Collectors;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
-using DotNetTool.Builder.Services.IO;
-using DotNetTool.Builder.Services.Template;
+using DotNetTool.Builder.SolutionBuilder.FileStructure;
+using DotNetTool.Builder.SolutionBuilder.Services.IO;
+using DotNetTool.Builder.SolutionBuilder.Services.Template;
+using DotNetTool.Builder.SolutionBuilder.Startup;
+using DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
-namespace DotNetTool.Builder.Dotnet.Newtool.Service
+namespace DotNetTool.Builder.DotNet.Newtool.Service
 {
     internal class NewToolService : INewToolService
     {

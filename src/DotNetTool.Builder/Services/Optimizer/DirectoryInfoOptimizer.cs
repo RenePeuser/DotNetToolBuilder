@@ -18,10 +18,5 @@
 
             return typeName;
         }
-
-        public bool OptimizerFor(string typeName)
-        {
-            return typeName.Contains("directory");
-        }
     }
 }

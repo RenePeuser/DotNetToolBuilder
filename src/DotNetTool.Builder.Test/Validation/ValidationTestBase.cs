@@ -2,11 +2,11 @@
 using System.Linq;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Optimizer;
-using DotNetTool.Builder.Tokenizer;
-using DotNetTool.Builder.Validation;
-using DotNetTool.Builder.Validation.Expression;
+using DotNetTool.Builder.Services.Validation;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ToolNameValidator = DotNetTool.Builder.Validation.ToolNameValidator;
+using ToolNameValidator = DotNetTool.Builder.Services.Validation.ToolNameValidator;
 
 namespace DotNetTool.Builder.Test.Validation
 {
@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.Test.Validation
         [TestInitialize]
         public void Init()
         {
-            ExpressionTokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizers().ToList());
+            ExpressionTokenizer = new ToolBuilder.FromConsole.Tokenizer.Tokenizer(GetTokenizers().ToList());
             ExpressionValidator = new ExpressionValidator(GetValidators().ToList());
         }
 
@@ -44,7 +44,7 @@ namespace DotNetTool.Builder.Test.Validation
             yield return new MinimumCommandValidator();
             yield return new OnlyOneArgumentValidator();
             yield return new OptionValidator(primitiveTypeNameValidator);
-            yield return new DotNetTool.Builder.Validation.Expression.ToolNameValidator(toolNameValidator);
+            yield return new ToolBuilder.FromConsole.Validation.Expression.ToolNameValidator(toolNameValidator);
             yield return new CommandNameValidation(validateCommandNameFromString);
             yield return new UnknownTokenValidator();
             yield return new MultipleOptionValidator();

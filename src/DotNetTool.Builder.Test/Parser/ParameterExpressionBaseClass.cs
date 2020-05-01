@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Models;
-using DotNetTool.Builder.Parser;
-using DotNetTool.Builder.Parser.Argument;
-using DotNetTool.Builder.Parser.Commands;
-using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Optimizer;
-using DotNetTool.Builder.Tokenizer;
-using DotNetTool.Builder.Validation;
+using DotNetTool.Builder.Services.Validation;
+using DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Argument;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Commands;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Options;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
@@ -33,7 +34,7 @@ namespace DotNetTool.Builder.Test.Parser
             var argumentParser = new ArgumentParser(argumentTypeOptimizer, descriptionCollector);
             var optionParser = new OptionParser(collectTillOk, optionAliasCollector, descriptionCollector);
             var parser = new ParameterExpressionParser(new CommandParser(descriptionCollector, dotNetToolNameNormalizer), argumentParser, optionParser, new ParameterService());
-            var tokenizer = new DotNetTool.Builder.Tokenizer.Tokenizer(GetTokenizer().ToList());
+            var tokenizer = new ToolBuilder.FromConsole.Tokenizer.Tokenizer(GetTokenizer().ToList());
             var expressions = GetExpressionsToParse().ToList();
 
             CommandInfo lastCommandInfo = null;

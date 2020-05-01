@@ -2,7 +2,7 @@
 {
     internal class FileInfoOptimizer : ITypeNameOptimizer
     {
-        private static readonly string FileInfoFullQualifiedName = "System.IO.FileInfo";
+        private static readonly string FileInfoFullQualifiedName = "FileInfo";
 
         public string Optimize(string typeName)
         {
@@ -17,11 +17,6 @@
             }
 
             return typeName;
-        }
-
-        public bool OptimizerFor(string typeName)
-        {
-            return typeName.Contains("file");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DotNetTool.Builder.Dotnet.Newtool;
+using DotNetTool.Builder.DotNet.Newtool;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE

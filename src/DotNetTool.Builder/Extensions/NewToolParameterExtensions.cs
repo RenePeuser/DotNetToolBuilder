@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Argument.Check;
-using DotNetTool.Builder.Dotnet.Newtool;
+using DotNetTool.Builder.DotNet.Newtool;
 
 namespace DotNetTool.Builder.Extensions
 {

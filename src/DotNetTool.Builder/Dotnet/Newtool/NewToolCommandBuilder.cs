@@ -2,10 +2,10 @@ using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
 using System.Linq;
-using DotNetTool.Builder.Dotnet.Newtool.Options;
-using DotNetTool.Builder.Dotnet.Newtool.Service;
+using DotNetTool.Builder.DotNet.Newtool.Options;
+using DotNetTool.Builder.DotNet.Newtool.Service;
 
-namespace DotNetTool.Builder.Dotnet.Newtool
+namespace DotNetTool.Builder.DotNet.Newtool
 {
     internal class NewToolCommandBuilder : IDotnetSubCommandBuilder
     {

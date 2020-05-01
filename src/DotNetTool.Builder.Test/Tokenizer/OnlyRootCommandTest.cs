@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DotNetTool.Builder.Tokenizer.Tokens;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.Tokenizer

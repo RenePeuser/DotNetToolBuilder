@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DotNetTool.Builder.Validation;
+using DotNetTool.Builder.Models.Validation;
 using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
