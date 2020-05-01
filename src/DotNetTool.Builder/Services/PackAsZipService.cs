@@ -23,6 +23,10 @@ namespace DotNetTool.Builder.Services
         internal IFileInfo Pack(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters, Models.DotNetTool dotNetTool)
         {
             var target = newToolParameters.TargetZipFileInfo.IsNull() ? _fileService.GetFileInfo($"{dotNetTool.ProjectName}.zip") : _fileService.GetFileInfo(newToolParameters.TargetZipFileInfo.FullName);
+            if (target.Directory.NotExists)
+            {
+                target.Directory.Create();
+            }
 
             try
             {
