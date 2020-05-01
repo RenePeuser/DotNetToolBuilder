@@ -81,10 +81,10 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
                     yield return $"The option: '{optionName}' must not contains '.'";
                 }
 
-                var validationResult = _primitiveTypeNameValidator.IsTypeName(optionName);
+                var validationResult = _primitiveTypeNameValidator.IsPrimitiveTypeName(optionName);
                 if (validationResult.IsValid)
                 {
-                    yield return $"The name of an argument does not match a name of a type: '{optionName}'";
+                    yield return $"The name of an option does not match a name of a type: '{optionName}'";
                 }
             }
         }

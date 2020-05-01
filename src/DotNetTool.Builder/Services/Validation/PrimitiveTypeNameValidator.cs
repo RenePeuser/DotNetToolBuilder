@@ -37,5 +37,19 @@ namespace DotNetTool.Builder.Services.Validation
             var errorMessage = $"The type: '{value}' for the argument type cast: '[{value}]' is not a valid system type. Sample: <myArg>[string] or <myArg>[FileInfo] or many more.";
             return new PrimitiveTypeValidationResult(typeMatch.IsNull() ? errorMessage : string.Empty, typeMatch, typeMatch?.Name);
         }
+
+        public PrimitiveTypeValidationResult IsPrimitiveTypeName(string value)
+        {
+            Throw.IfNullOrWhiteSpace(() => value);
+
+            var primitiveType = _builtInTypeTableService.GetTypeFor(value);
+            if (primitiveType.IsNotNull())
+            {
+                return new PrimitiveTypeValidationResult(string.Empty, primitiveType.Type, primitiveType.Alias);
+            }
+
+            var errorMessage = $"The type: '{value}' is not a primitive system type";
+            return new PrimitiveTypeValidationResult(errorMessage, null, null);
+        }
     }
 }
