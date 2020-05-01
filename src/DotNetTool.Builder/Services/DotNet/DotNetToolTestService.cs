@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Argument.Check;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.DotNet

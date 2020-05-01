@@ -1,6 +1,6 @@
 using System.CommandLine;
 
-namespace DotNetTool.Builder.Dotnet
+namespace DotNetTool.Builder.DotNet
 {
     internal interface IDotnetSubCommandBuilder
     {

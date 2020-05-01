@@ -1,24 +1,23 @@
 using System.Threading.Tasks;
-using DotNetTool.Builder.Builder.FileStructure;
-using DotNetTool.Builder.Builder.Startup;
-
-using DotNetTool.Builder.InfoCollectors;
 using DotNetTool.Builder.Services;
-using DotNetTool.Builder.Services.Collectors;
+using DotNetTool.Builder.Services.Builders;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
-using DotNetTool.Builder.Services.IO;
-using DotNetTool.Builder.Services.Template;
-using Extensions.Pack;
+using DotNetTool.Builder.SolutionBuilder.FileStructure;
+using DotNetTool.Builder.SolutionBuilder.Services.IO;
+using DotNetTool.Builder.SolutionBuilder.Services.Template;
+using DotNetTool.Builder.SolutionBuilder.Startup;
+using DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
-namespace DotNetTool.Builder.Dotnet.Newtool.Service
+namespace DotNetTool.Builder.DotNet.Newtool.Service
 {
     internal class NewToolService : INewToolService
     {
         private readonly ICommandTypeCollector _commandTypeCollector;
         private readonly IConsoleService _consoleService;
+        private readonly DotNetToolToolBuildFromStrategy _dotNetToolToolBuildFromStrategy;
         private readonly ICreateCommandClasses _createCommandClasses;
-        private readonly IDotNetToolInfoCollector _dotNetToolInfoCollector;
         private readonly IDotNetToolSerializer _dotNetToolSerializer;
         private readonly IDotNetToolTestService _dotNetToolTestService;
         private readonly INameSpaceCollector _nameSpaceCollector;
@@ -31,7 +30,6 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
 
         public NewToolService(
             IDotNetToolSerializer dotNetToolSerializer,
-            IDotNetToolInfoCollector dotNetToolInfoCollector,
             ITargetFolderService targetFolderService,
             ITemplateExtractor templateExtractor,
             ITemplateService templateService,
@@ -42,10 +40,10 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
             IProcessService processService,
             IUseIDE useIde,
             IDotNetToolTestService dotNetToolTestService,
-            IConsoleService consoleService)
+            IConsoleService consoleService,
+            DotNetToolToolBuildFromStrategy dotNetToolToolBuildFromStrategy)
         {
             _dotNetToolSerializer = dotNetToolSerializer;
-            _dotNetToolInfoCollector = dotNetToolInfoCollector;
             _targetFolderService = targetFolderService;
             _templateExtractor = templateExtractor;
             _templateService = templateService;
@@ -57,19 +55,13 @@ namespace DotNetTool.Builder.Dotnet.Newtool.Service
             _useIde = useIde;
             _dotNetToolTestService = dotNetToolTestService;
             _consoleService = consoleService;
+            _dotNetToolToolBuildFromStrategy = dotNetToolToolBuildFromStrategy;
         }
 
         public async Task<int> HandleAsync(NewToolParameters parameters)
         {
-            // if a json file with a dot net tool is given then try to deserialize it
-            var dotNetTool = _dotNetToolSerializer.DeserializeFrom(parameters.FromFile);
-            // ToDo: Validation of an serialized tool !!
-
-            if (dotNetTool.IsNull())
-            {
-                // if tool was not deserialized, then user have to give in all information for this tool.
-                dotNetTool = _dotNetToolInfoCollector.Collect();
-            }
+            // build dotnet tool.
+            var dotNetTool = _dotNetToolToolBuildFromStrategy.CreateFrom(parameters);
 
             // Save created tool as json.
             _dotNetToolSerializer.Serialize(dotNetTool, parameters);

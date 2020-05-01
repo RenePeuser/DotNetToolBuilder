@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace DotNetTool.Builder.Dotnet.Newtool
+namespace DotNetTool.Builder.DotNet.Newtool
 {
     internal class NewToolParameters
     {

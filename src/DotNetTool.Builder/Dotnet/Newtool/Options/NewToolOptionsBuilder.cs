@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.IO;
 
-namespace DotNetTool.Builder.Dotnet.Newtool.Options
+namespace DotNetTool.Builder.DotNet.Newtool.Options
 {
     internal class NewToolOptionsBuilder : INewToolOptionsBuilder
     {

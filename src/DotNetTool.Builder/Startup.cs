@@ -1,32 +1,37 @@
-﻿using DotNetTool.Builder.Builder.Argument;
-using DotNetTool.Builder.Builder.Commands;
-using DotNetTool.Builder.Builder.FileStructure;
-using DotNetTool.Builder.Builder.Options;
-using DotNetTool.Builder.Builder.Parameter;
-using DotNetTool.Builder.Builder.Startup;
-using DotNetTool.Builder.Dotnet;
-using DotNetTool.Builder.Dotnet.Newtool;
-using DotNetTool.Builder.Dotnet.Newtool.Options;
-using DotNetTool.Builder.Dotnet.Newtool.Service;
+﻿using DotNetTool.Builder.DotNet;
+using DotNetTool.Builder.DotNet.Newtool;
+using DotNetTool.Builder.DotNet.Newtool.Options;
+using DotNetTool.Builder.DotNet.Newtool.Service;
 using DotNetTool.Builder.ErrorHandling;
-using DotNetTool.Builder.InfoCollectors;
-using DotNetTool.Builder.Parser;
-using DotNetTool.Builder.Parser.Argument;
-using DotNetTool.Builder.Parser.Commands;
-using DotNetTool.Builder.Parser.Options;
 using DotNetTool.Builder.Services;
-using DotNetTool.Builder.Services.Collectors;
+using DotNetTool.Builder.Services.Builders;
 using DotNetTool.Builder.Services.DotNet;
 using DotNetTool.Builder.Services.IDE;
-using DotNetTool.Builder.Services.IO;
 using DotNetTool.Builder.Services.Optimizer;
-using DotNetTool.Builder.Services.Template;
-using DotNetTool.Builder.Tokenizer;
-using DotNetTool.Builder.Validation;
-using DotNetTool.Builder.Validation.Expression;
+using DotNetTool.Builder.Services.Validation;
+using DotNetTool.Builder.SolutionBuilder.Argument;
+using DotNetTool.Builder.SolutionBuilder.Commands;
+using DotNetTool.Builder.SolutionBuilder.FileStructure;
+using DotNetTool.Builder.SolutionBuilder.Options;
+using DotNetTool.Builder.SolutionBuilder.Parameter;
+using DotNetTool.Builder.SolutionBuilder.Services.IO;
+using DotNetTool.Builder.SolutionBuilder.Services.Template;
+using DotNetTool.Builder.SolutionBuilder.Startup;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Builder;
+using DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Argument;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Commands;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Options;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression;
+using DotNetTool.Builder.ToolBuilder.FromJson.Builder;
+using DotNetTool.Builder.ToolBuilder.FromJson.Fixer;
 using FileSystem.Abstraction;
 using Microsoft.Extensions.DependencyInjection;
-using ToolNameValidator = DotNetTool.Builder.Validation.ToolNameValidator;
+using DescriptionValidator = DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors.DescriptionValidator;
+using ToolNameValidator = DotNetTool.Builder.Services.Validation.ToolNameValidator;
 
 namespace DotNetTool.Builder
 {
@@ -53,6 +58,9 @@ namespace DotNetTool.Builder
             RegisterStartUpBuilder(services);
             RegisterFileStructureCreators(services);
             RegisterArgumentTypeOptimizer(services);
+
+            RegisterJsonFixer(services);
+            RegisterJsonValidators(services);
         }
 
         private void RegisterArgumentTypeOptimizer(IServiceCollection services)
@@ -89,7 +97,7 @@ namespace DotNetTool.Builder
 
         private void RegisterTokenizer(IServiceCollection services)
         {
-            services.AddSingleton<IExpressionTokenizer, Tokenizer.tokenizer>();
+            services.AddSingleton<IExpressionTokenizer, Tokenizer>();
             services.AddSingleton<ITokenizer, ArgumentTokenizer>();
             services.AddSingleton<ITokenizer, OptionTokenizer>();
             services.AddSingleton<ITokenizer, CommandTokenizer>();
@@ -109,7 +117,7 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, ArgumentValidator>();
             services.AddSingleton<IExpressionContentValidator, OptionValidator>();
             services.AddSingleton<IExpressionContentValidator, CharValidator>();
-            services.AddSingleton<IExpressionContentValidator, Validation.Expression.ToolNameValidator>();
+            services.AddSingleton<IExpressionContentValidator, ToolBuilder.FromConsole.Validation.Expression.ToolNameValidator>();
             services.AddSingleton<IExpressionContentValidator, MinimumCommandValidator>();
             services.AddSingleton<IExpressionContentValidator, OnlyOneArgumentValidator>();
             services.AddSingleton<IExpressionContentValidator, CommandMustBeforeOptionOrArgumentValidator>();
@@ -119,6 +127,10 @@ namespace DotNetTool.Builder
             services.AddSingleton<IExpressionContentValidator, DuplicatedCommandValidator>();
             services.AddSingleton<IExpressionContentValidator, RootCommandNameValidation>();
             services.AddSingleton<IExpressionContentValidator, ArgumentTypeValidator>();
+
+
+            services.AddSingleton<ValidateCommandNameFromString>();
+
         }
 
         private void RegisterStartUpBuilder(IServiceCollection services)
@@ -126,6 +138,32 @@ namespace DotNetTool.Builder
             services.AddSingleton<IStartUpBuilder, StartUpBuilder>();
             services.AddSingleton<IRegisterServiceMethodBuilder, RegisterServiceMethodBuilder>();
             services.AddSingleton<ITypeRegistrationBuilder, TypeRegistrationBuilder>();
+        }
+
+        private void RegisterJsonFixer(IServiceCollection services)
+        {
+            services.AddSingleton<DotNetToolOptimizer>();
+            services.AddSingleton<DotNetToolNameOptimizer>();
+
+            services.AddSingleton<ArgumentInfoOptimizer>();
+            services.AddSingleton<CommandInfoOptimizer>();
+            services.AddSingleton<OptionInfoOptimizer>();
+        }
+
+        private void RegisterJsonValidators(IServiceCollection services)
+        {
+            services.AddSingleton<DotNetToolValidator>();
+            services.AddSingleton<IValidateDotNetTool, Command>();
+            services.AddSingleton<IValidateDotNetTool, ProjectNameTool>();
+            services.AddSingleton<IValidateDotNetTool, ToolName>();
+
+            services.AddSingleton<ValidateArgumentNameFromString>();
+            services.AddSingleton<ValidateArgumentInfo>();
+            services.AddSingleton<ValidateCommandInfo>();
+            services.AddSingleton<ValidateCommandNameFromString>();
+            services.AddSingleton<ValidateOptionFromString>();
+            services.AddSingleton<ValidateOptionInfo>();
+            services.AddSingleton<ValidateTypeFromString>();
         }
 
         private void RegisterServices(IServiceCollection services)
@@ -141,8 +179,15 @@ namespace DotNetTool.Builder
             services.AddSingleton<INameSpaceCollector, NameSpaceCollector>();
             services.AddSingleton<IRenameFilesAndFolders, RenameFilesAndFolders>();
             services.AddSingleton<ITemplateService, TemplateService>();
+
             services.AddSingleton<IDotNetToolTestService, DotNetToolTestService>();
-            services.AddSingleton<IDotNetToolSerializer, DotNetToolSerializer>();
+            services.AddSingleton<IDotNetToolSerializer, DotNetToolJsonSerializer>();
+
+
+            services.AddSingleton<IBuildDotNetTool, CreateDotNetToolFromJson>();
+            services.AddSingleton<IBuildDotNetTool, CreateDotNetToolFromConsole>();
+            services.AddSingleton<DotNetToolToolBuildFromStrategy>();
+
             services.AddSingleton<ITargetFolderService, TargetFolderService>();
             services.AddSingleton<ITypeService, TypeService>();
 

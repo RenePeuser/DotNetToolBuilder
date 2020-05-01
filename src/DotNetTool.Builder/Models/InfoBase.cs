@@ -16,6 +16,6 @@ namespace DotNetTool.Builder.Models
 
         public string Name { get; }
 
-        public string NormalizedName { get; }
+        public string NormalizedName { get; set; }
     }
 }

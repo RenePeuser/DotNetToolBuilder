@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DotNetTool.Builder.Tokenizer.Tokens;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Models
 {

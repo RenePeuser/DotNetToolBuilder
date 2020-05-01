@@ -15,7 +15,6 @@ namespace DotNetTool.Builder.Models
             Description = description;
             IsIsRequired = isRequired;
             Argument = argument;
-            NormalizedValue = normalizedValue;
         }
 
         public string Alias { get; }
@@ -25,7 +24,5 @@ namespace DotNetTool.Builder.Models
         public bool IsIsRequired { get; }
 
         public ArgumentInfo Argument { get; }
-
-        public string NormalizedValue { get; }
     }
 }

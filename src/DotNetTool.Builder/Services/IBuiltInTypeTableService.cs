@@ -1,5 +1,4 @@
-﻿using System;
-using DotNetTool.Builder.Models;
+﻿using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.Services
 {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Argument.Check;
 
 using DotNetTool.Builder.Models;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services

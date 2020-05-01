@@ -5,7 +5,7 @@ using System.CommandLine.Invocation;
 using System.Linq;
 using System.Threading.Tasks;
 using Argument.Check;
-using DotNetTool.Builder.Dotnet;
+using DotNetTool.Builder.DotNet;
 using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.Services.DotNet;
 using FileSystem.Abstraction;

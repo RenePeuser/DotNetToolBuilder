@@ -3,7 +3,7 @@ using System.Linq;
 
 using DotNetTool.Builder.Services;
 using DotNetTool.Builder.Services.Optimizer;
-using DotNetTool.Builder.Validation;
+using DotNetTool.Builder.Services.Validation;
 using Extensions.Pack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

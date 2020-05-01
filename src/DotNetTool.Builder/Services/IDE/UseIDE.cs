@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Argument.Check;
-using DotNetTool.Builder.Dotnet.Newtool;
+using DotNetTool.Builder.DotNet.Newtool;
 using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE

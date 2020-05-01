@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.Linq;
 
-namespace DotNetTool.Builder.Dotnet
+namespace DotNetTool.Builder.DotNet
 {
     internal class DotnetCommandBuilder : IDotnetCommandBuilder
     {

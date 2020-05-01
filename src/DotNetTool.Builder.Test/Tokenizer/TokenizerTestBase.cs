@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DotNetTool.Builder.Models;
-using DotNetTool.Builder.Tokenizer;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotNetTool.Builder.Test.Tokenizer
@@ -13,7 +13,7 @@ namespace DotNetTool.Builder.Test.Tokenizer
         [TestInitialize]
         public void Init()
         {
-            var tokenizer = new DotNetTool.Builder.Tokenizer.tokenizer(GetTokenizer().ToList());
+            var tokenizer = new ToolBuilder.FromConsole.Tokenizer.Tokenizer(GetTokenizer().ToList());
             ExpressionInfo = tokenizer.Tokenize(GetExpression());
         }
 

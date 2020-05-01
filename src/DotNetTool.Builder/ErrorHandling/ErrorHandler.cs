@@ -2,6 +2,7 @@ using System;
 using System.CommandLine.Invocation;
 using System.Threading.Tasks;
 using DotNetTool.Builder.Services;
+using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
 namespace DotNetTool.Builder.ErrorHandling
 {
