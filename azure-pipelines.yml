@@ -6,7 +6,7 @@
 trigger:
   - master  
   - dev/*
-  - ref/tags/*
+  - refs/tags/*
 
 pool:
   vmImage: 'ubuntu-latest'
