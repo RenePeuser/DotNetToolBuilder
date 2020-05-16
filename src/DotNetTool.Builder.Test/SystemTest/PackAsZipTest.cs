@@ -15,7 +15,7 @@ namespace DotNetTool.Builder.Test.SystemTest
         {
             base.BeforeExecution();
 
-            _targetZipFile = new FileInfo(Path.Combine(Environment.CurrentDirectory, "dotnet.tool.install.json"));
+            _targetZipFile = new FileInfo(Path.Combine(Environment.CurrentDirectory, "dotnet.tool.install.zip"));
         }
 
         [TestMethod]

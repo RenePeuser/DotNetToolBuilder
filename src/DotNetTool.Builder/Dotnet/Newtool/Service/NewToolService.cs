@@ -90,9 +90,6 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
             // Add type registrations
             _startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, _commandTypeCollector, dotNetTool.ParameterInfo, _nameSpaceCollector);
 
-            // new feature pack it as zip
-            _packAsZipService.Pack(targetDirectory, parameters, dotNetTool);
-
             // Build your new generated tool
             var dotnetBuildResult = await _processService.RunAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
             if (dotnetBuildResult.ExitCode != 0)
@@ -107,6 +104,9 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
 
             // Opens all per option set IDE
             await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
+
+            // new feature pack it as zip
+            _packAsZipService.Pack(targetDirectory, parameters, dotNetTool);
 
             // All works fine, enjoy your new cli.
             _consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
