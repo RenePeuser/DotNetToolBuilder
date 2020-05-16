@@ -20,7 +20,7 @@ namespace DotNetTool.Builder.Services
             _consoleService = consoleService;
         }
 
-        internal async Task PackAsync(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters, Models.DotNetTool dotNetTool)
+        internal async Task PackAsync(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters)
         {
             if (newToolParameters.TargetZipFileInfo.IsNull())
             {
