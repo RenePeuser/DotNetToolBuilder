@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>DotNetTool.Builder</AssemblyName>
     <RootNamespace>DotNetTool.Builder</RootNamespace>
     <Authors>Rene Peuser</Authors>
@@ -13,11 +13,14 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes
-- Update to microsoft's System.CommandLine package
+- add validation when creating dotnet tool from json.
+- new option to pack created tool as a zip file
+
+Hint: Older *.json files are not compatible any more. The property "Value" of the DotNetToolName in the json was renamed to "Name". Change it and it will run.
 
 Prerequisites
-- .NET Core 3.0 SDK or higher</PackageReleaseNotes>
-    <PackageTags>C#;DotNet;.Net;.NetTool;.NetToolBuilder;DotNetToolBuilder;CLI;Build CLI;Build.NetTool;System.CommandLine.Experimental;</PackageTags>
+- .NET Core 3.1 SDK or higher</PackageReleaseNotes>
+    <PackageTags>C#;DotNet;.Net;.NetTool;.NetToolBuilder;DotNetToolBuilder;CLI;Build CLI;Build.NetTool;System.CommandLine;CommandLine;GlobalTool;LocalTool;Tool;</PackageTags>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>dotnet-newtool</ToolCommandName>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

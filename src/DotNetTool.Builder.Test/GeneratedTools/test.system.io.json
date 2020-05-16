@@ -1,7 +1,7 @@
 {
   "ProjectName": "test.system.io",
   "DotNetToolName": {
-    "Value": "test",
+    "Name": "test",
     "NormalizedName": "Test"
   },
   "ParameterInfo": {

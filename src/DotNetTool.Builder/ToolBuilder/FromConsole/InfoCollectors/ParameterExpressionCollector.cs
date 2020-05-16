@@ -40,7 +40,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
                 while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
                 {
                     _consoleService.WriteInput("Please enter your parameter expression");
-                    _consoleService.WriteSample($"Sample: '{dotNetDotNetToolName.Value} command <argument> --option");
+                    _consoleService.WriteSample($"Sample: '{dotNetDotNetToolName.Name} command <argument> --option");
 
                     var parameterExpression = _consoleService.ReadLine();
                     expressionInfo = _expressionTokenizer.Tokenize(parameterExpression);

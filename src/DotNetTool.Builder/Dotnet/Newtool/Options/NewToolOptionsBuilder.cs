@@ -1,11 +1,21 @@
 using System.Collections.Generic;
 using System.CommandLine;
-using System.IO;
+using FileSystem.Abstraction;
+using Argument = System.CommandLine.Argument;
+using DirectoryInfo = System.IO.DirectoryInfo;
+using FileInfo = System.IO.FileInfo;
 
 namespace DotNetTool.Builder.DotNet.Newtool.Options
 {
     internal class NewToolOptionsBuilder : INewToolOptionsBuilder
     {
+        private readonly IFileService _fileService;
+
+        public NewToolOptionsBuilder(IFileService fileService)
+        {
+            _fileService = fileService;
+        }
+
         public IEnumerable<Option> Build()
         {
             yield return BuildFromFileOption();
@@ -13,6 +23,7 @@ namespace DotNetTool.Builder.DotNet.Newtool.Options
             yield return BuildUseVisualStudioOption();
             yield return BuildUseVsCodeOption();
             yield return BuildUseCustomIDEOption();
+            yield return BuildAndZipDotNetTool();
         }
 
         private Option BuildSaveToolToOption()
@@ -38,6 +49,15 @@ namespace DotNetTool.Builder.DotNet.Newtool.Options
         private Option BuildUseVisualStudioOption()
         {
             return new Option(new[] { "--use-visualstudio", "-uv" }, "Opens visual studio after generating the new dotnet tool.") { Required = false };
+        }
+
+        private Option BuildAndZipDotNetTool()
+        {
+            return new Option(new[] { "--as-zip", "-az" }, "Generate a dotnet tool and zip is as zip file.")
+            {
+                Argument = new Argument<FileInfo>("zipFile") { Description = "The target zip file info." },
+                Required = false
+            };
         }
     }
 }

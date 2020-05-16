@@ -17,6 +17,7 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
         private readonly ICommandTypeCollector _commandTypeCollector;
         private readonly IConsoleService _consoleService;
         private readonly DotNetToolToolBuildFromStrategy _dotNetToolToolBuildFromStrategy;
+        private readonly PackAsZipService _packAsZipService;
         private readonly ICreateCommandClasses _createCommandClasses;
         private readonly IDotNetToolSerializer _dotNetToolSerializer;
         private readonly IDotNetToolTestService _dotNetToolTestService;
@@ -41,7 +42,8 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
             IUseIDE useIde,
             IDotNetToolTestService dotNetToolTestService,
             IConsoleService consoleService,
-            DotNetToolToolBuildFromStrategy dotNetToolToolBuildFromStrategy)
+            DotNetToolToolBuildFromStrategy dotNetToolToolBuildFromStrategy,
+            PackAsZipService packAsZipService)
         {
             _dotNetToolSerializer = dotNetToolSerializer;
             _targetFolderService = targetFolderService;
@@ -56,6 +58,7 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
             _dotNetToolTestService = dotNetToolTestService;
             _consoleService = consoleService;
             _dotNetToolToolBuildFromStrategy = dotNetToolToolBuildFromStrategy;
+            _packAsZipService = packAsZipService;
         }
 
         public async Task<int> HandleAsync(NewToolParameters parameters)
@@ -101,6 +104,9 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
 
             // Opens all per option set IDE
             await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
+
+            // new feature pack it as zip
+            _packAsZipService.Pack(targetDirectory, parameters, dotNetTool);
 
             // All works fine, enjoy your new cli.
             _consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");

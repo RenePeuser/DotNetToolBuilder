@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace DotNetTool.Builder.DotNet
 {
+    
     internal class DotnetCommandBuilder : IDotnetCommandBuilder
     {
         private readonly IEnumerable<IDotnetSubCommandBuilder> _dotnetSubCommandBuilders;

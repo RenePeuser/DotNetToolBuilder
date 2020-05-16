@@ -1,7 +1,7 @@
 {
   "ProjectName": "test.newformat",
   "DotNetToolName": {
-    "Value": "dotnet-tool"
+    "Name": "dotnet-tool"
   },
   "ParameterInfo": {
     "SubCommands": [
@@ -34,7 +34,6 @@
         "Argument": {
           "Description": "description for <package>[string]",
           "Type": "string",
-          "OptimizedType": "string",
           "Name": "package"
         },
         "Description": "description for install",
