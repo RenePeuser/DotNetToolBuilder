@@ -27,7 +27,7 @@ namespace DotNetTool.Builder.Services
                 return;
             }
 
-            var target = newToolParameters.TargetZipFileInfo.IsNull() ? _fileService.GetFileInfo($"{dotNetTool.ProjectName}.zip") : _fileService.GetFileInfo(newToolParameters.TargetZipFileInfo.FullName);
+            var target = _fileService.GetFileInfo(newToolParameters.TargetZipFileInfo.FullName);
             if (target.Directory.NotExists)
             {
                 target.Directory.Create();
