@@ -39,7 +39,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
             }
 
             yield return "Only commands, options or aguments are allowed. Sample:";
-            yield return $"{dotNetDotNetToolName.Value} command <cmd-arg> --option <opt-arg>";
+            yield return $"{dotNetDotNetToolName.Name} command <cmd-arg> --option <opt-arg>";
         }
     }
 }

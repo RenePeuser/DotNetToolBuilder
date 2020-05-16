@@ -1,7 +1,7 @@
 {
   "ProjectName": "project.with.special.args",
   "DotNetToolName": {
-    "Value": "test",
+    "Name": "test",
     "NormalizedName": "Test"
   },
   "ParameterInfo": {

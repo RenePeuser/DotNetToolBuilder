@@ -1,7 +1,7 @@
 {
   "ProjectName": "tool.multiple.commands",
   "DotNetToolName": {
-    "Value": "tool",
+    "Name": "tool",
     "NormalizedName": "Tool"
   },
   "ParameterInfo": {

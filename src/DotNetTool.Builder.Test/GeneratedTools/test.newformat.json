@@ -1,7 +1,7 @@
 {
   "ProjectName": "test.newformat",
   "DotNetToolName": {
-    "Value": "dotnet-tool"
+    "Name": "dotnet-tool"
   },
   "ParameterInfo": {
     "SubCommands": [

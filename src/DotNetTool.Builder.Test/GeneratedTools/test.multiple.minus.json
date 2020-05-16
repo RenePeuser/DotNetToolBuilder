@@ -1,7 +1,7 @@
 {
   "ProjectName": "test.multiple.minus",
   "DotNetToolName": {
-    "Value": "my-tool-now",
+    "Name": "my-tool-now",
     "NormalizedName": "MyToolNow"
   },
   "ParameterInfo": {

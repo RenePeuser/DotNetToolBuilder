@@ -4,18 +4,18 @@ namespace DotNetTool.Builder.Models
 {
     public class DotNetToolName
     {
-        public DotNetToolName(string value, string normalizedName)
+        public DotNetToolName(string name, string normalizedName)
         {
-            Throw.IfNullOrWhiteSpace(() => value);
+            Throw.IfNullOrWhiteSpace(() => name);
 
             // hint for new json method !
             // Throw.IfNullOrWhiteSpace(() => normalizedName);
 
-            Value = value;
+            Name = name;
             NormalizedName = normalizedName;
         }
 
-        public string Value { get; }
+        public string Name { get; }
 
         public string NormalizedName { get; }
     }

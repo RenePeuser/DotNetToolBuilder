@@ -14,9 +14,9 @@ namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 
         public DotNetToolName Optimize(DotNetToolName dotNetToolName)
         {
-            var normalizedName = _dotNetToolNameNormalizer.Normalize(dotNetToolName.Value);
+            var normalizedName = _dotNetToolNameNormalizer.Normalize(dotNetToolName.Name);
 
-            return new DotNetToolName(dotNetToolName.Value, normalizedName);
+            return new DotNetToolName(dotNetToolName.Name, normalizedName);
         }
     }
 }

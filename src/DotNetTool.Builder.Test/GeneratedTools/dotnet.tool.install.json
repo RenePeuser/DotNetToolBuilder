@@ -1,7 +1,7 @@
 {
   "ProjectName": "dotnet.tool.install",
   "DotNetToolName": {
-    "Value": "dotnet-tool",
+    "Name": "dotnet-tool",
     "NormalizedName": "Tool"
   },
   "ParameterInfo": {
