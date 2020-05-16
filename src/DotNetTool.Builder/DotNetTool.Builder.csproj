@@ -13,8 +13,7 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes
-- add validation when creating dotnet tool from json.
-- new option to pack created tool as a zip file
+-fix create only zip when option "--as-zip" is used.
 
 Hint: Older *.json files are not compatible any more. The property "Value" of the DotNetToolName in the json was renamed to "Name". Change it and it will run.
 
