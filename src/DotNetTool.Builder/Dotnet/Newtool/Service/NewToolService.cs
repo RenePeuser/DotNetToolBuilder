@@ -106,7 +106,7 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
             await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
 
             // new feature pack it as zip
-            _packAsZipService.Pack(targetDirectory, parameters, dotNetTool);
+            await _packAsZipService.PackAsync(targetDirectory, parameters, dotNetTool);
 
             // All works fine, enjoy your new cli.
             _consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
