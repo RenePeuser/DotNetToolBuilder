@@ -1,6 +1,6 @@
 using System;
-using System.CommandLine;
 using System.IO.Compression;
+using System.Threading.Tasks;
 using DotNetTool.Builder.DotNet.Newtool;
 using DotNetTool.Builder.ErrorHandling;
 using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
@@ -20,9 +20,14 @@ namespace DotNetTool.Builder.Services
             _consoleService = consoleService;
         }
 
-        internal IFileInfo Pack(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters, Models.DotNetTool dotNetTool)
+        internal async Task PackAsync(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters)
         {
-            var target = newToolParameters.TargetZipFileInfo.IsNull() ? _fileService.GetFileInfo($"{dotNetTool.ProjectName}.zip") : _fileService.GetFileInfo(newToolParameters.TargetZipFileInfo.FullName);
+            if (newToolParameters.TargetZipFileInfo.IsNull())
+            {
+                return;
+            }
+
+            var target = _fileService.GetFileInfo(newToolParameters.TargetZipFileInfo.FullName);
             if (target.Directory.NotExists)
             {
                 target.Directory.Create();
@@ -30,7 +35,7 @@ namespace DotNetTool.Builder.Services
 
             try
             {
-                ZipFile.CreateFromDirectory(directoryInfo.FullName, target.FullName);
+                await Task.Run(() => ZipFile.CreateFromDirectory(directoryInfo.FullName, target.FullName));
             }
             catch (Exception e)
             {
@@ -38,8 +43,6 @@ namespace DotNetTool.Builder.Services
             }
 
             _consoleService.WriteSuccess($"Zip-File: '{target.FullName}' successfully created.");
-
-            return target;
         }
     }
 }
