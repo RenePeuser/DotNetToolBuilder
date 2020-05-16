@@ -5,6 +5,7 @@
 
 trigger:
   - master
+  - pacxk-as-zip
   - refs/tags/*
 
 pool:
