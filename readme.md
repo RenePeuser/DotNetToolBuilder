@@ -5,7 +5,7 @@ You will not loose time to create a cool dotnet tool, then you have to try out t
 This dotnet tool will create a dotnet tool based on the [System.CommandLine](https://www.nuget.org/packages/System.CommandLine/) package from Microsoft.
 
 ## Prerequisites
-* .NET Core 3.0 SDK or higher
+* .NET Core 3.1 SDK or higher
 
 
 ## Target
@@ -16,7 +16,7 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 
 ## Quickguide to your new CLI
 ```
-1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version 0.8.4'
+1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version 0.9.1'
 2. Run 'dotnet newtool --use-code'
 3. Insert all your expressions, and informations
 4. Implement your logic to the created service for each command, which is called from the aktiv command handler.
