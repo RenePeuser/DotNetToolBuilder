@@ -14,6 +14,15 @@ With this DotNetTool.Builder you should focus your work only to your Logic
 of your defined cli commands. The hole framework around will be generated. 
 With this builder your are able to build quick, fast and good maintainable CLI's.
 
+## Install
+
+Hint: Because of prerelease state you have to use the '--version' option to install the prerelease.
+
+![](./assets/dotnet-tool-builder-install.gif)
+```bash 
+dotnet tool install DotNetTool.Builder --global
+```
+
 ## Quickguide to your new CLI
 ```
 1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version 0.9.1'
@@ -36,15 +45,6 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 5. Test it.
 6. Pack it.
 7. Publish it.
-```
-
-## Install
-
-Hint: Because of prerelease state you have to use the '--version' option to install the prerelease.
-
-![](./assets/dotnet-tool-builder-install.gif)
-```bash 
-dotnet tool install DotNetTool.Builder --global
 ```
 
 ## Create a new simple dotnet tool (generating only):
