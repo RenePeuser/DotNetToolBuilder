@@ -18,10 +18,11 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 
 Hint: Because of prerelease state you have to use the '--version' option to install the prerelease.
 
-![](./assets/dotnet-tool-builder-install.gif)
 ```bash 
 dotnet tool install DotNetTool.Builder --global
 ```
+![](./assets/dotnet-tool-builder-install.gif)
+
 
 ## Quickguide to your new CLI
 ```
