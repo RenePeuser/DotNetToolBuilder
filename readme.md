@@ -23,6 +23,12 @@ dotnet tool install DotNetTool.Builder --global --version 0.9.1
 ```
 ![](./assets/dotnet-tool-builder-install.gif)
 
+## Create a dotnet tool, add command specific code and run it.
+```
+Hint this command is now equals to 'dotnet newtool --use-visualstudio'
+Because this gif is not up to date to the new cli syntax !
+```
+![](./assets/simple-tool-sample.gif)
 
 ## Quickguide to your new CLI
 ```
@@ -63,13 +69,6 @@ Hint: Right now we look only for installed VS2019 Versions !
 Works only if you have installed Rider in the default installation folder
 
 ![](./assets/use-rider-ide.gif)
-
-## Create a dotnet tool, add command specific code and run it.
-```
-Hint this command is now equals to 'dotnet newtool --use-visualstudio'
-Because this gif is not up to date to the new cli syntax !
-```
-![](./assets/simple-tool-sample.gif)
 
 ## Create a dotnet tool and save it as json:
 ![](./assets/save-dotnet-tool.gif)
