@@ -1,8 +1,7 @@
 {
   "profiles": {
     "trumpf.hmi.dotnettool.builder": {
-      "commandName": "Project",
-      "commandLineArgs": "--as-zip d:\\test.zip"
+      "commandName": "Project"
     }
   }
 }

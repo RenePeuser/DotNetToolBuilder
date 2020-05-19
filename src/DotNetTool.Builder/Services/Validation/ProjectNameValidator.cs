@@ -10,8 +10,10 @@ namespace DotNetTool.Builder.Services.Validation
     internal class ProjectNameValidator : IProjectNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
-
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetterOrDigit, c => c == '.' };
+
+        // ToDo: quick fix => make it nice later
+        private readonly IEnumerable<string> _forbiddenSpecialNaming = new string[] { "new", "class", "struct", "enum" };
 
         public ProjectNameValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
         {
@@ -63,9 +65,9 @@ namespace DotNetTool.Builder.Services.Validation
             var splittedProjectName = value.Split('.');
 
             // ToDo: add new special naming validation, beacause of causing namespace conflicts.
-            if (splittedProjectName.Any(s => s.EqualsTo("new")))
+            if (splittedProjectName.Any(s => _forbiddenSpecialNaming.Any(forbidden => forbidden.EqualsTo(s))))
             {
-                yield return $"The project name: '{value}' must not contains '.new.' because of coming namespace conflicts.";
+                yield return $"The project name: '{value}' must not contains special names like: {_forbiddenSpecialNaming.Flatten(", ")}";
             }
 
             var validationResults = splittedProjectName.Select(name => _primitiveTypeNameValidator.IsTypeName(name));
