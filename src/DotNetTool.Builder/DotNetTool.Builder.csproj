@@ -15,6 +15,7 @@
     <PackageReleaseNotes>Bug-Fixes / Changes
 - add validation that no access modifiers are used in project name, like "public", "internal" etc. causes namespace conflicts
 - fix that multiple visual studio instanaces are opened when use option --use-visualstudio
+- fix project name must only be letters and dots.
 
 Prerequisites
 - .NET Core 3.1 SDK or higher</PackageReleaseNotes>
