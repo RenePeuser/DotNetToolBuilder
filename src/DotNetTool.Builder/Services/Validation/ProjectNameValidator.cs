@@ -10,7 +10,7 @@ namespace DotNetTool.Builder.Services.Validation
     internal class ProjectNameValidator : IProjectNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
-        private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetterOrDigit, c => c == '.' };
+        private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetter, c => c == '.' };
 
         // ToDo: quick fix => make it nice later
         private readonly IEnumerable<string> _forbiddenSpecialNaming = new string[] { "new", "class", "struct", "enum" };
@@ -47,7 +47,7 @@ namespace DotNetTool.Builder.Services.Validation
 
             if (value.All(c => _validationRules.Any(validation => validation(c))).IsFalse())
             {
-                yield return $"The project name: '{value}' must only contains letters, digits or '.' are allowed";
+                yield return $"The project name: '{value}' must only contains letters or '.'";
             }
 
             if (char.IsLetter(value.First()).IsFalse())
