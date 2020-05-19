@@ -62,6 +62,12 @@ namespace DotNetTool.Builder.Services.Validation
             // by a dot is a type name, otherwise we can not compile because of namespace conflicts.
             var splittedProjectName = value.Split('.');
 
+            // ToDo: add new special naming validation, beacause of causing namespace conflicts.
+            if (splittedProjectName.Any(s => s.EqualsTo("new")))
+            {
+                yield return $"The project name: '{value}' must not contains '.new.' because of coming namespace conflicts.";
+            }
+
             var validationResults = splittedProjectName.Select(name => _primitiveTypeNameValidator.IsTypeName(name));
             foreach (var validationResult in validationResults)
             {
