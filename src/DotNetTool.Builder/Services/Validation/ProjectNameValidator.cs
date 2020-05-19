@@ -13,7 +13,7 @@ namespace DotNetTool.Builder.Services.Validation
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetter, c => c == '.' };
 
         // ToDo: quick fix => make it nice later
-        private readonly IEnumerable<string> _forbiddenSpecialNaming = new string[] { "new", "class", "struct", "enum" };
+        private readonly IEnumerable<string> _forbiddenSpecialNaming = new string[] { "new", "class", "struct", "enum", "public", "private", "protected", "internal", "interface" };
 
         public ProjectNameValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
         {
