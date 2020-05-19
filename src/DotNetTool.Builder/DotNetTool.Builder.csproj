@@ -13,9 +13,9 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes
-- add validation not to use new,class,structs types name in project name, because causing namspace problems.
-
-Hint: Older *.json files are not compatible any more. The property "Value" of the DotNetToolName in the json was renamed to "Name". Change it and it will run.
+- add validation that no access modifiers are used in project name, like "public", "internal" etc. causes namespace conflicts
+- fix that multiple visual studio instanaces are opened when use option --use-visualstudio
+- fix project name must only be letters and dots.
 
 Prerequisites
 - .NET Core 3.1 SDK or higher</PackageReleaseNotes>
