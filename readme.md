@@ -19,13 +19,13 @@ With this builder your are able to build quick, fast and good maintainable CLI's
 Hint: Because of prerelease state you have to use the '--version' option to install the prerelease.
 
 ```bash 
-dotnet tool install DotNetTool.Builder --global --version 0.9.2
+dotnet tool install DotNetTool.Builder --global --version 0.9.3
 ```
 ![](./assets/dotnet-tool-builder-install.gif)
 
 ## Quickguide to your new CLI
 ```
-1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version 0.9.1'
+1. Install the DotNetToolBuilder 'dotnet tool install DotNetTool.Builder --global --version 0.9.3'
 2. Run 'dotnet newtool --use-code'
 3. Insert all your expressions, and informations
 4. Implement your logic to the created service for each command, which is called from the aktiv command handler.
