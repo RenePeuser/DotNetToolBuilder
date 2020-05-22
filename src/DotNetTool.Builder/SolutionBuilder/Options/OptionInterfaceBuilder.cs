@@ -6,13 +6,14 @@ namespace DotNetTool.Builder.SolutionBuilder.Options
     internal class OptionInterfaceBuilder : IOptionInterfaceBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.CommandLine;
+@"
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.CommandLine;
 
+namespace $namespace$
+{    
     internal interface I$command-name$OptionsBuilder
     {
         IEnumerable<Option> Build();

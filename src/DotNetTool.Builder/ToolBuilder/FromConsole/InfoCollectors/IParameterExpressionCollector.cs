@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
     internal interface IParameterExpressionCollector
     {
-        CommandInfo CollectFor(DotNetToolName dotnetDotNetToolName);
+        CommandInfo CollectFor(DotNetToolName dotNetDotNetToolName, string projectName);
     }
 }

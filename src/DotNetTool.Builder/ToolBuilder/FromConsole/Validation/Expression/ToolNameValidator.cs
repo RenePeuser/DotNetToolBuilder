@@ -20,16 +20,16 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
             _toolNameValidator = toolNameValidator;
         }
 
-        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo, string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
 
-            var errors = CollectErrors(dotNetDotNetToolName, expressionInfo).ToList();
+            var errors = CollectErrors(dotNetDotNetToolName, expressionInfo, projectName).ToList();
             return new ValidationResult(errors.Flatten(Environment.NewLine));
         }
 
-        private IEnumerable<string> CollectErrors(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
+        private IEnumerable<string> CollectErrors(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo, string projectName)
         {
             if (expressionInfo.OptimizedExpressions.IsNullOrWhiteSpace())
             {
@@ -48,7 +48,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
                 yield return $"The expression:'{expressionInfo.Expression}' must start with your root command: '{dotNetDotNetToolName.Name}'";
             }
 
-            var result = _toolNameValidator.Validate(firstCommand.Value);
+            var result = _toolNameValidator.Validate(firstCommand.Value, projectName);
             if (result.IsValid.IsFalse())
             {
                 yield return result.Errors;

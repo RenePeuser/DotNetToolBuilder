@@ -6,12 +6,13 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class RootCommandInterfaceBuilder : IRootCommandInterfaceBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System;
-    using System.IO;
-    using System.CommandLine;
+@"
+using System;
+using System.IO;
+using System.CommandLine;
 
+namespace $namespace$
+{    
     internal interface I$command-name$CommandBuilder
     {
         Command Build();

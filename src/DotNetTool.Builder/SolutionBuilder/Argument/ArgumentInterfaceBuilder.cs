@@ -6,12 +6,13 @@ namespace DotNetTool.Builder.SolutionBuilder.Argument
     internal class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System;
-    using System.IO;
-    using System.CommandLine;
+@"
+using System;
+using System.IO;
+using System.CommandLine;
 
+namespace $namespace$
+{    
     internal interface I$command-name$ArgumentBuilder
     {
         Argument Build();

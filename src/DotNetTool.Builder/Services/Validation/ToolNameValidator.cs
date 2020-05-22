@@ -18,16 +18,16 @@ namespace DotNetTool.Builder.Services.Validation
             _primitiveTypeNameValidator = primitiveTypeNameValidator;
         }
 
-        public ValidationResult Validate(string value)
+        public ValidationResult Validate(string value, string projectName)
         {
             // No argument check here !
             // Throw.IfNullOrWhiteSpace(() => value);
 
-            var errors = CollectErrors(value).Flatten(Environment.NewLine);
+            var errors = CollectErrors(value, projectName).Flatten(Environment.NewLine);
             return new ValidationResult(errors);
         }
 
-        private IEnumerable<string> CollectErrors(string value)
+        private IEnumerable<string> CollectErrors(string value, string projectName)
         {
             if (value.IsNullOrWhiteSpace())
             {
@@ -50,6 +50,13 @@ namespace DotNetTool.Builder.Services.Validation
             {
                 yield return $"The dotnet tool name: '{value}' must start with a letter";
             }
+
+            var splitProjectName = projectName.Split(".");
+            if (splitProjectName.First().EqualsTo(value.FirstCharToUpper()))
+            {
+                yield return $"The dotnet tool name: '{value}' must not equal with the start of your project name: '{projectName}', causes in namespace conflicts. Hint the dotnet tool name will transformed to: {value.FirstCharToUpper()}";
+            }
+
 
             var validationResult = _primitiveTypeNameValidator.IsTypeName(value);
             if (validationResult.IsValid)

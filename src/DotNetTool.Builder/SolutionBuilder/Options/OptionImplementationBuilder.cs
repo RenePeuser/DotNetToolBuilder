@@ -9,13 +9,14 @@ namespace DotNetTool.Builder.SolutionBuilder.Options
     internal class OptionImplementationBuilder : IOptionImplementationBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.CommandLine; 
+@"
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.CommandLine; 
 
+namespace $namespace$
+{    
     internal class $command-name$OptionsBuilder : I$command-name$OptionsBuilder
     {
         public IEnumerable<Option> Build()

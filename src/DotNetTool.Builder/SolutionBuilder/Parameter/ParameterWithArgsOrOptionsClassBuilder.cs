@@ -10,12 +10,12 @@ namespace DotNetTool.Builder.SolutionBuilder.Parameter
     internal class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
+@"
+using System;
+using System.IO;
 
-    using System;
-    using System.IO;
-
+namespace $namespace$
+{    
     internal class $command-name$Parameters
     {
         public $command-name$Parameters($ctor-arguments$)

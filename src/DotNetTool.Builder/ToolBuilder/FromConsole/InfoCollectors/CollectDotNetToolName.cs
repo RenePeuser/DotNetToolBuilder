@@ -10,18 +10,18 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
         private const string Title = "Please enter the name of the DotNetTool: (Sample: 'myTool')";
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;
         private readonly IDotNetToolNameNormalizer _dotNetToolNameNormalizer;
-        private readonly IToolNameValidator _inputValidator;
+        private readonly IToolNameValidator _toolNameValidator;
 
-        public CollectDotNetToolName(IToolNameValidator inputValidator, ICollectTillInputCorrect collectTillInputCorrect, IDotNetToolNameNormalizer dotNetToolNameNormalizer)
+        public CollectDotNetToolName(IToolNameValidator toolNameValidator, ICollectTillInputCorrect collectTillInputCorrect, IDotNetToolNameNormalizer dotNetToolNameNormalizer)
         {
-            _inputValidator = inputValidator;
+            _toolNameValidator = toolNameValidator;
             _collectTillInputCorrect = collectTillInputCorrect;
             _dotNetToolNameNormalizer = dotNetToolNameNormalizer;
         }
 
-        public DotNetToolName Collect()
+        public DotNetToolName Collect(string projectName)
         {
-            var dotNetToolName = _collectTillInputCorrect.CollectTillInputIsValid(Title, _inputValidator);
+            var dotNetToolName = _collectTillInputCorrect.CollectTillInputIsValid(Title, projectName, _toolNameValidator);
             var normalizedName = _dotNetToolNameNormalizer.Normalize(dotNetToolName);
             return new DotNetToolName(dotNetToolName, normalizedName);
         }

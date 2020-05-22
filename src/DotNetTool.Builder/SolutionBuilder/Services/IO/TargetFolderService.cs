@@ -54,7 +54,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Services.IO
                 throw new DotNetToolBuilderException($"The directory: '{targetDirectoryInfo.FullName}' does not exists.");
             }
 
-            var solutionFile = _fileService.GetFileInfo(Path.Combine(targetDirectoryInfo.FullName, "src", $"{dotNetTool.ProjectName}.sln"));
+            var solutionFile = _fileService.GetFileInfo(Path.Combine(targetDirectoryInfo.FullName, $"{dotNetTool.ProjectName}.sln"));
             if (solutionFile.NotExists)
             {
                 throw new DotNetToolBuilderException($"The solution file: '{solutionFile.FullName}' does not exists.");

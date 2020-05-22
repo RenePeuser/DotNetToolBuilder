@@ -7,14 +7,15 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class RootCommandBuilder : IRootCommandBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System;
-    using System.IO;
-    using System.Linq;
-    using System.Collections.Generic;    
-    using System.CommandLine;    
+@"
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;    
+using System.CommandLine;    
 
+namespace $namespace$
+{    
     internal class $command-name$CommandBuilder : I$command-name$CommandBuilder
     {
         private readonly IEnumerable<I$command-name$SubCommandBuilder> _$command-argument-name$SubCommandBuilders;

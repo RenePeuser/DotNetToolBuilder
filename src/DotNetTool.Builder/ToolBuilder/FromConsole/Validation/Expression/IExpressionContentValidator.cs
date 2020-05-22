@@ -5,6 +5,6 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
     internal interface IExpressionContentValidator
     {
-        ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo);
+        ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo, string projectName);
     }
 }

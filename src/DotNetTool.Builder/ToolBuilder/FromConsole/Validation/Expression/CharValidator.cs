@@ -12,7 +12,8 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
     {
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetterOrDigit, char.IsWhiteSpace, c => c == '[', c => c == ']', c => c == '<', c => c == '>', c => c == '-', c => c == '.' };
 
-        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
+            string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
