@@ -10,8 +10,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Parameter
     internal class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
     {
         private const string Template =
-@"
-using System;
+@"using System;
 using System.IO;
 
 namespace $namespace$

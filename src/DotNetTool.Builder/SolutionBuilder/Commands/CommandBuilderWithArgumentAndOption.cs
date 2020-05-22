@@ -6,8 +6,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class CommandBuilderWithArgumentAndOption : ICommandBuilderWithArgumentAndOption
     {
         private const string Template =
-            @"
-using System;
+@"using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;    

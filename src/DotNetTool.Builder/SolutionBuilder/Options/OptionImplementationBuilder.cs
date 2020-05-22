@@ -9,8 +9,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Options
     internal class OptionImplementationBuilder : IOptionImplementationBuilder
     {
         private const string Template =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;
 using System.CommandLine; 

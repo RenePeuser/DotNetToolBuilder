@@ -7,8 +7,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class CommandBuilderSimple : ICommandBuilderSimple
     {
         private const string Template =
-            @"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;    
 using System.CommandLine;

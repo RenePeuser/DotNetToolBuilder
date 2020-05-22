@@ -14,8 +14,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Startup
     internal class StartUpBuilder : IStartUpBuilder
     {
         private const string Template =
-@"
-using System;
+@"using System;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using $projectName$.$root-command$;
@@ -72,7 +71,7 @@ $methods$
             var commandRegistrations = methods.Select(m => $"            {m.MethodName}(services);").Flatten(Environment.NewLine);
             var registrationMethods = methods.Select(m => $"        {m.MethodSyntax}").Flatten(Environment.NewLine);
 
-            var usings = nameSpaceCollector.GetAll().Select(n => $"    using {n};").Flatten(Environment.NewLine);
+            var usings = nameSpaceCollector.GetAll().Select(n => $"using {n};").Flatten(Environment.NewLine);
 
             var newStartUp = Template.Replace("$projectName$", projectName)
                 .Replace("$command-registrations$", commandRegistrations)

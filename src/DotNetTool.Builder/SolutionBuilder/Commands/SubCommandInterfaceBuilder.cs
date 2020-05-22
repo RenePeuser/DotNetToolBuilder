@@ -6,8 +6,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class SubCommandInterfaceBuilder : ISubCommandInterfaceBuilder
     {
         private const string Template =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.CommandLine;
 

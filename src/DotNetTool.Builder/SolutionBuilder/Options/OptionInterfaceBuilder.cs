@@ -6,8 +6,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Options
     internal class OptionInterfaceBuilder : IOptionInterfaceBuilder
     {
         private const string Template =
-@"
-using System;
+@"using System;
 using System.IO;
 using System.Collections.Generic;
 using System.CommandLine;

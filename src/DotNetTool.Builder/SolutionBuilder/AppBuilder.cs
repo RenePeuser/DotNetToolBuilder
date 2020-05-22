@@ -8,8 +8,7 @@ namespace DotNetTool.Builder.SolutionBuilder
     internal class AppBuilder
     {
         private const string Template =
-            @"
-using System;
+@"using System;
 using System.IO;
 using System.CommandLine.Invocation;
 using System.Threading.Tasks;
