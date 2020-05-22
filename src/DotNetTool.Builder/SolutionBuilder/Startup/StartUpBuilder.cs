@@ -14,16 +14,16 @@ namespace DotNetTool.Builder.SolutionBuilder.Startup
     internal class StartUpBuilder : IStartUpBuilder
     {
         private const string Template =
-            @"namespace $projectName$
-{
-    using System;
-    using System.IO;
-    using Microsoft.Extensions.DependencyInjection;
-    using $projectName$.$root-command$;
-    using $projectName$.Services;
-    using $projectName$.ErrorHandling;    
+@"using System;
+using System.IO;
+using Microsoft.Extensions.DependencyInjection;
+using $projectName$.$root-command$;
+using $projectName$.Services;
+using $projectName$.ErrorHandling;    
 $usings$
 
+namespace $projectName$
+{    
     internal class Startup
     {
         public void ConfigureServices(IServiceCollection services)
@@ -71,7 +71,7 @@ $methods$
             var commandRegistrations = methods.Select(m => $"            {m.MethodName}(services);").Flatten(Environment.NewLine);
             var registrationMethods = methods.Select(m => $"        {m.MethodSyntax}").Flatten(Environment.NewLine);
 
-            var usings = nameSpaceCollector.GetAll().Select(n => $"    using {n};").Flatten(Environment.NewLine);
+            var usings = nameSpaceCollector.GetAll().Select(n => $"using {n};").Flatten(Environment.NewLine);
 
             var newStartUp = Template.Replace("$projectName$", projectName)
                 .Replace("$command-registrations$", commandRegistrations)

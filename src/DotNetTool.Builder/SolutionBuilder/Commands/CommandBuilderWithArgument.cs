@@ -6,16 +6,16 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class CommandBuilderWithArgument : ICommandBuilderWithArgument
     {
         private const string Template =
-            @"namespace $namespace$
-{                
-    using System;
-    using System.IO;
-    using System.Collections.Generic;    
-    using System.CommandLine;
-    using System.CommandLine.Invocation;    
-    using $namespace$.Arguments;  
-    using $namespace$.Service;
+@"using System;
+using System.IO;
+using System.Collections.Generic;    
+using System.CommandLine;
+using System.CommandLine.Invocation;    
+using $namespace$.Arguments;  
+using $namespace$.Service;
 
+namespace $namespace$
+{                    
     internal class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
         private readonly I$command-name$Service _$command-service-argument-name$Service;        

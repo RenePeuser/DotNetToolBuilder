@@ -30,7 +30,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
             _collectTillInputCorrect = collectTillInputCorrect;
         }
 
-        public CommandInfo CollectFor(DotNetToolName dotNetDotNetToolName)
+        public CommandInfo CollectFor(DotNetToolName dotNetDotNetToolName, string projectName)
         {
             CommandInfo parameter = null;
             while (true)
@@ -44,7 +44,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 
                     var parameterExpression = _consoleService.ReadLine();
                     expressionInfo = _expressionTokenizer.Tokenize(parameterExpression);
-                    validationResult = _expressionValidator.IsValid(dotNetDotNetToolName, expressionInfo);
+                    validationResult = _expressionValidator.IsValid(dotNetDotNetToolName, expressionInfo, projectName);
                     if (validationResult.IsValid.IsFalse())
                     {
                         _consoleService.WriteError(validationResult.Errors);

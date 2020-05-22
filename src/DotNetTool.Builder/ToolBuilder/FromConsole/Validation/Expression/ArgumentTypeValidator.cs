@@ -22,7 +22,8 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
             _argumentTypeOptimizer = argumentTypeOptimizer;
         }
 
-        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
+            string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);

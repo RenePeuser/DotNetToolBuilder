@@ -6,12 +6,12 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class CommandServiceBuilder : ICommandServiceBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System;
-    using System.IO; 
-    using System.Threading.Tasks;
+@"using System;
+using System.IO; 
+using System.Threading.Tasks;
 
+namespace $namespace$
+{    
     internal class $command-name$Service : I$command-name$Service
     {       
         public Task HandleAsync($command-name$Parameters parameters)

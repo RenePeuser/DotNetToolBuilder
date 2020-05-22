@@ -15,6 +15,29 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
             _consoleService = consoleService;
         }
 
+        public string CollectTillInputIsValid(string messageForUser, string projectName, IToolNameValidator toolNameValidator)
+        {
+
+            Throw.IfNullOrWhiteSpace(() => messageForUser);
+            Throw.IfNull(() => toolNameValidator);
+
+            string input = null;
+            ValidationResult validationResult = null;
+            while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
+            {
+                _consoleService.WriteInput(messageForUser);
+                input = _consoleService.ReadLine().Trim();
+                validationResult = toolNameValidator.Validate(input, projectName);
+                if (validationResult.IsValid.IsFalse())
+                {
+                    _consoleService.WriteError(validationResult.Errors);
+                    _consoleService.WriteLine();
+                }
+            }
+
+            return input;
+        }
+
         public string CollectTillInputIsValid(string messageForUser, Predicate<string> inputValidation, Func<string, string> getErrorMessageForInput)
         {
             Throw.IfNullOrWhiteSpace(() => messageForUser);

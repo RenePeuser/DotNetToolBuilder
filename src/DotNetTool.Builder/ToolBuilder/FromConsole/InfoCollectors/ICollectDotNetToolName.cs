@@ -4,6 +4,6 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
     internal interface ICollectDotNetToolName
     {
-        DotNetToolName Collect();
+        DotNetToolName Collect(string projectName);
     }
 }

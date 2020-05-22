@@ -6,12 +6,12 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
     internal class CommandServiceInterfaceBuilder : ICommandServiceInterfaceBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+@"using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
+namespace $namespace$
+{    
     internal interface I$command-name$Service
     {       
         Task HandleAsync($command-name$Parameters parameters);

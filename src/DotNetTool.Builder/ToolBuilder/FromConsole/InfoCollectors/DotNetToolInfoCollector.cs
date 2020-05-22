@@ -16,8 +16,8 @@
         public Models.DotNetTool Collect()
         {
             var projectName = _collectProjectName.Collect();
-            var dotnetToolName = _collectDotNetToolName.Collect();
-            var parameter = _parameterExpressionCollector.CollectFor(dotnetToolName);
+            var dotnetToolName = _collectDotNetToolName.Collect(projectName);
+            var parameter = _parameterExpressionCollector.CollectFor(dotnetToolName, projectName);
 
             return new Models.DotNetTool(projectName, dotnetToolName, parameter);
         }

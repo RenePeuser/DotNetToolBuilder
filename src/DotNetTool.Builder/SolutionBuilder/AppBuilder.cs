@@ -8,14 +8,14 @@ namespace DotNetTool.Builder.SolutionBuilder
     internal class AppBuilder
     {
         private const string Template =
-            @"namespace $namespace$
-{
-    using System;
-    using System.IO;
-    using System.CommandLine.Invocation;
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.DependencyInjection;
+@"using System;
+using System.IO;
+using System.CommandLine.Invocation;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
+namespace $namespace$
+{    
     internal class App
     {
         public IServiceProvider ServiceProvider { get; }

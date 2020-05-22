@@ -13,9 +13,9 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes
-- add validation that no access modifiers are used in project name, like "public", "internal" etc. causes namespace conflicts
-- fix that multiple visual studio instanaces are opened when use option --use-visualstudio
-- fix project name must only be letters and dots.
+- The tool name must not match project name, causes in namespace conflicts. If Project name starts with lower case then we have no problems.
+- Change namespaces not to deepest scope in generated solution.
+
 
 Prerequisites
 - .NET Core 3.1 SDK or higher</PackageReleaseNotes>

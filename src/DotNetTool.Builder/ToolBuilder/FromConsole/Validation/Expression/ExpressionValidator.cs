@@ -19,7 +19,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
             _expressionContentValidators = expressionContentValidators;
         }
 
-        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo)
+        public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo, string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
@@ -29,7 +29,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
                 return new ValidationResult("Input must not be 'null', 'empty' or 'whitespace");
             }
 
-            var results = _expressionContentValidators.Select(validator => validator.IsValid(dotNetDotNetToolName, expressionInfo));
+            var results = _expressionContentValidators.Select(validator => validator.IsValid(dotNetDotNetToolName, expressionInfo, projectName));
             if (results.All(r => r.IsValid))
             {
                 return new ValidationResult(null);
