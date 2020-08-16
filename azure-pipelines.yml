@@ -6,6 +6,8 @@
 trigger:
   - master  
   - dev/*
+  - fix/*
+  - feat/*
   - refs/tags/*
 
 pool:
