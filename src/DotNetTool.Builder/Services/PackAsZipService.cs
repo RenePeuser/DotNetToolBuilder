@@ -20,7 +20,7 @@ namespace DotNetTool.Builder.Services
             _consoleService = consoleService;
         }
 
-        internal async Task PackAsync(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters)
+        internal void PackAsync(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters)
         {
             if (newToolParameters.TargetZipFileInfo.IsNull())
             {
@@ -35,7 +35,7 @@ namespace DotNetTool.Builder.Services
 
             try
             {
-                await Task.Run(() => ZipFile.CreateFromDirectory(directoryInfo.FullName, target.FullName));
+                ZipFile.CreateFromDirectory(directoryInfo.FullName, target.FullName);
             }
             catch (Exception e)
             {

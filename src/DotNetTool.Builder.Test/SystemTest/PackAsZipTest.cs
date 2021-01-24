@@ -8,26 +8,26 @@ namespace DotNetTool.Builder.Test.SystemTest
 {
     [TestClass]
     public class PackAsZipTest : SystemTestBase
-    { 
+    {
         private FileInfo _targetZipFile;
 
         protected override void BeforeExecution()
         {
             base.BeforeExecution();
-
             _targetZipFile = new FileInfo(Path.Combine(Environment.CurrentDirectory, "dotnet.tool.install.zip"));
+            new DirectoryInfo(Path.Combine(_targetZipFile.Directory.FullName, "dotnet.tool.install")).Delete(true);
         }
 
         [TestMethod]
         public void Should_Print_Out_Correct_Message()
         {
-            Assert.IsTrue(_targetZipFile.Exists, Output);
+            Assert.IsTrue(File.Exists(_targetZipFile.FullName));
         }
 
-        protected override void AfterExecution()
+        [TestCleanup]
+        public void Cleanup()
         {
             _targetZipFile.Exists.IfTrueThen(() => _targetZipFile.Delete());
-            base.AfterExecution();
         }
 
         protected override IEnumerable<string> CollectConsoleParameters()
