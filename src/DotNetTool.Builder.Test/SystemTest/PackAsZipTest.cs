@@ -15,7 +15,8 @@ namespace DotNetTool.Builder.Test.SystemTest
         {
             base.BeforeExecution();
             _targetZipFile = new FileInfo(Path.Combine(Environment.CurrentDirectory, "dotnet.tool.install.zip"));
-            new DirectoryInfo(Path.Combine(_targetZipFile.Directory.FullName, "dotnet.tool.install")).Delete(true);
+            var directory = new DirectoryInfo(Path.Combine(_targetZipFile.Directory.FullName, "dotnet.tool.install"));
+            directory.Exists.IfTrueThen(() => directory.Delete(true));
         }
 
         [TestMethod]
