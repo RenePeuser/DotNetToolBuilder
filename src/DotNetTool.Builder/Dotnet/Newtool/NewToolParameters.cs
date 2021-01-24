@@ -4,7 +4,7 @@ namespace DotNetTool.Builder.DotNet.Newtool
 {
     internal class NewToolParameters
     {
-        internal NewToolParameters(FileInfo fromFile, DirectoryInfo saveToolToTo, bool useCode, bool useVisualStudio, bool useRider, FileInfo targetZipFileInfo)
+        internal NewToolParameters(FileInfo fromFile, DirectoryInfo saveToolToTo, bool useCode, bool useVisualStudio, bool useRider, FileInfo targetZipFileInfo, bool useFastMode)
         {
             FromFile = fromFile;
             UseVsCode = useCode;
@@ -12,6 +12,7 @@ namespace DotNetTool.Builder.DotNet.Newtool
             UseRider = useRider;
             SaveToolTo = saveToolToTo;
             TargetZipFileInfo = targetZipFileInfo;
+            UseFastMode = useFastMode;
         }
 
         internal FileInfo FromFile { get; }
@@ -23,6 +24,8 @@ namespace DotNetTool.Builder.DotNet.Newtool
         internal bool UseVisualStudio { get; }
 
         internal bool UseRider { get; }
+
+        internal bool UseFastMode { get; }
 
         internal FileInfo TargetZipFileInfo { get; }
     }

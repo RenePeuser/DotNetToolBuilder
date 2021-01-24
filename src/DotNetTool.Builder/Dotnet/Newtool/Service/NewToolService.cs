@@ -9,6 +9,7 @@ using DotNetTool.Builder.SolutionBuilder.Services.Template;
 using DotNetTool.Builder.SolutionBuilder.Startup;
 using DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors;
 using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
+using Extensions.Pack;
 
 namespace DotNetTool.Builder.DotNet.Newtool.Service
 {
@@ -90,17 +91,21 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
             // Add type registrations
             _startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, _commandTypeCollector, dotNetTool.ParameterInfo, _nameSpaceCollector);
 
-            // Build your new generated tool
-            var dotnetBuildResult = await _processService.RunAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
-            if (dotnetBuildResult.ExitCode != 0)
+            // fast workaround to test it.
+            if (parameters.UseFastMode.IsFalse())
             {
-                // Opens all per option set IDE
-                await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
-                return -1;
-            }
+                // Build your new generated tool
+                var dotnetBuildResult = await _processService.RunAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
+                if (dotnetBuildResult.ExitCode != 0)
+                {
+                    // Opens all per option set IDE
+                    await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
+                    return -1;
+                }
 
-            // Test run with the new tool with --help
-            await _dotNetToolTestService.RunAsync(solutionFile, dotNetTool).ConfigureAwait(false);
+                // Test run with the new tool with --help
+                await _dotNetToolTestService.RunAsync(solutionFile, dotNetTool).ConfigureAwait(false);
+            }
 
             // Opens all per option set IDE
             await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);

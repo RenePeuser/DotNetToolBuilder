@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.CommandLine;
-using FileSystem.Abstraction;
-using Argument = System.CommandLine.Argument;
 using DirectoryInfo = System.IO.DirectoryInfo;
 using FileInfo = System.IO.FileInfo;
 
@@ -9,13 +7,6 @@ namespace DotNetTool.Builder.DotNet.Newtool.Options
 {
     internal class NewToolOptionsBuilder : INewToolOptionsBuilder
     {
-        private readonly IFileService _fileService;
-
-        public NewToolOptionsBuilder(IFileService fileService)
-        {
-            _fileService = fileService;
-        }
-
         public IEnumerable<Option> Build()
         {
             yield return BuildFromFileOption();
@@ -24,6 +15,7 @@ namespace DotNetTool.Builder.DotNet.Newtool.Options
             yield return BuildUseVsCodeOption();
             yield return BuildUseCustomIDEOption();
             yield return BuildAndZipDotNetTool();
+            yield return BuildFastMode();
         }
 
         private Option BuildSaveToolToOption()
@@ -50,6 +42,12 @@ namespace DotNetTool.Builder.DotNet.Newtool.Options
         {
             return new Option(new[] { "--use-visualstudio", "-uv" }, "Opens visual studio after generating the new dotnet tool.") { Required = false };
         }
+
+        private Option BuildFastMode()
+        {
+            return new Option(new[] { "--use-fastmode", "-fm" }, "Do not run MsBuild and no test run of your tool") { Required = false };
+        }
+
 
         private Option BuildAndZipDotNetTool()
         {
