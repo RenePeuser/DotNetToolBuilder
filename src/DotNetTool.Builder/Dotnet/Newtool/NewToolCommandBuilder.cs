@@ -22,7 +22,7 @@ namespace DotNetTool.Builder.DotNet.Newtool
         {
             var command = new Command("newtool", "creates a new dotnet tool");
             _optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
-            command.Handler = CommandHandler.Create<FileInfo, DirectoryInfo, bool, bool, bool, FileInfo>((fromFile, saveTo, useCode, usevisualstudio, useRider, asZip) => _newToolService.HandleAsync(new NewToolParameters(fromFile, saveTo, useCode, usevisualstudio, useRider, asZip)));
+            command.Handler = CommandHandler.Create<FileInfo, DirectoryInfo, bool, bool, bool, FileInfo, bool>((fromFile, saveTo, useCode, usevisualstudio, useRider, asZip, useFastMode) => _newToolService.HandleAsync(new NewToolParameters(fromFile, saveTo, useCode, usevisualstudio, useRider, asZip, useFastMode)));
             return command;
         }
     }

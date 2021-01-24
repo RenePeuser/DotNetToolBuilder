@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>DotNetTool.Builder</AssemblyName>
     <RootNamespace>DotNetTool.Builder</RootNamespace>
     <Authors>Rene Peuser</Authors>
@@ -12,13 +12,15 @@
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
-    <PackageReleaseNotes>Bug-Fixes / Changes
-- The tool name must not match project name, causes in namespace conflicts. If Project name starts with lower case then we have no problems.
-- Change namespaces not to deepest scope in generated solution.
+    <PackageReleaseNotes>Bug-Fixes / Changes:
+- Upgrade to Net5
+- Fix legacy version bug and upgrade to 9.x.x, so calling dotnet tool install without version will pull the newest.
+- Fix tests with cleanup.
+- Add a prototype fast mode which will not build and run the created tool
 
 
 Prerequisites
-- .NET Core 3.1 SDK or higher</PackageReleaseNotes>
+- .NET5 SDK or higher</PackageReleaseNotes>
     <PackageTags>C#;DotNet;.Net;.NetTool;.NetToolBuilder;DotNetToolBuilder;CLI;Build CLI;Build.NetTool;System.CommandLine;CommandLine;GlobalTool;LocalTool;Tool;</PackageTags>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>dotnet-newtool</ToolCommandName>
@@ -42,10 +44,10 @@ Prerequisites
 
   <ItemGroup>
     <PackageReference Include="Argument.Check" Version="1.0.4" />
-    <PackageReference Include="Extensions.Pack" Version="0.1.1-beta-3" />
+    <PackageReference Include="Extensions.Pack" Version="0.1.1" />
     <PackageReference Include="FileSystem.Abstraction" Version="0.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.CommandLine" Version="0.3.0-alpha.20054.1" />
   </ItemGroup>
