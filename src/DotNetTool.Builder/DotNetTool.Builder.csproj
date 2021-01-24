@@ -16,6 +16,7 @@
 - Upgrade to Net5
 - Fix legacy version bug and upgrade to 9.x.x, so calling dotnet tool install without version will pull the newest.
 - Fix tests with cleanup.
+- Add a prototype fast mode which will not build and run the created tool
 
 
 Prerequisites
