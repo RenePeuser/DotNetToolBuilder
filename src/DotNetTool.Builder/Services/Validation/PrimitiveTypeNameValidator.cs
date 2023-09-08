@@ -23,7 +23,7 @@ namespace DotNetTool.Builder.Services.Validation
 
         public PrimitiveTypeValidationResult IsTypeName(string value)
         {
-            Throw.IfNullOrWhiteSpace(() => value);
+            Throw.IfNullOrWhiteSpace(value);
 
             var primitiveType = _builtInTypeTableService.GetTypeFor(value);
             if (primitiveType.IsNotNull())
@@ -40,7 +40,7 @@ namespace DotNetTool.Builder.Services.Validation
 
         public PrimitiveTypeValidationResult IsPrimitiveTypeName(string value)
         {
-            Throw.IfNullOrWhiteSpace(() => value);
+            Throw.IfNullOrWhiteSpace(value);
 
             var primitiveType = _builtInTypeTableService.GetTypeFor(value);
             if (primitiveType.IsNotNull())

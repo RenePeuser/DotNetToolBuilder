@@ -11,7 +11,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Options
 
         public NewOptionExpressionService(IEnumerable<INewOptionExpressionBuilder> newOptionExpressionBuilders)
         {
-            Throw.IfNullOrEmpty(() => newOptionExpressionBuilders);
+            Throw.IfNullOrEmpty(newOptionExpressionBuilders);
 
             _newOptionExpressionBuilders = newOptionExpressionBuilders;
         }

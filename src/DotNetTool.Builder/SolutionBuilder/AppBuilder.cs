@@ -36,10 +36,10 @@ namespace $namespace$
 
         internal void AddStartup(string projectName, FileInfo solutionFile, CommandInfo rootCommand)
         {
-            Throw.IfNullOrWhiteSpace(() => projectName);
-            Throw.IfNull(() => solutionFile);
-            Throw.IfNotExists(() => solutionFile);
-            Throw.IfNull(() => rootCommand);
+            Throw.IfNullOrWhiteSpace(projectName);
+            Throw.IfNull(solutionFile);
+            Throw.IfNotExists(solutionFile);
+            Throw.IfNull(rootCommand);
 
             var app = solutionFile.Directory.EnumerateFiles("App.cs", SearchOption.AllDirectories).FirstOrDefault();
 

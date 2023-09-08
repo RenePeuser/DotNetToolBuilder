@@ -18,9 +18,9 @@ namespace DotNetTool.Builder.SolutionBuilder.Parameter
 
         public string Build(string projectName, CommandInfo parameterInfo, string nameSpace)
         {
-            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNullOrWhiteSpace(projectName);
             Throw.IfNull(() => parameterInfo);
-            Throw.IfNullOrWhiteSpace(() => nameSpace);
+            Throw.IfNullOrWhiteSpace(nameSpace);
 
             var builder = _parameterSpecificClassBuilders.Single(b => b.IsThisBuilderFor(parameterInfo));
             return builder.Build(projectName, parameterInfo, nameSpace);

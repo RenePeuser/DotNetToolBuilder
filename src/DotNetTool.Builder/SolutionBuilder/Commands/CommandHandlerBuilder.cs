@@ -11,8 +11,8 @@ namespace DotNetTool.Builder.SolutionBuilder.Commands
 
         public CommandHandlerBuilder(IEnumerable<ICommandHandlerStringBuilder> commandHandlerStringBuilders)
         {
-            Throw.IfNullOrEmpty(() => commandHandlerStringBuilders);
-
+            Throw.IfNullOrEmpty(commandHandlerStringBuilders);
+                
             _commandHandlerStringBuilders = commandHandlerStringBuilders;
         }
 

@@ -18,7 +18,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
         public string CollectTillInputIsValid(string messageForUser, string projectName, IToolNameValidator toolNameValidator)
         {
 
-            Throw.IfNullOrWhiteSpace(() => messageForUser);
+            Throw.IfNullOrWhiteSpace(messageForUser);
             Throw.IfNull(() => toolNameValidator);
 
             string input = null;
@@ -40,7 +40,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
 
         public string CollectTillInputIsValid(string messageForUser, Predicate<string> inputValidation, Func<string, string> getErrorMessageForInput)
         {
-            Throw.IfNullOrWhiteSpace(() => messageForUser);
+            Throw.IfNullOrWhiteSpace(messageForUser);
             Throw.IfNull(() => inputValidation);
 
             var isValid = false;
@@ -62,7 +62,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
 
         public string CollectTillInputIsValid(string messageForUser, IInputValidator inputValidator)
         {
-            Throw.IfNullOrWhiteSpace(() => messageForUser);
+            Throw.IfNullOrWhiteSpace(messageForUser);
             Throw.IfNull(() => inputValidator);
 
             string input = null;

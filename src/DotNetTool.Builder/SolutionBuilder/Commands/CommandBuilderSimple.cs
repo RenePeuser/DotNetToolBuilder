@@ -45,10 +45,10 @@ namespace $namespace$
 
         public string Build(string project, CommandInfo parameterInfo, CommandInfo parent, string nameSpace)
         {
-            Throw.IfNullOrWhiteSpace(() => project);
+            Throw.IfNullOrWhiteSpace(project);
             Throw.IfNull(() => parameterInfo);
             Throw.IfNull(() => parent);
-            Throw.IfNullOrWhiteSpace(() => nameSpace);
+            Throw.IfNullOrWhiteSpace(nameSpace);
 
             var commandHandler = _commandHandlerBuilder.Build(parameterInfo);
 

@@ -6,8 +6,8 @@ namespace DotNetTool.Builder.Models
     {
         public FindAndReplaceInfo(string find, string replace)
         {
-            Throw.IfNullOrWhiteSpace(() => find);
-            Throw.IfNullOrWhiteSpace(() => replace);
+            Throw.IfNullOrWhiteSpace(find);
+            Throw.IfNullOrWhiteSpace(replace);
 
             Find = find;
             Replace = replace;

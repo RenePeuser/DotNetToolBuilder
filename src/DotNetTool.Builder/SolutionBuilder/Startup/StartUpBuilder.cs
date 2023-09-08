@@ -55,7 +55,7 @@ $methods$
             ICommandTypeCollector commandTypeCollector, CommandInfo rootCommand,
             INameSpaceCollector nameSpaceCollector)
         {
-            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNullOrWhiteSpace(projectName);
             Throw.IfNull(() => solutionFile);
             Throw.IfNull(() => rootCommand);
             Throw.IfNull(() => commandTypeCollector);

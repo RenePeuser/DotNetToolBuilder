@@ -29,9 +29,9 @@ namespace $namespace$
 
         public string Build(string projectName, CommandInfo parameterInfo, string nameSpace)
         {
-            Throw.IfNullOrWhiteSpace(() => projectName);
+            Throw.IfNullOrWhiteSpace(projectName);
             Throw.IfNull(() => parameterInfo);
-            Throw.IfNullOrWhiteSpace(() => nameSpace);
+            Throw.IfNullOrWhiteSpace(nameSpace);
 
             var currentNamespace = $"{nameSpace}.Arguments";
             var newTemplate = Template.Replace("$project-name$", projectName)

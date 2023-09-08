@@ -16,7 +16,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 
         public string Collect(string title)
         {
-            Throw.IfNullOrWhiteSpace(() => title);
+            Throw.IfNullOrWhiteSpace(title);
 
             var description = _collectTillInputCorrect.CollectTillInputIsValid(title, _descriptionValidator);
             return description;

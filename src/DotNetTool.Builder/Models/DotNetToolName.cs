@@ -6,7 +6,7 @@ namespace DotNetTool.Builder.Models
     {
         public DotNetToolName(string name, string normalizedName)
         {
-            Throw.IfNullOrWhiteSpace(() => name);
+            Throw.IfNullOrWhiteSpace(name);
 
             // hint for new json method !
             // Throw.IfNullOrWhiteSpace(() => normalizedName);
