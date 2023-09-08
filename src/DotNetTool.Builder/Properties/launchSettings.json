@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "trumpf.hmi.dotnettool.builder": {
+    "dotnettool.builder": {
       "commandName": "Project",
       "commandLineArgs": "--use-visualstudio"
     }
