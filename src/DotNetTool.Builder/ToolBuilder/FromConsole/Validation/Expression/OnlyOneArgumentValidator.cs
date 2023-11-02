@@ -9,7 +9,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class OnlyOneArgumentValidator : IExpressionContentValidator
+    internal sealed class OnlyOneArgumentValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
             string projectName)

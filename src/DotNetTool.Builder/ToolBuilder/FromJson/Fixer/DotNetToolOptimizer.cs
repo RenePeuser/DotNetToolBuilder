@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 {
-    internal class DotNetToolOptimizer
+    internal sealed class DotNetToolOptimizer
     {
         private readonly DotNetToolNameOptimizer _dotNetToolNameOptimizer;
         private readonly CommandInfoOptimizer _commandInfoOptimizer;

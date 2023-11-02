@@ -7,7 +7,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
 {
-    internal class ParameterService : IParameterService
+    internal sealed class ParameterService : IParameterService
     {
         public CommandInfo FindAlreadyExistingCommand(CommandToken commandToken,
             CommandInfo commandInfo)

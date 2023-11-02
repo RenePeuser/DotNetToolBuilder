@@ -6,7 +6,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer
 {
-    internal class Tokenizer : IExpressionTokenizer
+    internal sealed class Tokenizer : IExpressionTokenizer
     {
         private readonly IEnumerable<ITokenizer> _tokenizers;
 

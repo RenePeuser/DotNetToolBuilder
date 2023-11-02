@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class DotNetToolValidator
+    internal sealed class DotNetToolValidator
     {
         private readonly IEnumerable<IValidateDotNetTool> _validators;
 

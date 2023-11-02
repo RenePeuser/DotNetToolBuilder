@@ -3,7 +3,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.Services.Template
 {
-    internal class TemplateService : ITemplateService
+    internal sealed class TemplateService : ITemplateService
     {
         private readonly IRenameFilesAndFolders _renameFilesAndFolders;
 

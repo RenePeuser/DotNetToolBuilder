@@ -4,7 +4,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.SolutionBuilder.Parameter
 {
-    internal class ConstructorArgumentBuilder : IConstructorArgumentBuilder
+    internal sealed class ConstructorArgumentBuilder : IConstructorArgumentBuilder
     {
         public IEnumerable<CtorArgument> Build(CommandInfo parameterInfo)
         {

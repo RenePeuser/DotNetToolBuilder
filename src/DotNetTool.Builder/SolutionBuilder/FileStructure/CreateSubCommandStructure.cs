@@ -8,7 +8,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal class CreateSubCommandStructure : IBuildCommandFileStructure
+    internal sealed class CreateSubCommandStructure : IBuildCommandFileStructure
     {
         private readonly ICommandBuilderForSubCommands _commandBuilderForSubCommands;
         private readonly IFileService _fileService;

@@ -3,7 +3,7 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Name) + "}")]
-    internal class Property
+    internal sealed class Property
     {
         public Property(string type, string name)
         {

@@ -5,7 +5,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class DescriptionValidator : IDescriptionValidator
+    internal sealed class DescriptionValidator : IDescriptionValidator
     {
         public ValidationResult Validate(string value)
         {

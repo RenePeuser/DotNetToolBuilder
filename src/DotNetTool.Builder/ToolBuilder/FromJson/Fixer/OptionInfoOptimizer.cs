@@ -4,7 +4,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 {
-    internal class OptionInfoOptimizer
+    internal sealed class OptionInfoOptimizer
     {
         private readonly ArgumentInfoOptimizer _argumentInfoOptimizer;
 

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DotNetTool.Builder.Services.Optimizer
 {
-    internal class ArgumentTypeOptimizer : IArgumentTypeOptimizer
+    internal sealed class ArgumentTypeOptimizer : IArgumentTypeOptimizer
     {
         private readonly IEnumerable<ITypeNameOptimizer> _typeNameOptimizers;
 

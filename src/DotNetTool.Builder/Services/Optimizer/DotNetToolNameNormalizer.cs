@@ -5,7 +5,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Optimizer
 {
-    internal class DotNetToolNameNormalizer : IDotNetToolNameNormalizer
+    internal sealed class DotNetToolNameNormalizer : IDotNetToolNameNormalizer
     {
         public string Normalize(string dotNetToolName)
         {

@@ -5,7 +5,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Builder
 {
-    internal class CreateDotNetToolFromConsole : IBuildDotNetTool
+    internal sealed class CreateDotNetToolFromConsole : IBuildDotNetTool
     {
         private readonly IDotNetToolInfoCollector _dotNetToolInfoCollector;
 

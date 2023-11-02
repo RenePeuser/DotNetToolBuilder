@@ -5,7 +5,7 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class CollectOptionAlias : ICollectOptionAlias
+    internal sealed class CollectOptionAlias : ICollectOptionAlias
     {
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;
         private readonly IOptionAliasValidator _inputValidator;

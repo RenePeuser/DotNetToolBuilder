@@ -6,7 +6,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services
 {
-    internal class BuiltInTypeTableService : IBuiltInTypeTableService
+    internal sealed class BuiltInTypeTableService : IBuiltInTypeTableService
     {
         // The following table shows the keywords for built-in C# types, which are aliases of predefined types in the System namespace
         // All this types will bot be found as type in the system namespace so we need this information too.

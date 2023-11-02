@@ -8,7 +8,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Argument
 {
-    internal class ArgumentParser : IArgumentParser
+    internal sealed class ArgumentParser : IArgumentParser
     {
         private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
         private readonly ICollectDescription _collectDescription;

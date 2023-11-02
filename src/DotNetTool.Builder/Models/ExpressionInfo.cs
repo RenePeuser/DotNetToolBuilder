@@ -3,7 +3,7 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Models
 {
-    internal class ExpressionInfo
+    internal sealed class ExpressionInfo
     {
         public ExpressionInfo(string expression, string optimizedExpressions, IEnumerable<Token> tokens)
         {

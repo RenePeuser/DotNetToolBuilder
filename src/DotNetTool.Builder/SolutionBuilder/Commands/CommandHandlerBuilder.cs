@@ -5,7 +5,7 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Commands
 {
-    internal class CommandHandlerBuilder : ICommandHandlerBuilder
+    internal sealed class CommandHandlerBuilder : ICommandHandlerBuilder
     {
         private readonly IEnumerable<ICommandHandlerStringBuilder> _commandHandlerStringBuilders;
 

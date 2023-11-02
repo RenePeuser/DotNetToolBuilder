@@ -7,7 +7,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Options
 {
-    internal class OptionParser : IOptionParser
+    internal sealed class OptionParser : IOptionParser
     {
         private readonly ICollectDescription _collectDescription;
         private readonly ICollectOptionAlias _collectOptionAlias;

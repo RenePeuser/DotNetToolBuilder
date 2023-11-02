@@ -5,7 +5,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class DotNetToolValidationResult
+    internal sealed class DotNetToolValidationResult
     {
         public DotNetToolValidationResult(IEnumerable<ValidationResult> result)
         {

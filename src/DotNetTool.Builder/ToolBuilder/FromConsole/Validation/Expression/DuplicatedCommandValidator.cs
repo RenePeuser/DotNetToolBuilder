@@ -9,7 +9,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class DuplicatedCommandValidator : IExpressionContentValidator
+    internal sealed class DuplicatedCommandValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
             string projectName)

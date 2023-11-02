@@ -10,7 +10,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class OptionValidator : IExpressionContentValidator
+    internal sealed class OptionValidator : IExpressionContentValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 

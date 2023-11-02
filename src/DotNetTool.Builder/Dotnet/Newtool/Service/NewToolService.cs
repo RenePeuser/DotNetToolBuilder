@@ -13,7 +13,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.DotNet.Newtool.Service
 {
-    internal class NewToolService : INewToolService
+    internal sealed class NewToolService : INewToolService
     {
         private readonly ICommandTypeCollector _commandTypeCollector;
         private readonly IConsoleService _consoleService;

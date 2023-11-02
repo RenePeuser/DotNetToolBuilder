@@ -4,7 +4,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ValidateTypeFromString
+    internal sealed class ValidateTypeFromString
     {
         private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;

@@ -10,7 +10,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class RootCommandNameValidation : IExpressionContentValidator
+    internal sealed class RootCommandNameValidation : IExpressionContentValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 

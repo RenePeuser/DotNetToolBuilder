@@ -8,7 +8,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal class CreateArgumentStructure : IBuildCommandFileStructure
+    internal sealed class CreateArgumentStructure : IBuildCommandFileStructure
     {
         private readonly IArgumentBuilder _argumentBuilder;
         private readonly IArgumentInterfaceBuilder _argumentInterfaceBuilder;

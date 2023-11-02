@@ -5,7 +5,7 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class CollectDotNetToolName : ICollectDotNetToolName
+    internal sealed class CollectDotNetToolName : ICollectDotNetToolName
     {
         private const string Title = "Please enter the name of the DotNetTool: (Sample: 'myTool')";
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;

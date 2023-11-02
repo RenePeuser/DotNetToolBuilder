@@ -3,14 +3,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Commands
 {
-    internal class CommandBuilderWithArgumentAndOption : ICommandBuilderWithArgumentAndOption
+    internal sealed class CommandBuilderWithArgumentAndOption : ICommandBuilderWithArgumentAndOption
     {
         private const string Template =
-@"using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;    
-using System.CommandLine;
+@"using System.CommandLine;
 using System.CommandLine.Invocation;
 using $namespace$.Arguments;
 using $namespace$.Options;
@@ -18,7 +14,7 @@ using $namespace$.Service;
 
 namespace $namespace$
 {                    
-    internal class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
+    internal sealed class $command-name$CommandBuilder : I$parent-command-name$SubCommandBuilder
     {
         private readonly I$command-name$Service _$command-service-argument-name$Service;
         private readonly I$command-name$OptionsBuilder _optionsBuilder;

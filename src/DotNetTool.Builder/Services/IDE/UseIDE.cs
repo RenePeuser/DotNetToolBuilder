@@ -6,7 +6,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE
 {
-    internal class UseIDE : IUseIDE
+    internal sealed class UseIDE : IUseIDE
     {
         private readonly IEnumerable<ISpecificIDE> _specificIDEs;
 

@@ -4,7 +4,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.SolutionBuilder.Options
 {
-    internal class NewOptionExpressionBuilderWithArgument : INewOptionExpressionBuilder
+    internal sealed class NewOptionExpressionBuilderWithArgument : INewOptionExpressionBuilder
     {
         private const string OptionArgumentTemplate =
             @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")

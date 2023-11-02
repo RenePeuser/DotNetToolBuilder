@@ -9,7 +9,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class ToolNameValidator : IExpressionContentValidator
+    internal sealed class ToolNameValidator : IExpressionContentValidator
     {
         private readonly IToolNameValidator _toolNameValidator;
 

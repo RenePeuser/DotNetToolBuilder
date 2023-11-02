@@ -5,7 +5,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 {
-    internal class CommandInfoOptimizer
+    internal sealed class CommandInfoOptimizer
     {
         private readonly IDotNetToolNameNormalizer _dotNetToolNameNormalizer;
         private readonly ArgumentInfoOptimizer _argumentInfoOptimizer;

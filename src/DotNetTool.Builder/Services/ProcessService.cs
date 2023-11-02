@@ -10,7 +10,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services
 {
-    internal class ProcessService : IProcessService
+    internal sealed class ProcessService : IProcessService
     {
         private readonly IConsoleService _consoleService;
 

@@ -9,7 +9,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE
 {
-    internal class VisualStudioCode : ISpecificIDE
+    internal sealed class VisualStudioCode : ISpecificIDE
     {
         private readonly IConsoleService _consoleService;
         private readonly IFileService _fileService;

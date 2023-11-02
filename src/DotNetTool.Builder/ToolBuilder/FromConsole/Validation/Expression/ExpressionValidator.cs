@@ -8,7 +8,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class ExpressionValidator : IExpressionValidator
+    internal sealed class ExpressionValidator : IExpressionValidator
     {
         private readonly IEnumerable<IExpressionContentValidator> _expressionContentValidators;
 

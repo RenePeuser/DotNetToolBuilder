@@ -5,7 +5,7 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Parameter
 {
-    internal class ParameterClassBuilder : IParameterClassBuilder
+    internal sealed class ParameterClassBuilder : IParameterClassBuilder
     {
         private readonly IEnumerable<IParameterSpecificClassBuilder> _parameterSpecificClassBuilders;
 

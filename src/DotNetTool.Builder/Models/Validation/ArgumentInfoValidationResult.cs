@@ -1,8 +1,8 @@
 ﻿namespace DotNetTool.Builder.Models.Validation
 {
-    internal class ArgumentInfoValidationResult : GenericValidationResult<ArgumentInfo>
+    internal sealed class ArgumentInfoValidationResult : GenericValidationResult<ArgumentInfo>
     {
-        public ArgumentInfoValidationResult(ArgumentInfo source, string errors) : base(source, errors)
+        internal ArgumentInfoValidationResult(ArgumentInfo source, string errors) : base(source, errors)
         {
         }
     }

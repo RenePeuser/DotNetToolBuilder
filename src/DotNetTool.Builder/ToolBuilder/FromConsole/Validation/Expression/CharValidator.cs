@@ -8,7 +8,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class CharValidator : IExpressionContentValidator
+    internal sealed class CharValidator : IExpressionContentValidator
     {
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetterOrDigit, char.IsWhiteSpace, c => c == '[', c => c == ']', c => c == '<', c => c == '>', c => c == '-', c => c == '.' };
 

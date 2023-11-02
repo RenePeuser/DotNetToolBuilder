@@ -3,7 +3,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.Services.IO
 {
-    internal class RenameFilesAndFolders : IRenameFilesAndFolders
+    internal sealed class RenameFilesAndFolders : IRenameFilesAndFolders
     {
         public void Rename(IDirectoryInfo directoryInfo, string originalName, string newName)
         {

@@ -4,7 +4,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class OptionAliasValidator : IOptionAliasValidator
+    internal sealed class OptionAliasValidator : IOptionAliasValidator
     {
         public ValidationResult Validate(string value)
         {

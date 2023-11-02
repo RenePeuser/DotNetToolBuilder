@@ -3,7 +3,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer
 {
-    internal class CommandTokenizer : ITokenizer
+    internal sealed class CommandTokenizer : ITokenizer
     {
         public Token GetToken(string value)
         {

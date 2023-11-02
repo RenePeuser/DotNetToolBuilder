@@ -5,7 +5,7 @@ using Extensions.Pack;
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Name) + "}")]
-    internal class CtorArgument
+    internal sealed class CtorArgument
     {
         public CtorArgument(string type, string name)
         {

@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer
 {
-    internal class OptionTokenizer : ITokenizer
+    internal sealed class OptionTokenizer : ITokenizer
     {
         public Token GetToken(string value)
         {

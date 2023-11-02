@@ -3,7 +3,7 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class CollectProjectName : ICollectProjectName
+    internal sealed class CollectProjectName : ICollectProjectName
     {
         private const string Title = "Please enter the name of your project: (Sample: 'My.New.Tool', this is the name of your solution !)";
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;

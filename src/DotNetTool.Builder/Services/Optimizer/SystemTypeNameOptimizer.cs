@@ -3,7 +3,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Optimizer
 {
-    internal class SystemTypeNameOptimizer : ITypeNameOptimizer
+    internal sealed class SystemTypeNameOptimizer : ITypeNameOptimizer
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
         private readonly IBuiltInTypeTableService _builtInTypeTableService;

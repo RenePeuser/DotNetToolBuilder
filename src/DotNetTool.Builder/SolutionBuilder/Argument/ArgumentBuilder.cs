@@ -3,20 +3,17 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Argument
 {
-    internal class ArgumentBuilder : IArgumentBuilder
+    internal sealed class ArgumentBuilder : IArgumentBuilder
     {
         private const string Template =
-@"using System;
-using System.IO;
-using System.CommandLine;
-
+@"
 namespace $namespace$
 {    
-    internal class $command-name$ArgumentBuilder : I$command-name$ArgumentBuilder
+    internal sealed class $command-name$ArgumentBuilder : I$command-name$ArgumentBuilder
     {                                        
-        public Argument Build()
+        public System.CommandLine.Argument Build()
         {
-            var argument = new Argument<$type$>()
+            var argument = new System.CommandLine.Argument<$type$>()
             {
                 Name = ""$argument-name$"",
                 Description = ""$argument-description$""

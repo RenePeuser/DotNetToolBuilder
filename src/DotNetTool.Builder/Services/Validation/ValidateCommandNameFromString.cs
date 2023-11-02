@@ -4,7 +4,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ValidateCommandNameFromString
+    internal sealed class ValidateCommandNameFromString
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 

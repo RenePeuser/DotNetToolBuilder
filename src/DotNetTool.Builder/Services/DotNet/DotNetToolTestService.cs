@@ -7,7 +7,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.DotNet
 {
-    internal class DotNetToolTestService : IDotNetToolTestService
+    internal sealed class DotNetToolTestService : IDotNetToolTestService
     {
         private readonly IConsoleService _consoleService;
         private readonly IProcessService _processService;

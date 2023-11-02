@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
 {
-    internal class ConsoleService : IConsoleService
+    internal sealed class ConsoleService : IConsoleService
     {
         public void WriteLine()
         {

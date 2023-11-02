@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Services.DotNet
 {
-    internal class DotNetCliArgumentFixer : IDotNetCliArgumentFixer
+    internal sealed class DotNetCliArgumentFixer : IDotNetCliArgumentFixer
     {
         public string[] Fix(string[] args)
         {

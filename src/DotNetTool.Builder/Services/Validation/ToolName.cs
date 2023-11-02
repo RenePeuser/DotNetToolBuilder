@@ -3,7 +3,7 @@ using DotNetTool.Builder.Models.Validation;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ToolName : IValidateDotNetTool
+    internal sealed class ToolName : IValidateDotNetTool
     {
         private readonly IToolNameValidator _toolNameValidator;
 

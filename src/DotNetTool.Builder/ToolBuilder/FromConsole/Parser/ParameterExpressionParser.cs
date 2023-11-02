@@ -12,7 +12,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Parser
 {
-    internal class ParameterExpressionParser : IParameterExpressionParser
+    internal sealed class ParameterExpressionParser : IParameterExpressionParser
     {
         private readonly IArgumentParser _argumentParser;
         private readonly ICommandParser _commandParser;

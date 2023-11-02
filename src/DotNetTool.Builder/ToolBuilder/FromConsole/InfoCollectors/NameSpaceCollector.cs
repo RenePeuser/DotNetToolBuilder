@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class NameSpaceCollector : INameSpaceCollector
+    internal sealed class NameSpaceCollector : INameSpaceCollector
     {
         private readonly List<string> _items = new List<string>();
 

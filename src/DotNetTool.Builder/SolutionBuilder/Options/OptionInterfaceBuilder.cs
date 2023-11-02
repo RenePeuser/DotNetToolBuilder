@@ -3,13 +3,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Options
 {
-    internal class OptionInterfaceBuilder : IOptionInterfaceBuilder
+    internal sealed class OptionInterfaceBuilder : IOptionInterfaceBuilder
     {
         private const string Template =
-@"using System;
-using System.IO;
-using System.Collections.Generic;
-using System.CommandLine;
+@"using System.CommandLine;
 
 namespace $namespace$
 {    

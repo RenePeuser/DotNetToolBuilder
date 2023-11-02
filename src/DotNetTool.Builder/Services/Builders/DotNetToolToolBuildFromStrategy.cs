@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.Services.Builders
 {
-    internal class DotNetToolToolBuildFromStrategy
+    internal sealed class DotNetToolToolBuildFromStrategy
     {
         private readonly IEnumerable<IBuildDotNetTool> _dotNetToolStrategies;
 

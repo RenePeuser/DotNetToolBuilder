@@ -8,7 +8,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class CommandMustBeforeOptionOrArgumentValidator : IExpressionContentValidator
+    internal sealed class CommandMustBeforeOptionOrArgumentValidator : IExpressionContentValidator
     {
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
             string projectName)

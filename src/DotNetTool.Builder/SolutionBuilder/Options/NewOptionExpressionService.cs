@@ -5,7 +5,7 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Options
 {
-    internal class NewOptionExpressionService : INewOptionExpressionService
+    internal sealed class NewOptionExpressionService : INewOptionExpressionService
     {
         private readonly IEnumerable<INewOptionExpressionBuilder> _newOptionExpressionBuilders;
 

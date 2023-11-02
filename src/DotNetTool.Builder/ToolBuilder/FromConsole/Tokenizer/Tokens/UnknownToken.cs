@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens
 {
-    internal class UnknownToken : Token
+    internal sealed class UnknownToken : Token
     {
         public UnknownToken(string value) : base(value)
         {

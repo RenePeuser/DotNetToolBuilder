@@ -11,22 +11,20 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.Startup
 {
-    internal class StartUpBuilder : IStartUpBuilder
+    internal sealed class StartUpBuilder : IStartUpBuilder
     {
         private const string Template =
-@"using System;
-using System.IO;
-using Microsoft.Extensions.DependencyInjection;
-using $projectName$.$root-command$;
+@"using $projectName$.$root-command$;
 using $projectName$.Services;
 using $projectName$.ErrorHandling;    
+using Microsoft.Extensions.DependencyInjection;
 $usings$
 
 namespace $projectName$
 {    
-    internal class Startup
+    internal sealed class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        internal void ConfigureServices(IServiceCollection services)
         {            
             services.AddSingleton<IErrorHandler, ErrorHandler>();
             services.AddSingleton<IConsoleService, ConsoleService>();

@@ -10,7 +10,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services.IDE
 {
-    internal class VisualStudio : ISpecificIDE
+    internal sealed class VisualStudio : ISpecificIDE
     {
         private readonly IConsoleService _consoleService;
         private readonly IDirectoryService _directoryService;

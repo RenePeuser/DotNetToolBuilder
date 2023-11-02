@@ -5,7 +5,7 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder
 {
-    internal class AppBuilder
+    internal sealed class AppBuilder
     {
         private const string Template =
 @"using System;
@@ -16,18 +16,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace $namespace$
 {    
-    internal class App
+    internal sealed class App
     {
-        public IServiceProvider ServiceProvider { get; }
+        private readonly IServiceProvider _serviceProvider;
 
         public App(IServiceProvider serviceProvider)
         {
-            ServiceProvider = serviceProvider;
+            _serviceProvider = serviceProvider;
         }
 
         public Task<int> RunAsync(string[] args)
         {
-            var rootCommand = ServiceProvider.GetService<$interface-startup-command$>().Build();
+            var rootCommand = _serviceProvider.GetService<$interface-startup-command$>().Build();
 
             return rootCommand.InvokeAsync(args);
         }

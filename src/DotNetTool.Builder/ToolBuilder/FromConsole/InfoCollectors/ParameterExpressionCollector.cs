@@ -8,7 +8,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class ParameterExpressionCollector : IParameterExpressionCollector
+    internal sealed class ParameterExpressionCollector : IParameterExpressionCollector
     {
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;
         private readonly IConsoleService _consoleService;

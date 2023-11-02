@@ -8,7 +8,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal class CreateParameterClassStructure : IBuildCommandFileStructure
+    internal sealed class CreateParameterClassStructure : IBuildCommandFileStructure
     {
         private readonly IFileService _fileService;
         private readonly IParameterClassBuilder _parameterClassBuilder;

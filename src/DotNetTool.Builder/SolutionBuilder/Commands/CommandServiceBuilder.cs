@@ -3,16 +3,14 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Commands
 {
-    internal class CommandServiceBuilder : ICommandServiceBuilder
+    internal sealed class CommandServiceBuilder : ICommandServiceBuilder
     {
         private const string Template =
-@"using System;
-using System.IO; 
-using System.Threading.Tasks;
+@"
 
 namespace $namespace$
 {    
-    internal class $command-name$Service : I$command-name$Service
+    internal sealed class $command-name$Service : I$command-name$Service
     {       
         public Task HandleAsync($command-name$Parameters parameters)
         {

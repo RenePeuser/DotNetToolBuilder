@@ -7,15 +7,13 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.SolutionBuilder.Parameter
 {
-    internal class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
+    internal sealed class ParameterWithArgsOrOptionsClassBuilder : IParameterSpecificClassBuilder
     {
         private const string Template =
-@"using System;
-using System.IO;
-
+@"
 namespace $namespace$
 {    
-    internal class $command-name$Parameters
+    internal sealed class $command-name$Parameters
     {
         public $command-name$Parameters($ctor-arguments$)
         {

@@ -9,7 +9,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services
 {
-    internal class PackAsZipService
+    internal sealed class PackAsZipService
     {
         private readonly IFileService _fileService;
         private readonly IConsoleService _consoleService;

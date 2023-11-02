@@ -2,7 +2,7 @@ using System.IO;
 
 namespace DotNetTool.Builder.DotNet.Newtool
 {
-    internal class NewToolParameters
+    internal sealed class NewToolParameters
     {
         internal NewToolParameters(FileInfo fromFile, DirectoryInfo saveToolToTo, bool useCode, bool useVisualStudio, bool useRider, FileInfo targetZipFileInfo, bool useFastMode)
         {

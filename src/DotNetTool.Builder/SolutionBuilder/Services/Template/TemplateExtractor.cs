@@ -4,7 +4,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.Services.Template
 {
-    internal class TemplateExtractor : ITemplateExtractor
+    internal sealed class TemplateExtractor : ITemplateExtractor
     {
         public void ExtractTo(IDirectoryInfo directoryInfo)
         {

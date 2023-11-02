@@ -22,6 +22,8 @@ namespace DotNetTool.Builder.Test.SystemTest
             _currentDirectory = new DirectoryInfo(Environment.CurrentDirectory);
             _generatedTools = new DirectoryInfo(Path.Combine(_currentDirectory.FullName, "GeneratedTools"));
             _toolSerializeResult = new DirectoryInfo(Path.Combine(_currentDirectory.FullName, "saved-tools"));
+
+            Cleanup();
         }
 
         [TestMethod]

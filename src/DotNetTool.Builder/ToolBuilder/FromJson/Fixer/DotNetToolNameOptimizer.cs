@@ -3,7 +3,7 @@ using DotNetTool.Builder.Services.Optimizer;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 {
-    internal class DotNetToolNameOptimizer
+    internal sealed class DotNetToolNameOptimizer
     {
         private readonly IDotNetToolNameNormalizer _dotNetToolNameNormalizer;
 

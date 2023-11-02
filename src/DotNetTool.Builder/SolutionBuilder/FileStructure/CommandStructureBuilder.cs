@@ -9,7 +9,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal class CommandStructureBuilder : IBuildCommandFileStructure
+    internal sealed class CommandStructureBuilder : IBuildCommandFileStructure
     {
         private readonly ICommandBuilderSimple _commandBuilderSimple;
         private readonly ICommandBuilderWithArgument _commandBuilderWithArgument;

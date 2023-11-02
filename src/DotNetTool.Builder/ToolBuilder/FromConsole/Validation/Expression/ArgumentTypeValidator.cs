@@ -11,7 +11,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal class ArgumentTypeValidator : IExpressionContentValidator
+    internal sealed class ArgumentTypeValidator : IExpressionContentValidator
     {
         private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;

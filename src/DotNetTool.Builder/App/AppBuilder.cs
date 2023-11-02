@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.App
 {
-    internal class AppBuilder
+    internal sealed class AppBuilder
     {
         internal App Build()
         {

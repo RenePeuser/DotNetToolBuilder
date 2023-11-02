@@ -5,7 +5,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ValidateOptionFromString
+    internal sealed class ValidateOptionFromString
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 

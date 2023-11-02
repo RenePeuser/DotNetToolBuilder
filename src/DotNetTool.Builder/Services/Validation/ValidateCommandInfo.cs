@@ -7,7 +7,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ValidateCommandInfo
+    internal sealed class ValidateCommandInfo
     {
         private readonly ValidateArgumentInfo _validateArgumentInfo;
         private readonly ValidateOptionInfo _validateOptionInfo;

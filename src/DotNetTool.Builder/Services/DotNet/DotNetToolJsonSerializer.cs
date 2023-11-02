@@ -10,7 +10,7 @@ using FileInfo = System.IO.FileInfo;
 
 namespace DotNetTool.Builder.Services.DotNet
 {
-    internal class DotNetToolJsonSerializer : IDotNetToolSerializer
+    internal sealed class DotNetToolJsonSerializer : IDotNetToolSerializer
     {
         private readonly IConsoleService _consoleService;
         private readonly IFileService _fileService;

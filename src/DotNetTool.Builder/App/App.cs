@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder.App
 {
-    internal class App
+    internal sealed class App
     {
         private readonly IServiceProvider _serviceProvider;
 

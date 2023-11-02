@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class DotNetToolInfoCollector : IDotNetToolInfoCollector
+    internal sealed class DotNetToolInfoCollector : IDotNetToolInfoCollector
     {
         private readonly ICollectDotNetToolName _collectDotNetToolName;
         private readonly ICollectProjectName _collectProjectName;

@@ -3,7 +3,7 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("Project: {" + nameof(ProjectName) + "} ToolName: {" + nameof(Models.DotNetToolName.Name) + "}")]
-    internal class DotNetTool
+    internal sealed class DotNetTool
     {
         public DotNetTool(string projectName, DotNetToolName dotNetToolName, CommandInfo parameterInfo)
         {

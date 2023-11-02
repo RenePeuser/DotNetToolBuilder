@@ -10,7 +10,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
     // from the dotnet cli.
     // 
     // Default: 'dotnet newtool --use-visualstudio'
-    internal class CommandTypeCollector : ICommandTypeCollector
+    internal sealed class CommandTypeCollector : ICommandTypeCollector
     {
         private readonly Dictionary<string, IEnumerable<TypeToRegister>> _typesToRegister;
 

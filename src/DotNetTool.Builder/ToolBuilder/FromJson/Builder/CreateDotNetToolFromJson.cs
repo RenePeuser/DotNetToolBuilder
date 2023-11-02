@@ -10,7 +10,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Builder
 {
-    internal class CreateDotNetToolFromJson : IBuildDotNetTool
+    internal sealed class CreateDotNetToolFromJson : IBuildDotNetTool
     {
         private readonly IDotNetToolSerializer _dotNetToolJsonSerializer;
         private readonly DotNetToolOptimizer _dotNetToolOptimizer;

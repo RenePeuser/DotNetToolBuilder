@@ -9,7 +9,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Commands
 {
-    internal class CommandParser : ICommandParser
+    internal sealed class CommandParser : ICommandParser
     {
         private readonly ICollectDescription _collectDescription;
         private readonly IDotNetToolNameNormalizer _dotNetToolNameNormalizer;

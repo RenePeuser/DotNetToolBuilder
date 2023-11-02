@@ -7,7 +7,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ProjectNameValidator : IProjectNameValidator
+    internal sealed class ProjectNameValidator : IProjectNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
         private readonly IEnumerable<Predicate<char>> _validationRules = new Predicate<char>[] { char.IsLetter, c => c == '.' };

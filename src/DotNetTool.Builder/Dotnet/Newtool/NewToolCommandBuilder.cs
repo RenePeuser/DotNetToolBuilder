@@ -7,7 +7,7 @@ using DotNetTool.Builder.DotNet.Newtool.Service;
 
 namespace DotNetTool.Builder.DotNet.Newtool
 {
-    internal class NewToolCommandBuilder : IDotnetSubCommandBuilder
+    internal sealed class NewToolCommandBuilder : IDotnetSubCommandBuilder
     {
         private readonly INewToolService _newToolService;
         private readonly INewToolOptionsBuilder _optionsBuilder;

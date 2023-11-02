@@ -6,7 +6,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
 {
-    internal class TypeService : ITypeService
+    internal sealed class TypeService : ITypeService
     {
         public string GetFullQualifiedName(string projectName, IFileInfo fileInfo)
         {

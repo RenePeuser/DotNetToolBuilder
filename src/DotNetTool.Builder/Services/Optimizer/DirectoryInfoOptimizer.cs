@@ -1,6 +1,6 @@
 ﻿namespace DotNetTool.Builder.Services.Optimizer
 {
-    internal class DirectoryInfoOptimizer : ITypeNameOptimizer
+    internal sealed class DirectoryInfoOptimizer : ITypeNameOptimizer
     {
         private static readonly string FileInfoFullQualifiedName = "System.IO.DirectoryInfo";
 

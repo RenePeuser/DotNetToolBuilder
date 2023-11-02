@@ -3,7 +3,7 @@ using DotNetTool.Builder.Models.Validation;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class Command : IValidateDotNetTool
+    internal sealed class Command : IValidateDotNetTool
     {
         private readonly ValidateCommandInfo _validateCommandInfo;
 

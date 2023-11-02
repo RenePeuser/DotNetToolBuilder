@@ -3,7 +3,7 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal class CollectDescription : ICollectDescription
+    internal sealed class CollectDescription : ICollectDescription
     {
         private readonly ICollectTillInputCorrect _collectTillInputCorrect;
         private readonly IDescriptionValidator _descriptionValidator;

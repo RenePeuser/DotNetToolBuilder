@@ -5,7 +5,7 @@ using FileInfo = System.IO.FileInfo;
 
 namespace DotNetTool.Builder.DotNet.Newtool.Options
 {
-    internal class NewToolOptionsBuilder : INewToolOptionsBuilder
+    internal sealed class NewToolOptionsBuilder : INewToolOptionsBuilder
     {
         public IEnumerable<Option> Build()
         {

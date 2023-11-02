@@ -4,7 +4,7 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Options
 {
-    internal class OptionMethodsBuilder : IOptionMethodsBuilder
+    internal sealed class OptionMethodsBuilder : IOptionMethodsBuilder
     {
         private const string OptionMethodTemplate =
             @"        private Option Build$option-name$Option()

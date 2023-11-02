@@ -6,7 +6,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
 {
-    internal class CollectTillInputCorrect : ICollectTillInputCorrect
+    internal sealed class CollectTillInputCorrect : ICollectTillInputCorrect
     {
         private readonly IConsoleService _consoleService;
 

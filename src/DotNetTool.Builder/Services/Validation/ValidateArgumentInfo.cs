@@ -6,7 +6,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ValidateArgumentInfo
+    internal sealed class ValidateArgumentInfo
     {
         private readonly ValidateTypeFromString _validateTypeFromString;
         private readonly ValidateArgumentNameFromString _validateArgumentNameFromString;

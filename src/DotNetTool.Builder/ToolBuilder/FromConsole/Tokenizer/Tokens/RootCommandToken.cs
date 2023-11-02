@@ -1,8 +1,8 @@
 ﻿namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens
 {
-    internal class RootCommandToken : CommandToken
+    internal sealed class RootCommandToken : CommandToken
     {
-        public RootCommandToken(string value) : base(value)
+        internal RootCommandToken(string value) : base(value)
         {
         }
     }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace DotNetTool.Builder.Models.Validation
 {
     [DebuggerDisplay("Validate: '{" + nameof(IsValid) + "}")]
-    internal class PrimitiveTypeValidationResult : ValidationResult
+    internal sealed class PrimitiveTypeValidationResult : ValidationResult
     {
         public PrimitiveTypeValidationResult(string errors, Type type, string alias) : base(errors)
         {

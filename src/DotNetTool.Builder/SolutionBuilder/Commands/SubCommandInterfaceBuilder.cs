@@ -3,12 +3,10 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Commands
 {
-    internal class SubCommandInterfaceBuilder : ISubCommandInterfaceBuilder
+    internal sealed class SubCommandInterfaceBuilder : ISubCommandInterfaceBuilder
     {
         private const string Template =
-@"using System;
-using System.IO;
-using System.CommandLine;
+@"using System.CommandLine;
 
 namespace $namespace$
 {    

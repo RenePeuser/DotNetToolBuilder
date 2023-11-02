@@ -4,18 +4,14 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.SolutionBuilder.Commands
 {
-    internal class RootCommandBuilder : IRootCommandBuilder
+    internal sealed class RootCommandBuilder : IRootCommandBuilder
     {
         private const string Template =
-@"using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;    
-using System.CommandLine;    
+@"using System.CommandLine;    
 
 namespace $namespace$
 {    
-    internal class $command-name$CommandBuilder : I$command-name$CommandBuilder
+    internal sealed class $command-name$CommandBuilder : I$command-name$CommandBuilder
     {
         private readonly IEnumerable<I$command-name$SubCommandBuilder> _$command-argument-name$SubCommandBuilders;
 

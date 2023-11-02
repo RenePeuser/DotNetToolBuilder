@@ -7,7 +7,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal class CreateCommandClasses : ICreateCommandClasses
+    internal sealed class CreateCommandClasses : ICreateCommandClasses
     {
         private readonly IEnumerable<IBuildCommandFileStructure> _commandFileStructures;
         private readonly IDirectoryService _directoryService;

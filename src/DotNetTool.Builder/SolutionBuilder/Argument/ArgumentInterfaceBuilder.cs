@@ -3,18 +3,17 @@ using DotNetTool.Builder.Models;
 
 namespace DotNetTool.Builder.SolutionBuilder.Argument
 {
-    internal class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
+    internal sealed class ArgumentInterfaceBuilder : IArgumentInterfaceBuilder
     {
         private const string Template =
-@"using System;
-using System.IO;
+@"
 using System.CommandLine;
 
 namespace $namespace$
 {    
     internal interface I$command-name$ArgumentBuilder
     {
-        Argument Build();
+        System.CommandLine.Argument Build();
     }
 }";
 

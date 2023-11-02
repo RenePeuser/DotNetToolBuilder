@@ -6,7 +6,7 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
 namespace DotNetTool.Builder.ErrorHandling
 {
-    internal class ErrorHandler : IErrorHandler
+    internal sealed class ErrorHandler : IErrorHandler
     {
         private readonly IConsoleService _consoleService;
 

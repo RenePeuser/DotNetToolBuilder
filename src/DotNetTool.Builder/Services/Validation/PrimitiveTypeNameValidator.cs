@@ -7,7 +7,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class PrimitiveTypeNameValidator : IPrimitiveTypeNameValidator
+    internal sealed class PrimitiveTypeNameValidator : IPrimitiveTypeNameValidator
     {
         private readonly IBuiltInTypeTableService _builtInTypeTableService;
         private readonly Type[] _supportedTypes;

@@ -5,7 +5,7 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.Services.IO
 {
-    internal class TargetFolderService : ITargetFolderService
+    internal sealed class TargetFolderService : ITargetFolderService
     {
         private readonly IDirectoryService _directoryService;
         private readonly IFileService _fileService;

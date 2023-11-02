@@ -6,7 +6,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ValidateOptionInfo
+    internal sealed class ValidateOptionInfo
     {
         private readonly ValidateArgumentInfo _validateArgumentInfo;
         private readonly IOptionAliasValidator _optionAliasValidator;

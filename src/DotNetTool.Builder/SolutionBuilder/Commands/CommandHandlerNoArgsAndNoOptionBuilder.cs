@@ -6,7 +6,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.SolutionBuilder.Commands
 {
-    internal class CommandHandlerNoArgsAndNoOptionBuilder : ICommandHandlerStringBuilder
+    internal sealed class CommandHandlerNoArgsAndNoOptionBuilder : ICommandHandlerStringBuilder
     {
         private const string Template = "CommandHandler.Create(() => _$command-argument-name$Service.HandleAsync(new $command-name$Parameters($argument-names$)))";
 

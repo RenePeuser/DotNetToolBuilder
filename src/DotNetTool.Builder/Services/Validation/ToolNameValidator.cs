@@ -7,7 +7,7 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal class ToolNameValidator : IToolNameValidator
+    internal sealed class ToolNameValidator : IToolNameValidator
     {
         private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
 

@@ -35,7 +35,7 @@ using ToolNameValidator = DotNetTool.Builder.Services.Validation.ToolNameValidat
 
 namespace DotNetTool.Builder
 {
-    internal class Startup
+    internal sealed class Startup
     {
         internal void ConfigureServices(IServiceCollection services)
         {

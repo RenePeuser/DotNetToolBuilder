@@ -2,7 +2,7 @@
 
 namespace DotNetTool.Builder.Models
 {
-    internal class TypeToAlias
+    internal sealed class TypeToAlias
     {
         internal TypeToAlias(Type type, string @alias)
         {
