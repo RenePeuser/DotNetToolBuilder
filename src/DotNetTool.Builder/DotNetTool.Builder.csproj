@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/DotNetToolBuilder</RepositoryUrl>
     <PackageReleaseNotes>Bug-Fixes / Changes:
-- Upgrade to Net7
+- Upgrade generated solution to Net7
 
 Prerequisites
 - .NET7 SDK or higher</PackageReleaseNotes>
