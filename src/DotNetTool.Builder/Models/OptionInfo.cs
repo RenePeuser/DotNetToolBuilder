@@ -5,24 +5,22 @@ using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.Models
 {
-    public class OptionInfo : InfoBase
+    [method: JsonConstructor]
+    public class OptionInfo(string value,
+                            string name,
+                            string alias,
+                            string description,
+                            bool isRequired,
+                            ArgumentInfo argument,
+                            string normalizedValue)
+        : InfoBase(value, name, normalizedValue)
     {
-        [JsonConstructor]
-        public OptionInfo(string value, string name, string alias, string description, bool isRequired,
-            ArgumentInfo argument, string normalizedValue) : base(value, name, normalizedValue)
-        {
-            Alias = alias;
-            Description = description;
-            IsIsRequired = isRequired;
-            Argument = argument;
-        }
+        public string Alias { get; } = alias;
 
-        public string Alias { get; }
+        public string Description { get; } = description;
 
-        public string Description { get; }
+        public bool IsIsRequired { get; } = isRequired;
 
-        public bool IsIsRequired { get; }
-
-        public ArgumentInfo Argument { get; }
+        public ArgumentInfo Argument { get; } = argument;
     }
 }

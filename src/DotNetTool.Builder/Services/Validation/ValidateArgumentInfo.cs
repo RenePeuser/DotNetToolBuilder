@@ -6,17 +6,9 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal sealed class ValidateArgumentInfo
+    internal sealed class ValidateArgumentInfo(ValidateTypeFromString validateTypeFromString,
+                                               ValidateArgumentNameFromString validateArgumentNameFromString)
     {
-        private readonly ValidateTypeFromString _validateTypeFromString;
-        private readonly ValidateArgumentNameFromString _validateArgumentNameFromString;
-
-        public ValidateArgumentInfo(ValidateTypeFromString validateTypeFromString, ValidateArgumentNameFromString validateArgumentNameFromString)
-        {
-            _validateTypeFromString = validateTypeFromString;
-            _validateArgumentNameFromString = validateArgumentNameFromString;
-        }
-
         internal ArgumentInfoValidationResult Validate(ArgumentInfo argumentInfo)
         {
             if (argumentInfo.IsNull())
@@ -24,8 +16,8 @@ namespace DotNetTool.Builder.Services.Validation
                 return new ArgumentInfoValidationResult(argumentInfo, string.Empty);
             }
 
-            var argumentTypeErrors = _validateTypeFromString.CollectErrors(argumentInfo.Type).ToList();
-            var argumentNameErrors = _validateArgumentNameFromString.CheckForErrors(argumentInfo.Name);
+            var argumentTypeErrors = validateTypeFromString.CollectErrors(argumentInfo.Type).ToList();
+            var argumentNameErrors = validateArgumentNameFromString.CheckForErrors(argumentInfo.Name);
             var allErrors = argumentTypeErrors.Concat(argumentNameErrors).FilterNullOrWhitespace().ToList();
 
             return new ArgumentInfoValidationResult(argumentInfo, allErrors.Any() ? allErrors.Flatten(Environment.NewLine) : string.Empty);

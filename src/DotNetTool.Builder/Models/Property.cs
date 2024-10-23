@@ -3,15 +3,11 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Name) + "}")]
-    internal sealed class Property
+    internal sealed class Property(string type,
+                                   string name)
     {
-        public Property(string type, string name)
-        {
-            Type = type;
-            Name = name;
-        }
+        public string Type { get; } = type;
 
-        public string Type { get; }
-        public string Name { get; }
+        public string Name { get; } = name;
     }
 }

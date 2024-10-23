@@ -8,23 +8,22 @@ using Newtonsoft.Json;
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Name) + "}")]
-    public class CommandInfo : InfoBase
+    [method: JsonConstructor]
+    public class CommandInfo(string value,
+                             string name,
+                             string normalizedName,
+                             string description,
+                             ArgumentInfo argumentInfo,
+                             IEnumerable<OptionInfo> options,
+                             IEnumerable<CommandInfo> subCommands)
+        : InfoBase(value, name, normalizedName)
     {
-        [JsonConstructor]
-        public CommandInfo(string value, string name, string normalizedName, string description, ArgumentInfo argumentInfo, IEnumerable<OptionInfo> options, IEnumerable<CommandInfo> subCommands) : base(value, name, normalizedName)
-        {
-            Description = description;
-            Argument = argumentInfo;
-            Options = options;
-            SubCommands = subCommands;
-        }
+        public IEnumerable<CommandInfo> SubCommands { get; } = subCommands;
 
-        public IEnumerable<CommandInfo> SubCommands { get; }
+        public IEnumerable<OptionInfo> Options { get; } = options;
 
-        public IEnumerable<OptionInfo> Options { get; }
+        public ArgumentInfo Argument { get; set; } = argumentInfo;
 
-        public ArgumentInfo Argument { get; set; }
-
-        public string Description { get; }
+        public string Description { get; } = description;
     }
 }

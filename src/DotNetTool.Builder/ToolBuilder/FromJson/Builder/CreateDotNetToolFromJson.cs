@@ -10,24 +10,15 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Builder
 {
-    internal sealed class CreateDotNetToolFromJson : IBuildDotNetTool
+    internal sealed class CreateDotNetToolFromJson(IDotNetToolSerializer dotNetToolJsonSerializer,
+                                                   DotNetToolOptimizer dotNetToolOptimizer,
+                                                   DotNetToolValidator dotNetToolValidator) : IBuildDotNetTool
     {
-        private readonly IDotNetToolSerializer _dotNetToolJsonSerializer;
-        private readonly DotNetToolOptimizer _dotNetToolOptimizer;
-        private readonly DotNetToolValidator _dotNetToolValidator;
-
-        public CreateDotNetToolFromJson(IDotNetToolSerializer dotNetToolJsonSerializer, DotNetToolOptimizer dotNetToolOptimizer, DotNetToolValidator dotNetToolValidator)
-        {
-            _dotNetToolJsonSerializer = dotNetToolJsonSerializer;
-            _dotNetToolOptimizer = dotNetToolOptimizer;
-            _dotNetToolValidator = dotNetToolValidator;
-        }
-
         public Models.DotNetTool BuildFrom(NewToolParameters newToolParameters)
         {
-            var deserializedTool = _dotNetToolJsonSerializer.DeserializeFrom(newToolParameters.FromFile);
-            var optimizedTool = _dotNetToolOptimizer.FixMissingValues(deserializedTool);
-            var validationResult = _dotNetToolValidator.Validate(optimizedTool);
+            var deserializedTool = dotNetToolJsonSerializer.DeserializeFrom(newToolParameters.FromFile);
+            var optimizedTool = dotNetToolOptimizer.FixMissingValues(deserializedTool);
+            var validationResult = dotNetToolValidator.Validate(optimizedTool);
             if (validationResult.HasErrors)
             {
                 var errors = validationResult.ValidationResults.Where(result => result.IsValid.IsFalse()).ToList();

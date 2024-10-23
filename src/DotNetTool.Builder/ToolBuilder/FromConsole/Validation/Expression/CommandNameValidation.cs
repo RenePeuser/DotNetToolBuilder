@@ -10,17 +10,10 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal sealed class CommandNameValidation : IExpressionContentValidator
+    internal sealed class CommandNameValidation(ValidateCommandNameFromString validateCommandNameFromString) : IExpressionContentValidator
     {
-        private readonly ValidateCommandNameFromString _validateCommandNameFromString;
-
-        public CommandNameValidation(ValidateCommandNameFromString validateCommandNameFromString)
-        {
-            _validateCommandNameFromString = validateCommandNameFromString;
-        }
-
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
-            string projectName)
+                                        string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
@@ -35,7 +28,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
             foreach (var commandToken in commandTokens)
             {
                 var command = commandToken.Value;
-                var errors = _validateCommandNameFromString.CollectErrors(command).ToList();
+                var errors = validateCommandNameFromString.CollectErrors(command).ToList();
 
                 foreach (var error in errors)
                 {

@@ -7,19 +7,10 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal sealed class ValidateCommandInfo
+    internal sealed class ValidateCommandInfo(ValidateArgumentInfo validateArgumentInfo,
+                                              ValidateOptionInfo validateOptionInfo,
+                                              ValidateCommandNameFromString validateCommandNameFromString)
     {
-        private readonly ValidateArgumentInfo _validateArgumentInfo;
-        private readonly ValidateOptionInfo _validateOptionInfo;
-        private readonly ValidateCommandNameFromString _validateCommandNameFromString;
-
-        public ValidateCommandInfo(ValidateArgumentInfo validateArgumentInfo, ValidateOptionInfo validateOptionInfo, ValidateCommandNameFromString validateCommandNameFromString)
-        {
-            _validateArgumentInfo = validateArgumentInfo;
-            _validateOptionInfo = validateOptionInfo;
-            _validateCommandNameFromString = validateCommandNameFromString;
-        }
-
         internal IEnumerable<CommandInfoValidationResult> Validate(CommandInfo commandInfo)
         {
             yield return ValidateCommandInfoInternal(commandInfo);
@@ -36,9 +27,9 @@ namespace DotNetTool.Builder.Services.Validation
 
         private CommandInfoValidationResult ValidateCommandInfoInternal(CommandInfo commandInfo)
         {
-            var argumentValidationResult = _validateArgumentInfo.Validate(commandInfo.Argument);
-            var optionsValidationResults = commandInfo.Options.Select(option => _validateOptionInfo.Validate(option)).Select(result => result.Errors).ToList();
-            var commandNameValidationResult = _validateCommandNameFromString.CollectErrors(commandInfo.NormalizedName).ToList();
+            var argumentValidationResult = validateArgumentInfo.Validate(commandInfo.Argument);
+            var optionsValidationResults = commandInfo.Options.Select(option => validateOptionInfo.Validate(option)).Select(result => result.Errors).ToList();
+            var commandNameValidationResult = validateCommandNameFromString.CollectErrors(commandInfo.NormalizedName).ToList();
 
             var allErrors = argumentValidationResult.Errors.Concat(optionsValidationResults).Concat(commandNameValidationResult).FilterNullOrWhitespace().ToList();
 

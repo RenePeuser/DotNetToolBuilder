@@ -1,9 +1,5 @@
 ﻿namespace DotNetTool.Builder.Models.Validation
 {
-    internal sealed class CommandInfoValidationResult : GenericValidationResult<CommandInfo>
-    {
-        public CommandInfoValidationResult(CommandInfo source, string errors) : base(source, errors)
-        {
-        }
-    }
+    internal sealed class CommandInfoValidationResult(CommandInfo source,
+                                                      string errors) : GenericValidationResult<CommandInfo>(source, errors);
 }

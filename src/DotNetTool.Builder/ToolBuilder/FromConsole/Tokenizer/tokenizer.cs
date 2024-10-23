@@ -6,15 +6,8 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer
 {
-    internal sealed class Tokenizer : IExpressionTokenizer
+    internal sealed class Tokenizer(IEnumerable<ITokenizer> tokenizers) : IExpressionTokenizer
     {
-        private readonly IEnumerable<ITokenizer> _tokenizers;
-
-        public Tokenizer(IEnumerable<ITokenizer> tokenizers)
-        {
-            _tokenizers = tokenizers;
-        }
-
         public ExpressionInfo Tokenize(string expression)
         {
             var splittedExpression = expression.Split().FilterNullOrWhitespace().ToList();
@@ -33,10 +26,10 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer
         {
             foreach (var token in tokens)
             {
-                var tokenizers = _tokenizers.Where(tokenizer => tokenizer.IsThisTokenizerFor(token)).ToList();
-                if (tokenizers.Any())
+                var tokenizers1 = tokenizers.Where(tokenizer => tokenizer.IsThisTokenizerFor(token)).ToList();
+                if (tokenizers1.Any())
                 {
-                    foreach (var tokenizer in tokenizers)
+                    foreach (var tokenizer in tokenizers1)
                     {
                         yield return tokenizer.GetToken(token);
                     }

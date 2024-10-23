@@ -3,22 +3,14 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal sealed class CollectDescription : ICollectDescription
+    internal sealed class CollectDescription(ICollectTillInputCorrect collectTillInputCorrect,
+                                             IDescriptionValidator descriptionValidator) : ICollectDescription
     {
-        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
-        private readonly IDescriptionValidator _descriptionValidator;
-
-        public CollectDescription(ICollectTillInputCorrect collectTillInputCorrect, IDescriptionValidator descriptionValidator)
-        {
-            _collectTillInputCorrect = collectTillInputCorrect;
-            _descriptionValidator = descriptionValidator;
-        }
-
         public string Collect(string title)
         {
             Throw.IfNullOrWhiteSpace(title);
 
-            var description = _collectTillInputCorrect.CollectTillInputIsValid(title, _descriptionValidator);
+            var description = collectTillInputCorrect.CollectTillInputIsValid(title, descriptionValidator);
             return description;
         }
     }

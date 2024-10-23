@@ -8,19 +8,9 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal sealed class CreateParameterClassStructure : IBuildCommandFileStructure
+    internal sealed class CreateParameterClassStructure(IFileService fileService,
+                                                        IParameterClassBuilder parameterClassBuilder) : IBuildCommandFileStructure
     {
-        private readonly IFileService _fileService;
-        private readonly IParameterClassBuilder _parameterClassBuilder;
-
-        public CreateParameterClassStructure(
-            IFileService fileService,
-            IParameterClassBuilder parameterClassBuilder)
-        {
-            _fileService = fileService;
-            _parameterClassBuilder = parameterClassBuilder;
-        }
-
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
         {
             if (!subCommand.Argument.IsNotNull() && !subCommand.Options.Any() && !subCommand.SubCommands.IsNullOrEmpty())
@@ -28,8 +18,8 @@ namespace DotNetTool.Builder.SolutionBuilder.FileStructure
                 return;
             }
 
-            var parameterModelClass = _parameterClassBuilder.Build(projectName, subCommand, currentPath);
-            var parameterClassFileInfo = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
+            var parameterModelClass = parameterClassBuilder.Build(projectName, subCommand, currentPath);
+            var parameterClassFileInfo = fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}Parameters.cs"));
             parameterClassFileInfo.WriteAllText(parameterModelClass);
             namespaceCollector.Add($"{currentPath}.Service");
         }

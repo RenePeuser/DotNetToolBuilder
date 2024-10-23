@@ -5,19 +5,13 @@ using Extensions.Pack;
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Name) + "}")]
-    internal sealed class CtorArgument
+    internal sealed class CtorArgument(string type,
+                                       string name)
     {
-        public CtorArgument(string type, string name)
-        {
-            Type = type;
-            Name = name;
-            NormalizedName = name.FirstCharToUpper();
-        }
+        public string Type { get; } = type;
 
-        public string Type { get; }
+        public string Name { get; } = name;
 
-        public string Name { get; }
-
-        public string NormalizedName { get; }
+        public string NormalizedName { get; } = name.FirstCharToUpper();
     }
 }

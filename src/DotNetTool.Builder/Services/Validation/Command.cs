@@ -3,18 +3,11 @@ using DotNetTool.Builder.Models.Validation;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal sealed class Command : IValidateDotNetTool
+    internal sealed class Command(ValidateCommandInfo validateCommandInfo) : IValidateDotNetTool
     {
-        private readonly ValidateCommandInfo _validateCommandInfo;
-
-        public Command(ValidateCommandInfo validateCommandInfo)
-        {
-            _validateCommandInfo = validateCommandInfo;
-        }
-
         public IEnumerable<ValidationResult> Validate(Models.DotNetTool dotNetTool)
         {
-            return _validateCommandInfo.Validate(dotNetTool.ParameterInfo);
+            return validateCommandInfo.Validate(dotNetTool.ParameterInfo);
         }
     }
 }

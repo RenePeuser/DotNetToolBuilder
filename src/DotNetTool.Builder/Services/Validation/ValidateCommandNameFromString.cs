@@ -4,15 +4,8 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal sealed class ValidateCommandNameFromString
+    internal sealed class ValidateCommandNameFromString(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
     {
-        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
-
-        public ValidateCommandNameFromString(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
-        {
-            _primitiveTypeNameValidator = primitiveTypeNameValidator;
-        }
-
         internal IEnumerable<string> CollectErrors(string command)
         {
             if (command.Contains("--") || command.Contains("<") || command.Contains("["))
@@ -30,7 +23,7 @@ namespace DotNetTool.Builder.Services.Validation
                 yield return $"The command: '{command}' must only contains letters or digits";
             }
 
-            var validationResult = _primitiveTypeNameValidator.IsTypeName(command);
+            var validationResult = primitiveTypeNameValidator.IsTypeName(command);
             if (validationResult.IsValid)
             {
                 yield return $"The command: '{command}' must not be a name of a type";

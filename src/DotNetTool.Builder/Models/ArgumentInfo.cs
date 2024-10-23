@@ -5,20 +5,19 @@ using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.Models
 {
-    public class ArgumentInfo : InfoBase
+    [method: JsonConstructor]
+    public class ArgumentInfo(string name,
+                              string description,
+                              string value,
+                              string type,
+                              string optimizedType,
+                              string normalizedName)
+        : InfoBase(value, name, normalizedName)
     {
-        [JsonConstructor]
-        public ArgumentInfo(string name, string description, string value, string type, string optimizedType, string normalizedName) : base(value, name, normalizedName)
-        {
-            Description = description;
-            Type = type;
-            OptimizedType = optimizedType;
-        }
+        public string Description { get; } = description;
 
-        public string Description { get; }
+        public string Type { get; } = type;
 
-        public string Type { get; }
-
-        public string OptimizedType { get; set; }
+        public string OptimizedType { get; set; } = optimizedType;
     }
 }

@@ -3,15 +3,11 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("ExitCode: '{" + nameof(ExitCode) + "}'")]
-    internal sealed class CliRunResult
+    internal sealed class CliRunResult(int exitCode,
+                                       string output)
     {
-        public CliRunResult(int exitCode, string output)
-        {
-            ExitCode = exitCode;
-            Output = output;
-        }
+        public int ExitCode { get; } = exitCode;
 
-        public int ExitCode { get; }
-        public string Output { get; }
+        public string Output { get; } = output;
     }
 }

@@ -3,19 +3,14 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("Project: {" + nameof(ProjectName) + "} ToolName: {" + nameof(Models.DotNetToolName.Name) + "}")]
-    internal sealed class DotNetTool
+    internal sealed class DotNetTool(string projectName,
+                                     DotNetToolName dotNetToolName,
+                                     CommandInfo parameterInfo)
     {
-        public DotNetTool(string projectName, DotNetToolName dotNetToolName, CommandInfo parameterInfo)
-        {
-            ProjectName = projectName;
-            DotNetToolName = dotNetToolName;
-            ParameterInfo = parameterInfo;
-        }
+        public string ProjectName { get; } = projectName;
 
-        public string ProjectName { get; }
+        public DotNetToolName DotNetToolName { get; } = dotNetToolName;
 
-        public DotNetToolName DotNetToolName { get; }
-
-        public CommandInfo ParameterInfo { get; }
+        public CommandInfo ParameterInfo { get; } = parameterInfo;
     }
 }

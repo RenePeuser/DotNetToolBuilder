@@ -10,17 +10,10 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal sealed class ArgumentValidator : IExpressionContentValidator
+    internal sealed class ArgumentValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator) : IExpressionContentValidator
     {
-        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
-
-        public ArgumentValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
-        {
-            _primitiveTypeNameValidator = primitiveTypeNameValidator;
-        }
-
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
-            string projectName)
+                                        string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
@@ -89,7 +82,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
                     yield return $"The argument: '{argument}' must begin with a letter";
                 }
 
-                var validationResult = _primitiveTypeNameValidator.IsPrimitiveTypeName(argumentName);
+                var validationResult = primitiveTypeNameValidator.IsPrimitiveTypeName(argumentName);
                 if (validationResult.IsValid)
                 {
                     yield return $"The argument: '{argument}' must not be a name of a type.";

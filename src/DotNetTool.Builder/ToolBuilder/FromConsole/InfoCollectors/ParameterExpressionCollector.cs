@@ -8,28 +8,13 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
 {
-    internal sealed class ParameterExpressionCollector : IParameterExpressionCollector
+    internal sealed class ParameterExpressionCollector(IConsoleService consoleService,
+                                                       IParameterExpressionParser parameterExpressionParser,
+                                                       IExpressionValidator expressionValidator,
+                                                       IExpressionTokenizer expressionTokenizer,
+                                                       ICollectTillInputCorrect collectTillInputCorrect)
+        : IParameterExpressionCollector
     {
-        private readonly ICollectTillInputCorrect _collectTillInputCorrect;
-        private readonly IConsoleService _consoleService;
-        private readonly IExpressionTokenizer _expressionTokenizer;
-        private readonly IExpressionValidator _expressionValidator;
-        private readonly IParameterExpressionParser _parameterExpressionParser;
-
-        public ParameterExpressionCollector(
-            IConsoleService consoleService,
-            IParameterExpressionParser parameterExpressionParser,
-            IExpressionValidator expressionValidator,
-            IExpressionTokenizer expressionTokenizer,
-            ICollectTillInputCorrect collectTillInputCorrect)
-        {
-            _consoleService = consoleService;
-            _parameterExpressionParser = parameterExpressionParser;
-            _expressionValidator = expressionValidator;
-            _expressionTokenizer = expressionTokenizer;
-            _collectTillInputCorrect = collectTillInputCorrect;
-        }
-
         public CommandInfo CollectFor(DotNetToolName dotNetDotNetToolName, string projectName)
         {
             CommandInfo parameter = null;
@@ -39,21 +24,21 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.InfoCollectors
                 ValidationResult validationResult = null;
                 while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
                 {
-                    _consoleService.WriteInput("Please enter your parameter expression");
-                    _consoleService.WriteSample($"Sample: '{dotNetDotNetToolName.Name} command <argument> --option");
+                    consoleService.WriteInput("Please enter your parameter expression");
+                    consoleService.WriteSample($"Sample: '{dotNetDotNetToolName.Name} command <argument> --option");
 
-                    var parameterExpression = _consoleService.ReadLine();
-                    expressionInfo = _expressionTokenizer.Tokenize(parameterExpression);
-                    validationResult = _expressionValidator.IsValid(dotNetDotNetToolName, expressionInfo, projectName);
+                    var parameterExpression = consoleService.ReadLine();
+                    expressionInfo = expressionTokenizer.Tokenize(parameterExpression);
+                    validationResult = expressionValidator.IsValid(dotNetDotNetToolName, expressionInfo, projectName);
                     if (validationResult.IsValid.IsFalse())
                     {
-                        _consoleService.WriteError(validationResult.Errors);
+                        consoleService.WriteError(validationResult.Errors);
                     }
                 }
 
-                parameter = _parameterExpressionParser.Parse(expressionInfo, parameter);
+                parameter = parameterExpressionParser.Parse(expressionInfo, parameter);
 
-                var required = _collectTillInputCorrect.CollectTillInputIsValid("Do you want to add another parameter expression ? yes(y) or no (n)", input => input.EqualsAnyOf("yes", "y", "no", "n"), input => $"Input: '{input}' does not match any of yes(y) or no (n)");
+                var required = collectTillInputCorrect.CollectTillInputIsValid("Do you want to add another parameter expression ? yes(y) or no (n)", input => input.EqualsAnyOf("yes", "y", "no", "n"), input => $"Input: '{input}' does not match any of yes(y) or no (n)");
                 if (required.EqualsAnyOf("n", "no"))
                 {
                     return parameter;

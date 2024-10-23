@@ -7,22 +7,14 @@ using DotNetTool.Builder.DotNet.Newtool.Service;
 
 namespace DotNetTool.Builder.DotNet.Newtool
 {
-    internal sealed class NewToolCommandBuilder : IDotnetSubCommandBuilder
+    internal sealed class NewToolCommandBuilder(INewToolService newToolService,
+                                                INewToolOptionsBuilder optionsBuilder) : IDotnetSubCommandBuilder
     {
-        private readonly INewToolService _newToolService;
-        private readonly INewToolOptionsBuilder _optionsBuilder;
-
-        public NewToolCommandBuilder(INewToolService newToolService, INewToolOptionsBuilder optionsBuilder)
-        {
-            _newToolService = newToolService;
-            _optionsBuilder = optionsBuilder;
-        }
-
         public Command Build()
         {
             var command = new Command("newtool", "creates a new dotnet tool");
-            _optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
-            command.Handler = CommandHandler.Create<FileInfo, DirectoryInfo, bool, bool, bool, FileInfo, bool>((fromFile, saveTo, useCode, usevisualstudio, useRider, asZip, useFastMode) => _newToolService.HandleAsync(new NewToolParameters(fromFile, saveTo, useCode, usevisualstudio, useRider, asZip, useFastMode)));
+            optionsBuilder.Build().ToList().ForEach(option => command.AddOption(option));
+            command.Handler = CommandHandler.Create<FileInfo, DirectoryInfo, bool, bool, bool, FileInfo, bool>((fromFile, saveTo, useCode, usevisualstudio, useRider, asZip, useFastMode) => newToolService.HandleAsync(new NewToolParameters(fromFile, saveTo, useCode, usevisualstudio, useRider, asZip, useFastMode)));
             return command;
         }
     }

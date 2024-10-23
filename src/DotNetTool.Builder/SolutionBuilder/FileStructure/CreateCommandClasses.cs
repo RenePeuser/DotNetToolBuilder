@@ -7,19 +7,9 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal sealed class CreateCommandClasses : ICreateCommandClasses
+    internal sealed class CreateCommandClasses(IDirectoryService directoryService,
+                                               IEnumerable<IBuildCommandFileStructure> commandFileStructures) : ICreateCommandClasses
     {
-        private readonly IEnumerable<IBuildCommandFileStructure> _commandFileStructures;
-
-        private readonly IDirectoryService _directoryService;
-
-        public CreateCommandClasses(IDirectoryService directoryService,
-                                    IEnumerable<IBuildCommandFileStructure> commandFileStructures)
-        {
-            _commandFileStructures = commandFileStructures;
-            _directoryService = directoryService;
-        }
-
         public void Invoke(string projectName,
                            CommandInfo parameter,
                            IDirectoryInfo rootDirectory,
@@ -41,12 +31,12 @@ namespace DotNetTool.Builder.SolutionBuilder.FileStructure
                 currentPath = $"{currentRootPath}.{subCommand.NormalizedName}";
 
                 namespaceCollector.Add(currentPath);
-                var subCommnandDirectoryInfo = _directoryService.GetDirectoryInfo(Path.Combine(rootDirectory.FullName, subCommand.NormalizedName));
+                var subCommnandDirectoryInfo = directoryService.GetDirectoryInfo(Path.Combine(rootDirectory.FullName, subCommand.NormalizedName));
                 subCommnandDirectoryInfo.Create();
 
                 var closure = currentPath;
 
-                _commandFileStructures.ForEach(structure => structure.Create(projectName, parameter, commandTypeCollector,
+                commandFileStructures.ForEach(structure => structure.Create(projectName, parameter, commandTypeCollector,
                                                                              closure, namespaceCollector, subCommnandDirectoryInfo,
                                                                              subCommand));
 

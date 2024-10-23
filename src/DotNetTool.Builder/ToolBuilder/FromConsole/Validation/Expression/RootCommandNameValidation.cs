@@ -10,17 +10,10 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal sealed class RootCommandNameValidation : IExpressionContentValidator
+    internal sealed class RootCommandNameValidation(IPrimitiveTypeNameValidator primitiveTypeNameValidator) : IExpressionContentValidator
     {
-        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
-
-        public RootCommandNameValidation(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
-        {
-            _primitiveTypeNameValidator = primitiveTypeNameValidator;
-        }
-
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
-            string projectName)
+                                        string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
@@ -50,7 +43,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
                 yield return $"The command: '{command} must only contains letters or digits";
             }
 
-            var validationResult = _primitiveTypeNameValidator.IsTypeName(command);
+            var validationResult = primitiveTypeNameValidator.IsTypeName(command);
             if (validationResult.IsValid)
             {
                 yield return $"The command: '{command}' must not be a name of a type";

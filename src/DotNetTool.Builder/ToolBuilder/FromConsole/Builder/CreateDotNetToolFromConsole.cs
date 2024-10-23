@@ -5,18 +5,11 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Builder
 {
-    internal sealed class CreateDotNetToolFromConsole : IBuildDotNetTool
+    internal sealed class CreateDotNetToolFromConsole(IDotNetToolInfoCollector dotNetToolInfoCollector) : IBuildDotNetTool
     {
-        private readonly IDotNetToolInfoCollector _dotNetToolInfoCollector;
-
-        public CreateDotNetToolFromConsole(IDotNetToolInfoCollector dotNetToolInfoCollector)
-        {
-            _dotNetToolInfoCollector = dotNetToolInfoCollector;
-        }
-
         public Models.DotNetTool BuildFrom(NewToolParameters newToolParameters)
         {
-            return _dotNetToolInfoCollector.Collect();
+            return dotNetToolInfoCollector.Collect();
         }
 
         public bool IsThisBuilderFor(NewToolParameters newToolParameters)

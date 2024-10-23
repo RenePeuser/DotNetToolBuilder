@@ -6,15 +6,8 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
 {
-    internal sealed class CollectTillInputCorrect : ICollectTillInputCorrect
+    internal sealed class CollectTillInputCorrect(IConsoleService consoleService) : ICollectTillInputCorrect
     {
-        private readonly IConsoleService _consoleService;
-
-        public CollectTillInputCorrect(IConsoleService consoleService)
-        {
-            _consoleService = consoleService;
-        }
-
         public string CollectTillInputIsValid(string messageForUser, string projectName, IToolNameValidator toolNameValidator)
         {
 
@@ -25,13 +18,13 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
             ValidationResult validationResult = null;
             while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
             {
-                _consoleService.WriteInput(messageForUser);
-                input = _consoleService.ReadLine().Trim();
+                consoleService.WriteInput(messageForUser);
+                input = consoleService.ReadLine().Trim();
                 validationResult = toolNameValidator.Validate(input, projectName);
                 if (validationResult.IsValid.IsFalse())
                 {
-                    _consoleService.WriteError(validationResult.Errors);
-                    _consoleService.WriteLine();
+                    consoleService.WriteError(validationResult.Errors);
+                    consoleService.WriteLine();
                 }
             }
 
@@ -47,13 +40,13 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
             var input = string.Empty;
             while (isValid.IsFalse())
             {
-                _consoleService.WriteInput(messageForUser);
-                input = _consoleService.ReadLine().Trim();
+                consoleService.WriteInput(messageForUser);
+                input = consoleService.ReadLine().Trim();
                 isValid = inputValidation(input);
                 if (isValid.IsFalse())
                 {
-                    _consoleService.WriteError(getErrorMessageForInput(input));
-                    _consoleService.WriteLine();
+                    consoleService.WriteError(getErrorMessageForInput(input));
+                    consoleService.WriteLine();
                 }
             }
 
@@ -69,13 +62,13 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Services
             ValidationResult validationResult = null;
             while (validationResult.IsNull() || validationResult.IsValid.IsFalse())
             {
-                _consoleService.WriteInput(messageForUser);
-                input = _consoleService.ReadLine().Trim();
+                consoleService.WriteInput(messageForUser);
+                input = consoleService.ReadLine().Trim();
                 validationResult = inputValidator.Validate(input);
                 if (validationResult.IsValid.IsFalse())
                 {
-                    _consoleService.WriteError(validationResult.Errors);
-                    _consoleService.WriteLine();
+                    consoleService.WriteError(validationResult.Errors);
+                    consoleService.WriteLine();
                 }
             }
 

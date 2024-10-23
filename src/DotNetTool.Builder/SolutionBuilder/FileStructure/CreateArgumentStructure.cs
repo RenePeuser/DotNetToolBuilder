@@ -8,23 +8,13 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal sealed class CreateArgumentStructure : IBuildCommandFileStructure
+    internal sealed class CreateArgumentStructure(IDirectoryService directoryService,
+                                                  IFileService fileService,
+                                                  IArgumentInterfaceBuilder argumentInterfaceBuilder,
+                                                  IArgumentBuilder argumentBuilder,
+                                                  ITypeService typeService)
+        : IBuildCommandFileStructure
     {
-        private readonly IArgumentBuilder _argumentBuilder;
-        private readonly IArgumentInterfaceBuilder _argumentInterfaceBuilder;
-        private readonly IDirectoryService _directoryService;
-        private readonly IFileService _fileService;
-        private readonly ITypeService _typeService;
-
-        public CreateArgumentStructure(IDirectoryService directoryService, IFileService fileService, IArgumentInterfaceBuilder argumentInterfaceBuilder, IArgumentBuilder argumentBuilder, ITypeService typeService)
-        {
-            _directoryService = directoryService;
-            _fileService = fileService;
-            _argumentInterfaceBuilder = argumentInterfaceBuilder;
-            _argumentBuilder = argumentBuilder;
-            _typeService = typeService;
-        }
-
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
         {
             if (subCommand.Argument.IsNull())
@@ -33,18 +23,18 @@ namespace DotNetTool.Builder.SolutionBuilder.FileStructure
             }
 
             var argumentFolderPath = Path.Combine(subCommnandDirectoryInfo.FullName, "Arguments");
-            var argumentFolder = _directoryService.CreateDirectory(argumentFolderPath);
+            var argumentFolder = directoryService.CreateDirectory(argumentFolderPath);
 
-            var argumentInterfaceSyntaxTree = _argumentInterfaceBuilder.Build(projectName, subCommand, currentPath);
-            var argumentInterfaceFilePath = _fileService.GetFileInfo(Path.Combine(argumentFolder.FullName, $"I{subCommand.NormalizedName}ArgumentBuilder.cs"));
+            var argumentInterfaceSyntaxTree = argumentInterfaceBuilder.Build(projectName, subCommand, currentPath);
+            var argumentInterfaceFilePath = fileService.GetFileInfo(Path.Combine(argumentFolder.FullName, $"I{subCommand.NormalizedName}ArgumentBuilder.cs"));
             File.WriteAllText(argumentInterfaceFilePath.FullName, argumentInterfaceSyntaxTree);
 
-            var argumentImplementationSyntaxTree = _argumentBuilder.Build(projectName, subCommand, currentPath);
-            var argumentImplementationFilePath = _fileService.GetFileInfo(Path.Combine(argumentFolder.FullName, $"{subCommand.NormalizedName}ArgumentBuilder.cs"));
+            var argumentImplementationSyntaxTree = argumentBuilder.Build(projectName, subCommand, currentPath);
+            var argumentImplementationFilePath = fileService.GetFileInfo(Path.Combine(argumentFolder.FullName, $"{subCommand.NormalizedName}ArgumentBuilder.cs"));
             File.WriteAllText(argumentImplementationFilePath.FullName, argumentImplementationSyntaxTree);
 
-            var interfaceToRegister = _typeService.GetFullQualifiedName(projectName, argumentInterfaceFilePath);
-            var implementationToRegister = _typeService.GetFullQualifiedName(projectName, argumentImplementationFilePath);
+            var interfaceToRegister = typeService.GetFullQualifiedName(projectName, argumentInterfaceFilePath);
+            var implementationToRegister = typeService.GetFullQualifiedName(projectName, argumentImplementationFilePath);
 
             commandTypeCollector.Add(subCommand, new TypeToRegister(interfaceToRegister, implementationToRegister));
 

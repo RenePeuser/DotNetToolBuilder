@@ -9,17 +9,9 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.Services
 {
-    internal sealed class PackAsZipService
+    internal sealed class PackAsZipService(IFileService fileService,
+                                           IConsoleService consoleService)
     {
-        private readonly IFileService _fileService;
-        private readonly IConsoleService _consoleService;
-
-        public PackAsZipService(IFileService fileService, IConsoleService consoleService)
-        {
-            _fileService = fileService;
-            _consoleService = consoleService;
-        }
-
         internal void PackAsync(IDirectoryInfo directoryInfo, NewToolParameters newToolParameters)
         {
             if (newToolParameters.TargetZipFileInfo.IsNull())
@@ -27,7 +19,7 @@ namespace DotNetTool.Builder.Services
                 return;
             }
 
-            var target = _fileService.GetFileInfo(newToolParameters.TargetZipFileInfo.FullName);
+            var target = fileService.GetFileInfo(newToolParameters.TargetZipFileInfo.FullName);
             if (target.Directory.NotExists)
             {
                 target.Directory.Create();
@@ -42,7 +34,7 @@ namespace DotNetTool.Builder.Services
                 throw new DotNetToolBuilderException($"Could not create zip file: {target.FullName}.{Environment.NewLine}{e.Message}");
             }
 
-            _consoleService.WriteSuccess($"Zip-File: '{target.FullName}' successfully created.");
+            consoleService.WriteSuccess($"Zip-File: '{target.FullName}' successfully created.");
         }
     }
 }

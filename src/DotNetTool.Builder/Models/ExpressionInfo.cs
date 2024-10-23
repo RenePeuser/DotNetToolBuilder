@@ -3,19 +3,14 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens;
 
 namespace DotNetTool.Builder.Models
 {
-    internal sealed class ExpressionInfo
+    internal sealed class ExpressionInfo(string expression,
+                                         string optimizedExpressions,
+                                         IEnumerable<Token> tokens)
     {
-        public ExpressionInfo(string expression, string optimizedExpressions, IEnumerable<Token> tokens)
-        {
-            Expression = expression;
-            OptimizedExpressions = optimizedExpressions;
-            Tokens = tokens;
-        }
+        public string Expression { get; } = expression;
 
-        public string Expression { get; }
+        public string OptimizedExpressions { get; } = optimizedExpressions;
 
-        public string OptimizedExpressions { get; }
-
-        public IEnumerable<Token> Tokens { get; }
+        public IEnumerable<Token> Tokens { get; } = tokens;
     }
 }

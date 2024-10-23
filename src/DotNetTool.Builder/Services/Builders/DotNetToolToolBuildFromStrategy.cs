@@ -9,17 +9,11 @@ using Newtonsoft.Json;
 
 namespace DotNetTool.Builder.Services.Builders
 {
-    internal sealed class DotNetToolToolBuildFromStrategy
+    internal sealed class DotNetToolToolBuildFromStrategy(IEnumerable<IBuildDotNetTool> dotNetToolStrategies)
     {
-        private readonly IEnumerable<IBuildDotNetTool> _dotNetToolStrategies;
-
-        public DotNetToolToolBuildFromStrategy(IEnumerable<IBuildDotNetTool> dotNetToolStrategies)
-        {
-            _dotNetToolStrategies = dotNetToolStrategies;
-        }
         internal Models.DotNetTool CreateFrom(NewToolParameters newToolParameters)
         {
-            var builder = _dotNetToolStrategies.SingleOrDefault(strategy => strategy.IsThisBuilderFor(newToolParameters));
+            var builder = dotNetToolStrategies.SingleOrDefault(strategy => strategy.IsThisBuilderFor(newToolParameters));
             if (builder.IsNull())
             {
                 throw new DotNetToolBuilderException($"Could not find strategy for your given parameters: {Environment.NewLine}{Environment.NewLine}{newToolParameters.ToInfo()}");

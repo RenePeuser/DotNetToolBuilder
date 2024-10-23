@@ -5,19 +5,10 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 {
-    internal sealed class CommandInfoOptimizer
+    internal sealed class CommandInfoOptimizer(IDotNetToolNameNormalizer dotNetToolNameNormalizer,
+                                               ArgumentInfoOptimizer argumentInfoOptimizer,
+                                               OptionInfoOptimizer optionInfoOptimizer)
     {
-        private readonly IDotNetToolNameNormalizer _dotNetToolNameNormalizer;
-        private readonly ArgumentInfoOptimizer _argumentInfoOptimizer;
-        private readonly OptionInfoOptimizer _optionInfoOptimizer;
-
-        public CommandInfoOptimizer(IDotNetToolNameNormalizer dotNetToolNameNormalizer, ArgumentInfoOptimizer argumentInfoOptimizer, OptionInfoOptimizer optionInfoOptimizer)
-        {
-            _dotNetToolNameNormalizer = dotNetToolNameNormalizer;
-            _argumentInfoOptimizer = argumentInfoOptimizer;
-            _optionInfoOptimizer = optionInfoOptimizer;
-        }
-
         public CommandInfo Optimize(CommandInfo commandInfo)
         {
             OptimizeInternal(commandInfo);
@@ -31,9 +22,9 @@ namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 
         private CommandInfo OptimizeInternal(CommandInfo commandInfo)
         {
-            commandInfo.NormalizedName = _dotNetToolNameNormalizer.Normalize(commandInfo.Name);
-            commandInfo.Argument = _argumentInfoOptimizer.Optimize(commandInfo.Argument);
-            commandInfo.Options.ForEach(option => _optionInfoOptimizer.Optimize(option));
+            commandInfo.NormalizedName = dotNetToolNameNormalizer.Normalize(commandInfo.Name);
+            commandInfo.Argument = argumentInfoOptimizer.Optimize(commandInfo.Argument);
+            commandInfo.Options.ForEach(option => optionInfoOptimizer.Optimize(option));
             return commandInfo;
         }
     }

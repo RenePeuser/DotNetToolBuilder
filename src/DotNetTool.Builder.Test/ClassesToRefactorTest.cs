@@ -64,17 +64,12 @@ namespace DotNetTool.Builder.Test
         }
 
         [DebuggerDisplay("{FileInfo.Name}")]
-        private class CSharpFileInfo
+        private class CSharpFileInfo(FileInfo fileInfo,
+                                     SyntaxTree syntaxTree)
         {
-            public CSharpFileInfo(FileInfo fileInfo, SyntaxTree syntaxTree)
-            {
-                FileInfo = fileInfo;
-                SyntaxTree = syntaxTree;
-            }
+            public FileInfo FileInfo { get; } = fileInfo;
 
-            public FileInfo FileInfo { get; }
-
-            public SyntaxTree SyntaxTree { get; }
+            public SyntaxTree SyntaxTree { get; } = syntaxTree;
         }
     }
 }

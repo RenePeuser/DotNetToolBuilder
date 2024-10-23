@@ -4,15 +4,8 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.Services.Validation
 {
-    internal sealed class ValidateArgumentNameFromString
+    internal sealed class ValidateArgumentNameFromString(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
     {
-        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
-
-        public ValidateArgumentNameFromString(IPrimitiveTypeNameValidator primitiveTypeNameValidator)
-        {
-            _primitiveTypeNameValidator = primitiveTypeNameValidator;
-        }
-
         internal IEnumerable<string> CheckForErrors(string argumentName)
         {
             if (argumentName.IsNullOrWhiteSpace())
@@ -26,7 +19,7 @@ namespace DotNetTool.Builder.Services.Validation
                 yield return $"The argument: '{argumentName}' must begin with a letter";
             }
 
-            var validationResult = _primitiveTypeNameValidator.IsPrimitiveTypeName(argumentName);
+            var validationResult = primitiveTypeNameValidator.IsPrimitiveTypeName(argumentName);
             if (validationResult.IsValid)
             {
                 yield return $"The argument: '{argumentName}' must not be a name of a type.";

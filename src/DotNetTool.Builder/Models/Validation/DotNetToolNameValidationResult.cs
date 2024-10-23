@@ -1,9 +1,5 @@
 ﻿namespace DotNetTool.Builder.Models.Validation
 {
-    internal sealed class DotNetToolNameValidationResult : GenericValidationResult<DotNetToolName>
-    {
-        public DotNetToolNameValidationResult(DotNetToolName source, string errors) : base(source, errors)
-        {
-        }
-    }
+    internal sealed class DotNetToolNameValidationResult(DotNetToolName source,
+                                                         string errors) : GenericValidationResult<DotNetToolName>(source, errors);
 }

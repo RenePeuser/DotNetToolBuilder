@@ -3,18 +3,11 @@ using System.Linq;
 
 namespace DotNetTool.Builder.Services.Optimizer
 {
-    internal sealed class ArgumentTypeOptimizer : IArgumentTypeOptimizer
+    internal sealed class ArgumentTypeOptimizer(IEnumerable<ITypeNameOptimizer> typeNameOptimizers) : IArgumentTypeOptimizer
     {
-        private readonly IEnumerable<ITypeNameOptimizer> _typeNameOptimizers;
-
-        public ArgumentTypeOptimizer(IEnumerable<ITypeNameOptimizer> typeNameOptimizers)
-        {
-            _typeNameOptimizers = typeNameOptimizers;
-        }
-
         public string OptimizeType(string typeName)
         {
-            var result = _typeNameOptimizers.Aggregate(typeName, (current, next) => next.Optimize(current));
+            var result = typeNameOptimizers.Aggregate(typeName, (current, next) => next.Optimize(current));
             return result;
         }
     }

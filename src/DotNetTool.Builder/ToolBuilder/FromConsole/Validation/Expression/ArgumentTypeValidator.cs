@@ -11,19 +11,11 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
 {
-    internal sealed class ArgumentTypeValidator : IExpressionContentValidator
+    internal sealed class ArgumentTypeValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator,
+                                                IArgumentTypeOptimizer argumentTypeOptimizer) : IExpressionContentValidator
     {
-        private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
-        private readonly IPrimitiveTypeNameValidator _primitiveTypeNameValidator;
-
-        public ArgumentTypeValidator(IPrimitiveTypeNameValidator primitiveTypeNameValidator, IArgumentTypeOptimizer argumentTypeOptimizer)
-        {
-            _primitiveTypeNameValidator = primitiveTypeNameValidator;
-            _argumentTypeOptimizer = argumentTypeOptimizer;
-        }
-
         public ValidationResult IsValid(DotNetToolName dotNetDotNetToolName, ExpressionInfo expressionInfo,
-            string projectName)
+                                        string projectName)
         {
             Throw.IfNull(() => dotNetDotNetToolName);
             Throw.IfNull(() => expressionInfo);
@@ -51,8 +43,8 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Validation.Expression
                     continue;
                 }
 
-                var optimizedTypeName = _argumentTypeOptimizer.OptimizeType(typeName);
-                var isValidTypeNameResult = _primitiveTypeNameValidator.IsTypeName(optimizedTypeName);
+                var optimizedTypeName = argumentTypeOptimizer.OptimizeType(typeName);
+                var isValidTypeNameResult = primitiveTypeNameValidator.IsTypeName(optimizedTypeName);
                 if (isValidTypeNameResult.IsValid.IsFalse())
                 {
                     yield return isValidTypeNameResult.Errors;

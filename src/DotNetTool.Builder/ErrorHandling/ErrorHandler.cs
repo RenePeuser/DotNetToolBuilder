@@ -6,15 +6,8 @@ using DotNetTool.Builder.ToolBuilder.FromConsole.Services;
 
 namespace DotNetTool.Builder.ErrorHandling
 {
-    internal sealed class ErrorHandler : IErrorHandler
+    internal sealed class ErrorHandler(IConsoleService consoleService) : IErrorHandler
     {
-        private readonly IConsoleService _consoleService;
-
-        public ErrorHandler(IConsoleService consoleService)
-        {
-            _consoleService = consoleService;
-        }
-
         public async Task HandleErrors(InvocationContext context, Func<InvocationContext, Task> next)
         {
             try
@@ -27,13 +20,13 @@ namespace DotNetTool.Builder.ErrorHandling
 
                 if (ex is DotNetToolBuilderException)
                 {
-                    _consoleService.WriteError(ex.Message);
+                    consoleService.WriteError(ex.Message);
                 }
                 else
                 {
-                    _consoleService.WriteError("An unhandled Error occurred:");
-                    _consoleService.WriteLine();
-                    _consoleService.WriteError(ex.ToString());
+                    consoleService.WriteError("An unhandled Error occurred:");
+                    consoleService.WriteLine();
+                    consoleService.WriteError(ex.ToString());
                 }
 
                 context.ResultCode = 1;

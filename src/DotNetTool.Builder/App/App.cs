@@ -13,24 +13,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetTool.Builder.App
 {
-    internal sealed class App
+    internal sealed class App(IServiceProvider serviceProvider)
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        public App(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
         public Task<int> RunAsync(string[] args)
         {
             Throw.IfNull(() => args);
 
-            var rootCommand = _serviceProvider.GetService<IDotnetCommandBuilder>().Build();
-            var errorHandler = _serviceProvider.GetService<IErrorHandler>();
-            var dotNetCliArgumentFixer = _serviceProvider.GetService<IDotNetCliArgumentFixer>();
+            var rootCommand = serviceProvider.GetService<IDotnetCommandBuilder>().Build();
+            var errorHandler = serviceProvider.GetService<IErrorHandler>();
+            var dotNetCliArgumentFixer = serviceProvider.GetService<IDotNetCliArgumentFixer>();
 
-            var directoryService = _serviceProvider.GetService<IDirectoryService>();
+            var directoryService = serviceProvider.GetService<IDirectoryService>();
             var currentDirectory = directoryService.GetDirectoryInfo(Environment.CurrentDirectory);
             directoryService.SetCurrentDirectoryInfo(currentDirectory);
 

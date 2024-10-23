@@ -4,15 +4,8 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 {
-    internal sealed class OptionInfoOptimizer
+    internal sealed class OptionInfoOptimizer(ArgumentInfoOptimizer argumentInfoOptimizer)
     {
-        private readonly ArgumentInfoOptimizer _argumentInfoOptimizer;
-
-        public OptionInfoOptimizer(ArgumentInfoOptimizer argumentInfoOptimizer)
-        {
-            _argumentInfoOptimizer = argumentInfoOptimizer;
-        }
-
         public OptionInfo Optimize(OptionInfo optionInfo)
         {
             if (optionInfo.IsNull())
@@ -20,7 +13,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
                 return optionInfo;
             }
 
-            _argumentInfoOptimizer.Optimize(optionInfo.Argument);
+            argumentInfoOptimizer.Optimize(optionInfo.Argument);
 
             optionInfo.NormalizedName = optionInfo.Name.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
             

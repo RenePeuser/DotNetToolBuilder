@@ -3,16 +3,11 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(MethodName) + "}")]
-    internal sealed class MethodInfo
+    internal sealed class MethodInfo(string methodName,
+                                     string methodSyntax)
     {
-        public MethodInfo(string methodName, string methodSyntax)
-        {
-            MethodName = methodName;
-            MethodSyntax = methodSyntax;
-        }
+        public string MethodName { get; } = methodName;
 
-        public string MethodName { get; }
-
-        public string MethodSyntax { get; }
+        public string MethodSyntax { get; } = methodSyntax;
     }
 }

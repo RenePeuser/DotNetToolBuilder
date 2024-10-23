@@ -13,108 +13,75 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.DotNet.Newtool.Service
 {
-    internal sealed class NewToolService : INewToolService
+    internal sealed class NewToolService(IDotNetToolSerializer dotNetToolSerializer,
+                                         ITargetFolderService targetFolderService,
+                                         ITemplateExtractor templateExtractor,
+                                         ITemplateService templateService,
+                                         ICreateCommandClasses createCommandClasses,
+                                         ICommandTypeCollector commandTypeCollector,
+                                         INameSpaceCollector nameSpaceCollector,
+                                         IStartUpBuilder startUpBuilder,
+                                         IProcessService processService,
+                                         IUseIDE useIde,
+                                         IDotNetToolTestService dotNetToolTestService,
+                                         IConsoleService consoleService,
+                                         DotNetToolToolBuildFromStrategy dotNetToolToolBuildFromStrategy,
+                                         PackAsZipService packAsZipService)
+        : INewToolService
     {
-        private readonly ICommandTypeCollector _commandTypeCollector;
-        private readonly IConsoleService _consoleService;
-        private readonly DotNetToolToolBuildFromStrategy _dotNetToolToolBuildFromStrategy;
-        private readonly PackAsZipService _packAsZipService;
-        private readonly ICreateCommandClasses _createCommandClasses;
-        private readonly IDotNetToolSerializer _dotNetToolSerializer;
-        private readonly IDotNetToolTestService _dotNetToolTestService;
-        private readonly INameSpaceCollector _nameSpaceCollector;
-        private readonly IProcessService _processService;
-        private readonly IStartUpBuilder _startUpBuilder;
-        private readonly ITargetFolderService _targetFolderService;
-        private readonly ITemplateExtractor _templateExtractor;
-        private readonly ITemplateService _templateService;
-        private readonly IUseIDE _useIde;
-
-        public NewToolService(
-            IDotNetToolSerializer dotNetToolSerializer,
-            ITargetFolderService targetFolderService,
-            ITemplateExtractor templateExtractor,
-            ITemplateService templateService,
-            ICreateCommandClasses createCommandClasses,
-            ICommandTypeCollector commandTypeCollector,
-            INameSpaceCollector nameSpaceCollector,
-            IStartUpBuilder startUpBuilder,
-            IProcessService processService,
-            IUseIDE useIde,
-            IDotNetToolTestService dotNetToolTestService,
-            IConsoleService consoleService,
-            DotNetToolToolBuildFromStrategy dotNetToolToolBuildFromStrategy,
-            PackAsZipService packAsZipService)
-        {
-            _dotNetToolSerializer = dotNetToolSerializer;
-            _targetFolderService = targetFolderService;
-            _templateExtractor = templateExtractor;
-            _templateService = templateService;
-            _createCommandClasses = createCommandClasses;
-            _commandTypeCollector = commandTypeCollector;
-            _nameSpaceCollector = nameSpaceCollector;
-            _startUpBuilder = startUpBuilder;
-            _processService = processService;
-            _useIde = useIde;
-            _dotNetToolTestService = dotNetToolTestService;
-            _consoleService = consoleService;
-            _dotNetToolToolBuildFromStrategy = dotNetToolToolBuildFromStrategy;
-            _packAsZipService = packAsZipService;
-        }
-
         public async Task<int> HandleAsync(NewToolParameters parameters)
         {
             // build dotnet tool.
-            var dotNetTool = _dotNetToolToolBuildFromStrategy.CreateFrom(parameters);
+            var dotNetTool = dotNetToolToolBuildFromStrategy.CreateFrom(parameters);
 
             // Save created tool as json.
-            _dotNetToolSerializer.Serialize(dotNetTool, parameters);
+            dotNetToolSerializer.Serialize(dotNetTool, parameters);
 
             // Create target, will create in execution folder and throws exception if target already exists.
-            var targetDirectory = _targetFolderService.CreateTargetDirectory(dotNetTool);
+            var targetDirectory = targetFolderService.CreateTargetDirectory(dotNetTool);
 
             // Extract the solution template to target directory
-            _templateExtractor.ExtractTo(targetDirectory);
+            templateExtractor.ExtractTo(targetDirectory);
 
             // All templates will renamed with the new tool information
-            _templateService.RenameAllIn(targetDirectory, dotNetTool);
+            templateService.RenameAllIn(targetDirectory, dotNetTool);
 
             // detect folder of root command
-            var rootDirectory = _targetFolderService.GetToolFolder(dotNetTool, targetDirectory);
+            var rootDirectory = targetFolderService.GetToolFolder(dotNetTool, targetDirectory);
 
             // Create command structure
-            _createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, _commandTypeCollector, dotNetTool.ProjectName, _nameSpaceCollector);
+            createCommandClasses.Invoke(dotNetTool.ProjectName, dotNetTool.ParameterInfo, rootDirectory, commandTypeCollector, dotNetTool.ProjectName, nameSpaceCollector);
 
             // Find solution file
-            var solutionFile = _targetFolderService.GetSolutionFile(dotNetTool, targetDirectory);
+            var solutionFile = targetFolderService.GetSolutionFile(dotNetTool, targetDirectory);
 
             // Add type registrations
-            _startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, _commandTypeCollector, dotNetTool.ParameterInfo, _nameSpaceCollector);
+            startUpBuilder.AddRegistrationsFrom(dotNetTool.ProjectName, solutionFile, commandTypeCollector, dotNetTool.ParameterInfo, nameSpaceCollector);
 
             // fast workaround to test it.
             if (parameters.UseFastMode.IsFalse())
             {
                 // Build your new generated tool
-                var dotnetBuildResult = await _processService.RunAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
+                var dotnetBuildResult = await processService.RunAsync("dotnet", $"build {solutionFile.FullName}").ConfigureAwait(false);
                 if (dotnetBuildResult.ExitCode != 0)
                 {
                     // Opens all per option set IDE
-                    await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
+                    await useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
                     return -1;
                 }
 
                 // Test run with the new tool with --help
-                await _dotNetToolTestService.RunAsync(solutionFile, dotNetTool).ConfigureAwait(false);
+                await dotNetToolTestService.RunAsync(solutionFile, dotNetTool).ConfigureAwait(false);
             }
 
             // Opens all per option set IDE
-            await _useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
+            await useIde.OpenAsync(solutionFile, parameters).ConfigureAwait(false);
 
             // new feature pack it as zip
-            _packAsZipService.PackAsync(targetDirectory, parameters);
+            packAsZipService.PackAsync(targetDirectory, parameters);
 
             // All works fine, enjoy your new cli.
-            _consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
+            consoleService.WriteSuccess($"Enjoy your new generated: '{dotNetTool.ProjectName}' dotnet tool :-)");
 
             return 0;
         }

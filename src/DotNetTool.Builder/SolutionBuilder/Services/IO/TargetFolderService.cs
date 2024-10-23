@@ -5,21 +5,13 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.Services.IO
 {
-    internal sealed class TargetFolderService : ITargetFolderService
+    internal sealed class TargetFolderService(IDirectoryService directoryService,
+                                              IFileService fileService) : ITargetFolderService
     {
-        private readonly IDirectoryService _directoryService;
-        private readonly IFileService _fileService;
-
-        public TargetFolderService(IDirectoryService directoryService, IFileService fileService)
-        {
-            _directoryService = directoryService;
-            _fileService = fileService;
-        }
-
         public IDirectoryInfo CreateTargetDirectory(Models.DotNetTool dotNetTool)
         {
-            var currentDirectory = _directoryService.GetCurrentDirectory().FullName;
-            var targetDirectory = _directoryService.GetDirectoryInfo(Path.Combine(currentDirectory, dotNetTool.ProjectName));
+            var currentDirectory = directoryService.GetCurrentDirectory().FullName;
+            var targetDirectory = directoryService.GetDirectoryInfo(Path.Combine(currentDirectory, dotNetTool.ProjectName));
 
             if (targetDirectory.Exists)
             {
@@ -27,7 +19,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Services.IO
             }
 
             targetDirectory.Create();
-            var newTargetDirectory = _directoryService.GetDirectoryInfo(targetDirectory.FullName);
+            var newTargetDirectory = directoryService.GetDirectoryInfo(targetDirectory.FullName);
             return newTargetDirectory;
         }
 
@@ -38,7 +30,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Services.IO
                 throw new DotNetToolBuilderException($"The directory: '{targetDirectoryInfo.FullName}' does not exists.");
             }
 
-            var toolFolder = _directoryService.GetDirectoryInfo(Path.Combine(targetDirectoryInfo.FullName, "src", dotNetTool.ProjectName, dotNetTool.DotNetToolName.NormalizedName));
+            var toolFolder = directoryService.GetDirectoryInfo(Path.Combine(targetDirectoryInfo.FullName, "src", dotNetTool.ProjectName, dotNetTool.DotNetToolName.NormalizedName));
             if (toolFolder.NotExists)
             {
                 throw new DotNetToolBuilderException($"The tool folder: '{toolFolder.FullName}' does not exists.");
@@ -54,7 +46,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Services.IO
                 throw new DotNetToolBuilderException($"The directory: '{targetDirectoryInfo.FullName}' does not exists.");
             }
 
-            var solutionFile = _fileService.GetFileInfo(Path.Combine(targetDirectoryInfo.FullName, $"{dotNetTool.ProjectName}.sln"));
+            var solutionFile = fileService.GetFileInfo(Path.Combine(targetDirectoryInfo.FullName, $"{dotNetTool.ProjectName}.sln"));
             if (solutionFile.NotExists)
             {
                 throw new DotNetToolBuilderException($"The solution file: '{solutionFile.FullName}' does not exists.");

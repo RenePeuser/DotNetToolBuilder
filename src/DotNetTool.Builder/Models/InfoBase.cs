@@ -3,19 +3,14 @@
 namespace DotNetTool.Builder.Models
 {
     [DebuggerDisplay("{" + nameof(Value) + "}")]
-    public abstract class InfoBase
+    public abstract class InfoBase(string value,
+                                   string name,
+                                   string normalizedName)
     {
-        protected InfoBase(string value, string name, string normalizedName)
-        {
-            Value = value;
-            Name = name;
-            NormalizedName = normalizedName;
-        }
+        public string Value { get; } = value;
 
-        public string Value { get; }
+        public string Name { get; } = name;
 
-        public string Name { get; }
-
-        public string NormalizedName { get; set; }
+        public string NormalizedName { get; set; } = normalizedName;
     }
 }

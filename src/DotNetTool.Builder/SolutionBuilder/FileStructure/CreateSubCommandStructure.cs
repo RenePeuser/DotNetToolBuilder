@@ -8,22 +8,10 @@ using FileSystem.Abstraction;
 
 namespace DotNetTool.Builder.SolutionBuilder.FileStructure
 {
-    internal sealed class CreateSubCommandStructure : IBuildCommandFileStructure
+    internal sealed class CreateSubCommandStructure(ICommandBuilderForSubCommands commandBuilderForSubCommands,
+                                                    ISubCommandInterfaceBuilder subCommandInterfaceBuilder,
+                                                    IFileService fileService) : IBuildCommandFileStructure
     {
-        private readonly ICommandBuilderForSubCommands _commandBuilderForSubCommands;
-        private readonly IFileService _fileService;
-        private readonly ISubCommandInterfaceBuilder _subCommandInterfaceBuilder;
-
-        public CreateSubCommandStructure(
-            ICommandBuilderForSubCommands commandBuilderForSubCommands,
-            ISubCommandInterfaceBuilder subCommandInterfaceBuilder,
-            IFileService fileService)
-        {
-            _commandBuilderForSubCommands = commandBuilderForSubCommands;
-            _subCommandInterfaceBuilder = subCommandInterfaceBuilder;
-            _fileService = fileService;
-        }
-
         public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
         {
             if (!subCommand.SubCommands.IsNotNull() || !subCommand.SubCommands.Any())
@@ -31,12 +19,12 @@ namespace DotNetTool.Builder.SolutionBuilder.FileStructure
                 return;
             }
 
-            var result = _commandBuilderForSubCommands.Build(projectName, subCommand, parameter, currentPath);
-            var filePath0 = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
+            var result = commandBuilderForSubCommands.Build(projectName, subCommand, parameter, currentPath);
+            var filePath0 = fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"{subCommand.NormalizedName}CommandBuilder.cs"));
             filePath0.WriteAllText(result);
 
-            var subCommandBuilder = _subCommandInterfaceBuilder.Build(projectName, subCommand, parameter, currentPath);
-            var filePath1 = _fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"I{subCommand.NormalizedName}SubCommandBuilder.cs"));
+            var subCommandBuilder = subCommandInterfaceBuilder.Build(projectName, subCommand, parameter, currentPath);
+            var filePath1 = fileService.GetFileInfo(Path.Combine(subCommnandDirectoryInfo.FullName, $"I{subCommand.NormalizedName}SubCommandBuilder.cs"));
             filePath1.WriteAllText(subCommandBuilder);
 
             var splittedNamespace = currentPath.Split(".").ToList();

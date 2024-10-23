@@ -1,9 +1,4 @@
 ﻿namespace DotNetTool.Builder.ToolBuilder.FromConsole.Tokenizer.Tokens
 {
-    internal sealed class OptionToken : Token
-    {
-        public OptionToken(string value) : base(value)
-        {
-        }
-    }
+    internal sealed class OptionToken(string value) : Token(value);
 }

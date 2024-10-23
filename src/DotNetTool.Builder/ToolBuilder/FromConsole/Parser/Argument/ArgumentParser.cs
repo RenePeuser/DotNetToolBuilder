@@ -8,17 +8,9 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Argument
 {
-    internal sealed class ArgumentParser : IArgumentParser
+    internal sealed class ArgumentParser(IArgumentTypeOptimizer argumentTypeOptimizer,
+                                         ICollectDescription collectDescription) : IArgumentParser
     {
-        private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
-        private readonly ICollectDescription _collectDescription;
-
-        public ArgumentParser(IArgumentTypeOptimizer argumentTypeOptimizer, ICollectDescription collectDescription)
-        {
-            _argumentTypeOptimizer = argumentTypeOptimizer;
-            _collectDescription = collectDescription;
-        }
-
         public ArgumentInfo Parse(ArgumentToken value)
         {
             var argumentToken = value.As<ArgumentToken>();
@@ -36,8 +28,8 @@ namespace DotNetTool.Builder.ToolBuilder.FromConsole.Parser.Argument
                 typeInfo = argumentValue[startIndex..endIndex];
             }
 
-            var description = _collectDescription.Collect($"Please enter a description for your argument: '{argumentValue}'");
-            var optmmizedTypeInfo = _argumentTypeOptimizer.OptimizeType(typeInfo);
+            var description = collectDescription.Collect($"Please enter a description for your argument: '{argumentValue}'");
+            var optmmizedTypeInfo = argumentTypeOptimizer.OptimizeType(typeInfo);
             var normalizedName = name.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
 
             var argument = new ArgumentInfo(name, description, argumentValue, typeInfo, optmmizedTypeInfo, normalizedName);

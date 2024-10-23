@@ -5,15 +5,8 @@ using Extensions.Pack;
 
 namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
 {
-    internal sealed class ArgumentInfoOptimizer
+    internal sealed class ArgumentInfoOptimizer(IArgumentTypeOptimizer argumentTypeOptimizer)
     {
-        private readonly IArgumentTypeOptimizer _argumentTypeOptimizer;
-
-        public ArgumentInfoOptimizer(IArgumentTypeOptimizer argumentTypeOptimizer)
-        {
-            _argumentTypeOptimizer = argumentTypeOptimizer;
-        }
-
         public ArgumentInfo Optimize(ArgumentInfo argumentInfo)
         {
             if (argumentInfo.IsNull())
@@ -21,7 +14,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromJson.Fixer
                 return argumentInfo;
             }
 
-            argumentInfo.OptimizedType = _argumentTypeOptimizer.OptimizeType(argumentInfo.Type);
+            argumentInfo.OptimizedType = argumentTypeOptimizer.OptimizeType(argumentInfo.Type);
             argumentInfo.NormalizedName = argumentInfo.Name.Split('-').Select(s => s.FirstCharToUpper()).Flatten();
 
             return argumentInfo;
