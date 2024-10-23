@@ -11,17 +11,20 @@ namespace DotNetTool.Builder.SolutionBuilder.FileStructure
     internal sealed class CreateOptionsStructure : IBuildCommandFileStructure
     {
         private readonly IDirectoryService _directoryService;
+
         private readonly IFileService _fileService;
+
         private readonly IOptionImplementationBuilder _optionImplementationBuilder;
+
         private readonly IOptionInterfaceBuilder _optionInterfaceBuilder;
+
         private readonly ITypeService _typeService;
 
-        public CreateOptionsStructure(
-            IOptionInterfaceBuilder optionInterfaceBuilder,
-            IDirectoryService directoryService,
-            IFileService fileService,
-            IOptionImplementationBuilder optionImplementationBuilder,
-            ITypeService typeService)
+        public CreateOptionsStructure(IOptionInterfaceBuilder optionInterfaceBuilder,
+                                      IDirectoryService directoryService,
+                                      IFileService fileService,
+                                      IOptionImplementationBuilder optionImplementationBuilder,
+                                      ITypeService typeService)
         {
             _optionInterfaceBuilder = optionInterfaceBuilder;
             _directoryService = directoryService;
@@ -30,7 +33,13 @@ namespace DotNetTool.Builder.SolutionBuilder.FileStructure
             _typeService = typeService;
         }
 
-        public void Create(string projectName, CommandInfo parameter, ICommandTypeCollector commandTypeCollector, string currentPath, INameSpaceCollector namespaceCollector, IDirectoryInfo subCommnandDirectoryInfo, CommandInfo subCommand)
+        public void Create(string projectName,
+                           CommandInfo parameter,
+                           ICommandTypeCollector commandTypeCollector,
+                           string currentPath,
+                           INameSpaceCollector namespaceCollector,
+                           IDirectoryInfo subCommnandDirectoryInfo,
+                           CommandInfo subCommand)
         {
             if (subCommand.Options.IsNullOrEmpty())
             {

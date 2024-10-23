@@ -31,7 +31,7 @@ namespace DotNetTool.Builder.ToolBuilder.FromJson.Builder
             if (validationResult.HasErrors)
             {
                 var errors = validationResult.ValidationResults.Where(result => result.IsValid.IsFalse()).ToList();
-                throw new DotNetToolBuilderException($"Deserialized tool: '{newToolParameters.FromFile.FullName}' has following errors: {validationResult.ValidationResults.Select(result => result.Errors).Flatten(Environment.NewLine)}");
+                throw new DotNetToolBuilderException($"Deserialized tool: '{newToolParameters.FromFile.FullName}' has following errors: {errors.Select(result => result.Errors).Flatten(Environment.NewLine)}");
             }
             return optimizedTool;
         }

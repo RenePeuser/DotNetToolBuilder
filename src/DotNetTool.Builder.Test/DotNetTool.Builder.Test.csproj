@@ -25,9 +25,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="GeneratedTools\invalid.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="GeneratedTools\test.newformat.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
