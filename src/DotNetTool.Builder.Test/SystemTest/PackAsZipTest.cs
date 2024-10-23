@@ -21,7 +21,7 @@ namespace DotNetTool.Builder.Test.SystemTest
         }
 
         [TestMethod]
-        public void Should_Print_Out_Correct_Message()
+        public void Zip_File_Have_To_Be_Created()
         {
             Assert.IsTrue(File.Exists(_targetZipFile.FullName));
         }

@@ -26,8 +26,7 @@ namespace DotNetTool.Builder.DotNet.Newtool.Service
                                          IDotNetToolTestService dotNetToolTestService,
                                          IConsoleService consoleService,
                                          DotNetToolToolBuildFromStrategy dotNetToolToolBuildFromStrategy,
-                                         PackAsZipService packAsZipService)
-        : INewToolService
+                                         PackAsZipService packAsZipService) : INewToolService
     {
         public async Task<int> HandleAsync(NewToolParameters parameters)
         {

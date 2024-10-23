@@ -7,7 +7,7 @@ namespace DotNetTool.Builder.SolutionBuilder.Options
     internal sealed class NewOptionExpressionBuilderWithoutArgument : INewOptionExpressionBuilder
     {
         private const string OptionTemplate =
-            @"Option(new[] { ""$option-name$"", ""$option-alias$"" }, ""$option-description$"")
+            @"Option([""$option-name$"", ""$option-alias$""], ""$option-description$"")
             {
                 Required = $required-value$
             }";
