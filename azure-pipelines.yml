@@ -23,7 +23,7 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 
 - script: dotnet test
-  displayName: 'dotnet test .'
+  displayName: 'dotnet test . --filter no-tests'
 
 - task: DotNetCoreCLI@2
   displayName: Pack
